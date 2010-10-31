@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <bean id="wcmApp" class="com.hundsun.fund.website.wcm.client.model.WcmApp"/>
+
+    <util:map id="wcmApps" map-class="java.util.LinkedHashMap" key-type="java.lang.Long" value-type="com.hundsun.fund.website.wcm.client.model.WcmApp">
+        <entry key="10000">
+            <bean parent="wcmApp">
+                <property name="id" value="10000"/>
+                <property name="name" value="旗下基金配置"/>
+                <property name="url" value="x"/>
+                <property name="icon" value="icon-qxfund"/>
+            </bean>
+        </entry>
+        <entry key="10001">
+            <bean parent="wcmApp">
+                <property name="id" value="10001"/>
+                <property name="name" value="问卷管理"/>
+                <property name="url" value="y"/>
+                <property name="icon" value="icon-wenjuan"/>
+            </bean>
+        </entry>
+    </util:map>
+
+</beans>
