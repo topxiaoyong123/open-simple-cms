@@ -16,17 +16,57 @@
         <entry key="10000">
             <bean parent="wcmApp">
                 <property name="id" value="10000"/>
-                <property name="name" value="旗下基金配置"/>
+                <property name="name" value="站点管理"/>
                 <property name="url" value="x"/>
-                <property name="icon" value="icon-qxfund"/>
+                <property name="icon" value="icon-site"/>
             </bean>
         </entry>
         <entry key="10001">
             <bean parent="wcmApp">
                 <property name="id" value="10001"/>
+                <property name="name" value="访问IP管理"/>
+                <property name="url" value="x"/>
+                <property name="icon" value="icon-ip"/>
+            </bean>
+        </entry>
+        <entry key="10002">
+            <bean parent="wcmApp">
+                <property name="id" value="10002"/>
+                <property name="name" value="权限设计"/>
+                <property name="url" value="x"/>
+                <property name="icon" value="icon-juese"/>
+            </bean>
+        </entry>
+        <entry key="10003">
+            <bean parent="wcmApp">
+                <property name="id" value="10003"/>
+                <property name="name" value="用户管理"/>
+                <property name="url" value="x"/>
+                <property name="icon" value="icon-yonghu"/>
+            </bean>
+        </entry>
+        <entry key="10004">
+            <bean parent="wcmApp">
+                <property name="id" value="10004"/>
+                <property name="name" value="留言管理"/>
+                <property name="url" value="x"/>
+                <property name="icon" value="icon-liuyan"/>
+            </bean>
+        </entry>
+        <entry key="10005">
+            <bean parent="wcmApp">
+                <property name="id" value="10005"/>
                 <property name="name" value="问卷管理"/>
                 <property name="url" value="y"/>
                 <property name="icon" value="icon-wenjuan"/>
+            </bean>
+        </entry>
+        <entry key="10006">
+            <bean parent="wcmApp">
+                <property name="id" value="10006"/>
+                <property name="name" value="活动管理"/>
+                <property name="url" value="y"/>
+                <property name="icon" value="icon-huodong"/>
             </bean>
         </entry>
     </util:map>

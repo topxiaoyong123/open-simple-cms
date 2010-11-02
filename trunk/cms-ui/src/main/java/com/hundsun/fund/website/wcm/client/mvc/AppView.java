@@ -60,7 +60,7 @@ public class AppView extends View {
 
     private void createNorth() {
         StringBuffer sb = new StringBuffer();
-        sb.append("<table background=\"images/topbg.gif\" border='0' cellpadding='0' cellspacing='0' width='100%' height='100%'><tr><td><img src=\"images/logo.gif\"></td><td></td><td valign='bottom'> <div class=b1 align=right></div></td></tr></table>");
+        sb.append("<table background=\"images/topbg.gif\" border='0' cellpadding='0' cellspacing='0' width='100%' height='100%'><tr><td><img src=\"images/logo1.gif\"></td><td></td><td valign='bottom'> <div class=b1 align=right></div></td></tr></table>");
         north = new HtmlContainer(sb.toString());
 
         HTML logout = new HTML("<a href='#' class='logout'>注销登录</a>");
