@@ -52,7 +52,7 @@ public class WcmServiceImpl extends RemoteServiceServlet implements WcmService {
         logger.debug("获取左侧树, [{}]", node);
         List<WcmNodeModel> list = new ArrayList<WcmNodeModel>();
         if (node == null){
-            WcmNodeModel subnode = new WcmNodeModel("1", "hft", "海富通", "0");
+            WcmNodeModel subnode = new WcmNodeModel("1", "site1", "站点", "0");
             list.add(subnode);
         } else{
             WcmNodeModel subnode = new WcmNodeModel("2", "oo", "栏目", "-1");

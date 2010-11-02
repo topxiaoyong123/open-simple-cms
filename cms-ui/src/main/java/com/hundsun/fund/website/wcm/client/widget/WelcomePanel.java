@@ -49,11 +49,11 @@ public class WelcomePanel extends ContentPanel {
                 window.setSize("490px", "230px");
                 window.setResizable(false);
                 window.setLayout(new RowLayout(Style.Orientation.VERTICAL));
-                window.add(new HTML("<div style=\"background:url(images/about_bg.gif) no-repeat; width:488px; padding:106px 0 0 0\">\n" +
+                window.add(new HTML("<div style=\"background:url(images/about_bg1.gif) no-repeat; width:488px; padding:106px 0 0 0\">\n" +
                         "    <div style=\"border-top:1px solid #ccc; background:#efefef; color:#666; padding:10px 20px; height:50px; line-height:22px; position:relative\">\n" +
                         "    <span style=\"font-family:Verdana; font-weight:bold; position:absolute; top:-53px; left:23px\">1.0.1</span>\n" +
-                        "版权&copy; Hundsun Inc. 保留所有权利。<br />\n" +
-                        "        <a class=\"address\" target=\"_blank\" href=\"http://www.hundsun.com\">http://www.hundsun.com</a>\n" +
+                        "版权&copy; Lij Inc. 保留所有权利。<br />\n" +
+                        "        <a class=\"address\" target=\"_blank\" href=\"#\">http://www.demo.com</a>\n" +
                         "    </div>\n" +
                         "</div>"));
                 Button b = new Button("确定");
