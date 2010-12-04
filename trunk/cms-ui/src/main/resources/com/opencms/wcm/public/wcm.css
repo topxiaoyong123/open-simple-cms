@@ -4,12 +4,12 @@
 
 }
 
-.cms_prompt{margin:2px; border:1px solid #ff8282; background:#fff8e5 url(../../../hundsun/fund/website/wcm/public/images/bg/cms_prompt.gif) no-repeat 4px 4px; padding:6px 0 0 26px; height:18px; font-size:12px; color:#ff8282}
+.cms_prompt{margin:2px; border:1px solid #ff8282; background:#fff8e5 url(images/bg/cms_prompt.gif) no-repeat 4px 4px; padding:6px 0 0 26px; height:18px; font-size:12px; color:#ff8282}
 .cms_prompt a{ color:#2b5dff; text-decoration:underline}
 .cms_prompt a:hover{ color:red}
 
 .x-theme-slate #header {
-  background: #1E4176 url(../../../hundsun/fund/website/wcm/public/images/bg/slate-hd-bg.gif) repeat-x scroll 0pt;
+  background: #1E4176 url(images/bg/slate-hd-bg.gif) repeat-x scroll 0pt;
 }
 
 .drag-ok {
@@ -93,7 +93,7 @@
 
 #img-chooser-view .loading-indicator {
   font-size: 12px;
-  background-image: url('../../resources/images/grid/loading.gif');
+  background-image: url('images/grid/loading.gif');
   background-repeat: no-repeat;
   background-position: left;
   padding-left: 20px;
@@ -131,7 +131,7 @@
 
 #images-view .x-view-over {
   border: 1px solid #dddddd;
-  background: #efefef url(../../../hundsun/fund/website/wcm/public/images/default/grid/row-over.gif) repeat-x left top;
+  background: #efefef url(images/default/grid/row-over.gif) repeat-x left top;
   padding: 4px;
 }
 
@@ -147,7 +147,7 @@
 
 #images-view .loading-indicator {
   font-size: 12px;
-  background-image: url('resources/images/default/grid/loading.gif');
+  background-image: url('images/default/grid/loading.gif');
   background-repeat: no-repeat;
   background-position: left;
   padding-left: 20px;
@@ -176,7 +176,7 @@
 }
 
 #header {
-  background: #1E4176 url(../../../hundsun/fund/website/wcm/public/images/bg/hd-bg.gif) repeat-x scroll 0pt;
+  background: #1E4176 url(images/bg/hd-bg.gif) repeat-x scroll 0pt;
   border: 0pt none;
   padding-left: 3px;
 }
@@ -237,7 +237,7 @@
 }
 
 .x-view-over {
-  background: #EFEFEF url(../../../hundsun/fund/website/wcm/public/images/default/grid/row-over.gif) repeat-x scroll left top;
+  background: #EFEFEF url(images/default/grid/row-over.gif) repeat-x scroll left top;
   border: 1px solid #DDDDDD;
   padding: 4px;
 }
@@ -273,243 +273,243 @@
 }
 
 .icon-app-side {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/application_side_list.png) no-repeat center left !important;
+  background: url(images/icons/application_side_list.png) no-repeat center left !important;
 }
 
 .icon-calendar {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/calendar.gif) no-repeat center left !important;
+  background: url(images/icons/calendar.gif) no-repeat center left !important;
 }
 
 .icon-list-items {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/list-items.gif) no-repeat center left !important;
+  background: url(images/icons/list-items.gif) no-repeat center left !important;
 }
 
 .icon-menu-show {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/menu-show.gif) no-repeat center left !important;
+  background: url(images/icons/menu-show.gif) no-repeat center left !important;
 }
 
 .icon-user-add {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_add.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_add.gif) no-repeat center left !important;
 }
 
 .icon-user-delete {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_delete.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_delete.gif) no-repeat center left !important;
 }
 
 .icon-connect {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/connect.gif) no-repeat center left !important;
+  background: url(images/icons/fam/connect.gif) no-repeat center left !important;
 }
 
 .icon-accordion {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/accordion.gif) no-repeat center left !important;
+  background: url(images/icons/accordion.gif) no-repeat center left !important;
 }
 
 .user {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user.gif) no-repeat center left !important;
 }
 
 .user-add {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_add.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_add.gif) no-repeat center left !important;
 }
 
 .user-delete {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_delete.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_delete.gif) no-repeat center left !important;
 }
 
 .connect {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/connect.gif) no-repeat center left !important;
+  background: url(images/icons/fam/connect.gif) no-repeat center left !important;
 }
 
 .user-girl {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_female.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_female.gif) no-repeat center left !important;
 }
 
 .user-kid {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_green.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_green.gif) no-repeat center left !important;
 }
 
 .user-suit {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/user_suit.gif) no-repeat center left !important;
+  background: url(images/icons/fam/user_suit.gif) no-repeat center left !important;
 }
 
 .icon-filter {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/funnel.png) no-repeat center left !important;
+  background: url(images/icons/funnel.png) no-repeat center left !important;
 }
 
 .icon-form {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/application_form.png) no-repeat center left !important;
+  background: url(images/icons/application_form.png) no-repeat center left !important;
 }
 
 .icon-add {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/add.gif) no-repeat center left !important;
+  background: url(images/icons/add.gif) no-repeat center left !important;
 }
 
 .icon-plugin {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/plugin.png) no-repeat center left !important;
+  background: url(images/icons/plugin.png) no-repeat center left !important;
 }
 
 .icon-table {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/table.png) no-repeat center left !important;
+  background: url(images/icons/table.png) no-repeat center left !important;
 }
 
 .icon-delete {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/delete.gif) no-repeat center left !important;
+  background: url(images/icons/delete.gif) no-repeat center left !important;
 }
 
 .icon-email {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/email.png) no-repeat center left !important;
+  background: url(images/icons/email.png) no-repeat center left !important;
 }
 
 .icon-email-add {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/email_add.png) no-repeat center left !important;
+  background: url(images/icons/email_add.png) no-repeat center left !important;
 }
 
 .icon-email-reply {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/email_go.png) no-repeat center left !important;
+  background: url(images/icons/email_go.png) no-repeat center left !important;
 }
 
 .icon-date-add {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/date-add.png) no-repeat center left !important;
+  background: url(images/icons/date-add.png) no-repeat center left !important;
 }
 
 .icon-contact {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/vcard.png) no-repeat center left !important;
+  background: url(images/icons/vcard.png) no-repeat center left !important;
 }
 
 .icon-contact-add {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/vcard_add.png) no-repeat center left !important;
+  background: url(images/icons/vcard_add.png) no-repeat center left !important;
 }
 
 .icon-shell {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/shell.gif) no-repeat center left !important;
+  background: url(images/icons/shell.gif) no-repeat center left !important;
 }
 
 .icon-page {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/document.gif) no-repeat center left !important;
+  background: url(images/icons/document.gif) no-repeat center left !important;
 }
 
 .icon-page-java {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/page_white_cup.png) no-repeat center left !important;
+  background: url(images/icons/page_white_cup.png) no-repeat center left !important;
 }
 
 .icon-page-html {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/page_white_code.png) no-repeat center left !important;
+  background: url(images/icons/page_white_code.png) no-repeat center left !important;
 }
 
 .icon-album {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/album.gif) no-repeat center left !important;
+  background: url(images/icons/album.gif) no-repeat center left !important;
 }
 .icon-text {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/text.gif) no-repeat center left !important;
+  background: url(images/icons/text.gif) no-repeat center left !important;
 }
 
 .icon-add-disabled {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/add.gif) no-repeat center left !important;
+  background: url(images/icons/add.gif) no-repeat center left !important;
 }
 
 .icon-chart {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/chart.png) no-repeat center left !important;
+  background: url(images/icons/chart.png) no-repeat center left !important;
 }
 
 .icon-list {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/list.gif) no-repeat center left !important;
+  background: url(images/icons/list.gif) no-repeat center left !important;
 }
 
 .icon-feed {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/feed.gif) no-repeat center left !important;
+  background: url(images/icons/feed.gif) no-repeat center left !important;
 }
 
 .icon-info {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/information.png) no-repeat center left !important;
+  background: url(images/icons/information.png) no-repeat center left !important;
 }
 
 .icon-info-white {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/information-white.gif) no-repeat center left !important;
+  background: url(images/icons/information-white.gif) no-repeat center left !important;
 }
 
 .icon-music {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/music.png) no-repeat center left !important;
+  background: url(images/icons/music.png) no-repeat center left !important;
 }
 
 .icon-printer {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/printer.png) no-repeat center left !important;
+  background: url(images/icons/printer.png) no-repeat center left !important;
 }
 
 .icon-page-code {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/page.png) no-repeat 0 50% !important;
+  background: url(images/icons/page.png) no-repeat 0 50% !important;
 }
 
 .icon-tabs {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/tabs.gif) no-repeat center left !important;
+  background: url(images/icons/tabs.gif) no-repeat center left !important;
 }
 
 .icon-pass {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/tick.gif) no-repeat center left !important;
+  background: url(images/icons/tick.gif) no-repeat center left !important;
 }
 
 .icon-reject {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/cross.gif) no-repeat center left !important;
+  background: url(images/icons/cross.gif) no-repeat center left !important;
 }
 
 .icon-chartLine {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/chart_line.gif) no-repeat center left !important;
+  background: url(images/icons/chart_line.gif) no-repeat center left !important;
 }
 
 .icon-sitemanager {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/application_home.gif) no-repeat center left !important;
+  background: url(images/icons/application_home.gif) no-repeat center left !important;
 }
 
 .icon-passwordmanager {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/lock.png) no-repeat center left !important;
+  background: url(images/icons/lock.png) no-repeat center left !important;
 }
 
 .icon-subjectmanager {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/application_view_tile.png) no-repeat center left !important;
+  background: url(images/icons/application_view_tile.png) no-repeat center left !important;
 }
 
 .icon-querymanager {
-  background: url(../../../hundsun/fund/website/wcm/public/images/icons/page_white_find.png) no-repeat center left !important;
+  background: url(images/icons/page_white_find.png) no-repeat center left !important;
 }
 
 .icon-recycle
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/cross.gif) no-repeat center left !important;
+    background: url(images/icons/fam/cross.gif) no-repeat center left !important;
 }
 
 .icon-revert
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/application_go.png) no-repeat center left !important;
+    background: url(images/icons/fam/application_go.png) no-repeat center left !important;
 }
 
 
 .icon-site
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/application_home.gif) no-repeat center left !important;
+    background: url(images/icons/application_home.gif) no-repeat center left !important;
 }
 
 .icon-recycle-xp
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/recycle.gif) no-repeat center left !important;
+    background: url(images/icons/recycle.gif) no-repeat center left !important;
 }
 
 .icon-recycle-full
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/recycle_full.png) no-repeat center left !important;
+    background: url(images/icons/recycle_full.png) no-repeat center left !important;
 }
 
 .icon-recycle-empty
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/recycle_empty.png) no-repeat center left !important;
+    background: url(images/icons/recycle_empty.png) no-repeat center left !important;
 }
 
 .icon-website-home
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/home-1.gif) no-repeat center left !important;
+    background: url(images/icons/home-1.gif) no-repeat center left !important;
 }
 
 .icon-cog_edit
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/fam/cog_edit.png) no-repeat center left !important;
+    background: url(images/icons/fam/cog_edit.png) no-repeat center left !important;
 }
 
 
@@ -517,175 +517,175 @@
 
  .icon-huishouzhan
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/huishouzhan.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/huishouzhan.gif) no-repeat center left !important;
 }
 
  .icon-jijinjinli
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/jijinjinli.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/jijinjinli.gif) no-repeat center left !important;
 }
 
  .icon-passwordsmanager
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/passwordmanager.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/passwordmanager.gif) no-repeat center left !important;
 }
 
  .icon-zhaopin
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/zhaopin.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/zhaopin.gif) no-repeat center left !important;
 }
 
  .icon-qxfund
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/qxfund.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/qxfund.gif) no-repeat center left !important;
 }
 
 
  .icon-rizhi
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/rizhi.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/rizhi.gif) no-repeat center left !important;
 }
 
  .icon-huodong
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/huodong.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/huodong.gif) no-repeat center left !important;
 }
 
  .icon-yonghu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/yonghu.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/yonghu.gif) no-repeat center left !important;
 }
 
  .icon-liuyan
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/liuyan.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/liuyan.gif) no-repeat center left !important;
 }
 
  .icon-site
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/site.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/site.gif) no-repeat center left !important;
 }
 
  .icon-juese
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/juese.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/juese.gif) no-repeat center left !important;
 }
 
 
  .icon-ip
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/ip.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/ip.gif) no-repeat center left !important;
 }
 
  .icon-shouye
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/shouye.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/shouye.gif) no-repeat center left !important;
 }
 
 
  .icon-wenjuan
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/huafu/wenjuan.gif) no-repeat center left !important;
+    background: url(images/icons/huafu/wenjuan.gif) no-repeat center left !important;
 }
 
 .article-about
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/wenzhangxiangguang.gif) no-repeat center left !important;
+    background: url(images/icons/article/wenzhangxiangguang.gif) no-repeat center left !important;
 }
 
 .article-fujian
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/fujian.gif) no-repeat center left !important;
+    background: url(images/icons/article/fujian.gif) no-repeat center left !important;
 }
 
 .article-lianjie
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/lianjie.gif) no-repeat center left !important;
+    background: url(images/icons/article/lianjie.gif) no-repeat center left !important;
 }
 
 .article-shanchu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/shanchu.gif) no-repeat center left !important;
+    background: url(images/icons/article/shanchu.gif) no-repeat center left !important;
 }
 
 .article-cedishanchu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/cedishanchu.gif) no-repeat center left !important;
+    background: url(images/icons/article/cedishanchu.gif) no-repeat center left !important;
 }
 
 .article-huishouzhan
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/huishouzhan.gif) no-repeat center left !important;
+    background: url(images/icons/article/huishouzhan.gif) no-repeat center left !important;
 }
 
 .article-xiangguanfuzhi
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/xiangguanfuzhi.gif) no-repeat center left !important;
+    background: url(images/icons/article/xiangguanfuzhi.gif) no-repeat center left !important;
 }
 
 .article-neirongfuzhi
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/neirongfuzhi.gif) no-repeat center left !important;
+    background: url(images/icons/article/neirongfuzhi.gif) no-repeat center left !important;
 }
 
 .article-lianjiefuzhi
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/lianjiefuzhi.gif) no-repeat center left !important;
+    background: url(images/icons/article/lianjiefuzhi.gif) no-repeat center left !important;
 }
 
 .article-jianqie
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/jianqie.gif) no-repeat center left !important;
+    background: url(images/icons/article/jianqie.gif) no-repeat center left !important;
 }
 
 .article-cengci
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/cengci.gif) no-repeat center left !important;
+    background: url(images/icons/article/cengci.gif) no-repeat center left !important;
 }
 
 .article-chazhao
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/chazhao.gif) no-repeat center left !important;
+    background: url(images/icons/article/chazhao.gif) no-repeat center left !important;
 }
 
 .article-yulan
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/yulan.gif) no-repeat center left !important;
+    background: url(images/icons/article/yulan.gif) no-repeat center left !important;
 }
 
 .article-zengjia
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/zengjia.gif) no-repeat center left !important;
+    background: url(images/icons/article/zengjia.gif) no-repeat center left !important;
 }
 
 .article-wenzhangfubu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/wenzhangfubu.gif) no-repeat center left !important;
+    background: url(images/icons/article/wenzhangfubu.gif) no-repeat center left !important;
 }
 
 .article-wenzhangtihuanfubu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/wenzhangtihuanfubu.gif) no-repeat center left !important;
+    background: url(images/icons/article/wenzhangtihuanfubu.gif) no-repeat center left !important;
 }
 
 .fabu-lanmufabu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/lanmufabu.gif) no-repeat center left !important;
+    background: url(images/icons/article/lanmufabu.gif) no-repeat center left !important;
 }
 
 .fabu-lanmushouye
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/lanmushouye.gif) no-repeat center left !important;
+    background: url(images/icons/article/lanmushouye.gif) no-repeat center left !important;
 }
 
 .fabu-zhandianfabu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/zhandianfabu.gif) no-repeat center left !important;
+    background: url(images/icons/article/zhandianfabu.gif) no-repeat center left !important;
 }
 
 .fabu-zhandianshouyefabu
 {
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/article/zhandianshouyefabu.gif) no-repeat center left !important;
+    background: url(images/icons/article/zhandianshouyefabu.gif) no-repeat center left !important;
 }
 
 .fujian-wenzhangfujian
@@ -772,11 +772,11 @@
 }
 
 .navigation{
-    background: url(../../../hundsun/fund/website/wcm/public/images/bg/bg.gif) right bottom no-repeat #dfe8f6;
+    background: url(images/bg/bg.gif) right bottom no-repeat #dfe8f6;
 }
 
 .logout{
-    font-size:12px;position:absolute;display:block;width:70px;height:20px;color:#fff;padding:2px 0 0 10px;background:url(../../../hundsun/fund/website/wcm/public/images/icons/logout.gif) 0 0 no-repeat;right:10px;top:12px;
+    font-size:12px;position:absolute;display:block;width:70px;height:20px;color:#fff;padding:2px 0 0 10px;background:url(images/icons/logout.gif) 0 0 no-repeat;right:10px;top:12px;
 }
 .logout:hover{
     color:yellow;
@@ -792,13 +792,13 @@
 .Hs_table .noLborder{ border-left:0;}
 
 .welcome-bookmark{
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/bookmark.gif) no-repeat center left !important;
+    background: url(images/icons/bookmark.gif) no-repeat center left !important;
 }
 .welcome-about{
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/about.gif) no-repeat center left !important;
+    background: url(images/icons/about.gif) no-repeat center left !important;
 }
 .fabu-resource{
-    background: url(../../../hundsun/fund/website/wcm/public/images/icons/resource.gif) no-repeat center left !important;
+    background: url(images/icons/resource.gif) no-repeat center left !important;
 }
 
 a.address{font-size:10px; color:#06C; text-decoration:none}

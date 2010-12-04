@@ -34,7 +34,7 @@ public class OtherView extends View {
     protected void handleEvent(AppEvent appEvent) {
         final Entry entry = (Entry) appEvent.getData();
         Map<Long, WcmApp> wcmApps = AppState.wcmApps;
-        WcmApp app = wcmApps.get(Long.parseLong(entry.getId()));
+        WcmApp app = wcmApps.get(Long.valueOf(entry.getId()));
         if (app != null) {      
             Frame frame = new Frame(app.getUrl());
             ContentPanel framePanel = new ContentPanel();

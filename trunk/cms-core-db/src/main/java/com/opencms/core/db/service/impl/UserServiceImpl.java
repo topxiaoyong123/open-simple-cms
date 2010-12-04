@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     public boolean addUser(UserBean user){
-        if(userDao.findByUsername(user.getUsername()) != null){
+        if(getUserByUsername(user.getUsername()) != null){
             return false;
         }
         userDao.persist(user);
