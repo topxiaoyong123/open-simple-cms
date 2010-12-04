@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>cms</artifactId>
-        <groupId>com.hundsun.fund.website.cms</groupId>
+        <groupId>com.open-cms</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hundsun.fund.website.cms</groupId>
+    <groupId>com.open-cms</groupId>
     <artifactId>cms-ui</artifactId>
     <packaging>war</packaging>
     <name>gwt-maven-archetype-project</name>
@@ -30,6 +30,21 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.open-cms</groupId>
+            <artifactId>cms-core-db</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -80,7 +95,7 @@
             <artifactId>spring</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        
     </dependencies>
 
     <build>
@@ -100,12 +115,12 @@
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>1.2</version>
                 <configuration>
-                    <runTarget>com.hundsun.fund.website.wcm.Wcm/Wcm.html</runTarget>
+                    <runTarget>com.opencms.wcm.Wcm/Wcm.html</runTarget>
                     <modules>
-                        <module>com.hundsun.fund.website.wcm.Wcm</module>
+                        <module>com.opencms.wcm.Wcm</module>
                     </modules>
                     <i18nMessagesBundles>
-                        <i18nMessagesBundle>com.hundsun.fund.website.wcm.client.WcmMessages</i18nMessagesBundle>
+                        <i18nMessagesBundle>com.opencms.wcm.client.WcmMessages</i18nMessagesBundle>
                     </i18nMessagesBundles>
                     <hostedWebapp>target/war</hostedWebapp>
                     <mergedWebXml>target/war/WEB-INF/web.xml</mergedWebXml>
