@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -27,10 +29,13 @@ public class WcmServiceImpl implements WcmService {
 
     private static Logger logger = LoggerFactory.getLogger(WcmServiceImpl.class);
 
-    @Autowired
-    private static Map wcmApps;
+    private static Map<Long, WcmApp> wcmApps;
 
     public Map<Long, WcmApp> getWcmApps() {
+        if(wcmApps == null){
+            ApplicationContext context = new ClassPathXmlApplicationContext("wcmAppsContext.xml");
+            wcmApps = (Map)context.getBean("wcmApps");
+        }
         logger.debug("获取功能列表, [{}]", wcmApps);
         return wcmApps;
     }

@@ -6,7 +6,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:wcmAppsContext.xml
+            classpath*:/META-INF/spring/bundle-context-core-db.xml
             classpath*:applicationContext.xml
         </param-value>
     </context-param>
