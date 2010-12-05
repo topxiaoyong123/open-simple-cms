@@ -1,6 +1,10 @@
 package com.opencms.core.db.service;
 
 import com.opencms.core.db.bean.UserBean;
+import com.opencms.core.db.bean.RoleBean;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,4 +21,19 @@ public interface UserService {
 
     public UserBean getUserByUsername(String username);
 
+    public boolean updateUser(UserBean user);
+
+    public boolean deleteUser(UserBean user);
+
+    public boolean addRoleForUser(Long id, RoleBean role);
+
+    public boolean addRolesForUser(Long id, Set<RoleBean> roles);
+
+    public boolean addRole(RoleBean role);
+
+    public RoleBean getRoleById(Long id);
+
+    public boolean updateRole(RoleBean role);
+
+    public boolean deleteRole(RoleBean role);
 }

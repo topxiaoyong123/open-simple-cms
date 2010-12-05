@@ -1,7 +1,12 @@
 package com.opencms.core.db.bean;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,6 +17,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "cms_user")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class UserBean implements Serializable {
 
     @Id
@@ -23,6 +29,11 @@ public class UserBean implements Serializable {
 
     @Column(nullable = false, length = 32)
     private String password;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinTable(name = "cms_usergroup")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<RoleBean> roles = new HashSet<RoleBean>();
 
     public Long getId() {
         return id;
@@ -48,8 +59,27 @@ public class UserBean implements Serializable {
         this.password = password;
     }
 
+    public Set<RoleBean> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleBean> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(RoleBean role){
+        if(!roles.contains(role)){
+            roles.add(role);
+        }
+    }
+
+    public void removeRole(RoleBean role){
+        roles.remove(role);
+    }
+
     @Override
     public String toString() {
         return "id:" + id + ", username:" + username;
     }
+
 }

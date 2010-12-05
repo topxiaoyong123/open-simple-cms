@@ -1,16 +1,12 @@
 package com.opencms.core.db.test;
 
 import org.junit.BeforeClass;
-import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.opencms.core.db.dao.UserDao;
 import com.opencms.core.db.bean.UserBean;
+import com.opencms.core.db.bean.RoleBean;
 import com.opencms.core.db.service.UserService;
-
-import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,5 +46,31 @@ public class UserTest {
     public void testFindUserByUsername(){
 //        Assert.assertEquals("lijing", userService.getUserByUsername("lijing").getUsername());
         System.out.println(userService.getUserByUsername("lijing"));
+    }
+
+    @Test
+    public void testAddRole(){
+        UserBean u = userService.getUserByUsername("lijing");
+        if(u != null){
+            RoleBean r = new RoleBean();                                //userService.getRoleById(1L);
+            r.setRolename("role");
+            r.setDescription("role");
+            userService.addRole(r);
+            userService.addRoleForUser(u.getId(), r);
+//            u.setPassword("123456");
+//            userService.updateUser(u);
+        }
+    }
+
+    @Test
+    public void testDeleteRole(){
+        RoleBean role = userService.getRoleById(2L);
+        userService.deleteRole(role);
+    }
+
+    @Test
+    public void testDeleteUser(){
+        UserBean u = userService.getUserById(2L);
+        userService.deleteUser(u);
     }
 }
