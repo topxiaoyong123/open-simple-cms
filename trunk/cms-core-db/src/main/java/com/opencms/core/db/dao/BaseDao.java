@@ -1,6 +1,7 @@
 package com.opencms.core.db.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,5 +21,7 @@ public interface BaseDao<T> {
     public T get(Class c, Serializable id);
 
     public T get(Class c, String column, Serializable value);
+
+    public List<T> get(Class c, String[] column, Serializable[] value);
 
 }
