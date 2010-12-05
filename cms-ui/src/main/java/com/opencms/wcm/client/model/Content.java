@@ -3,6 +3,7 @@ package com.opencms.wcm.client.model;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,7 +12,7 @@ import java.util.Date;
  * Time: 12:16:55
  * To change this template use File | Settings | File Templates.
  */
-public class Content implements IsSerializable {
+public class Content implements Serializable, IsSerializable {
 
     public Content() {
         super();

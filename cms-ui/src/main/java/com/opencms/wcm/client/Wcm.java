@@ -4,6 +4,7 @@ import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.mvc.*;
 
 /**
@@ -28,6 +29,15 @@ public class Wcm implements EntryPoint {
 
         dispatcher.addController(new ArticleListController());
 
-        dispatcher.dispatch(AppEvents.INIT_UI);
+        dispatcher.addController(new LoginController());
+
+        wService.checkLogin(new AsyncCallback(){
+            public void onFailure(Throwable throwable) {
+                dispatcher.dispatch(AppEvents.LOGIN);    
+            }
+            public void onSuccess(Object o) {
+                dispatcher.dispatch(AppEvents.LOGIN_OK);
+            }
+        });
     }
 }

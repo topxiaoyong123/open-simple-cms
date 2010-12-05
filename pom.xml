@@ -23,7 +23,7 @@
         <commons.lang.version>2.4</commons.lang.version>
 
 
-        <cglib.version>2.1_3</cglib.version>
+        <cglib.version>2.2</cglib.version>
         <hibernate.core.version>3.3.1.GA</hibernate.core.version>
         <hibernate.annotations.version>3.4.0.GA</hibernate.annotations.version>
         <hibernate.entitymanager.version>3.4.0.GA</hibernate.entitymanager.version>
