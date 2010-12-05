@@ -2,6 +2,8 @@ package com.opencms.core.db.dao.impl;
 
 import com.opencms.core.db.dao.BaseDao;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
+
+    private static Logger logger = LoggerFactory.getLogger(BaseDaoImpl.class);
 
     public boolean persist(T obj){
         this.getHibernateTemplate().persist(obj);
@@ -47,7 +51,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
     }
 
     public List<T> getAll(Class c){
-        return this.getHibernateTemplate().find("from " + c.getSimpleName());
+        return this.getHibernateTemplate().find(getHql(c, null));
     }
 
     private String getHql(Class c, String[] column){
@@ -59,6 +63,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
                 s.append(" and o.").append(st).append(" = ? ");
             }
         }
+        logger.debug("query hql : [{}]", s);
         return s.toString();
     }
 }
