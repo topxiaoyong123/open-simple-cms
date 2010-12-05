@@ -65,7 +65,6 @@ public class WcmServiceImpl implements WcmService {
         } else if (!user.getPassword().equals(userBean.getPassword())) {
             throw new ApplicationException("无效的密码！");
         }
-        User u = new User();
         try {
             BeanUtils.copyProperties(user, userBean);
         } catch (IllegalAccessException e) {

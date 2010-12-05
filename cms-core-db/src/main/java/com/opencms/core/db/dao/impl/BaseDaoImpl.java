@@ -35,15 +35,30 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
     }
 
     public T get(Class c, String column, Serializable value) {
-        List<T> list = this.getHibernateTemplate().find("from " + c.getSimpleName() + " o where o." + column + " = ?", new Object[]{value});
+        List<T> list = get(c, new String[]{column}, new Serializable[]{value});
         if(list != null && list.size() > 0){
             return list.get(0);
         }
         return null;
     }
 
+    public List<T> get(Class c, String[] column, Serializable[] value) {
+        return this.getHibernateTemplate().find(getHql(c, column), value);
+    }
+
     public List<T> getAll(Class c){
         return this.getHibernateTemplate().find("from " + c.getSimpleName());
     }
 
+    private String getHql(Class c, String[] column){
+        StringBuffer s = new StringBuffer();
+        s.append("from ").append(c.getSimpleName()).append(" o ");
+        if(column != null){
+            s.append(" where 1 = 1 ");
+            for(String st : column){
+                s.append(" and o.").append(st).append(" = ? ");
+            }
+        }
+        return s.toString();
+    }
 }
