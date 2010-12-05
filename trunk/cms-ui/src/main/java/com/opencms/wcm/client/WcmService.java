@@ -5,6 +5,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.opencms.wcm.client.model.WcmApp;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.Content;
+import com.opencms.wcm.client.model.User;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 
@@ -25,11 +26,15 @@ public interface WcmService extends RemoteService {
 
     public static final String SERVICE_URI = WcmService.SERVICE;
 
-    public Map<Long, WcmApp> getWcmApps();
+    public Map<Long, WcmApp> getWcmApps() throws ApplicationException;
 
-    public List<WcmNodeModel> getNodeChildren(WcmNodeModel node);
+    public User login(User user) throws ApplicationException;
 
-    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content);
+    public String checkLogin() throws ApplicationException;
+
+    public List<WcmNodeModel> getNodeChildren(WcmNodeModel node) throws ApplicationException;
+
+    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
 
     /**
      * Utility/Convenience class.

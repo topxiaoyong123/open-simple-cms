@@ -13,6 +13,10 @@ public class AppEvents {
 
     public static final EventType INIT_UI = new EventType();
 
+    public static final EventType LOGIN = new EventType();
+    public static final EventType LOGIN_OK = new EventType();
+    public static final EventType LOGIN_FAIL = new EventType();
+
     public static final EventType WELCOME = new EventType();
 
     public static final EventType OTHER_APP = new EventType();

@@ -11,6 +11,15 @@
         </param-value>
     </context-param>
 
+    <servlet>
+        <servlet-name>image</servlet-name>
+        <servlet-class>com.opencms.wcm.server.Image</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>image</servlet-name>
+        <url-pattern>/com.opencms.wcm.Wcm/image</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>
             org.springframework.web.context.request.RequestContextListener
