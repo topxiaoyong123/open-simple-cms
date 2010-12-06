@@ -12,16 +12,8 @@
     <packaging>war</packaging>
     <name>gwt-maven-archetype-project</name>
 
-    <repositories>
-        <repository>
-            <id>jboss.org</id>
-            <name>JBoss Maven Repository</name>
-            <url>http://repo2.maven.org/maven2/</url>
-        </repository>  
-    </repositories>
-    
     <properties>
-        <gwtVersion>2.0.4</gwtVersion>
+        <gwtVersion>2.1.0</gwtVersion>
         <gxtVersion>2.2.0</gxtVersion>
     </properties>
 
@@ -92,7 +84,8 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>1.2</version>
+                <version>2.1.0</version>
+
                 <configuration>
                     <runTarget>com.opencms.wcm.Wcm/Wcm.html</runTarget>
                     <modules>
