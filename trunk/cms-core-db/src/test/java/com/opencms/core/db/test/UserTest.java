@@ -39,7 +39,7 @@ public class UserTest {
     @Test
     public void testFindUser(){
 //        Assert.assertEquals("lijing1", userService.getUserById(1L).getUsername());
-        System.out.println(userService.getUserById(1L).getUsername());
+//        System.out.println(userService.getUserById(1L).getUsername());
     }
 
     @Test
@@ -52,25 +52,25 @@ public class UserTest {
     public void testAddRole(){
         UserBean u = userService.getUserByUsername("lijing");
         if(u != null){
-            RoleBean r = new RoleBean();                                //userService.getRoleById(1L);
-            r.setRolename("role");
-            r.setDescription("role");
-            userService.addRole(r);
-            userService.addRoleForUser(u.getId(), r);
+//            RoleBean r = new RoleBean();                                //userService.getRoleById(1L);
+//            r.setRolename("role");
+//            r.setDescription("role");
+//            userService.addRole(r);
+//            userService.addRoleForUser(u.getId(), r);
 //            u.setPassword("123456");
-//            userService.updateUser(u);
+            userService.updateUser(u);
         }
     }
 
     @Test
     public void testDeleteRole(){
-        RoleBean role = userService.getRoleById(2L);
-        userService.deleteRole(role);
+//        RoleBean role = userService.getRoleById(2L);
+//        userService.deleteRole(role);
     }
 
     @Test
     public void testDeleteUser(){
-        UserBean u = userService.getUserById(2L);
-        userService.deleteUser(u);
+//        UserBean u = userService.getUserById(2L);
+//        userService.deleteUser(u);
     }
 }

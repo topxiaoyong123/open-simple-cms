@@ -11,13 +11,15 @@ import com.opencms.wcm.client.AppEvents;
  * Time: 8:53:27
  * To change this template use File | Settings | File Templates.
  */
-public class ArticleListController extends Controller {
+public class ContentListController extends Controller {
 
-    private ArticleListView view;
-    public ArticleListController() {
+    private ContentListView view;
+
+    public ContentListController() {
         this.registerEventTypes(AppEvents.CONTENT_VIEWARTICLELIST);
     }
 
+    @Override
     public void handleEvent(AppEvent appEvent) {
         if(appEvent.getType() == AppEvents.CONTENT_VIEWARTICLELIST){
             this.forwardToView(view, appEvent);
@@ -26,6 +28,6 @@ public class ArticleListController extends Controller {
 
     @Override
     protected void initialize() {
-        view = new ArticleListView(this);
+        view = new ContentListView(this);
     }
 }

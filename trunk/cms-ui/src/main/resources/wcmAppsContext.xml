@@ -13,14 +13,6 @@
     <bean id="wcmApp" class="com.opencms.wcm.client.model.WcmApp"/>
 
     <util:map id="wcmApps" map-class="java.util.LinkedHashMap" key-type="java.lang.Long" value-type="com.opencms.wcm.client.model.WcmApp">
-        <entry key="10000">
-            <bean parent="wcmApp">
-                <property name="id" value="10000"/>
-                <property name="name" value="站点管理"/>
-                <property name="url" value="x"/>
-                <property name="icon" value="icon-site"/>
-            </bean>
-        </entry>
         <entry key="10001">
             <bean parent="wcmApp">
                 <property name="id" value="10001"/>

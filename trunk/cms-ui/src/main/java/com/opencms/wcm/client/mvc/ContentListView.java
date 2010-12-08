@@ -6,10 +6,9 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
-import com.opencms.wcm.client.AppConstant;
 import com.opencms.wcm.client.model.Content;
 import com.opencms.wcm.client.model.Entry;
-import com.opencms.wcm.client.widget.ArticleListPanel;
+import com.opencms.wcm.client.widget.content.ContentListPanel;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,22 +17,22 @@ import com.opencms.wcm.client.widget.ArticleListPanel;
  * Time: 8:55:38
  * To change this template use File | Settings | File Templates.
  */
-public class ArticleListView extends View {
+public class ContentListView extends View {
 
-    private ArticleListPanel artcilelisttpanel;
+    private ContentListPanel artcilelisttpanel;
 
-    public ArticleListView(Controller controller) {
+    public ContentListView(Controller controller) {
         super(controller);
     }
 
     protected void handleEvent(AppEvent appEvent) {
         if(appEvent.getType() == AppEvents.CONTENT_VIEWARTICLELIST){
             Content content = (Content) appEvent.getData();
-            artcilelisttpanel = new ArticleListPanel(content, true);
+            artcilelisttpanel = new ContentListPanel(content, true);
             Dispatcher.forwardEvent(
                     AppEvents.ARTICLE_MANAGER_CHANGE_EVENT,
                     new Entry(
-                            String.valueOf(AppConstant.CONTENT_VIEWARTICLELIST),
+                            AppEvents.CONTENT_VIEWARTICLELIST.getId(),
                             "文章采编",
                             AppState.OWNER_ARTICLE_MANAGER_CALLBACK,
                             artcilelisttpanel,

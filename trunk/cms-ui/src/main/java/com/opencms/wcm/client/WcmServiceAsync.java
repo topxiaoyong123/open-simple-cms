@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.Content;
 import com.opencms.wcm.client.model.User;
+import com.opencms.wcm.client.model.Site;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 
 /**
@@ -15,7 +16,6 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
  * To change this template use File | Settings | File Templates.
  */
 public interface WcmServiceAsync {
-    
     void getWcmApps(AsyncCallback async);
 
     void login(User user, AsyncCallback async);
@@ -25,6 +25,12 @@ public interface WcmServiceAsync {
     void getNodeChildren(WcmNodeModel node, AsyncCallback async);
 
     void PagingLoadArticleList(PagingLoadConfig config, Content content, AsyncCallback async);
+
+    void getAllSites(AsyncCallback async);
+
+    void addOrUpdateSite(Site site, AsyncCallback async);
+
+    void getSiteById(String id, AsyncCallback async);
 
     public static class Util {
         private static WcmServiceAsync instance;

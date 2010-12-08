@@ -2,10 +2,7 @@ package com.opencms.wcm.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.opencms.wcm.client.model.WcmApp;
-import com.opencms.wcm.client.model.WcmNodeModel;
-import com.opencms.wcm.client.model.Content;
-import com.opencms.wcm.client.model.User;
+import com.opencms.wcm.client.model.*;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 
@@ -19,6 +16,7 @@ import java.util.Map;
  * Time: 10:59:25
  * To change this template use File | Settings | File Templates.
  */
+//@SuppressWarnings({"ALL"})
 @RemoteServiceRelativePath(WcmService.SERVICE_URI)
 public interface WcmService extends RemoteService {
 
@@ -36,9 +34,9 @@ public interface WcmService extends RemoteService {
 
     public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
 
-    /**
-     * Utility/Convenience class.
-     * Use WcmService.App.getInstance() to access static instance of WcmServiceAsync
-     */
+    public List<Site> getAllSites() throws ApplicationException;
 
+    public boolean addOrUpdateSite(Site site) throws ApplicationException;
+
+    public Site getSiteById(String id) throws ApplicationException;
 }

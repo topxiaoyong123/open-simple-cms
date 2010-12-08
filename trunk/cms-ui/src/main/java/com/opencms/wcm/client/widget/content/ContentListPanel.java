@@ -1,4 +1,4 @@
-package com.opencms.wcm.client.widget;
+package com.opencms.wcm.client.widget.content;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Time: 9:00:45
  * To change this template use File | Settings | File Templates.
  */
-public class ArticleListPanel extends ContentPanel {
+public class ContentListPanel extends ContentPanel {
 
     final WcmServiceAsync service = (WcmServiceAsync) Registry.get(WcmService.SERVICE);// 定义所要引用的异步服务
 
@@ -36,7 +36,7 @@ public class ArticleListPanel extends ContentPanel {
 
     private static Grid<BeanModel> grid = null;
 
-    public ArticleListPanel(final Content content, boolean showontype) {
+    public ContentListPanel(final Content content, boolean showontype) {
         if (service == null) {
             MessageBox box = new MessageBox();
             box.setButtons(MessageBox.OK);

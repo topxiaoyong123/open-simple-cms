@@ -18,8 +18,18 @@
 
     <aop:aspectj-autoproxy />
 
-    <bean id="wcmService" class="com.opencms.wcm.server.WcmServiceImpl"/>
-    <bean id="authorityAspect" class="com.opencms.wcm.server.authority.AuthorityAspect"/>
-    <bean id="logAspect" class="com.opencms.wcm.server.log.LogAspect"/>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="txManager"
+                      expression="execution(* com.opencms.core.db.dao.*.*(..)) or execution(* com.opencms.core.db.service.*.*(..)) or execution(* com.opencms.wcm.server.WcmServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txManager"/>
+    </aop:config>
 
 </beans>

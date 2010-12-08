@@ -24,4 +24,6 @@ public interface BaseDao<T> {
 
     public List<T> get(Class c, String[] column, Serializable[] value);
 
+    public List<T> getAll(Class c);
+
 }
