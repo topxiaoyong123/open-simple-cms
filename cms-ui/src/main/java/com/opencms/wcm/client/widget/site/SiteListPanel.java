@@ -23,6 +23,7 @@ import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.data.*;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.WcmServiceAsync;
@@ -48,7 +49,6 @@ public class SiteListPanel extends ContentPanel {
 
     public void refresh() {
         grid.getStore().getLoader().load();
-        grid.getView().refresh(false);
     }
     
     public SiteListPanel() {
@@ -92,7 +92,6 @@ public class SiteListPanel extends ContentPanel {
         grid.setSelectionModel(smm);
         grid.addPlugin(smm);
         grid.getView().setForceFit(true);
-        grid.setLoadMask(true);
         ToolBar toolBars = new ToolBar();
         Button add = new Button(msgs.add());
         add.setIconStyle("icon-add");

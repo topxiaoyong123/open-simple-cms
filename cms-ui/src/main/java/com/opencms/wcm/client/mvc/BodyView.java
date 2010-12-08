@@ -85,7 +85,7 @@ public class BodyView extends View {
             tabPanel.add(item);
         } else {
             if (refresh) {// refresh
-//                item.removeAll();
+                item.removeAll();
                 item.setLayout(new FitLayout());
                 if (null != entry.getBody()) {
                     item.add(entry.getBody());

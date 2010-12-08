@@ -53,7 +53,6 @@ public class SiteView extends View {
         } else if(AppEvents.SITE_MANAGER_CANCEL == appEvent.getType() || AppEvents.SITE_MANAGER_SUCCESS == appEvent.getType()){
             window.hide();
             siteListPanel.refresh();
-            siteListPanel.layout(true);
         } else if(AppEvents.SITE_MANAGER_ADD == appEvent.getType()){
             Site c = appEvent.getData();
             SitePanel editsite = new SitePanel(c);
