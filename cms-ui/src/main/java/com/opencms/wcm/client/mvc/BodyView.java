@@ -15,7 +15,6 @@ import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.Content;
 import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.AppConstant;
 import com.opencms.wcm.client.AppState;
 
 import java.util.List;
@@ -46,7 +45,7 @@ public class BodyView extends View {
         tabPanel.addListener(Events.Select, new Listener<TabPanelEvent>() {
             public void handleEvent(TabPanelEvent be) {
                 Entry entry = (Entry) be.getItem().getData("body");
-                if (entry.getId().equalsIgnoreCase(String.valueOf(AppConstant.WELCOME))){
+                if (entry.getId().equalsIgnoreCase(AppEvents.WELCOME.getId())){
                     AppState.centerEventType = AppEvents.WELCOME;
                     if(AppState.westBarId.equals(AppState.OWNER_OTHER_MANAGER)){
                         Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE);
@@ -117,12 +116,12 @@ public class BodyView extends View {
     private void removeBodyItems() {
         try {
             List<TabItem> list = tabPanel.getItems();
-            TabItem welcome = tabPanel.getItemByItemId(String.valueOf(AppConstant.WELCOME));
+            TabItem welcome = tabPanel.getItemByItemId(AppEvents.WELCOME.getId());
             tabPanel.setSelection(welcome);
             if (list.size() > 1) {
                 for (int i = list.size() - 1; i >= 0; i--) {
                     TabItem item = list.get(i);
-                    if (item.getId().equals(String.valueOf(AppConstant.WELCOME))) {
+                    if (item.getId().equals(AppEvents.WELCOME.getId())) {
                         continue;
                     } else {
                         tabPanel.remove(item);
@@ -161,14 +160,14 @@ public class BodyView extends View {
 
     private void doArticleManagerChangeCategory(AppEvent appEvent){
         WcmNodeModel node = (WcmNodeModel)appEvent.getData();
-        AppState.westTreeItemId = node.getUuid();
+        AppState.westTreeItemId = node.getId();
         if(AppState.isWestBarChanged(AppState.OWNER_ARTICLE_MANAGER)){
             AppState.westBarId = AppState.OWNER_ARTICLE_MANAGER;
             this.initArticleManageTabPanel();
             Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE);
         }
         Content content = new Content();
-        content.setCategoryId(node.getUuid());
+        content.setCategoryId(node.getId());
         Dispatcher.forwardEvent(AppState.centerEventType, content);
     }
 
@@ -188,7 +187,7 @@ public class BodyView extends View {
         } else if(entry.isOtherApp()){
             Dispatcher.forwardEvent(AppEvents.OTHER_APP, entry);    
         } else{
-            //TODO
+            Dispatcher.forwardEvent(entry.getEventType(), entry);
         }
     }
 
@@ -203,37 +202,37 @@ public class BodyView extends View {
     private void initArticleManageTabPanel(){
         this.removeBodyItems();
         if (CONTENT_VIEWARTICLELIST_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.CONTENT_VIEWARTICLELIST + "", "文章采编", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_VIEWARTICLELIST.getId(), "文章采编", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_VIEWARTICLELIST, false));
         }
         if (CONTENT_AUDITINGLIST_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.CONTENT_AUDITINGLIST + "", "文章审核", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_AUDITINGLIST.getId(), "文章审核", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_AUDITINGLIST, false));
         }
         if (CONTENT_CONFIRMAUDITINGLIST_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.CONTENT_CONFIRMAUDITINGLIST + "", "文章签发", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_CONFIRMAUDITINGLIST.getId() + "", "文章签发", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_CONFIRMAUDITINGLIST, false));
         }
         if (CONTENT_PUBLISH_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.CONTENT_PUBLISH + "", "文章发布", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISH.getId(), "文章发布", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_PUBLISH, false));
         }
         if (CONTENT_MANAGERCONTENT_ALL_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.CONTENT_MANAGERCONTENT_ALL + "", "文章管理", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_MANAGERCONTENT_ALL.getId(), "文章管理", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_MANAGERCONTENT_ALL, false));
         }
         if (CATEGORY_LIST_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.CATEGORY_LIST + "", "栏目管理", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CATEGORY_LIST.getId(), "栏目管理", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CATEGORY_LIST, false));
         }
         if (OTHER_PUBLISH_JUDGE) {
-            this.addShowPage(new Entry(AppConstant.OTHER_PUBLISH + "", "栏目站点发布", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.OTHER_PUBLISH.getId(), "栏目站点发布", AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.OTHER_PUBLISH, false));
         }
     }
     
     private void initWelcomeTabPanel() {
-        this.onShowPage(new Entry(String.valueOf(AppConstant.WELCOME), "系统首页", AppState.OWNER_ARTICLE_MANAGER, new WelcomePanel(), true, false), true);
+        this.onShowPage(new Entry(AppEvents.WELCOME.getId(), "系统首页", AppState.OWNER_ARTICLE_MANAGER, new WelcomePanel(), true, false), true);
     }
 
     private void initArticleManagerJudge() {

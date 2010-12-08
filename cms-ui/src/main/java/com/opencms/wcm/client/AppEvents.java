@@ -11,34 +11,39 @@ import com.extjs.gxt.ui.client.event.EventType;
  */
 public class AppEvents {
 
-    public static final EventType INIT_UI = new EventType();
+    public static final AppEventType INIT_UI = new AppEventType();
 
-    public static final EventType LOGIN = new EventType();
-    public static final EventType LOGIN_OK = new EventType();
-    public static final EventType LOGIN_FAIL = new EventType();
+    public static final AppEventType LOGIN = new AppEventType();
+    public static final AppEventType LOGIN_OK = new AppEventType();
+    public static final AppEventType LOGIN_FAIL = new AppEventType();
 
-    public static final EventType WELCOME = new EventType();
+    public static final AppEventType WELCOME = new AppEventType();
 
-    public static final EventType OTHER_APP = new EventType();
+    public static final AppEventType OTHER_APP = new AppEventType();
 
-    public static final EventType OTHER_MANAGER_CHANGE_EVENT = new EventType();
+    //基础布局
+    public static final AppEventType OTHER_MANAGER_CHANGE_EVENT = new AppEventType();
+    public static final AppEventType OTHER_MANAGER_ITEM_SELECTION = new AppEventType();
+    public static final AppEventType OTHER_MANAGER_ITEM_SELECTION_NONE = new AppEventType();
+    public static final AppEventType ARTICLE_MANAGER_CHANGE_EVENT = new AppEventType();
+    public static final AppEventType ARTICLE_MANAGER_ITEM_SELECTION_NONE = new AppEventType();
+    public static final AppEventType ARTICLE_MANAGER_CHANGE_CATEGORY = new AppEventType();
 
-    public static final EventType OTHER_MANAGER_ITEM_SELECTION = new EventType();
+    //
+    public final static AppEventType CONTENT_VIEWARTICLELIST = new AppEventType();
+    public final static AppEventType CONTENT_AUDITINGLIST = new AppEventType();
+    public final static AppEventType CONTENT_CONFIRMAUDITINGLIST = new AppEventType();
+    public final static AppEventType CONTENT_PUBLISH = new AppEventType();
+    public final static AppEventType CONTENT_MANAGERCONTENT_ALL = new AppEventType();
+    public final static AppEventType CATEGORY_LIST = new AppEventType();
+    public final static AppEventType OTHER_PUBLISH = new AppEventType();
 
-    public static final EventType OTHER_MANAGER_ITEM_SELECTION_NONE = new EventType();
-
-    public static final EventType ARTICLE_MANAGER_CHANGE_EVENT = new EventType();
-
-    public static final EventType ARTICLE_MANAGER_ITEM_SELECTION_NONE = new EventType();
-
-    public static final EventType ARTICLE_MANAGER_CHANGE_CATEGORY = new EventType();
-
-
-    public final static EventType CONTENT_VIEWARTICLELIST = new EventType();
-    public final static EventType CONTENT_AUDITINGLIST = new EventType();
-    public final static EventType CONTENT_CONFIRMAUDITINGLIST = new EventType();
-    public final static EventType CONTENT_PUBLISH = new EventType();
-    public final static EventType CONTENT_MANAGERCONTENT_ALL = new EventType();
-    public final static EventType CATEGORY_LIST = new EventType();
-    public final static EventType OTHER_PUBLISH = new EventType();
+    //站点管理
+    public final static AppEventType SITE_MANAGER = new AppEventType();
+    public final static AppEventType SITE_MANAGER_ADD = new AppEventType();
+    public final static AppEventType SITE_MANAGER_EDIT = new AppEventType();
+    public final static AppEventType SITE_MANAGER_DELETE = new AppEventType();
+    public final static AppEventType SITE_MANAGER_SAVE = new AppEventType();
+    public final static AppEventType SITE_MANAGER_CANCEL = new AppEventType();
+    public final static AppEventType SITE_MANAGER_SUCCESS = new AppEventType();
 }

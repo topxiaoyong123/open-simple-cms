@@ -142,6 +142,12 @@ public class NavigationView extends View {
     }
     
     private void juge(){
+        DataListItem dataListItem = new DataListItem();
+        dataListItem.setText("站点管理");
+        dataListItem.setId(AppEvents.SITE_MANAGER.getId());
+        dataListItem.setIconStyle("icon-site");
+        dataListItem.setData("entry", new Entry(AppEvents.SITE_MANAGER.getId(), "站点管理", AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.SITE_MANAGER, false));
+        otherManageDataList.add(dataListItem);
         service.getWcmApps(new AsyncCallback(){
             public void onFailure(Throwable throwable) {
             }

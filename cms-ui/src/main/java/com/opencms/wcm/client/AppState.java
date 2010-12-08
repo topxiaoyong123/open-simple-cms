@@ -18,7 +18,7 @@ public class AppState {
 
     public static String westBarId = AppState.OWNER_WESTBAR_INIT;
 
-     public static int centerEventId = AppConstant.WELCOME;
+    public static String centerEventId = AppEvents.WELCOME.getId();
 
     public static EventType centerEventType = AppEvents.WELCOME;
 

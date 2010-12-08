@@ -1,46 +1,50 @@
 package com.opencms.core.db.bean;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.Date;
+import java.util.LinkedHashSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
- * Date: 2010-12-4
- * Time: 20:38:05
+ * Date: 2010-12-8
+ * Time: 11:24:19
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "cms_content")
-public class ContentBean implements Serializable {
+@Table(name = "cms_site")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class SiteBean implements Serializable {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
     private String id;
 
-    @Column(nullable = false, length = 256)
+    @Column(nullable = false, length = 128)
     private String title;
 
-    @Column(length = 512)
+    @Column(nullable = false, length = 32)
+    private String name;
+
+    @Column(length = 256)
     private String keywords;
 
-    @Column(length = 512)
+    @Column(length = 256)
     private String description;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "categoryid", nullable = false, unique = true)
-    private CategoryBean category;
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "site")
+    @OrderBy("no")
+    private Set<CategoryBean> categorys = new LinkedHashSet<CategoryBean>();
 
     public String getId() {
         return id;
@@ -56,6 +60,14 @@ public class ContentBean implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getKeywords() {
@@ -74,14 +86,6 @@ public class ContentBean implements Serializable {
         this.description = description;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Date getCreationDate() {
         return creationDate;
     }
@@ -90,11 +94,11 @@ public class ContentBean implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public CategoryBean getCategory() {
-        return category;
+    public Set<CategoryBean> getCategorys() {
+        return categorys;
     }
 
-    public void setCategory(CategoryBean category) {
-        this.category = category;
+    public void setCategorys(Set<CategoryBean> categorys) {
+        this.categorys = categorys;
     }
 }

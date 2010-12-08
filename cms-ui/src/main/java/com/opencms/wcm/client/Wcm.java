@@ -26,8 +26,9 @@ public class Wcm implements EntryPoint {
         dispatcher.addController(new NavigationController());
         dispatcher.addController(new BodyController());
         dispatcher.addController(new OtherController());
-
-        dispatcher.addController(new ArticleListController());
+        
+        dispatcher.addController(new SiteController());
+        dispatcher.addController(new ContentListController());
 
         dispatcher.addController(new LoginController());
 

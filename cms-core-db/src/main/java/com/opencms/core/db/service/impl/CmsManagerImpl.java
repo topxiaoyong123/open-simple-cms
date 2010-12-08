@@ -3,6 +3,7 @@ package com.opencms.core.db.service.impl;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.core.db.service.UserService;
 import com.opencms.core.db.service.ContentService;
+import com.opencms.core.db.service.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,18 @@ public class CmsManagerImpl implements CmsManager {
     @Autowired
     private ContentService contentService;
 
+    @Autowired
+    private SiteService siteService;
+
     public UserService getUserService() {
         return userService;
     }
 
     public ContentService getContentService() {
         return contentService;
+    }
+
+    public SiteService getSiteService() {
+        return siteService;
     }
 }

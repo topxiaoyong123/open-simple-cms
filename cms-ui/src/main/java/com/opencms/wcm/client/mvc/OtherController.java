@@ -24,6 +24,7 @@ public class OtherController extends Controller {
         view = new OtherView(this);
     }
 
+    @Override
     public void handleEvent(AppEvent appEvent) {
         this.forwardToView(view, appEvent);
     }

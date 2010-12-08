@@ -28,6 +28,7 @@ public class BodyController extends Controller {
         view = new BodyView(this);
     }
 
+    @Override
     public void handleEvent(AppEvent appEvent) {
         forwardToView(view,appEvent);
     }

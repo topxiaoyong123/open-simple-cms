@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         return true;   
     }
 
-    public UserBean getUserById(Long id) {
+    public UserBean getUserById(String id) {
         return userDao.get(UserBean.class, id);
     }
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public boolean addRoleForUser(Long id, RoleBean role) {
+    public boolean addRoleForUser(String id, RoleBean role) {
         UserBean user = getUserById(id);
         if(user != null){
             user.addRole(role);
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public boolean addRolesForUser(Long id, Set<RoleBean> roles) {
+    public boolean addRolesForUser(String id, Set<RoleBean> roles) {
         UserBean user = getUserById(id);
         if(user != null){
             user.setRoles(roles);
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public RoleBean getRoleById(Long id){
+    public RoleBean getRoleById(String id){
         return roleDao.get(RoleBean.class, id);    
     }
 

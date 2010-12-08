@@ -31,6 +31,7 @@ public class LoginController extends Controller {
         this.registerEventTypes(AppEvents.LOGIN_FAIL);
     }
 
+    @Override
     public void handleEvent(AppEvent appEvent) {
         User u = appEvent.getData();
         if (u != null) {

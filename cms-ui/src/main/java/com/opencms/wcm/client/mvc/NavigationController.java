@@ -22,6 +22,7 @@ public class NavigationController extends Controller {
         this.registerEventTypes(AppEvents.ARTICLE_MANAGER_ITEM_SELECTION_NONE);
     }
 
+    @Override
     public void handleEvent(AppEvent appEvent) {
         this.forwardToView(view, appEvent);
     }
