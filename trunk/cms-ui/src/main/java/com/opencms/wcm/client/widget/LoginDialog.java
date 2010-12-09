@@ -34,9 +34,9 @@ public class LoginDialog extends Dialog {
     protected Button login;
     private String url = GWT.getModuleBaseURL();
 
-    public LoginDialog() {
+    WcmMessages msgs = GWT.create(WcmMessages.class);
 
-        WcmMessages msgs = GWT.create(WcmMessages.class);
+    public LoginDialog() {
 
         String username_label = msgs.username();
         String password_label = msgs.password();
@@ -113,15 +113,15 @@ public class LoginDialog extends Dialog {
 
     protected void onSubmit() {
         if (userName.isValid() == false) {
-            MessageBox.alert("错误", "用户名不能为空且要大于4个字符", null);
+            MessageBox.alert(msgs.error(), msgs.validate_notnull(msgs.username()) + msgs.and() + msgs.validate_minlength(msgs.username(), "4"), null);
             userName.setValue(null);
             setFocusWidget(userName);
         } else if (password.isValid() == false) {
-            MessageBox.alert("错误", "密码不能为空", null);
+            MessageBox.alert(msgs.error(),  msgs.validate_notnull(msgs.password()) + msgs.and() + msgs.validate_minlength(msgs.password(), "4"), null);
             password.setValue(null);
             setFocusWidget(password);
         } else if (checkcode.isValid() == false) {
-            MessageBox.alert("错误", "验证码不能为空", null);
+            MessageBox.alert(msgs.error(), msgs.validate_notnull(msgs.checkcode()), null);
             checkcode.setValue(null);
             setFocusWidget(checkcode);
         } else {

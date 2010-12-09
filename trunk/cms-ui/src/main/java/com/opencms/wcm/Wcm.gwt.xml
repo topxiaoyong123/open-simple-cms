@@ -8,7 +8,7 @@
     <entry-point class='com.opencms.wcm.client.Wcm'/>
 
     <extend-property name="locale" values="en"/>
-    <extend-property name="locale" values="zh"/>
+    <extend-property name="locale" values="zh_CN"/>
 
     <servlet path="/wcmService"
              class="com.opencms.wcm.server.MyGWTServer"/>

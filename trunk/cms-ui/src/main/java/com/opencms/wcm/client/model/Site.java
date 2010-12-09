@@ -24,7 +24,7 @@ public class Site implements Serializable, IsSerializable {
 
     private String description;
 
-    private Date clientCreationDate = new Date();
+    private Date clientCreationDate;
 
     public String getId() {
         return id;

@@ -154,6 +154,7 @@ public class WcmServiceImpl implements WcmService {
             SiteBean siteBean = new SiteBean();
             try {
                 BeanUtils.copyProperties(siteBean, site);
+                siteBean.setCreationDate(site.getClientCreationDate());
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {

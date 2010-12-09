@@ -43,7 +43,7 @@ public class SiteView extends View {
                     AppEvents.OTHER_MANAGER_CHANGE_EVENT,
                     new Entry(
                             etype.getId(),
-                            "站点管理",
+                            msgs.site_manager_header(),
                             AppState.OWNER_OTHER_MANAGER_CALLBACK,
                             siteListPanel,
                             true,
@@ -58,7 +58,7 @@ public class SiteView extends View {
             SitePanel editsite = new SitePanel(c);
             window.removeAll();
             window.add(editsite);
-            window.setHeading(msgs.site_add());
+            window.setHeading(msgs.site_add_header());
             window.setWidth("500px");
             window.show();
         } else if(AppEvents.SITE_MANAGER_EDIT == appEvent.getType()){
@@ -66,7 +66,7 @@ public class SiteView extends View {
             SitePanel editsite = new SitePanel(c);
             window.removeAll();
             window.add(editsite);
-            window.setHeading(msgs.site_edit());
+            window.setHeading(msgs.site_edit_header());
             window.setWidth("500px");
             window.show();
         } else if(AppEvents.SITE_MANAGER_DELETE == appEvent.getType()){
