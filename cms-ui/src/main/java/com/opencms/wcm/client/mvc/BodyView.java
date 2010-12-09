@@ -16,6 +16,8 @@ import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.Content;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
+import com.opencms.wcm.client.WcmMessages;
+import com.google.gwt.core.client.GWT;
 
 import java.util.List;
 
@@ -31,6 +33,8 @@ public class BodyView extends View {
     TabPanel tabPanel;
     private ContentPanel center = (ContentPanel) Registry.get(AppView.CENTER);
 
+    WcmMessages msgs = GWT.create(WcmMessages.class);
+    
     public BodyView(Controller controller) {
         super(controller);
     }
@@ -202,37 +206,37 @@ public class BodyView extends View {
     private void initArticleManageTabPanel(){
         this.removeBodyItems();
         if (CONTENT_VIEWARTICLELIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_VIEWARTICLELIST.getId(), "文章采编", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_VIEWARTICLELIST.getId(), msgs.content_editing_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_VIEWARTICLELIST, false));
         }
         if (CONTENT_AUDITINGLIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_AUDITINGLIST.getId(), "文章审核", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_AUDITINGLIST.getId(), msgs.content_auditing_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_AUDITINGLIST, false));
         }
         if (CONTENT_CONFIRMAUDITINGLIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_CONFIRMAUDITINGLIST.getId() + "", "文章签发", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_CONFIRMAUDITINGLIST.getId(), msgs.content_auditing_confirm_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_CONFIRMAUDITINGLIST, false));
         }
         if (CONTENT_PUBLISH_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISH.getId(), "文章发布", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISH.getId(), msgs.content_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_PUBLISH, false));
         }
         if (CONTENT_MANAGERCONTENT_ALL_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_MANAGERCONTENT_ALL.getId(), "文章管理", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CONTENT_MANAGERCONTENT_ALL.getId(), msgs.content_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CONTENT_MANAGERCONTENT_ALL, false));
         }
         if (CATEGORY_LIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CATEGORY_LIST.getId(), "栏目管理", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.CATEGORY_LIST.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.CATEGORY_LIST, false));
         }
         if (OTHER_PUBLISH_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.OTHER_PUBLISH.getId(), "栏目站点发布", AppState.OWNER_ARTICLE_MANAGER,
+            this.addShowPage(new Entry(AppEvents.OTHER_PUBLISH.getId(), msgs.category_site_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
                     null, true, false, AppEvents.OTHER_PUBLISH, false));
         }
     }
     
     private void initWelcomeTabPanel() {
-        this.onShowPage(new Entry(AppEvents.WELCOME.getId(), "系统首页", AppState.OWNER_ARTICLE_MANAGER, new WelcomePanel(), true, false), true);
+        this.onShowPage(new Entry(AppEvents.WELCOME.getId(), msgs.wcm_welcome(), AppState.OWNER_ARTICLE_MANAGER, new WelcomePanel(), true, false), true);
     }
 
     private void initArticleManagerJudge() {

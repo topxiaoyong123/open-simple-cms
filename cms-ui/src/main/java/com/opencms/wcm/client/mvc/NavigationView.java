@@ -17,14 +17,12 @@ import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.binder.TreeBinder;
 import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.*;
-import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.WcmServiceAsync;
-import com.opencms.wcm.client.WcmService;
-import com.opencms.wcm.client.AppState;
+import com.opencms.wcm.client.*;
 import com.opencms.wcm.client.model.WcmApp;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +46,8 @@ public class NavigationView extends View {
 
     final WcmServiceAsync service = (WcmServiceAsync) Registry.get(WcmService.SERVICE);// 定义所要引用的异步服务
 
+    WcmMessages msgs = GWT.create(WcmMessages.class);
+    
     public NavigationView(Controller controller) {
         super(controller);
     }
@@ -55,7 +55,7 @@ public class NavigationView extends View {
     @Override
     protected void initialize() {
         westPanel = Registry.get(AppView.WEST);
-        westPanel.setHeading("导航");
+        westPanel.setHeading(msgs.wcm_navigation());
         AccordionLayout layout = new AccordionLayout();
         westPanel.setLayout(layout);
         ContentPanel or = this.createOtherManagerPanel();
@@ -67,7 +67,7 @@ public class NavigationView extends View {
 
     private ContentPanel createArticleManagerPanel() {
         ContentPanel topicTreePanel = new ContentPanel();
-        topicTreePanel.setHeading("信息管理");
+        topicTreePanel.setHeading(msgs.wcm_information_management());
         topicTreePanel.setScrollMode(Style.Scroll.AUTO);
 
         // data proxy
@@ -123,7 +123,7 @@ public class NavigationView extends View {
 
     private ContentPanel createOtherManagerPanel() {
         ContentPanel otherManage = new ContentPanel();
-        otherManage.setHeading("综合管理");
+        otherManage.setHeading(msgs.wcm_general_management());
         otherManage.setLayout(new FitLayout());
 
         otherManageDataList.setSelectionModel(smotherManageDLSM);
@@ -143,10 +143,10 @@ public class NavigationView extends View {
     
     private void juge(){
         DataListItem dataListItem = new DataListItem();
-        dataListItem.setText("站点管理");
+        dataListItem.setText(msgs.site_manager_header());
         dataListItem.setId(AppEvents.SITE_MANAGER.getId());
         dataListItem.setIconStyle("icon-site");
-        dataListItem.setData("entry", new Entry(AppEvents.SITE_MANAGER.getId(), "站点管理", AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.SITE_MANAGER, false));
+        dataListItem.setData("entry", new Entry(AppEvents.SITE_MANAGER.getId(), msgs.site_manager_header(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.SITE_MANAGER, false));
         otherManageDataList.add(dataListItem);
         service.getWcmApps(new AsyncCallback(){
             public void onFailure(Throwable throwable) {

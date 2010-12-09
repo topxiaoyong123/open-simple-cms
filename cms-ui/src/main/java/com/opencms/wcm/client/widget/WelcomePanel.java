@@ -14,6 +14,7 @@ import com.extjs.gxt.ui.client.Style;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.http.client.*;
 import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.WcmMessages;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +25,8 @@ import com.google.gwt.core.client.GWT;
  */
 public class WelcomePanel extends ContentPanel {
 
+    WcmMessages msgs = GWT.create(WcmMessages.class);
+    
     public WelcomePanel() {
         this.setLayout(new FitLayout());
         this.setHeaderVisible(false);
@@ -31,32 +34,33 @@ public class WelcomePanel extends ContentPanel {
         this.setBodyBorder(false);
 
          ToolBar toolBars = new ToolBar();
-        Button addBookmark = new Button("收藏地址");
+        Button addBookmark = new Button(msgs.wcm_bookmark());
         addBookmark.setIconStyle("welcome-bookmark");
         addBookmark.addListener(Events.Select, new Listener<ComponentEvent>(){
             public void handleEvent(ComponentEvent componentEvent) {
-                addBookmark("cms后台访问界面");
+                addBookmark(msgs.wcm_bookmark_title());
             }
         });
-        Button about = new Button("关于CMS");
+        Button about = new Button(msgs.wcm_about());
         about.setIconStyle("welcome-about");
         about.addListener(Events.Select, new Listener<ComponentEvent>(){
             public void handleEvent(ComponentEvent componentEvent) {
                 final Window window = new Window();
                 window.setButtonAlign(Style.HorizontalAlignment.RIGHT);
-                window.setHeading("关于CMS");
+                window.setHeading(msgs.wcm_about());
                 window.setModal(true);
                 window.setSize("490px", "230px");
                 window.setResizable(false);
                 window.setLayout(new RowLayout(Style.Orientation.VERTICAL));
                 window.add(new HTML("<div style=\"background:url(images/about_bg1.gif) no-repeat; width:488px; padding:106px 0 0 0\">\n" +
                         "    <div style=\"border-top:1px solid #ccc; background:#efefef; color:#666; padding:10px 20px; height:50px; line-height:22px; position:relative\">\n" +
-                        "    <span style=\"font-family:Verdana; font-weight:bold; position:absolute; top:-53px; left:23px\">1.0.1</span>\n" +
-                        "版权&copy; Lij Inc. 保留所有权利。<br />\n" +
+                        "    <span style=\"font-family:Verdana; font-weight:bold; position:absolute; top:-53px; left:23px\">" + msgs.wcm_version() + "</span>\n" +
+                        msgs.wcm_copyright() + 
+                        "<br />\n" +
                         "        <a class=\"address\" target=\"_blank\" href=\"#\">http://www.demo.com</a>\n" +
                         "    </div>\n" +
                         "</div>"));
-                Button b = new Button("确定");
+                Button b = new Button(msgs.ok());
                 b.addListener(Events.Select, new Listener<ComponentEvent>(){
                     public void handleEvent(ComponentEvent componentEvent) {
                         window.hide();

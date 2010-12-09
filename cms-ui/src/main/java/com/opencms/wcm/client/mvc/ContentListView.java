@@ -6,9 +6,11 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
+import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.Content;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.widget.content.ContentListPanel;
+import com.google.gwt.core.client.GWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,6 +22,8 @@ import com.opencms.wcm.client.widget.content.ContentListPanel;
 public class ContentListView extends View {
 
     private ContentListPanel artcilelisttpanel;
+
+    WcmMessages msgs = GWT.create(WcmMessages.class);
 
     public ContentListView(Controller controller) {
         super(controller);
@@ -33,7 +37,7 @@ public class ContentListView extends View {
                     AppEvents.ARTICLE_MANAGER_CHANGE_EVENT,
                     new Entry(
                             AppEvents.CONTENT_VIEWARTICLELIST.getId(),
-                            "文章采编",
+                            msgs.content_editing_header(),
                             AppState.OWNER_ARTICLE_MANAGER_CALLBACK,
                             artcilelisttpanel,
                             true,

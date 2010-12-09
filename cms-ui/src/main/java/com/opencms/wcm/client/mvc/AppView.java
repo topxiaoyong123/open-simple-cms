@@ -17,6 +17,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.WcmMessages;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,6 +39,8 @@ public class AppView extends View {
     private ContentPanel west;
     private HtmlContainer north;
     private ContentPanel center;
+
+    WcmMessages msgs = GWT.create(WcmMessages.class);
 
     public AppView(Controller controller) {
         super(controller);
@@ -63,19 +67,19 @@ public class AppView extends View {
         sb.append("<table background=\"images/topbg.gif\" border='0' cellpadding='0' cellspacing='0' width='100%' height='100%'><tr><td><img src=\"images/logo1.gif\"></td><td></td><td valign='bottom'> <div class=b1 align=right></div></td></tr></table>");
         north = new HtmlContainer(sb.toString());
 
-        HTML logout = new HTML("<a href='#' class='logout'>注销登录</a>");
+        HTML logout = new HTML("<a href='#' class='logout'>" + msgs.logout() + "</a>");
         north.add(logout, "div.b1");
 
         final Listener<MessageBoxEvent> listener = new Listener<MessageBoxEvent>() {
             public void handleEvent(MessageBoxEvent ce) {
                 Button btn = ce.getButtonClicked();
-                if ("是".equals(btn.getText())) {
+                if (msgs.yes().equals(btn.getText())) {
                 }
             }
         };
         logout.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent clickEvent) {
-                MessageBox.confirm("退出", "是否确定退出？", listener);
+                MessageBox.confirm(msgs.tips(), msgs.logout_confirm(), listener);
             }
         });
         BorderLayoutData data = new BorderLayoutData(Style.LayoutRegion.NORTH, 33);
