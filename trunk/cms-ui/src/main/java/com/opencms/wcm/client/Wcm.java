@@ -18,7 +18,7 @@ public class Wcm implements EntryPoint {
     public void onModuleLoad() {
         GXT.hideLoadingPanel("loading");
 
-        WcmServiceAsync wService = WcmServiceAsync.Util.getInstance();
+        final WcmServiceAsync wService = WcmServiceAsync.Util.getInstance();
         Registry.register(WcmService.SERVICE, wService);
 
         final Dispatcher dispatcher = Dispatcher.get();
@@ -31,14 +31,33 @@ public class Wcm implements EntryPoint {
         dispatcher.addController(new ContentListController());
 
         dispatcher.addController(new LoginController());
-
-        wService.checkLogin(new AsyncCallback(){
+        wService.setLocale(getLocale(), new AsyncCallback(){
             public void onFailure(Throwable throwable) {
-                dispatcher.dispatch(AppEvents.LOGIN);    
+                wService.checkLogin(new AsyncCallback(){
+                    public void onFailure(Throwable throwable) {
+                        dispatcher.dispatch(AppEvents.LOGIN);
+                    }
+                    public void onSuccess(Object o) {
+                        dispatcher.dispatch(AppEvents.LOGIN_OK);
+                    }
+                });
             }
             public void onSuccess(Object o) {
-                dispatcher.dispatch(AppEvents.LOGIN_OK);
+                wService.checkLogin(new AsyncCallback(){
+                    public void onFailure(Throwable throwable) {
+                        dispatcher.dispatch(AppEvents.LOGIN);
+                    }
+                    public void onSuccess(Object o) {
+                        dispatcher.dispatch(AppEvents.LOGIN_OK);
+                    }
+                });
             }
         });
+
     }
+
+    public native String getLocale()/*-{
+        var locale = $wnd.getparastr("locale");
+        return locale;
+    }-*/;
 }

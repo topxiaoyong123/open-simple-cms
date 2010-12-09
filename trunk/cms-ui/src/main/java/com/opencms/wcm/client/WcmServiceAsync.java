@@ -16,6 +16,9 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
  * To change this template use File | Settings | File Templates.
  */
 public interface WcmServiceAsync {
+
+    void setLocale(String locale, AsyncCallback async);
+
     void getWcmApps(AsyncCallback async);
 
     void login(User user, AsyncCallback async);

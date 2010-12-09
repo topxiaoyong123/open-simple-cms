@@ -7,461 +7,461 @@ package com.opencms.wcm.client;
 public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   
   /**
-   * Translated "新增".
+   * Translated "Add".
    * 
-   * @return translated "新增"
+   * @return translated "Add"
    */
-  @DefaultMessage("新增")
+  @DefaultMessage("Add")
   @Key("add")
   String add();
 
   /**
-   * Translated "并且".
+   * Translated "And".
    * 
-   * @return translated "并且"
+   * @return translated "And"
    */
-  @DefaultMessage("并且")
+  @DefaultMessage("And")
   @Key("and")
   String and();
 
   /**
-   * Translated "取消".
+   * Translated "Cancel".
    * 
-   * @return translated "取消"
+   * @return translated "Cancel"
    */
-  @DefaultMessage("取消")
+  @DefaultMessage("Cancel")
   @Key("cancel")
   String cancel();
 
   /**
-   * Translated "栏目管理".
+   * Translated "Category Management".
    * 
-   * @return translated "栏目管理"
+   * @return translated "Category Management"
    */
-  @DefaultMessage("栏目管理")
+  @DefaultMessage("Category Management")
   @Key("category_manager_header")
   String category_manager_header();
 
   /**
-   * Translated "栏目管理".
+   * Translated "Category Site Publish".
    * 
-   * @return translated "栏目管理"
+   * @return translated "Category Site Publish"
    */
-  @DefaultMessage("栏目管理")
+  @DefaultMessage("Category Site Publish")
   @Key("category_site_publish_header")
   String category_site_publish_header();
 
   /**
-   * Translated "验证码".
+   * Translated "Checkcode".
    * 
-   * @return translated "验证码"
+   * @return translated "Checkcode"
    */
-  @DefaultMessage("验证码")
+  @DefaultMessage("Checkcode")
   @Key("checkcode")
   String checkcode();
 
   /**
-   * Translated "请选择一个".
+   * Translated "Please choose one".
    * 
-   * @return translated "请选择一个"
+   * @return translated "Please choose one"
    */
-  @DefaultMessage("请选择一个")
+  @DefaultMessage("Please choose one")
   @Key("choose_one")
   String choose_one();
 
   /**
-   * Translated "文章签发".
+   * Translated "Content Auditing Confirm".
    * 
-   * @return translated "文章签发"
+   * @return translated "Content Auditing Confirm"
    */
-  @DefaultMessage("文章签发")
+  @DefaultMessage("Content Auditing Confirm")
   @Key("content_auditing_confirm_header")
   String content_auditing_confirm_header();
 
   /**
-   * Translated "文章审核".
+   * Translated "Content Auditing".
    * 
-   * @return translated "文章审核"
+   * @return translated "Content Auditing"
    */
-  @DefaultMessage("文章审核")
+  @DefaultMessage("Content Auditing")
   @Key("content_auditing_header")
   String content_auditing_header();
 
   /**
-   * Translated "文章采编".
+   * Translated "Content Editing".
    * 
-   * @return translated "文章采编"
+   * @return translated "Content Editing"
    */
-  @DefaultMessage("文章采编")
+  @DefaultMessage("Content Editing")
   @Key("content_editing_header")
   String content_editing_header();
 
   /**
-   * Translated "文章管理".
+   * Translated "Content Management".
    * 
-   * @return translated "文章管理"
+   * @return translated "Content Management"
    */
-  @DefaultMessage("文章管理")
+  @DefaultMessage("Content Management")
   @Key("content_manager_header")
   String content_manager_header();
 
   /**
-   * Translated "文章签发".
+   * Translated "Content Publish".
    * 
-   * @return translated "文章签发"
+   * @return translated "Content Publish"
    */
-  @DefaultMessage("文章签发")
+  @DefaultMessage("Content Publish")
   @Key("content_publish_header")
   String content_publish_header();
 
   /**
-   * Translated "删除".
+   * Translated "Delete".
    * 
-   * @return translated "删除"
+   * @return translated "Delete"
    */
-  @DefaultMessage("删除")
+  @DefaultMessage("Delete")
   @Key("delete")
   String delete();
 
   /**
-   * Translated "编辑".
+   * Translated "Edit".
    * 
-   * @return translated "编辑"
+   * @return translated "Edit"
    */
-  @DefaultMessage("编辑")
+  @DefaultMessage("Edit")
   @Key("edit")
   String edit();
 
   /**
-   * Translated "错误".
+   * Translated "Error".
    * 
-   * @return translated "错误"
+   * @return translated "Error"
    */
-  @DefaultMessage("错误")
+  @DefaultMessage("Error")
   @Key("error")
   String error();
 
   /**
-   * Translated "登录".
+   * Translated "Login".
    * 
-   * @return translated "登录"
+   * @return translated "Login"
    */
-  @DefaultMessage("登录")
+  @DefaultMessage("Login")
   @Key("login")
   String login();
 
   /**
-   * Translated "注销登录".
+   * Translated "Logout".
    * 
-   * @return translated "注销登录"
+   * @return translated "Logout"
    */
-  @DefaultMessage("注销登录")
+  @DefaultMessage("Logout")
   @Key("logout")
   String logout();
 
   /**
-   * Translated "是否确定退出？".
+   * Translated "Sure to logout？".
    * 
-   * @return translated "是否确定退出？"
+   * @return translated "Sure to logout？"
    */
-  @DefaultMessage("是否确定退出？")
+  @DefaultMessage("Sure to logout？")
   @Key("logout_confirm")
   String logout_confirm();
 
   /**
-   * Translated "否".
+   * Translated "No".
    * 
-   * @return translated "否"
+   * @return translated "No"
    */
-  @DefaultMessage("否")
+  @DefaultMessage("No")
   @Key("no")
   String no();
 
   /**
-   * Translated "确定".
+   * Translated "Ok".
    * 
-   * @return translated "确定"
+   * @return translated "Ok"
    */
-  @DefaultMessage("确定")
+  @DefaultMessage("Ok")
   @Key("ok")
   String ok();
 
   /**
-   * Translated "或者".
+   * Translated "Or".
    * 
-   * @return translated "或者"
+   * @return translated "Or"
    */
-  @DefaultMessage("或者")
+  @DefaultMessage("Or")
   @Key("or")
   String or();
 
   /**
-   * Translated "密码".
+   * Translated "Password".
    * 
-   * @return translated "密码"
+   * @return translated "Password"
    */
-  @DefaultMessage("密码")
+  @DefaultMessage("Password")
   @Key("password")
   String password();
 
   /**
-   * Translated "请等待...".
+   * Translated "Waiting...".
    * 
-   * @return translated "请等待..."
+   * @return translated "Waiting..."
    */
-  @DefaultMessage("请等待...")
+  @DefaultMessage("Waiting...")
   @Key("pleasewait")
   String pleasewait();
 
   /**
-   * Translated "预览".
+   * Translated "Preview".
    * 
-   * @return translated "预览"
+   * @return translated "Preview"
    */
-  @DefaultMessage("预览")
+  @DefaultMessage("Preview")
   @Key("preview")
   String preview();
 
   /**
-   * Translated "重置".
+   * Translated "Reset".
    * 
-   * @return translated "重置"
+   * @return translated "Reset"
    */
-  @DefaultMessage("重置")
+  @DefaultMessage("Reset")
   @Key("reset")
   String reset();
 
   /**
-   * Translated "保存".
+   * Translated "Save".
    * 
-   * @return translated "保存"
+   * @return translated "Save"
    */
-  @DefaultMessage("保存")
+  @DefaultMessage("Save")
   @Key("save")
   String save();
 
   /**
-   * Translated "保存失败".
+   * Translated "Save Failed".
    * 
-   * @return translated "保存失败"
+   * @return translated "Save Failed"
    */
-  @DefaultMessage("保存失败")
+  @DefaultMessage("Save Failed")
   @Key("save_fail")
   String save_fail();
 
   /**
-   * Translated "保存成功".
+   * Translated "Save Succeed".
    * 
-   * @return translated "保存成功"
+   * @return translated "Save Succeed"
    */
-  @DefaultMessage("保存成功")
+  @DefaultMessage("Save Succeed")
   @Key("save_success")
   String save_success();
 
   /**
-   * Translated "新建站点".
+   * Translated "New Site".
    * 
-   * @return translated "新建站点"
+   * @return translated "New Site"
    */
-  @DefaultMessage("新建站点")
+  @DefaultMessage("New Site")
   @Key("site_add_header")
   String site_add_header();
 
   /**
-   * Translated "创建日期".
+   * Translated "Creation Date".
    * 
-   * @return translated "创建日期"
+   * @return translated "Creation Date"
    */
-  @DefaultMessage("创建日期")
+  @DefaultMessage("Creation Date")
   @Key("site_creationDate")
   String site_creationDate();
 
   /**
-   * Translated "描述".
+   * Translated "Description".
    * 
-   * @return translated "描述"
+   * @return translated "Description"
    */
-  @DefaultMessage("描述")
+  @DefaultMessage("Description")
   @Key("site_description")
   String site_description();
 
   /**
-   * Translated "编辑站点".
+   * Translated "Edit Site".
    * 
-   * @return translated "编辑站点"
+   * @return translated "Edit Site"
    */
-  @DefaultMessage("编辑站点")
+  @DefaultMessage("Edit Site")
   @Key("site_edit_header")
   String site_edit_header();
 
   /**
-   * Translated "站点ID".
+   * Translated "Site ID".
    * 
-   * @return translated "站点ID"
+   * @return translated "Site ID"
    */
-  @DefaultMessage("站点ID")
+  @DefaultMessage("Site ID")
   @Key("site_id")
   String site_id();
 
   /**
-   * Translated "关键字".
+   * Translated "Keywords".
    * 
-   * @return translated "关键字"
+   * @return translated "Keywords"
    */
-  @DefaultMessage("关键字")
+  @DefaultMessage("Keywords")
   @Key("site_keywords")
   String site_keywords();
 
   /**
-   * Translated "站点管理".
+   * Translated "Site Management".
    * 
-   * @return translated "站点管理"
+   * @return translated "Site Management"
    */
-  @DefaultMessage("站点管理")
+  @DefaultMessage("Site Management")
   @Key("site_manager_header")
   String site_manager_header();
 
   /**
-   * Translated "站点标识".
+   * Translated "Site Name".
    * 
-   * @return translated "站点标识"
+   * @return translated "Site Name"
    */
-  @DefaultMessage("站点标识")
+  @DefaultMessage("Site Name")
   @Key("site_name")
   String site_name();
 
   /**
-   * Translated "站点名称".
+   * Translated "Site Title".
    * 
-   * @return translated "站点名称"
+   * @return translated "Site Title"
    */
-  @DefaultMessage("站点名称")
+  @DefaultMessage("Site Title")
   @Key("site_title")
   String site_title();
 
   /**
-   * Translated "提示".
+   * Translated "Tips".
    * 
-   * @return translated "提示"
+   * @return translated "Tips"
    */
-  @DefaultMessage("提示")
+  @DefaultMessage("Tips")
   @Key("tips")
   String tips();
 
   /**
-   * Translated "用户名".
+   * Translated "Username".
    * 
-   * @return translated "用户名"
+   * @return translated "Username"
    */
-  @DefaultMessage("用户名")
+  @DefaultMessage("Username")
   @Key("username")
   String username();
 
   /**
-   * Translated "{0}格式不对".
+   * Translated "{0} not valid".
    * 
-   * @return translated "{0}格式不对"
+   * @return translated "{0} not valid"
    */
-  @DefaultMessage("{0}格式不对")
+  @DefaultMessage("{0} not valid")
   @Key("validate_error")
   String validate_error(String arg0);
 
   /**
-   * Translated "{0}不能超过{1}位".
+   * Translated "{0} length must not be larger than {1}".
    * 
-   * @return translated "{0}不能超过{1}位"
+   * @return translated "{0} length must not be larger than {1}"
    */
-  @DefaultMessage("{0}不能超过{1}位")
+  @DefaultMessage("{0} length must not be larger than {1}")
   @Key("validate_maxlength")
   String validate_maxlength(String arg0,  String arg1);
 
   /**
-   * Translated "{0}不能小于{1}位".
+   * Translated "{0} length must not be smaller than {1}".
    * 
-   * @return translated "{0}不能小于{1}位"
+   * @return translated "{0} length must not be smaller than {1}"
    */
-  @DefaultMessage("{0}不能小于{1}位")
+  @DefaultMessage("{0} length must not be smaller than {1}")
   @Key("validate_minlength")
   String validate_minlength(String arg0,  String arg1);
 
   /**
-   * Translated "{0}不能为空".
+   * Translated "{0} is required".
    * 
-   * @return translated "{0}不能为空"
+   * @return translated "{0} is required"
    */
-  @DefaultMessage("{0}不能为空")
+  @DefaultMessage("{0} is required")
   @Key("validate_notnull")
   String validate_notnull(String arg0);
 
   /**
-   * Translated "警告".
+   * Translated "Warn".
    * 
-   * @return translated "警告"
+   * @return translated "Warn"
    */
-  @DefaultMessage("警告")
+  @DefaultMessage("Warn")
   @Key("warn")
   String warn();
 
   /**
-   * Translated "关于cms".
+   * Translated "About Us".
    * 
-   * @return translated "关于cms"
+   * @return translated "About Us"
    */
-  @DefaultMessage("关于cms")
+  @DefaultMessage("About Us")
   @Key("wcm_about")
   String wcm_about();
 
   /**
-   * Translated "收藏地址".
+   * Translated "Bookmark".
    * 
-   * @return translated "收藏地址"
+   * @return translated "Bookmark"
    */
-  @DefaultMessage("收藏地址")
+  @DefaultMessage("Bookmark")
   @Key("wcm_bookmark")
   String wcm_bookmark();
 
   /**
-   * Translated "cms后台访问界面".
+   * Translated "Cms Console".
    * 
-   * @return translated "cms后台访问界面"
+   * @return translated "Cms Console"
    */
-  @DefaultMessage("cms后台访问界面")
+  @DefaultMessage("Cms Console")
   @Key("wcm_bookmark_title")
   String wcm_bookmark_title();
 
   /**
-   * Translated "版权&copy; Lij Inc. 保留所有权利。".
+   * Translated "Copyright&copy; Lij Inc.".
    * 
-   * @return translated "版权&copy; Lij Inc. 保留所有权利。"
+   * @return translated "Copyright&copy; Lij Inc."
    */
-  @DefaultMessage("版权&copy; Lij Inc. 保留所有权利。")
+  @DefaultMessage("Copyright&copy; Lij Inc.")
   @Key("wcm_copyright")
   String wcm_copyright();
 
   /**
-   * Translated "综合管理".
+   * Translated "General Management".
    * 
-   * @return translated "综合管理"
+   * @return translated "General Management"
    */
-  @DefaultMessage("综合管理")
+  @DefaultMessage("General Management")
   @Key("wcm_general_management")
   String wcm_general_management();
 
   /**
-   * Translated "信息管理".
+   * Translated "Information Management".
    * 
-   * @return translated "信息管理"
+   * @return translated "Information Management"
    */
-  @DefaultMessage("信息管理")
+  @DefaultMessage("Information Management")
   @Key("wcm_information_management")
   String wcm_information_management();
 
   /**
-   * Translated "导航".
+   * Translated "navigation".
    * 
-   * @return translated "导航"
+   * @return translated "navigation"
    */
-  @DefaultMessage("导航")
+  @DefaultMessage("navigation")
   @Key("wcm_navigation")
   String wcm_navigation();
 
@@ -475,20 +475,20 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String wcm_version();
 
   /**
-   * Translated "系统首页".
+   * Translated "Welcome".
    * 
-   * @return translated "系统首页"
+   * @return translated "Welcome"
    */
-  @DefaultMessage("系统首页")
+  @DefaultMessage("Welcome")
   @Key("wcm_welcome")
   String wcm_welcome();
 
   /**
-   * Translated "是".
+   * Translated "Yes".
    * 
-   * @return translated "是"
+   * @return translated "Yes"
    */
-  @DefaultMessage("是")
+  @DefaultMessage("Yes")
   @Key("yes")
   String yes();
 }

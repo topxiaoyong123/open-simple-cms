@@ -24,6 +24,8 @@ public interface WcmService extends RemoteService {
 
     public static final String SERVICE_URI = WcmService.SERVICE;
 
+    public boolean setLocale(String locale);
+
     public Map<Long, WcmApp> getWcmApps() throws ApplicationException;
 
     public User login(User user) throws ApplicationException;
