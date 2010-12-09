@@ -3,6 +3,8 @@ package com.opencms.wcm.server;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
+import com.opencms.wcm.server.message.LocaleHelper;
+import com.opencms.wcm.server.message.MessageSourceHelper;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.core.db.bean.UserBean;
 import com.opencms.core.db.bean.SiteBean;
@@ -14,6 +16,7 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,23 @@ public class WcmServiceImpl implements WcmService {
 
     private static Map<Long, WcmApp> wcmApps;
 
+    public boolean setLocale(String locale) {
+        getSession().setMaxInactiveInterval(-1);
+        Locale l = new Locale("");
+        if(locale != null){
+            String[] a = locale.split("_");
+            if(a.length == 3){
+                l = new Locale(a[0], a[1], a[2]);
+            } else if(a.length == 2){
+                l = new Locale(a[0], a[1]);
+            } else if(a.length == 1){
+                l = new Locale(a[0]);
+            }
+        }
+        getSession().setAttribute("locale", l);
+        return true;
+    }
+
     public Map<Long, WcmApp> getWcmApps() {
         if (wcmApps == null) {
             ApplicationContext context = new ClassPathXmlApplicationContext("wcmAppsContext.xml");
@@ -56,13 +76,16 @@ public class WcmServiceImpl implements WcmService {
     @Autowired
     private CmsManager cmsManager;
 
+    @Autowired
+    private MessageSourceHelper messageSourceHelper;
+
     public User login(User user) throws ApplicationException {
         if (!user.getCheckcode().equals(this.getSession().getAttribute("checkcode"))) {
             throw new ApplicationException("验证码错误");
         }
         UserBean userBean = cmsManager.getUserService().getUserByUsername(user.getUsername());
         if (userBean == null) {
-            throw new ApplicationException("无效的用户名！");
+            throw new ApplicationException(messageSourceHelper.getMessage("unvalid", new String[]{messageSourceHelper.getMessage("username")}));
         } else if (!user.getPassword().equals(userBean.getPassword())) {
             throw new ApplicationException("无效的密码！");
         }
