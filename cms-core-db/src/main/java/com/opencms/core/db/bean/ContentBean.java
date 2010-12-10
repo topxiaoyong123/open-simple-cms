@@ -39,7 +39,7 @@ public class ContentBean implements Serializable {
     private Date creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "categoryid", nullable = false, unique = true)
+    @JoinColumn(name = "categoryid", nullable = false)
     private CategoryBean category;
 
     public String getId() {

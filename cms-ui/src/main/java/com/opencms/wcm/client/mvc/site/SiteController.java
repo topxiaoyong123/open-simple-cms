@@ -1,12 +1,10 @@
-package com.opencms.wcm.client.mvc;
+package com.opencms.wcm.client.mvc.site;
 
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.opencms.wcm.client.*;
-import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.Site;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
@@ -76,7 +74,7 @@ public class SiteController extends Controller {
                 }
                 public void onSuccess(Object o) {
                     Site site = (Site)o;
-                    AppEvent event = new AppEvent(AppEvents.SITE_MANAGER_ADD, site);
+                    AppEvent event = new AppEvent(AppEvents.SITE_MANAGER_EDIT, site);
                     forwardToView(view, event);
                 }
             });

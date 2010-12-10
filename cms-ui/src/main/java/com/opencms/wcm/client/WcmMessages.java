@@ -34,6 +34,60 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String cancel();
 
   /**
+   * Translated "New Category".
+   * 
+   * @return translated "New Category"
+   */
+  @DefaultMessage("New Category")
+  @Key("category_add_header")
+  String category_add_header();
+
+  /**
+   * Translated "Creation Date".
+   * 
+   * @return translated "Creation Date"
+   */
+  @DefaultMessage("Creation Date")
+  @Key("category_creationDate")
+  String category_creationDate();
+
+  /**
+   * Translated "Description".
+   * 
+   * @return translated "Description"
+   */
+  @DefaultMessage("Description")
+  @Key("category_description")
+  String category_description();
+
+  /**
+   * Translated "Edit Category".
+   * 
+   * @return translated "Edit Category"
+   */
+  @DefaultMessage("Edit Category")
+  @Key("category_edit_header")
+  String category_edit_header();
+
+  /**
+   * Translated "Category ID".
+   * 
+   * @return translated "Category ID"
+   */
+  @DefaultMessage("Category ID")
+  @Key("category_id")
+  String category_id();
+
+  /**
+   * Translated "Keywords".
+   * 
+   * @return translated "Keywords"
+   */
+  @DefaultMessage("Keywords")
+  @Key("category_keywords")
+  String category_keywords();
+
+  /**
    * Translated "Category Management".
    * 
    * @return translated "Category Management"
@@ -43,6 +97,24 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String category_manager_header();
 
   /**
+   * Translated "Category Name".
+   * 
+   * @return translated "Category Name"
+   */
+  @DefaultMessage("Category Name")
+  @Key("category_name")
+  String category_name();
+
+  /**
+   * Translated "Category No.".
+   * 
+   * @return translated "Category No."
+   */
+  @DefaultMessage("Category No.")
+  @Key("category_no")
+  String category_no();
+
+  /**
    * Translated "Category Site Publish".
    * 
    * @return translated "Category Site Publish"
@@ -50,6 +122,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Category Site Publish")
   @Key("category_site_publish_header")
   String category_site_publish_header();
+
+  /**
+   * Translated "Category Title".
+   * 
+   * @return translated "Category Title"
+   */
+  @DefaultMessage("Category Title")
+  @Key("category_title")
+  String category_title();
 
   /**
    * Translated "Checkcode".
@@ -329,6 +410,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Site Name")
   @Key("site_name")
   String site_name();
+
+  /**
+   * Translated "Site No.".
+   * 
+   * @return translated "Site No."
+   */
+  @DefaultMessage("Site No.")
+  @Key("site_no")
+  String site_no();
 
   /**
    * Translated "Site Title".

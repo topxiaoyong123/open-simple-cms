@@ -3,7 +3,6 @@ package com.opencms.wcm.server;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
-import com.opencms.wcm.server.message.LocaleHelper;
 import com.opencms.wcm.server.message.MessageSourceHelper;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.core.db.bean.UserBean;
@@ -13,10 +12,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.Locale;
+import java.util.*;
 import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,21 +69,23 @@ public class WcmServiceImpl implements WcmService {
         return ContextThreadLocal.getRequest().getSession();
     }
 
+    //cmsManager
     @Autowired
     private CmsManager cmsManager;
 
+    //spring国际化处理
     @Autowired
     private MessageSourceHelper messageSourceHelper;
 
     public User login(User user) throws ApplicationException {
         if (!user.getCheckcode().equals(this.getSession().getAttribute("checkcode"))) {
-            throw new ApplicationException("验证码错误");
+            throw new ApplicationException(messageSourceHelper.getMessage("login.error", new String[]{messageSourceHelper.getMessage("login.validcode")}));
         }
         UserBean userBean = cmsManager.getUserService().getUserByUsername(user.getUsername());
         if (userBean == null) {
-            throw new ApplicationException(messageSourceHelper.getMessage("unvalid", new String[]{messageSourceHelper.getMessage("username")}));
+            throw new ApplicationException(messageSourceHelper.getMessage("login.notexist", new String[]{messageSourceHelper.getMessage("login.username")}));
         } else if (!user.getPassword().equals(userBean.getPassword())) {
-            throw new ApplicationException("无效的密码！");
+            throw new ApplicationException(messageSourceHelper.getMessage("login.error", new String[]{messageSourceHelper.getMessage("login.password")}));
         }
         try {
             BeanUtils.copyProperties(user, userBean);
@@ -124,21 +122,28 @@ public class WcmServiceImpl implements WcmService {
                 list.add(subnode);
             }
         } else {
+            Set<CategoryBean> categorys = null;
             if("0".equals(node.getNodetype())){
                 SiteBean siteBean = cmsManager.getSiteService().getSiteById(node.getId());
                 if(siteBean != null){
-                    for(CategoryBean category : siteBean.getCategorys()){
-                        if(category.getChildren().size() > 0){
-                            WcmNodeModel subnode = new WcmNodeModel(category.getId(), category.getName(), category.getTitle(), "1");
-                            list.add(subnode);
-                        } else{
-                            WcmNodeModel subnode = new WcmNodeModel(category.getId(), category.getName(), category.getTitle(), "-1");
-                            list.add(subnode);
-                        }
-                    }
+                    categorys = siteBean.getCategorys();    
                 }
             } else{
-                
+                CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(node.getId());
+                if(categoryBean != null){
+                    categorys = categoryBean.getChildren();        
+                }
+            }
+            if(categorys != null){
+                for(CategoryBean category : categorys){
+                    if(category.getChildren().size() > 0){
+                        WcmNodeModel subnode = new WcmNodeModel(category.getId(), category.getName(), category.getTitle(), "1");
+                        list.add(subnode);
+                    } else{
+                        WcmNodeModel subnode = new WcmNodeModel(category.getId(), category.getName(), category.getTitle(), "-1");
+                        list.add(subnode);
+                    }
+                }
             }
         }
         return list;
@@ -174,23 +179,22 @@ public class WcmServiceImpl implements WcmService {
 
     public boolean addOrUpdateSite(Site site) throws ApplicationException {
         try {
-            SiteBean siteBean = new SiteBean();
+            SiteBean siteBean;
+            if(site.getId() != null){
+                logger.debug("更新站点[{}]", site.getTitle());
+                siteBean = cmsManager.getSiteService().getSiteById(site.getId());
+            } else{
+                logger.debug("新建站点[{}]",  site.getTitle());
+                siteBean = new SiteBean();
+            }
             try {
                 BeanUtils.copyProperties(siteBean, site);
-                siteBean.setCreationDate(site.getClientCreationDate());
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
-            if(siteBean.getId() == null){
-                logger.debug("新建站点[{}]", siteBean.getTitle());
-                cmsManager.getSiteService().addSite(siteBean);
-            } else{
-                logger.debug("更新站点[{}]",  siteBean.getTitle());
-                cmsManager.getSiteService().updateSite(siteBean);    
-            }
-            return true;
+            return cmsManager.getSiteService().addOrUpdateSite(siteBean);
         } catch(Exception e){
             e.printStackTrace();
             logger.error("error:", e);
@@ -219,6 +223,110 @@ public class WcmServiceImpl implements WcmService {
             e.printStackTrace();
             logger.error("error:", e);
             throw new ApplicationException(e.getMessage());    
+        }
+    }
+
+    public List<Category> getCategorysByParent(WcmNodeModel parent) throws ApplicationException {
+        List<Category> list = new ArrayList<Category>();
+        if(parent != null){
+            logger.debug("parent:{}", parent);
+            if("0".equals(parent.getNodetype())){
+                logger.debug("取一级栏目，通过所属站点取");
+                SiteBean site = cmsManager.getSiteService().getSiteById(parent.getId());
+                if(site != null){
+                    for(CategoryBean categoryBean : site.getCategorys()){
+                        Category category = new Category();
+                        try {
+                            BeanUtils.copyProperties(category, categoryBean);
+                            category.setClientCreationDate(categoryBean.getCreationDate());
+                            category.setSiteId(site.getId());
+                            list.add(category);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } else{
+                logger.debug("取子级栏目，通过所属栏目取");
+                CategoryBean pcategory = cmsManager.getCategoryService().getCategoryById(parent.getId());
+                if(pcategory != null){
+                    for(CategoryBean categoryBean : pcategory.getChildren()){
+                        Category category = new Category();
+                        try {
+                            BeanUtils.copyProperties(category, categoryBean);
+                            category.setClientCreationDate(categoryBean.getCreationDate());
+                            category.setParentId(pcategory.getId());
+                            list.add(category);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    public boolean addOrUpdateCategory(Category category) throws ApplicationException {
+        try {
+            CategoryBean categoryBean;
+            if(category.getId() != null){
+                logger.debug("更新栏目[{}]", category.getTitle());
+                categoryBean = cmsManager.getCategoryService().getCategoryById(category.getId());
+            } else{
+                logger.debug("新建栏目[{}]",  category.getTitle());
+                categoryBean = new CategoryBean();
+                if(category.getSiteId() != null){
+                    categoryBean.setSite(cmsManager.getSiteService().getSiteById(category.getSiteId()));
+                } else if(category.getParentId() != null){
+                    categoryBean.setParent(cmsManager.getCategoryService().getCategoryById(category.getParentId()));
+                }
+            }
+            try {
+                BeanUtils.copyProperties(categoryBean, category);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return cmsManager.getCategoryService().addOrUpdateCategory(categoryBean);
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    public Category getCategoryById(String id) throws ApplicationException {
+        try {
+            if(id == null){
+                logger.debug("id为空");
+                return new Category();
+            }
+            CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(id);
+            Category category = new Category();
+            try {
+                BeanUtils.copyProperties(category, categoryBean);
+                category.setClientCreationDate(categoryBean.getCreationDate());
+                if(categoryBean.getSite() != null){
+                    category.setSiteId(categoryBean.getSite().getId());
+                } else if(categoryBean.getParent() != null){
+                    category.setParentId(categoryBean.getParent().getId());
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return category;
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
         }
     }
 }

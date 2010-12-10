@@ -31,6 +31,14 @@ public class SiteServiceImpl implements SiteService {
         return siteDao.merge(site);
     }
 
+    public boolean addOrUpdateSite(SiteBean site) {
+        if(site.getId() == null){
+            return addSite(site);
+        } else{
+            return updateSite(site);
+        }
+    }
+
     public List<SiteBean> getAllSites() {
         return siteDao.getAll(SiteBean.class);
     }

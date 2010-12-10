@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Date;
+import java.util.LinkedHashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,18 +46,18 @@ public class CategoryBean implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
+    private boolean visible;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "parentid", unique = true)
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinColumn(name = "parentid")
     private CategoryBean parent;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "parent")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<CategoryBean> children = new HashSet<CategoryBean>();
+    @OrderBy("no")
+    private Set<CategoryBean> children = new LinkedHashSet<CategoryBean>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "siteid", unique = true)
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinColumn(name = "siteid")
     private SiteBean site;
 
     public String getId() {
@@ -113,6 +114,14 @@ public class CategoryBean implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public CategoryBean getParent() {
