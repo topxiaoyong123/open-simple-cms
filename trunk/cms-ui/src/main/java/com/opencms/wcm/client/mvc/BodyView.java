@@ -165,6 +165,7 @@ public class BodyView extends View {
     private void doArticleManagerChangeCategory(AppEvent appEvent){
         WcmNodeModel node = (WcmNodeModel)appEvent.getData();
         AppState.westTreeItemId = node.getId();
+        AppState.westTreeItemObj = node;
         if(AppState.isWestBarChanged(AppState.OWNER_ARTICLE_MANAGER)){
             AppState.westBarId = AppState.OWNER_ARTICLE_MANAGER;
             this.initArticleManageTabPanel();
@@ -226,8 +227,8 @@ public class BodyView extends View {
                     null, true, false, AppEvents.CONTENT_MANAGERCONTENT_ALL, false));
         }
         if (CATEGORY_LIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CATEGORY_LIST.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CATEGORY_LIST, false));
+            this.addShowPage(new Entry(AppEvents.CATEGORY_MANAGER.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
+                    null, true, false, AppEvents.CATEGORY_MANAGER, false));
         }
         if (OTHER_PUBLISH_JUDGE) {
             this.addShowPage(new Entry(AppEvents.OTHER_PUBLISH.getId(), msgs.category_site_publish_header(), AppState.OWNER_ARTICLE_MANAGER,

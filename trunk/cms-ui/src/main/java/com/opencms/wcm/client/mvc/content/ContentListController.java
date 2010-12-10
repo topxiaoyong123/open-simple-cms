@@ -1,4 +1,4 @@
-package com.opencms.wcm.client.mvc;
+package com.opencms.wcm.client.mvc.content;
 
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.AppEvent;

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,8 +34,7 @@ public class RoleBean implements Serializable {
     private String description;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "roles")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<UserBean> users = new HashSet<UserBean>();
+    private Set<UserBean> users = new LinkedHashSet<UserBean>();
 
     public String getId() {
         return id;

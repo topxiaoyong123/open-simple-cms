@@ -14,5 +14,7 @@ public interface CmsManager {
     public ContentService getContentService();
 
     public SiteService getSiteService();
+
+    public CategoryService getCategoryService();
     
 }

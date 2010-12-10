@@ -1,0 +1,6 @@
+login.username=用户名
+login.password=密码
+login.validcode=验证码
+login.notexist={0}不存在
+login.error={0}错误
+

@@ -1,4 +1,4 @@
-package com.opencms.wcm.client.mvc;
+package com.opencms.wcm.client.mvc.site;
 
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -49,7 +49,7 @@ public class SiteView extends View {
                             true,
                             true,
                             etype,
-                            true));
+                            false));
         } else if(AppEvents.SITE_MANAGER_CANCEL == appEvent.getType() || AppEvents.SITE_MANAGER_SUCCESS == appEvent.getType()){
             window.hide();
             siteListPanel.refresh();

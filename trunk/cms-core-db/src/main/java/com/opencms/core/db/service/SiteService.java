@@ -17,6 +17,8 @@ public interface SiteService {
 
     public boolean updateSite(SiteBean site);
 
+    public boolean addOrUpdateSite(SiteBean site);
+
     public List<SiteBean> getAllSites();
 
     public SiteBean getSiteById(String id);

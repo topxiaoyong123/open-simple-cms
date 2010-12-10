@@ -6,6 +6,9 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.mvc.*;
+import com.opencms.wcm.client.mvc.category.CategoryController;
+import com.opencms.wcm.client.mvc.site.SiteController;
+import com.opencms.wcm.client.mvc.content.ContentListController;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,6 +31,7 @@ public class Wcm implements EntryPoint {
         dispatcher.addController(new OtherController());
         
         dispatcher.addController(new SiteController());
+        dispatcher.addController(new CategoryController());
         dispatcher.addController(new ContentListController());
 
         dispatcher.addController(new LoginController());

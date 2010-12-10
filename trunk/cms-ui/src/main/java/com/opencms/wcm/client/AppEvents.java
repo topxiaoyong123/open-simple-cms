@@ -35,7 +35,6 @@ public class AppEvents {
     public final static AppEventType CONTENT_CONFIRMAUDITINGLIST = new AppEventType();
     public final static AppEventType CONTENT_PUBLISH = new AppEventType();
     public final static AppEventType CONTENT_MANAGERCONTENT_ALL = new AppEventType();
-    public final static AppEventType CATEGORY_LIST = new AppEventType();
     public final static AppEventType OTHER_PUBLISH = new AppEventType();
 
     //站点管理
@@ -46,4 +45,13 @@ public class AppEvents {
     public final static AppEventType SITE_MANAGER_SAVE = new AppEventType();
     public final static AppEventType SITE_MANAGER_CANCEL = new AppEventType();
     public final static AppEventType SITE_MANAGER_SUCCESS = new AppEventType();
+
+    //栏目管理
+    public final static AppEventType CATEGORY_MANAGER = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_ADD = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_EDIT = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_DELETE = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_SAVE = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_CANCEL = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_SUCCESS = new AppEventType();
 }

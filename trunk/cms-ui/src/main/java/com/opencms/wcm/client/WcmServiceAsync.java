@@ -2,10 +2,7 @@ package com.opencms.wcm.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
-import com.opencms.wcm.client.model.WcmNodeModel;
-import com.opencms.wcm.client.model.Content;
-import com.opencms.wcm.client.model.User;
-import com.opencms.wcm.client.model.Site;
+import com.opencms.wcm.client.model.*;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 
 /**
@@ -34,6 +31,12 @@ public interface WcmServiceAsync {
     void addOrUpdateSite(Site site, AsyncCallback async);
 
     void getSiteById(String id, AsyncCallback async);
+
+    void getCategorysByParent(WcmNodeModel parent, AsyncCallback async);
+
+    void addOrUpdateCategory(Category category, AsyncCallback async);
+
+    void getCategoryById(String id, AsyncCallback async);
 
     public static class Util {
         private static WcmServiceAsync instance;
