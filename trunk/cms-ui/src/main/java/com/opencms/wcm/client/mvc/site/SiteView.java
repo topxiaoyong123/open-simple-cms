@@ -10,7 +10,7 @@ import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.AppEventType;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.Entry;
-import com.opencms.wcm.client.model.Site;
+import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.widget.site.SiteListPanel;
 import com.opencms.wcm.client.widget.site.SitePanel;
 import com.google.gwt.core.client.GWT;

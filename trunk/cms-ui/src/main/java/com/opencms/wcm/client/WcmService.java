@@ -3,6 +3,9 @@ package com.opencms.wcm.client;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.opencms.wcm.client.model.*;
+import com.opencms.wcm.client.model.site.Site;
+import com.opencms.wcm.client.model.category.Category;
+import com.opencms.wcm.client.model.content.Content;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 

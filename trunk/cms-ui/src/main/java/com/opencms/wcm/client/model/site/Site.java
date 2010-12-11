@@ -1,36 +1,30 @@
-package com.opencms.wcm.client.model;
+package com.opencms.wcm.client.model.site;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
- * Date: 2010-10-4
- * Time: 12:16:55
+ * Date: 2010-12-8
+ * Time: 13:15:07
  * To change this template use File | Settings | File Templates.
  */
-public class Content implements Serializable, IsSerializable {
-
-    public Content() {
-        super();
-    }
+public class Site implements Serializable, IsSerializable {
 
     private String id;
 
     private String title;
 
+    private String name;
+
     private String keywords;
 
     private String description;
 
-    private String content;
-
-    private Date creationDate;
-
-    private String categoryId;
+    private Date clientCreationDate;
 
     public String getId() {
         return id;
@@ -46,6 +40,14 @@ public class Content implements Serializable, IsSerializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getKeywords() {
@@ -64,27 +66,11 @@ public class Content implements Serializable, IsSerializable {
         this.description = description;
     }
 
-    public String getContent() {
-        return content;
+    public Date getClientCreationDate() {
+        return clientCreationDate;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setClientCreationDate(Date clientCreationDate) {
+        this.clientCreationDate = clientCreationDate;
     }
 }

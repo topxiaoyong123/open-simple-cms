@@ -25,7 +25,7 @@ import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.model.Site;
+import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;

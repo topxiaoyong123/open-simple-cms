@@ -28,7 +28,7 @@ import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.model.Site;
+import com.opencms.wcm.client.model.site.Site;
 
 import java.util.List;
 import java.util.ArrayList;

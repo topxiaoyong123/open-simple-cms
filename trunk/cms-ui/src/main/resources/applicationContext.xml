@@ -32,8 +32,6 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txManager"/>
     </aop:config>
 
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="basename" value="wcmResource"></property>
-    </bean>
+    
 
 </beans>

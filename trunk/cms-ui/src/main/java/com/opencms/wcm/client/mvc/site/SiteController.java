@@ -5,7 +5,7 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.opencms.wcm.client.*;
-import com.opencms.wcm.client.model.Site;
+import com.opencms.wcm.client.model.site.Site;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
 

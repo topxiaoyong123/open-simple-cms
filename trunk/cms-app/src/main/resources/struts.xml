@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!--  Overwrite Convention -->
+
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.DefaultActionMapper"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.action.extension" value="action,do,html"/>
+    
+    <constant name="struts.objectFactory.spring.autoWire" value="name"/>
+
+    <constant name="struts.custom.i18n.resources" value="messageResource"/>
+    <constant name="struts.locale" value="zh_CN"/>
+    
+    <package name="content" extends="struts-default" namespace="/content">
+        <action name="*/*/content-*" class="com.opencms.app.content.ContentAction" method="view">
+            <param name="year">{1}</param>
+            <param name="month">{2}</param>
+            <param name="id">{3}</param>
+            <result name="success">/WEB-INF/content/content-view.jsp</result>
+        </action>
+    </package>
+    <package name="category" extends="struts-default" namespace="/category">
+        <action name="**/*" class="com.opencms.app.category.CategoryAction" method="view">
+            <param name="id">{2}</param>
+            <result name="success">/WEB-INF/content/content-view.jsp</result>
+        </action>
+    </package>
+</struts>

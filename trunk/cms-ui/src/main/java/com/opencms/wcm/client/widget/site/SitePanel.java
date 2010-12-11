@@ -14,7 +14,7 @@ import com.extjs.gxt.ui.client.data.BeanModelFactory;
 import com.extjs.gxt.ui.client.data.BeanModelLookup;
 import com.extjs.gxt.ui.client.data.BeanModel;
 import com.google.gwt.core.client.GWT;
-import com.opencms.wcm.client.model.Site;
+import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.AppEvents;
 

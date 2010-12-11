@@ -16,12 +16,12 @@ public class ContentListController extends Controller {
     private ContentListView view;
 
     public ContentListController() {
-        this.registerEventTypes(AppEvents.CONTENT_VIEWARTICLELIST);
+        this.registerEventTypes(AppEvents.CATEGORY_MANAGER);
     }
 
     @Override
     public void handleEvent(AppEvent appEvent) {
-        if(appEvent.getType() == AppEvents.CONTENT_VIEWARTICLELIST){
+        if(appEvent.getType() == AppEvents.CATEGORY_MANAGER){
             this.forwardToView(view, appEvent);
         }
     }
