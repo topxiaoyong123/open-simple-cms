@@ -1,5 +1,10 @@
 package com.opencms.wcm.client.widget.content;
 
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
@@ -13,6 +18,9 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.data.*;
+import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.AppEvents;
+import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.WcmService;
@@ -35,6 +43,12 @@ public class ContentListPanel extends ContentPanel {
     private RpcProxy<PagingLoadResult<Content>> proxy;
 
     private static Grid<BeanModel> grid = null;
+
+    WcmMessages msgs = GWT.create(WcmMessages.class);
+
+    public void refresh() {
+        grid.getStore().getLoader().load();
+    }
 
     public ContentListPanel(final Content content) {
         if (service == null) {
@@ -64,25 +78,12 @@ public class ContentListPanel extends ContentPanel {
         final CheckBoxSelectionModel smm = new CheckBoxSelectionModel();
         columns.add(smm.getColumn());
         columns.add(rnum);
-        GridCellRenderer<BeanModel> titleRender = new GridCellRenderer<BeanModel>() {
-            public Object render(BeanModel model, String property, ColumnData config, int rowIndex, int colIndex, ListStore<BeanModel> beanModelListStore, Grid<BeanModel> beanModelGrid) {
-                 String id = model.get("contentId");
-                String title = model.get("title");
-                return "<a onclick='return false' href='" + "?id=" + id
-                        + "'>" + title + "</a>";
-            }
-        };
-        ColumnConfig column = new ColumnConfig();
-        column.setId("title");
-        column.setHeader("主题");
-        column.setWidth(260);
-        column.setRenderer(titleRender);
-        columns.add(column);
-        columns.add(new ColumnConfig("author", "作者", 80));
-        columns.add(new ColumnConfig("source", "来源", 80));
-        columns.add(new ColumnConfig("state", "状态", 80));
-        columns.add(new ColumnConfig("type", "展现方式", 80));
-        columns.add(new ColumnConfig("no", "排序", 40));
+        columns.add(new ColumnConfig("title", msgs.content_title(), 80));
+        columns.add(new ColumnConfig("author", msgs.content_author(), 80));
+        columns.add(new ColumnConfig("source", msgs.content_source(), 80));
+        columns.add(new ColumnConfig("state", msgs.content_state(), 80));
+        columns.add(new ColumnConfig("type", msgs.content_type(), 80));
+        columns.add(new ColumnConfig("no", msgs.content_no(), 40));
 
         final ColumnModel cm = new ColumnModel(columns);
         grid = new Grid<BeanModel>(store, cm) {
@@ -102,7 +103,6 @@ public class ContentListPanel extends ContentPanel {
         grid.setAutoExpandColumn("title");
 
         grid.getView().setForceFit(true);
-        grid.getView().setEmptyText("<div class=\"cms_prompt\">此栏目没有文章，请添加!</div>");
         grid.setSelectionModel(smm);
         grid.addPlugin(smm);
         grid.setWidth("100%");
@@ -110,20 +110,54 @@ public class ContentListPanel extends ContentPanel {
         grid.setAutoWidth(true);
 
         ToolBar toolBars = new ToolBar();
-        Button contentadd = new Button("增加");
-        contentadd.setIconStyle("article-zengjia");
-        Menu contentaddmenu = new Menu();
-        MenuItem contenttype = new MenuItem("文章");
-        contentaddmenu.add(contenttype);
-        MenuItem linktype = new MenuItem("链接");
-        contentaddmenu.add(linktype);
-        MenuItem wenjiantype = new MenuItem("文件");
-        contentaddmenu.add(wenjiantype);
-        MenuItem multiupload = new MenuItem("批量添加文件");
+        Button add = new Button(msgs.add());
+        add.setIconStyle("article-zengjia");
+        Menu addmenu = new Menu();
+        MenuItem normal = new MenuItem(msgs.content_type_normal());
+        normal.addListener(Events.Select, new Listener<ComponentEvent>() {
+            @Override
+            public void handleEvent(ComponentEvent componentEvent) {
+                AppEvent evt = new AppEvent(AppEvents.CONTENT_MANAGER_ADD, "0");
+                Dispatcher.forwardEvent(evt);
+            }
+        });
+        addmenu.add(normal);
+        MenuItem outlink = new MenuItem(msgs.content_type_outlink());
+        outlink.addListener(Events.Select, new Listener<ComponentEvent>() {
+            @Override
+            public void handleEvent(ComponentEvent componentEvent) {
+                AppEvent evt = new AppEvent(AppEvents.CONTENT_MANAGER_ADD, "1");
+                Dispatcher.forwardEvent(evt);
+            }
+        });
+        addmenu.add(outlink);
+        MenuItem download = new MenuItem(msgs.content_type_download());
+        download.addListener(Events.Select, new Listener<ComponentEvent>() {
+            @Override
+            public void handleEvent(ComponentEvent componentEvent) {
+                AppEvent evt = new AppEvent(AppEvents.CONTENT_MANAGER_ADD, "2");
+                Dispatcher.forwardEvent(evt);
+            }
+        });
+        addmenu.add(download);
 
-        contentaddmenu.add(multiupload);
-        contentadd.setMenu(contentaddmenu);
-        toolBars.add(contentadd);
+        add.setMenu(addmenu);
+        toolBars.add(add);
+        Button edit = new Button(msgs.edit());
+        edit.setIconStyle("article-zengjia");
+        edit.addListener(Events.Select, new Listener<ComponentEvent>() {
+            @Override
+            public void handleEvent(ComponentEvent componentEvent) {
+                if(smm.getSelectedItems().size() != 1){
+                    MessageBox.alert(msgs.warn(), msgs.choose_one(), null);
+                } else{
+                    String id = smm.getSelectedItem().get("id");
+                    AppEvent evt = new AppEvent(AppEvents.CONTENT_MANAGER_EDIT, id);
+                    Dispatcher.forwardEvent(evt);
+                }
+            }
+        });
+        toolBars.add(edit);
 
         this.setHeaderVisible(false);
         this.setBodyBorder(false);

@@ -65,15 +65,6 @@ public interface WcmService extends RemoteService {
     public List<WcmNodeModel> getNodeChildren(WcmNodeModel node) throws ApplicationException;
 
     /**
-     * 分页取得文章列表
-     * @param config
-     * @param content
-     * @return
-     * @throws ApplicationException
-     */
-    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
-
-    /**
      * 取得所有站点列表
      * @return
      * @throws ApplicationException
@@ -118,5 +109,32 @@ public interface WcmService extends RemoteService {
      * @return
      * @throws ApplicationException
      */
-    public Category getCategoryById(String id) throws ApplicationException;
+    public Category getCategoryById(String id, WcmNodeModel parent) throws ApplicationException;
+
+    /**
+     * 新增或更新文章
+     * @param content
+     * @return
+     * @throws ApplicationException
+     */
+    public boolean addOrUpdateContent(Content content) throws ApplicationException;
+
+    /**
+     * 根据ID取得文章信息
+     * @param id
+     * @param parent
+     * @return
+     * @throws ApplicationException
+     */
+    public Content getContentById(String id, WcmNodeModel parent) throws ApplicationException;
+
+    /**
+     * 分页取得文章列表
+     * @param config
+     * @param content
+     * @return
+     * @throws ApplicationException
+     */
+    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
+
 }

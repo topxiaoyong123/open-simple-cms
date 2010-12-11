@@ -4,3 +4,5 @@ login.validcode=验证码
 login.notexist={0}不存在
 login.error={0}错误
 
+content.add.sitenotallow=站点不能添加文章
+

@@ -24,6 +24,10 @@ public class Site implements Serializable, IsSerializable {
 
     private String description;
 
+    private String url;
+
+    private String template;
+
     private Date clientCreationDate;
 
     public String getId() {
@@ -64,6 +68,22 @@ public class Site implements Serializable, IsSerializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public Date getClientCreationDate() {

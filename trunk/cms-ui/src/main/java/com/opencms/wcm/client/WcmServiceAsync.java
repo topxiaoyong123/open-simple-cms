@@ -39,7 +39,11 @@ public interface WcmServiceAsync {
 
     void addOrUpdateCategory(Category category, AsyncCallback async);
 
-    void getCategoryById(String id, AsyncCallback async);
+    void getCategoryById(String id, WcmNodeModel parent, AsyncCallback async);
+
+    void addOrUpdateContent(Content category, AsyncCallback async);
+
+    void getContentById(String id, WcmNodeModel parent, AsyncCallback async);
 
     public static class Util {
         private static WcmServiceAsync instance;

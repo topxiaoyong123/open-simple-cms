@@ -26,9 +26,23 @@ public class Content implements Serializable, IsSerializable {
 
     private String description;
 
+    private double no;
+
+    private String state;
+
+    private String type;
+
+    private String template;
+
+    private String author;
+
+    private String source;
+
     private String content;
 
-    private Date creationDate;
+    private Date clientCreationDate;
+
+    private Date clientModificationDate;
 
     private String categoryId;
 
@@ -64,6 +78,54 @@ public class Content implements Serializable, IsSerializable {
         this.description = description;
     }
 
+    public double getNo() {
+        return no;
+    }
+
+    public void setNo(double no) {
+        this.no = no;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     public String getContent() {
         return content;
     }
@@ -72,12 +134,20 @@ public class Content implements Serializable, IsSerializable {
         this.content = content;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getClientCreationDate() {
+        return clientCreationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setClientCreationDate(Date clientCreationDate) {
+        this.clientCreationDate = clientCreationDate;
+    }
+
+    public Date getClientModificationDate() {
+        return clientModificationDate;
+    }
+
+    public void setClientModificationDate(Date clientModificationDate) {
+        this.clientModificationDate = clientModificationDate;
     }
 
     public String getCategoryId() {

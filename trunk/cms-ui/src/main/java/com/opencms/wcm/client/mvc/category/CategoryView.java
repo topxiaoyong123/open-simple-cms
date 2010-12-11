@@ -50,22 +50,22 @@ public class CategoryView extends View {
                             false,
                             etype,
                             false));
-        }  else if(AppEvents.CATEGORY_MANAGER_CANCEL == appEvent.getType() || AppEvents.CATEGORY_MANAGER_SUCCESS == appEvent.getType()){
+        } else if(AppEvents.CATEGORY_MANAGER_CANCEL == appEvent.getType() || AppEvents.CATEGORY_MANAGER_SUCCESS == appEvent.getType()){
             window.hide();
             categoryListPanel.refresh();
         } else if(AppEvents.CATEGORY_MANAGER_ADD == appEvent.getType()){
             Category c = appEvent.getData();
-            CategoryPanel editsite = new CategoryPanel(c, AppState.westTreeItemObj);
+            CategoryPanel cp = new CategoryPanel(c, AppState.westTreeItemObj);
             window.removeAll();
-            window.add(editsite);
+            window.add(cp);
             window.setHeading(msgs.category_add_header());
             window.setWidth("500px");
             window.show();
         } else if(AppEvents.CATEGORY_MANAGER_EDIT == appEvent.getType()){
             Category c = appEvent.getData();
-            CategoryPanel editsite = new CategoryPanel(c, AppState.westTreeItemObj);
+            CategoryPanel cp = new CategoryPanel(c, AppState.westTreeItemObj);
             window.removeAll();
-            window.add(editsite);
+            window.add(cp);
             window.setHeading(msgs.category_edit_header());
             window.setWidth("500px");
             window.show();

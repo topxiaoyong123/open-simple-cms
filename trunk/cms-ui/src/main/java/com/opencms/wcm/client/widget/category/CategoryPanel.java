@@ -65,19 +65,19 @@ public class CategoryPanel extends FormPanel {
 
         final Radio yes = new Radio();
         yes.setName("radio");
-        yes.setBoxLabel("显示");
+        yes.setBoxLabel(msgs.yes());
 
         final Radio novisable = new Radio();
         novisable.setName("radio");
-        novisable.setBoxLabel("不显示");
+        novisable.setBoxLabel(msgs.no());
 
         if (category.isVisible()) {
             yes.setValue(true);
         } else {
             novisable.setValue(true);
         }
-        final RadioGroup radioGroup = new RadioGroup("isvisble");
-        radioGroup.setFieldLabel("是否显示");
+        final RadioGroup radioGroup = new RadioGroup("isvisible");
+        radioGroup.setFieldLabel(msgs.visible());
         radioGroup.add(yes);
         radioGroup.add(novisable);
         this.add(radioGroup);

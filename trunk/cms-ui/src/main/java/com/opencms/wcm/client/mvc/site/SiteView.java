@@ -55,17 +55,17 @@ public class SiteView extends View {
             siteListPanel.refresh();
         } else if(AppEvents.SITE_MANAGER_ADD == appEvent.getType()){
             Site c = appEvent.getData();
-            SitePanel editsite = new SitePanel(c);
+            SitePanel cp = new SitePanel(c);
             window.removeAll();
-            window.add(editsite);
+            window.add(cp);
             window.setHeading(msgs.site_add_header());
             window.setWidth("500px");
             window.show();
         } else if(AppEvents.SITE_MANAGER_EDIT == appEvent.getType()){
             Site c = appEvent.getData();
-            SitePanel editsite = new SitePanel(c);
+            SitePanel cp = new SitePanel(c);
             window.removeAll();
-            window.add(editsite);
+            window.add(cp);
             window.setHeading(msgs.site_edit_header());
             window.setWidth("500px");
             window.show();
