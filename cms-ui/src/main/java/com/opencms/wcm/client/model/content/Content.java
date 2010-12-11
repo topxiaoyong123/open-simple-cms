@@ -1,30 +1,36 @@
-package com.opencms.wcm.client.model;
+package com.opencms.wcm.client.model.content;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
- * Date: 2010-12-8
- * Time: 13:15:07
+ * Date: 2010-10-4
+ * Time: 12:16:55
  * To change this template use File | Settings | File Templates.
  */
-public class Site implements Serializable, IsSerializable {
+public class Content implements Serializable, IsSerializable {
+
+    public Content() {
+        super();
+    }
 
     private String id;
 
     private String title;
 
-    private String name;
-
     private String keywords;
 
     private String description;
 
-    private Date clientCreationDate;
+    private String content;
+
+    private Date creationDate;
+
+    private String categoryId;
 
     public String getId() {
         return id;
@@ -40,14 +46,6 @@ public class Site implements Serializable, IsSerializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getKeywords() {
@@ -66,11 +64,27 @@ public class Site implements Serializable, IsSerializable {
         this.description = description;
     }
 
-    public Date getClientCreationDate() {
-        return clientCreationDate;
+    public String getContent() {
+        return content;
     }
 
-    public void setClientCreationDate(Date clientCreationDate) {
-        this.clientCreationDate = clientCreationDate;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

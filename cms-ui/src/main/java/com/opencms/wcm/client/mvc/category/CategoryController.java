@@ -8,7 +8,7 @@ import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.WcmService;
-import com.opencms.wcm.client.model.Category;
+import com.opencms.wcm.client.model.category.Category;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
 

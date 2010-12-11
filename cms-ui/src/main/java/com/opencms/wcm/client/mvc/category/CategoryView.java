@@ -12,7 +12,7 @@ import com.opencms.wcm.client.AppEventType;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.model.Entry;
-import com.opencms.wcm.client.model.Category;
+import com.opencms.wcm.client.model.category.Category;
 import com.google.gwt.core.client.GWT;
 
 /**

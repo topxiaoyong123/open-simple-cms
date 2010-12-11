@@ -1,19 +1,19 @@
 package com.opencms.wcm.client.widget.content;
 
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.grid.*;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.data.*;
-import com.opencms.wcm.client.model.Content;
+import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.WcmService;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -36,7 +36,7 @@ public class ContentListPanel extends ContentPanel {
 
     private static Grid<BeanModel> grid = null;
 
-    public ContentListPanel(final Content content, boolean showontype) {
+    public ContentListPanel(final Content content) {
         if (service == null) {
             MessageBox box = new MessageBox();
             box.setButtons(MessageBox.OK);
@@ -46,16 +46,13 @@ public class ContentListPanel extends ContentPanel {
             box.show();
             return;
         }
-        if (showontype == true) {
-            proxy = new RpcProxy<PagingLoadResult<Content>>() {
-                @Override
-                protected void load(Object loadConfig,
-                                    AsyncCallback<PagingLoadResult<Content>> callback) {
-                    service.PagingLoadArticleList((PagingLoadConfig) loadConfig, content, callback);
-                }
-            };
-        }
-
+        proxy = new RpcProxy<PagingLoadResult<Content>>() {
+            @Override
+            protected void load(Object loadConfig,
+                                AsyncCallback<PagingLoadResult<Content>> callback) {
+                service.PagingLoadArticleList((PagingLoadConfig) loadConfig, content, callback);
+            }
+        };
         final BasePagingLoader<PagingLoadResult<Content>> loader = new BasePagingLoader<PagingLoadResult<Content>>(proxy, new BeanModelReader());
         final ListStore<BeanModel> store = new ListStore<BeanModel>(loader);
 

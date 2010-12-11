@@ -1,4 +1,4 @@
-package com.opencms.wcm.client.model;
+package com.opencms.wcm.client.model.content;
 
 import com.extjs.gxt.ui.client.data.BeanModelMarker;
 

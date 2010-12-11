@@ -13,7 +13,7 @@ import com.extjs.gxt.ui.client.event.Events;
 import com.opencms.wcm.client.widget.WelcomePanel;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.WcmNodeModel;
-import com.opencms.wcm.client.model.Content;
+import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.WcmMessages;
@@ -34,7 +34,7 @@ public class BodyView extends View {
     private ContentPanel center = (ContentPanel) Registry.get(AppView.CENTER);
 
     WcmMessages msgs = GWT.create(WcmMessages.class);
-    
+
     public BodyView(Controller controller) {
         super(controller);
     }
@@ -49,14 +49,14 @@ public class BodyView extends View {
         tabPanel.addListener(Events.Select, new Listener<TabPanelEvent>() {
             public void handleEvent(TabPanelEvent be) {
                 Entry entry = (Entry) be.getItem().getData("body");
-                if (entry.getId().equalsIgnoreCase(AppEvents.WELCOME.getId())){
+                if (entry.getId().equalsIgnoreCase(AppEvents.WELCOME.getId())) {
                     AppState.centerEventType = AppEvents.WELCOME;
-                    if(AppState.westBarId.equals(AppState.OWNER_OTHER_MANAGER)){
+                    if (AppState.westBarId.equals(AppState.OWNER_OTHER_MANAGER)) {
                         Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE);
                     }
-                } else if(AppState.OWNER_OTHER_MANAGER_CALLBACK.equals(entry.getOwner())){
+                } else if (AppState.OWNER_OTHER_MANAGER_CALLBACK.equals(entry.getOwner())) {
                     Dispatcher.forwardEvent(entry.getEventType(), entry);
-                } else if(AppState.OWNER_ARTICLE_MANAGER.equals(entry.getOwner())){
+                } else if (AppState.OWNER_ARTICLE_MANAGER.equals(entry.getOwner())) {
                     Content content = new Content();
                     content.setCategoryId(AppState.westTreeItemId);
                     Dispatcher.forwardEvent(entry.getEventType(), content);
@@ -138,35 +138,35 @@ public class BodyView extends View {
     }
 
     protected void handleEvent(AppEvent appEvent) {
-        if(appEvent.getType() == AppEvents.WELCOME){
+        if (appEvent.getType() == AppEvents.WELCOME) {
             this.initWelcomeTabPanel();
         }
-        if(appEvent.getType() == AppEvents.ARTICLE_MANAGER_CHANGE_EVENT){
+        if (appEvent.getType() == AppEvents.ARTICLE_MANAGER_CHANGE_EVENT) {
             doArticleManagerChangeEvent(appEvent);
         }
-        if(appEvent.getType() == AppEvents.ARTICLE_MANAGER_CHANGE_CATEGORY){
+        if (appEvent.getType() == AppEvents.ARTICLE_MANAGER_CHANGE_CATEGORY) {
             doArticleManagerChangeCategory(appEvent);
         }
-        if(appEvent.getType() == AppEvents.OTHER_MANAGER_CHANGE_EVENT){
+        if (appEvent.getType() == AppEvents.OTHER_MANAGER_CHANGE_EVENT) {
             doOtherManagerChangeEvent(appEvent);
         }
     }
 
-    private void doArticleManagerChangeEvent(AppEvent appEvent){
-        Entry entry = (Entry)appEvent.getData();
+    private void doArticleManagerChangeEvent(AppEvent appEvent) {
+        Entry entry = (Entry) appEvent.getData();
         AppState.centerEventType = entry.getEventType();
-        if(AppState.OWNER_ARTICLE_MANAGER_CALLBACK.equals(entry.getOwner())){
+        if (AppState.OWNER_ARTICLE_MANAGER_CALLBACK.equals(entry.getOwner())) {
             this.onShowPage(entry, true);
-        } else{
-                
+        } else {
+
         }
     }
 
-    private void doArticleManagerChangeCategory(AppEvent appEvent){
-        WcmNodeModel node = (WcmNodeModel)appEvent.getData();
+    private void doArticleManagerChangeCategory(AppEvent appEvent) {
+        WcmNodeModel node = (WcmNodeModel) appEvent.getData();
         AppState.westTreeItemId = node.getId();
         AppState.westTreeItemObj = node;
-        if(AppState.isWestBarChanged(AppState.OWNER_ARTICLE_MANAGER)){
+        if (AppState.isWestBarChanged(AppState.OWNER_ARTICLE_MANAGER)) {
             AppState.westBarId = AppState.OWNER_ARTICLE_MANAGER;
             this.initArticleManageTabPanel();
             Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE);
@@ -176,77 +176,46 @@ public class BodyView extends View {
         Dispatcher.forwardEvent(AppState.centerEventType, content);
     }
 
-    private void doOtherManagerChangeEvent(AppEvent appEvent){
-        Entry entry = (Entry)appEvent.getData();
+    private void doOtherManagerChangeEvent(AppEvent appEvent) {
+        Entry entry = (Entry) appEvent.getData();
         AppState.centerEventType = entry.getEventType();
-        if(AppState.isWestBarChanged(AppState.OWNER_OTHER_MANAGER)){
+        if (AppState.isWestBarChanged(AppState.OWNER_OTHER_MANAGER)) {
             AppState.westBarId = AppState.OWNER_OTHER_MANAGER;
             this.removeBodyItems();
             Dispatcher.forwardEvent(AppEvents.ARTICLE_MANAGER_ITEM_SELECTION_NONE);
         }
-        if(AppState.OWNER_OTHER_MANAGER_CALLBACK.equals(entry.getOwner())){
+        if (AppState.OWNER_OTHER_MANAGER_CALLBACK.equals(entry.getOwner())) {
             this.onShowPage(entry, true);
             if (AppState.westBarId.equals(AppState.OWNER_OTHER_MANAGER)) {
                 Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION, entry);
             }
-        } else if(entry.isOtherApp()){
-            Dispatcher.forwardEvent(AppEvents.OTHER_APP, entry);    
-        } else{
+        } else if (entry.isOtherApp()) {
+            Dispatcher.forwardEvent(AppEvents.OTHER_APP, entry);
+        } else {
             Dispatcher.forwardEvent(entry.getEventType(), entry);
         }
     }
 
-    boolean CONTENT_VIEWARTICLELIST_JUDGE = false;
-    boolean CONTENT_AUDITINGLIST_JUDGE = false;
-    boolean CONTENT_CONFIRMAUDITINGLIST_JUDGE = false;
-    boolean CONTENT_PUBLISH_JUDGE = false;
-    boolean CONTENT_MANAGERCONTENT_ALL_JUDGE = false;
-    boolean CATEGORY_LIST_JUDGE = false;
-    boolean OTHER_PUBLISH_JUDGE = false;
-
-    private void initArticleManageTabPanel(){
+    private void initArticleManageTabPanel() {
         this.removeBodyItems();
-        if (CONTENT_VIEWARTICLELIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_VIEWARTICLELIST.getId(), msgs.content_editing_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CONTENT_VIEWARTICLELIST, false));
-        }
-        if (CONTENT_AUDITINGLIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_AUDITINGLIST.getId(), msgs.content_auditing_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CONTENT_AUDITINGLIST, false));
-        }
-        if (CONTENT_CONFIRMAUDITINGLIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_CONFIRMAUDITINGLIST.getId(), msgs.content_auditing_confirm_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CONTENT_CONFIRMAUDITINGLIST, false));
-        }
-        if (CONTENT_PUBLISH_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISH.getId(), msgs.content_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CONTENT_PUBLISH, false));
-        }
-        if (CONTENT_MANAGERCONTENT_ALL_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CONTENT_MANAGERCONTENT_ALL.getId(), msgs.content_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CONTENT_MANAGERCONTENT_ALL, false));
-        }
-        if (CATEGORY_LIST_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.CATEGORY_MANAGER.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.CATEGORY_MANAGER, false));
-        }
-        if (OTHER_PUBLISH_JUDGE) {
-            this.addShowPage(new Entry(AppEvents.OTHER_PUBLISH.getId(), msgs.category_site_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
-                    null, true, false, AppEvents.OTHER_PUBLISH, false));
-        }
+        this.addShowPage(new Entry(AppEvents.CONTENT_MANAGER.getId(), msgs.content_editing_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.CONTENT_MANAGER, false));
+        this.addShowPage(new Entry(AppEvents.CONTENT_AUDITING_MANAGER.getId(), msgs.content_auditing_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.CONTENT_AUDITING_MANAGER, false));
+        this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISH_MANAGER.getId(), msgs.content_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.CONTENT_PUBLISH_MANAGER, false));
+        this.addShowPage(new Entry(AppEvents.CONTENT_MANAGER_ALL.getId(), msgs.content_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.CONTENT_MANAGER_ALL, false));
+        this.addShowPage(new Entry(AppEvents.CATEGORY_MANAGER.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.CATEGORY_MANAGER, false));
+        this.addShowPage(new Entry(AppEvents.PUBLISH_MANAGER.getId(), msgs.category_site_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.PUBLISH_MANAGER, false));
     }
-    
+
     private void initWelcomeTabPanel() {
         this.onShowPage(new Entry(AppEvents.WELCOME.getId(), msgs.wcm_welcome(), AppState.OWNER_ARTICLE_MANAGER, new WelcomePanel(), true, false), true);
     }
 
     private void initArticleManagerJudge() {
-        CONTENT_VIEWARTICLELIST_JUDGE = true;
-        CONTENT_AUDITINGLIST_JUDGE = true;
-        CONTENT_CONFIRMAUDITINGLIST_JUDGE = true;
-        CONTENT_PUBLISH_JUDGE = true;
-        CONTENT_MANAGERCONTENT_ALL_JUDGE = true;
-        CATEGORY_LIST_JUDGE = true;
-        OTHER_PUBLISH_JUDGE = true;
     }
 }

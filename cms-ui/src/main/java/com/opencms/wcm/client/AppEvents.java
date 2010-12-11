@@ -29,13 +29,7 @@ public class AppEvents {
     public static final AppEventType ARTICLE_MANAGER_ITEM_SELECTION_NONE = new AppEventType();
     public static final AppEventType ARTICLE_MANAGER_CHANGE_CATEGORY = new AppEventType();
 
-    //
-    public final static AppEventType CONTENT_VIEWARTICLELIST = new AppEventType();
-    public final static AppEventType CONTENT_AUDITINGLIST = new AppEventType();
-    public final static AppEventType CONTENT_CONFIRMAUDITINGLIST = new AppEventType();
-    public final static AppEventType CONTENT_PUBLISH = new AppEventType();
-    public final static AppEventType CONTENT_MANAGERCONTENT_ALL = new AppEventType();
-    public final static AppEventType OTHER_PUBLISH = new AppEventType();
+    public final static AppEventType PUBLISH_MANAGER = new AppEventType();
 
     //站点管理
     public final static AppEventType SITE_MANAGER = new AppEventType();
@@ -54,4 +48,16 @@ public class AppEvents {
     public final static AppEventType CATEGORY_MANAGER_SAVE = new AppEventType();
     public final static AppEventType CATEGORY_MANAGER_CANCEL = new AppEventType();
     public final static AppEventType CATEGORY_MANAGER_SUCCESS = new AppEventType();
+
+    //文章管理
+    public final static AppEventType CONTENT_MANAGER = new AppEventType();
+    public final static AppEventType CONTENT_AUDITING_MANAGER = new AppEventType();
+    public final static AppEventType CONTENT_PUBLISH_MANAGER = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_ALL = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_ADD = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_EDIT = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_DELETE = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_SAVE = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_CANCEL = new AppEventType();
+    public final static AppEventType CONTENT_MANAGER_SUCCESS = new AppEventType();
 }

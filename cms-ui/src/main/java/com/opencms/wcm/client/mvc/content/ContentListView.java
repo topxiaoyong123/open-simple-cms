@@ -7,7 +7,7 @@ import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.WcmMessages;
-import com.opencms.wcm.client.model.Content;
+import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.widget.content.ContentListPanel;
 import com.google.gwt.core.client.GWT;
@@ -30,19 +30,19 @@ public class ContentListView extends View {
     }
 
     protected void handleEvent(AppEvent appEvent) {
-        if(appEvent.getType() == AppEvents.CONTENT_VIEWARTICLELIST){
+        if(appEvent.getType() == AppEvents.CATEGORY_MANAGER){
             Content content = (Content) appEvent.getData();
-            artcilelisttpanel = new ContentListPanel(content, true);
+            artcilelisttpanel = new ContentListPanel(content);
             Dispatcher.forwardEvent(
                     AppEvents.ARTICLE_MANAGER_CHANGE_EVENT,
                     new Entry(
-                            AppEvents.CONTENT_VIEWARTICLELIST.getId(),
+                            AppEvents.CATEGORY_MANAGER.getId(),
                             msgs.content_editing_header(),
                             AppState.OWNER_ARTICLE_MANAGER_CALLBACK,
                             artcilelisttpanel,
                             true,
                             false,
-                            AppEvents.CONTENT_VIEWARTICLELIST,
+                            AppEvents.CATEGORY_MANAGER,
                             false));
         }
     }

@@ -13,7 +13,7 @@ import com.extjs.gxt.ui.client.data.BeanModelLookup;
 import com.extjs.gxt.ui.client.data.BeanModel;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.model.Category;
+import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.google.gwt.core.client.GWT;
 
