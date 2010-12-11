@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.mvc.*;
 import com.opencms.wcm.client.mvc.category.CategoryController;
 import com.opencms.wcm.client.mvc.site.SiteController;
-import com.opencms.wcm.client.mvc.content.ContentListController;
+import com.opencms.wcm.client.mvc.content.ContentController;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,7 +32,7 @@ public class Wcm implements EntryPoint {
         
         dispatcher.addController(new SiteController());
         dispatcher.addController(new CategoryController());
-        dispatcher.addController(new ContentListController());
+        dispatcher.addController(new ContentController());
 
         dispatcher.addController(new LoginController());
         wService.setLocale(getLocale(), new AsyncCallback(){

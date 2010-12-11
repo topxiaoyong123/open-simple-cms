@@ -1,5 +1,6 @@
 package com.opencms.wcm.server;
 
+import com.opencms.core.db.bean.ContentBean;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
@@ -125,11 +126,11 @@ public class WcmServiceImpl implements WcmService {
                 list.add(subnode);
             }
         } else {
-            Set<CategoryBean> categorys = null;
+            Collection<CategoryBean> categorys = null;
             if("0".equals(node.getNodetype())){
                 SiteBean siteBean = cmsManager.getSiteService().getSiteById(node.getId());
                 if(siteBean != null){
-                    categorys = siteBean.getCategorys();    
+                    categorys = cmsManager.getCategoryService().getTopCategorysBySiteId(siteBean.getId());
                 }
             } else{
                 CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(node.getId());
@@ -150,10 +151,6 @@ public class WcmServiceImpl implements WcmService {
             }
         }
         return list;
-    }
-
-    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException {
-        return new BasePagingLoadResult<Content>(new ArrayList<Content>(), config.getOffset(), 0);
     }
 
     public List<Site> getAllSites() throws ApplicationException {
@@ -235,14 +232,14 @@ public class WcmServiceImpl implements WcmService {
             logger.debug("parent:{}", parent);
             if("0".equals(parent.getNodetype())){
                 logger.debug("取一级栏目，通过所属站点取");
-                SiteBean site = cmsManager.getSiteService().getSiteById(parent.getId());
-                if(site != null){
-                    for(CategoryBean categoryBean : site.getCategorys()){
+                List<CategoryBean> categorys = cmsManager.getCategoryService().getTopCategorysBySiteId(parent.getId());
+                if(categorys != null){
+                    for(CategoryBean categoryBean : categorys){
                         Category category = new Category();
                         try {
                             BeanUtils.copyProperties(category, categoryBean);
                             category.setClientCreationDate(categoryBean.getCreationDate());
-                            category.setSiteId(site.getId());
+                            category.setSiteId(parent.getId());
                             list.add(category);
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
@@ -261,6 +258,7 @@ public class WcmServiceImpl implements WcmService {
                             BeanUtils.copyProperties(category, categoryBean);
                             category.setClientCreationDate(categoryBean.getCreationDate());
                             category.setParentId(pcategory.getId());
+                            category.setSiteId(pcategory.getSite().getId());
                             list.add(category);
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
@@ -286,7 +284,9 @@ public class WcmServiceImpl implements WcmService {
                 if(category.getSiteId() != null){
                     categoryBean.setSite(cmsManager.getSiteService().getSiteById(category.getSiteId()));
                 } else if(category.getParentId() != null){
-                    categoryBean.setParent(cmsManager.getCategoryService().getCategoryById(category.getParentId()));
+                    CategoryBean parent = cmsManager.getCategoryService().getCategoryById(category.getParentId());
+                    categoryBean.setParent(parent);
+                    categoryBean.setSite(cmsManager.getSiteService().getSiteById(parent.getSite().getId()));
                 }
             }
             try {
@@ -304,7 +304,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
-    public Category getCategoryById(String id) throws ApplicationException {
+    public Category getCategoryById(String id, WcmNodeModel parent) throws ApplicationException {
         try {
             if(id == null){
                 logger.debug("id为空");
@@ -315,9 +315,8 @@ public class WcmServiceImpl implements WcmService {
             try {
                 BeanUtils.copyProperties(category, categoryBean);
                 category.setClientCreationDate(categoryBean.getCreationDate());
-                if(categoryBean.getSite() != null){
-                    category.setSiteId(categoryBean.getSite().getId());
-                } else if(categoryBean.getParent() != null){
+                category.setSiteId(categoryBean.getSite().getId());
+                if(categoryBean.getParent() != null){
                     category.setParentId(categoryBean.getParent().getId());
                 }
             } catch (IllegalAccessException e) {
@@ -330,6 +329,88 @@ public class WcmServiceImpl implements WcmService {
             e.printStackTrace();
             logger.error("error:", e);
             throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    public boolean addOrUpdateContent(Content content) throws ApplicationException {
+        try {
+            ContentBean contentBean;
+            if(content.getId() != null){
+                logger.debug("更新文章[{}]", content.getTitle());
+                contentBean = cmsManager.getContentService().getContentById(content.getId());
+            } else{
+                logger.debug("新建文章[{}]",  content.getTitle());
+                contentBean = new ContentBean();
+                contentBean.setCategory(cmsManager.getCategoryService().getCategoryById(content.getCategoryId()));
+            }
+            try {
+                BeanUtils.copyProperties(contentBean, content);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            contentBean.setState("0");
+            return cmsManager.getContentService().addOrUpdateContent(contentBean);
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    public Content getContentById(String id, WcmNodeModel parent) throws ApplicationException {
+        try {
+            if(id == null){
+                logger.debug("id为空");
+                if("0".equals(parent.getNodetype())){
+                    logger.warn("站点不能添加文章");
+                    throw new ApplicationException(messageSourceHelper.getMessage("content.add.sitenotallow"));
+                }
+                return new Content();
+            }
+            ContentBean contentBean = cmsManager.getContentService().getContentById(id);
+            Content content = new Content();
+            try {
+                BeanUtils.copyProperties(content, contentBean);
+                content.setClientCreationDate(contentBean.getCreationDate());
+                content.setCategoryId(contentBean.getCategory().getId());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return content;
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException {
+        try {
+            List<ContentBean> list = cmsManager.getContentService().getContentsByCategoryIdAndPage(content.getCategoryId(), config.getOffset(), config.getLimit());
+            long count = cmsManager.getContentService().getCountByCategoryId(content.getCategoryId());
+            List<Content> contents = new ArrayList<Content>();
+            for(ContentBean contentBean : list){
+                Content c = new Content();
+                try {
+                    BeanUtils.copyProperties(c, contentBean);
+                    c.setClientCreationDate(contentBean.getCreationDate());
+                    c.setCategoryId(contentBean.getCategory().getId());
+                    contents.add(c);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+            return new BasePagingLoadResult<Content>(contents, config.getOffset(), (int)count);      
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());    
         }
     }
 }

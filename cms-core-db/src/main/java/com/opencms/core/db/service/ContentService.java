@@ -2,6 +2,8 @@ package com.opencms.core.db.service;
 
 import com.opencms.core.db.bean.ContentBean;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -12,5 +14,17 @@ import com.opencms.core.db.bean.ContentBean;
 public interface ContentService {
 
     public boolean addContent(ContentBean content);
+
+    public boolean updateContent(ContentBean content);
+
+    public boolean addOrUpdateContent(ContentBean content);
+
+    public ContentBean getContentById(String id);
+
+    public ContentBean getContentById(String id, boolean loadContent);
+
+    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults);
+
+    public long getCountByCategoryId(String categoryId);
 
 }

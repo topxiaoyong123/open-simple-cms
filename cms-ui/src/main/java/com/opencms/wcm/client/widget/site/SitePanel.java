@@ -49,6 +49,18 @@ public class SitePanel extends FormPanel {
         title.setFieldLabel(msgs.site_title());
         this.add(title);
 
+        final TextField<String> url = new TextField<String>(); // url
+        url.setName("url");
+        url.setAllowBlank(false);
+        url.setFieldLabel(msgs.site_url());
+        this.add(url);
+
+        final TextField<String> template = new TextField<String>(); // template
+        template.setName("template");
+        template.setAllowBlank(false);
+        template.setFieldLabel(msgs.site_template());
+        this.add(template);
+
         final TextField<String> keywords = new TextField<String>(); // keyword
         keywords.setName("keywords");
         keywords.setFieldLabel(msgs.site_keywords());

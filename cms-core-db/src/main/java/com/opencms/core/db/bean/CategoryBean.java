@@ -34,11 +34,17 @@ public class CategoryBean implements Serializable {
     @Column(nullable = false, length = 32)
     private String name;
 
-    @Column(length = 256)
+    @Column(length = 255)
     private String keywords;
 
-    @Column(length = 256)
+    @Column(length = 255)
     private String description;
+
+    @Column(length = 128)
+    private String url;
+
+    @Column(length = 32)
+    private String template;
 
     @Column
     private double no = 0;
@@ -46,10 +52,13 @@ public class CategoryBean implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificationDate;
+
     private boolean visible;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "parentid")
+    @JoinColumn(name = "parent")
     private CategoryBean parent;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "parent")
@@ -57,7 +66,7 @@ public class CategoryBean implements Serializable {
     private Set<CategoryBean> children = new LinkedHashSet<CategoryBean>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "siteid")
+    @JoinColumn(name = "site", nullable = false)
     private SiteBean site;
 
     public String getId() {
@@ -100,6 +109,22 @@ public class CategoryBean implements Serializable {
         this.description = description;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
     public double getNo() {
         return no;
     }
@@ -114,6 +139,14 @@ public class CategoryBean implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Date getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
     }
 
     public boolean isVisible() {

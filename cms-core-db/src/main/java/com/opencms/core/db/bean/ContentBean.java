@@ -22,14 +22,32 @@ public class ContentBean implements Serializable {
     @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
     private String id;
 
-    @Column(nullable = false, length = 256)
+    @Column(nullable = false, length = 128)
     private String title;
 
-    @Column(length = 512)
+    @Column(length = 255)
     private String keywords;
 
-    @Column(length = 512)
+    @Column(length = 255)
     private String description;
+
+    @Column
+    private double no;
+
+    @Column(nullable = false, length = 3)
+    private String state;
+
+    @Column(nullable = false, length = 3)
+    private String type;
+
+    @Column(length = 32)
+    private String source;
+
+    @Column(length = 32)
+    private String template;
+
+    @Column(length = 32)
+    private String author;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -38,8 +56,11 @@ public class ContentBean implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificationDate;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "categoryid", nullable = false)
+    @JoinColumn(name = "category", nullable = false)
     private CategoryBean category;
 
     public String getId() {
@@ -74,6 +95,46 @@ public class ContentBean implements Serializable {
         this.description = description;
     }
 
+    public double getNo() {
+        return no;
+    }
+
+    public void setNo(double no) {
+        this.no = no;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     public String getContent() {
         return content;
     }
@@ -96,5 +157,21 @@ public class ContentBean implements Serializable {
 
     public void setCategory(CategoryBean category) {
         this.category = category;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Date getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
     }
 }

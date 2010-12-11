@@ -151,13 +151,13 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String choose_one();
 
   /**
-   * Translated "Content Auditing Confirm".
+   * Translated "New Content".
    * 
-   * @return translated "Content Auditing Confirm"
+   * @return translated "New Content"
    */
-  @DefaultMessage("Content Auditing Confirm")
-  @Key("content_auditing_confirm_header")
-  String content_auditing_confirm_header();
+  @DefaultMessage("New Content")
+  @Key("content_add_header")
+  String content_add_header();
 
   /**
    * Translated "Content Auditing".
@@ -169,6 +169,51 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String content_auditing_header();
 
   /**
+   * Translated "Author".
+   * 
+   * @return translated "Author"
+   */
+  @DefaultMessage("Author")
+  @Key("content_author")
+  String content_author();
+
+  /**
+   * Translated "Content".
+   * 
+   * @return translated "Content"
+   */
+  @DefaultMessage("Content")
+  @Key("content_content")
+  String content_content();
+
+  /**
+   * Translated "Creation Date".
+   * 
+   * @return translated "Creation Date"
+   */
+  @DefaultMessage("Creation Date")
+  @Key("content_creationDate")
+  String content_creationDate();
+
+  /**
+   * Translated "Description".
+   * 
+   * @return translated "Description"
+   */
+  @DefaultMessage("Description")
+  @Key("content_description")
+  String content_description();
+
+  /**
+   * Translated "Edit Content".
+   * 
+   * @return translated "Edit Content"
+   */
+  @DefaultMessage("Edit Content")
+  @Key("content_edit_header")
+  String content_edit_header();
+
+  /**
    * Translated "Content Editing".
    * 
    * @return translated "Content Editing"
@@ -176,6 +221,24 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Content Editing")
   @Key("content_editing_header")
   String content_editing_header();
+
+  /**
+   * Translated "Content ID".
+   * 
+   * @return translated "Content ID"
+   */
+  @DefaultMessage("Content ID")
+  @Key("content_id")
+  String content_id();
+
+  /**
+   * Translated "Keywords".
+   * 
+   * @return translated "Keywords"
+   */
+  @DefaultMessage("Keywords")
+  @Key("content_keywords")
+  String content_keywords();
 
   /**
    * Translated "Content Management".
@@ -187,6 +250,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String content_manager_header();
 
   /**
+   * Translated "Content No.".
+   * 
+   * @return translated "Content No."
+   */
+  @DefaultMessage("Content No.")
+  @Key("content_no")
+  String content_no();
+
+  /**
    * Translated "Content Publish".
    * 
    * @return translated "Content Publish"
@@ -194,6 +266,69 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Content Publish")
   @Key("content_publish_header")
   String content_publish_header();
+
+  /**
+   * Translated "Source".
+   * 
+   * @return translated "Source"
+   */
+  @DefaultMessage("Source")
+  @Key("content_source")
+  String content_source();
+
+  /**
+   * Translated "State".
+   * 
+   * @return translated "State"
+   */
+  @DefaultMessage("State")
+  @Key("content_state")
+  String content_state();
+
+  /**
+   * Translated "Content Title".
+   * 
+   * @return translated "Content Title"
+   */
+  @DefaultMessage("Content Title")
+  @Key("content_title")
+  String content_title();
+
+  /**
+   * Translated "Type".
+   * 
+   * @return translated "Type"
+   */
+  @DefaultMessage("Type")
+  @Key("content_type")
+  String content_type();
+
+  /**
+   * Translated "Download".
+   * 
+   * @return translated "Download"
+   */
+  @DefaultMessage("Download")
+  @Key("content_type_download")
+  String content_type_download();
+
+  /**
+   * Translated "Normal Content".
+   * 
+   * @return translated "Normal Content"
+   */
+  @DefaultMessage("Normal Content")
+  @Key("content_type_normal")
+  String content_type_normal();
+
+  /**
+   * Translated "Outlink".
+   * 
+   * @return translated "Outlink"
+   */
+  @DefaultMessage("Outlink")
+  @Key("content_type_outlink")
+  String content_type_outlink();
 
   /**
    * Translated "Delete".
@@ -421,6 +556,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String site_no();
 
   /**
+   * Translated "Site template".
+   * 
+   * @return translated "Site template"
+   */
+  @DefaultMessage("Site template")
+  @Key("site_template")
+  String site_template();
+
+  /**
    * Translated "Site Title".
    * 
    * @return translated "Site Title"
@@ -428,6 +572,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Site Title")
   @Key("site_title")
   String site_title();
+
+  /**
+   * Translated "Site Url".
+   * 
+   * @return translated "Site Url"
+   */
+  @DefaultMessage("Site Url")
+  @Key("site_url")
+  String site_url();
 
   /**
    * Translated "Tips".
@@ -482,6 +635,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("{0} is required")
   @Key("validate_notnull")
   String validate_notnull(String arg0);
+
+  /**
+   * Translated "Visible".
+   * 
+   * @return translated "Visible"
+   */
+  @DefaultMessage("Visible")
+  @Key("visible")
+  String visible();
 
   /**
    * Translated "Warn".

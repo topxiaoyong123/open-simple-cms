@@ -6,9 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 import java.util.Date;
-import java.util.LinkedHashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,18 +31,30 @@ public class SiteBean implements Serializable {
     @Column(nullable = false, length = 32)
     private String name;
 
-    @Column(length = 256)
+    @Column(length = 128, nullable = false)
+    private String url;
+
+    @Column(length = 32)
+    private String template;
+
+    @Column(length = 32)
+    private String indexTemplate;
+
+    @Column(length = 255)
     private String keywords;
 
-    @Column(length = 256)
+    @Column(length = 255)
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "site")
-    @OrderBy("no")
-    private Set<CategoryBean> categorys = new LinkedHashSet<CategoryBean>();
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modificationDate;
+
+//    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "site")
+//    @OrderBy("no")
+//    private Set<CategoryBean> categorys = new LinkedHashSet<CategoryBean>();
 
     public String getId() {
         return id;
@@ -68,6 +78,30 @@ public class SiteBean implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
+    public String getIndexTemplate() {
+        return indexTemplate;
+    }
+
+    public void setIndexTemplate(String indexTemplate) {
+        this.indexTemplate = indexTemplate;
     }
 
     public String getKeywords() {
@@ -94,11 +128,11 @@ public class SiteBean implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public Set<CategoryBean> getCategorys() {
-        return categorys;
+    public Date getModificationDate() {
+        return modificationDate;
     }
 
-    public void setCategorys(Set<CategoryBean> categorys) {
-        this.categorys = categorys;
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
     }
 }

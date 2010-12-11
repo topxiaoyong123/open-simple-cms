@@ -1,5 +1,7 @@
 package com.opencms.core.db.dao;
 
+import com.opencms.core.db.query.Finder;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,12 +20,18 @@ public interface BaseDao<T> {
 
     public boolean delete(T obj);
 
+    public boolean deleteAll(List<T> list);
+
     public T get(Class c, Serializable id);
 
     public T get(Class c, String column, Serializable value);
 
-    public List<T> get(Class c, String[] column, Serializable[] value);
+    public List<T> getAll(Class c, String column, Serializable value);
 
     public List<T> getAll(Class c);
+
+    public List<T> getByFinder(Finder finder);
+
+    public long getCountByFinder(Finder finder);
 
 }

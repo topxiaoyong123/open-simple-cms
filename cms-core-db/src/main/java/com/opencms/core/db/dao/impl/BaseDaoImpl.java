@@ -1,6 +1,7 @@
 package com.opencms.core.db.dao.impl;
 
 import com.opencms.core.db.dao.BaseDao;
+import com.opencms.core.db.query.Finder;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,36 +35,41 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
         return true;
     }
 
+    public boolean deleteAll(List<T> list){
+        this.getHibernateTemplate().deleteAll(list);
+        return true;
+    }
+
     public T get(Class c, Serializable id) {
         return (T)this.getHibernateTemplate().get(c, id);
     }
 
     public T get(Class c, String column, Serializable value) {
-        List<T> list = get(c, new String[]{column}, new Serializable[]{value});
+        List<T> list = getAll(c, column, value);
         if(list != null && list.size() > 0){
             return list.get(0);
         }
         return null;
     }
 
-    public List<T> get(Class c, String[] column, Serializable[] value) {
-        return this.getHibernateTemplate().find(getHql(c, column), value);
+    public List<T> getAll(Class c, String column, Serializable value) {
+        Finder finder = new Finder(c);
+        finder.setColumns(new String[]{column});
+        finder.setValues(new Serializable[]{value});
+        return getByFinder(finder);
     }
 
     public List<T> getAll(Class c){
-        return this.getHibernateTemplate().find(getHql(c, null));
+        Finder finder = new Finder(c);
+        return getByFinder(finder);
     }
 
-    private String getHql(Class c, String[] column){
-        StringBuffer s = new StringBuffer();
-        s.append("from ").append(c.getSimpleName()).append(" o ");
-        if(column != null){
-            s.append(" where 1 = 1 ");
-            for(String st : column){
-                s.append(" and o.").append(st).append(" = ? ");
-            }
-        }
-        logger.debug("query hql : [{}]", s);
-        return s.toString();
+    public List<T> getByFinder(Finder finder) {
+        return finder.find(this.getSession());
     }
+
+    public long getCountByFinder(Finder finder) {
+        return finder.findNumber(this.getSession());
+    }
+
 }

@@ -4,10 +4,7 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.Registry;
-import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.WcmMessages;
-import com.opencms.wcm.client.WcmServiceAsync;
-import com.opencms.wcm.client.WcmService;
+import com.opencms.wcm.client.*;
 import com.opencms.wcm.client.model.category.Category;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
@@ -59,7 +56,7 @@ public class CategoryController extends Controller {
                 }
             });
         } else if(AppEvents.CATEGORY_MANAGER_ADD == appEvent.getType()){
-            service.getCategoryById(null, new AsyncCallback(){
+            service.getCategoryById(null, AppState.westTreeItemObj, new AsyncCallback(){
                 public void onFailure(Throwable throwable) {
                     MessageBox.alert(msgs.error(), throwable.getMessage(), null);
                 }
@@ -71,7 +68,7 @@ public class CategoryController extends Controller {
             });
         } else if(AppEvents.CATEGORY_MANAGER_EDIT == appEvent.getType()){
             String id = appEvent.getData();
-            service.getCategoryById(id, new AsyncCallback(){
+            service.getCategoryById(id, AppState.westTreeItemObj, new AsyncCallback(){
                 public void onFailure(Throwable throwable) {
                     MessageBox.alert(msgs.error(), throwable.getMessage(), null);
                 }

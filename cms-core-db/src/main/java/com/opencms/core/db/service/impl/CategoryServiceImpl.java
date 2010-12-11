@@ -1,12 +1,15 @@
 package com.opencms.core.db.service.impl;
 
+import com.opencms.core.db.query.Finder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.opencms.core.db.service.CategoryService;
 import com.opencms.core.db.dao.CategoryDao;
 import com.opencms.core.db.bean.CategoryBean;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,5 +45,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     public CategoryBean getCategoryById(String id) {
         return categoryDao.get(CategoryBean.class, id);
+    }
+
+    public List<CategoryBean> getTopCategorysBySiteId(String siteId) {
+        Finder finder = new Finder(CategoryBean.class);
+        finder.setColumns(new String[]{"site.id"});
+        finder.setValues(new Serializable[]{siteId});
+        finder.setNullColumns(new String[]{"parent"});
+        finder.setOrders(new String[]{"no"});
+        return categoryDao.getByFinder(finder);
     }
 }

@@ -2,6 +2,8 @@ package com.opencms.core.db.service;
 
 import com.opencms.core.db.bean.CategoryBean;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -18,4 +20,11 @@ public interface CategoryService {
     public boolean addOrUpdateCategory(CategoryBean category);
 
     public CategoryBean getCategoryById(String id);
+
+    /**
+     * 根据站点ID取以及栏目
+     * @param siteId
+     * @return
+     */
+    public List<CategoryBean> getTopCategorysBySiteId(String siteId);
 }
