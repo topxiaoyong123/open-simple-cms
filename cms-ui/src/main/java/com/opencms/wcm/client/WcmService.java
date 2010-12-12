@@ -3,6 +3,7 @@ package com.opencms.wcm.client;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.opencms.wcm.client.model.*;
+import com.opencms.wcm.client.model.file.WcmFile;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
@@ -137,4 +138,12 @@ public interface WcmService extends RemoteService {
      */
     public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
 
+
+    public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException;
+
+    public List<WcmFile> getFiles(WcmFile f) throws ApplicationException;
+
+    public WcmFile createForder(WcmFile f, String name) throws ApplicationException;
+
+    public boolean deleteFiles(List<WcmFile> files) throws ApplicationException;
 }

@@ -71,6 +71,7 @@ public class MyGWTServer extends RemoteServiceServlet {
             //
             writeResponse(req, resp, responsePayload);
         } catch (Throwable e) {
+            e.printStackTrace();
             // Give a subclass a chance to either handle the exception or
             // rethrow it
             //

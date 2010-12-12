@@ -57,7 +57,7 @@ public class ContentView extends View {
             window.removeAll();
             window.add(cp);
             window.setHeading(msgs.content_add_header());
-            window.setWidth("500px");
+            window.setWidth(617);
             window.show();
         } else if(AppEvents.CONTENT_MANAGER_EDIT == appEvent.getType()){
             Content c = appEvent.getData();
@@ -65,7 +65,7 @@ public class ContentView extends View {
             window.removeAll();
             window.add(cp);
             window.setHeading(msgs.content_add_header());
-            window.setWidth("500px");
+            window.setWidth(617);
             window.show();
         }
     }

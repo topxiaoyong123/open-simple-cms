@@ -151,6 +151,24 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String choose_one();
 
   /**
+   * Translated "Confirm".
+   * 
+   * @return translated "Confirm"
+   */
+  @DefaultMessage("Confirm")
+  @Key("confirm")
+  String confirm();
+
+  /**
+   * Translated "Sure to delete selected?".
+   * 
+   * @return translated "Sure to delete selected?"
+   */
+  @DefaultMessage("Sure to delete selected?")
+  @Key("confirm_delete_selected")
+  String confirm_delete_selected();
+
+  /**
    * Translated "New Content".
    * 
    * @return translated "New Content"
@@ -286,6 +304,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String content_state();
 
   /**
+   * Translated "Template".
+   * 
+   * @return translated "Template"
+   */
+  @DefaultMessage("Template")
+  @Key("content_template")
+  String content_template();
+
+  /**
    * Translated "Content Title".
    * 
    * @return translated "Content Title"
@@ -356,6 +383,168 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Error")
   @Key("error")
   String error();
+
+  /**
+   * Translated "Hight".
+   * 
+   * @return translated "Hight"
+   */
+  @DefaultMessage("Hight")
+  @Key("file_image_height")
+  String file_image_height();
+
+  /**
+   * Translated "Image Only".
+   * 
+   * @return translated "Image Only"
+   */
+  @DefaultMessage("Image Only")
+  @Key("file_image_only")
+  String file_image_only();
+
+  /**
+   * Translated "Url".
+   * 
+   * @return translated "Url"
+   */
+  @DefaultMessage("Url")
+  @Key("file_image_url")
+  String file_image_url();
+
+  /**
+   * Translated "Width".
+   * 
+   * @return translated "Width"
+   */
+  @DefaultMessage("Width")
+  @Key("file_image_width")
+  String file_image_width();
+
+  /**
+   * Translated "File Manager".
+   * 
+   * @return translated "File Manager"
+   */
+  @DefaultMessage("File Manager")
+  @Key("file_manager")
+  String file_manager();
+
+  /**
+   * Translated "Create New Folder".
+   * 
+   * @return translated "Create New Folder"
+   */
+  @DefaultMessage("Create New Folder")
+  @Key("file_manager_create_folder")
+  String file_manager_create_folder();
+
+  /**
+   * Translated "Create New Folder Failed".
+   * 
+   * @return translated "Create New Folder Failed"
+   */
+  @DefaultMessage("Create New Folder Failed")
+  @Key("file_manager_create_folder_fail")
+  String file_manager_create_folder_fail();
+
+  /**
+   * Translated "Delete File".
+   * 
+   * @return translated "Delete File"
+   */
+  @DefaultMessage("Delete File")
+  @Key("file_manager_delete")
+  String file_manager_delete();
+
+  /**
+   * Translated "Delete File Failed".
+   * 
+   * @return translated "Delete File Failed"
+   */
+  @DefaultMessage("Delete File Failed")
+  @Key("file_manager_delete_fail")
+  String file_manager_delete_fail();
+
+  /**
+   * Translated "Delete Folder".
+   * 
+   * @return translated "Delete Folder"
+   */
+  @DefaultMessage("Delete Folder")
+  @Key("file_manager_delete_folder")
+  String file_manager_delete_folder();
+
+  /**
+   * Translated "Delete Folder Failed".
+   * 
+   * @return translated "Delete Folder Failed"
+   */
+  @DefaultMessage("Delete Folder Failed")
+  @Key("file_manager_delete_folder_fail")
+  String file_manager_delete_folder_fail();
+
+  /**
+   * Translated "File Name".
+   * 
+   * @return translated "File Name"
+   */
+  @DefaultMessage("File Name")
+  @Key("file_manager_filename")
+  String file_manager_filename();
+
+  /**
+   * Translated "Open File".
+   * 
+   * @return translated "Open File"
+   */
+  @DefaultMessage("Open File")
+  @Key("file_manager_open")
+  String file_manager_open();
+
+  /**
+   * Translated "Release Selection".
+   * 
+   * @return translated "Release Selection"
+   */
+  @DefaultMessage("Release Selection")
+  @Key("file_manager_release_selection")
+  String file_manager_release_selection();
+
+  /**
+   * Translated "Upload Files".
+   * 
+   * @return translated "Upload Files"
+   */
+  @DefaultMessage("Upload Files")
+  @Key("file_manager_upload")
+  String file_manager_upload();
+
+  /**
+   * Translated "Upload Files".
+   * 
+   * @return translated "Upload Files"
+   */
+  @DefaultMessage("Upload Files")
+  @Key("file_manager_upload_header")
+  String file_manager_upload_header();
+
+  /**
+   * Translated "Start Upload".
+   * 
+   * @return translated "Start Upload"
+   */
+  @DefaultMessage("Start Upload")
+  @Key("file_manager_upload_start")
+  String file_manager_upload_start();
+
+  /**
+   * Translated "View Server".
+   * 
+   * @return translated "View Server"
+   */
+  @DefaultMessage("View Server")
+  @Key("file_viewserver")
+  String file_viewserver();
 
   /**
    * Translated "Login".
