@@ -10,4 +10,11 @@
     <groupId>com.open-cms</groupId>
     <artifactId>cms-util</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.open-cms</groupId>
+            <artifactId>cms-core-db</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+    </dependencies>
 </project>

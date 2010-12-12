@@ -1,9 +1,11 @@
 package com.opencms.wcm.server;
 
 import com.opencms.core.db.bean.ContentBean;
+import com.opencms.util.resources.ResourceHelper;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
+import com.opencms.wcm.client.model.file.WcmFile;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
@@ -16,6 +18,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 
+import java.io.File;
 import java.util.*;
 import java.lang.reflect.InvocationTargetException;
 
@@ -80,6 +83,9 @@ public class WcmServiceImpl implements WcmService {
     //spring国际化处理
     @Autowired
     private MessageSourceHelper messageSourceHelper;
+
+    @Autowired
+    private ResourceHelper resourceHelper;
 
     public User login(User user) throws ApplicationException {
         if (!user.getCheckcode().equals(this.getSession().getAttribute("checkcode"))) {
@@ -374,6 +380,7 @@ public class WcmServiceImpl implements WcmService {
             try {
                 BeanUtils.copyProperties(content, contentBean);
                 content.setClientCreationDate(contentBean.getCreationDate());
+                content.setClientModificationDate(contentBean.getModificationDate());
                 content.setCategoryId(contentBean.getCategory().getId());
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -412,5 +419,110 @@ public class WcmServiceImpl implements WcmService {
             logger.error("error:", e);
             throw new ApplicationException(e.getMessage());    
         }
+    }
+
+    public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
+        String templatePath = resourceHelper.getTemplateResource().getTemplatePath();
+        List<WcmFile> list = new ArrayList<WcmFile>();
+        if (f != null) {
+            if ("0".equals(f.getType())) {
+                File parent = new File(f.getPath());
+                File[] fs = parent.listFiles();
+                for (File file : fs) {
+                    if (file.isDirectory() && !file.isHidden()) {
+                        WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), "", "0", "", f.getTemplate());
+                        list.add(wf);
+                    }
+                }
+            }
+        } else {
+            File parent = new File(templatePath);
+            File[] fs = parent.listFiles();
+            for (File file : fs) {
+                if (file.isDirectory() && !file.isHidden()) {
+                    WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), "", "0", "", file.getName());
+                    list.add(wf);
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<WcmFile> getFiles(WcmFile f) throws ApplicationException {
+        String hosturl = resourceHelper.getWcmResource().getOutputUrl();
+        List<WcmFile> list = new ArrayList<WcmFile>();
+        logger.debug("getFiles, parent:{}", f);
+        if (f != null && !"0".equals(f.getPath())) {
+            File parent = new File(f.getPath());
+            File[] fs = parent.listFiles();
+            for (File file : fs) {
+                if (file.isFile() && !file.isHidden()) {
+                    String filename = file.getName();
+                    String filetype = filename.substring(filename.lastIndexOf(".") + 1);
+                    String shortcut = null;
+                    String url = hosturl + "templates/" + file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(f.getTemplate())).replace("\\", "/");
+                    if (("jpg").equalsIgnoreCase(filetype) || ("bmp").equalsIgnoreCase(filetype) || ("gif").equalsIgnoreCase(filetype) || ("png").equalsIgnoreCase(filetype)) {
+                        shortcut = url;
+                    } else if ("doc".equalsIgnoreCase(filetype) || "docx".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/word.jpg";
+                    } else if ("xls".equalsIgnoreCase(filetype) || "xlsx".equalsIgnoreCase(filetype) || "csv".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/excel.jpg";
+                    } else if ("ppt".equalsIgnoreCase(filetype) || "pptx".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/ppt.jpg";
+                    } else if ("pdf".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/pdf.jpg";
+                    } else if ("html".equalsIgnoreCase(filetype) || "htm".equalsIgnoreCase(filetype) || "shtml".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/html.jpg";
+                    } else if ("css".equalsIgnoreCase(filetype) || "js".equalsIgnoreCase(filetype) || "txt".equalsIgnoreCase(filetype) || "text".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/txt.jpg";
+                    } else if ("rar".equalsIgnoreCase(filetype) || "zip".equalsIgnoreCase(filetype) || "war".equalsIgnoreCase(filetype) || "jar".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/rar.jpg";
+                    } else if ("exe".equalsIgnoreCase(filetype)) {
+                        shortcut = "images/shortcut/exe.jpg";
+                    } else {
+                        shortcut = "images/shortcut/other.jpg";
+                    }
+                    WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), url, "1", shortcut, f.getTemplate(), file.length(), new Date(file.lastModified()));
+                    list.add(wf);
+                }
+            }
+        }
+        logger.debug("getFiles, filelist:{}", list);
+        return list;
+    }
+
+    public WcmFile createForder(WcmFile f, String name) throws ApplicationException {
+        if (f != null) {
+            File parent = new File(f.getPath());
+            File tar = new File(parent, name);
+            if (tar.mkdirs()) {
+                return new WcmFile(tar.getName(), tar.getAbsolutePath(), "", "0", "", tar.getName());
+            }
+        } else {
+            String templatePath = resourceHelper.getTemplateResource().getTemplatePath();
+            File parent = new File(templatePath);
+            File tar = new File(parent, name);
+            if (tar.mkdirs()) {
+                return new WcmFile(tar.getName(), tar.getAbsolutePath(), "", "0", "", tar.getName());
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteFiles(List<WcmFile> files) throws ApplicationException {
+        int i = 0;
+        logger.debug("删除文件：{}", files.toString());
+        try {
+            for (WcmFile file : files) {
+                File f = new File(file.getPath());
+                if (f.exists() && f.isDirectory() && f.listFiles().length > 0) {
+                    return false;
+                }
+                f.delete();
+                i++;
+            }
+        } catch (Exception e) {
+        }
+        return true;
     }
 }

@@ -3,10 +3,13 @@ package com.opencms.wcm.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.model.*;
+import com.opencms.wcm.client.model.file.WcmFile;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,6 +47,14 @@ public interface WcmServiceAsync {
     void addOrUpdateContent(Content category, AsyncCallback async);
 
     void getContentById(String id, WcmNodeModel parent, AsyncCallback async);
+
+    void getFileForders(WcmFile f, AsyncCallback async);
+
+    void getFiles(WcmFile f, AsyncCallback async);
+
+    void createForder(WcmFile f, String name, AsyncCallback async);
+
+    void deleteFiles(List<WcmFile> files, AsyncCallback async);
 
     public static class Util {
         private static WcmServiceAsync instance;

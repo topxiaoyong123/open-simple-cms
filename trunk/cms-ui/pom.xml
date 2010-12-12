@@ -25,6 +25,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.open-cms</groupId>
+            <artifactId>cms-util</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
@@ -87,6 +93,7 @@
                 <version>2.1.0</version>
 
                 <configuration>
+                    
                     <runTarget>com.opencms.wcm.Wcm/Wcm.html</runTarget>
                     <modules>
                         <module>com.opencms.wcm.Wcm</module>
@@ -105,6 +112,7 @@
                             <goal>mergewebxml</goal>
                             <goal>compile</goal>
                             <goal>i18n</goal>
+                            <goal>test</goal>
                             <!--<goal>generateAsync</goal>-->
                         </goals>
                     </execution>

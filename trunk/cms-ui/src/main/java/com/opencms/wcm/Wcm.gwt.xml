@@ -12,4 +12,8 @@
 
     <servlet path="/wcmService"
              class="com.opencms.wcm.server.MyGWTServer"/>
+    
+    <servlet path="/fileupload"
+             class="com.opencms.wcm.server.FileUploadServlet"/>
+
 </module>
