@@ -44,7 +44,6 @@ public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
     public String engineSite(String siteId) throws IOException, TemplateException {
         SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
         if(siteBean != null){
-            this.setTemplatePath(templateHelper.getBasePath(siteBean));
             templateModel.clean();
             templateModel.setSite(mapper.map(siteBean));
             String template = templateHelper.getTemplate(siteBean);
