@@ -1,8 +1,9 @@
 package com.opencms.core.db.service.impl;
 
 import com.opencms.core.db.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,16 +15,16 @@ import org.springframework.stereotype.Service;
 @Service("cmsManager")
 public class CmsManagerImpl implements CmsManager {
 
-    @Autowired
+    @Resource(name = "userService")
     private UserService userService;
 
-    @Autowired
+    @Resource(name = "contentService")
     private ContentService contentService;
 
-    @Autowired
+    @Resource(name = "siteService")
     private SiteService siteService;
 
-    @Autowired
+    @Resource(name = "categoryService")
     private CategoryService categoryService;
 
     public UserService getUserService() {

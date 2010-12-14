@@ -2,8 +2,9 @@ package com.opencms.util;
 
 import com.opencms.util.mapper.BeanMapperHelper;
 import com.opencms.util.resources.ResourceHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,10 +16,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class CmsUtils {
 
-    @Autowired
+    @Resource(name = "resourceHelper")
     private ResourceHelper resourceHelper;
 
-    @Autowired
+    @Resource(name = "beanMapperHelper")
     private BeanMapperHelper beanMapperHelper;
 
     public ResourceHelper getResourceHelper() {

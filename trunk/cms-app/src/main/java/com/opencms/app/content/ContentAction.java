@@ -4,7 +4,8 @@ import com.opencms.core.db.service.CmsManager;
 import com.opensymphony.xwork2.ActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,7 +24,7 @@ public class ContentAction extends ActionSupport {
 
     private String id;
 
-    @Autowired
+    @Resource(name = "cmsManager")
     private CmsManager cmsManager;
 
     public int getYear() {

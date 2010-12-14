@@ -6,8 +6,8 @@ import com.opencms.core.db.dao.RoleDao;
 import com.opencms.core.db.bean.UserBean;
 import com.opencms.core.db.bean.RoleBean;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.Set;
 import java.util.Iterator;
 
@@ -21,10 +21,10 @@ import java.util.Iterator;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource(name = "userDao")
     private UserDao userDao;
 
-    @Autowired
+    @Resource(name = "roleDao")
     private RoleDao roleDao;
 
     public boolean addUser(UserBean user){

@@ -6,8 +6,8 @@ import com.opencms.core.db.service.ContentService;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.dao.ContentDao;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 @Service("contentService")
 public class ContentServiceImpl implements ContentService {
 
-    @Autowired
+    @Resource(name = "contentDao")
     private ContentDao contentDao;
 
     public boolean addContent(ContentBean content) {

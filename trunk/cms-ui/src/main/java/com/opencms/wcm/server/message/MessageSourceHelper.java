@@ -2,8 +2,8 @@ package com.opencms.wcm.server.message;
 
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.Locale;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Locale;
 @Component("messageSourceHelper")
 public class MessageSourceHelper {
 
-    @Autowired
+    @Resource(name = "messageSource")
     private MessageSource messageSource;
 
     public String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {

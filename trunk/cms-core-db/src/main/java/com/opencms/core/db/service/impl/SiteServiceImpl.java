@@ -4,8 +4,8 @@ import com.opencms.core.db.service.SiteService;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.core.db.dao.SiteDao;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Date;
 
@@ -19,7 +19,7 @@ import java.util.Date;
 @Service("siteService")
 public class SiteServiceImpl implements SiteService {
 
-    @Autowired
+    @Resource(name = "siteDao")
     private SiteDao siteDao;
 
     public boolean addSite(SiteBean site){

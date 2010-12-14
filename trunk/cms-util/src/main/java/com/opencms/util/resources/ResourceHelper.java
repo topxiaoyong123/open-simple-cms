@@ -1,7 +1,8 @@
 package com.opencms.util.resources;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -14,10 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResourceHelper {
 
-    @Autowired
+    @Resource(name = "templateResource")
     private TemplateResource templateResource;
 
-    @Autowired
+    @Resource(name = "wcmResource")
     private WcmResource wcmResource;
 
     public TemplateResource getTemplateResource() {
