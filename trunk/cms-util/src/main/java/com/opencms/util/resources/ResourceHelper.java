@@ -1,6 +1,7 @@
 package com.opencms.util.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Time: 12:27:07
  * To change this template use File | Settings | File Templates.
  */
+@Component
 public class ResourceHelper {
 
     @Autowired

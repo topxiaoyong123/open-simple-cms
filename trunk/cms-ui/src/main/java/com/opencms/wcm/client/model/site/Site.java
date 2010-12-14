@@ -28,7 +28,7 @@ public class Site implements Serializable, IsSerializable {
 
     private String template;
 
-    private Date clientCreationDate;
+    private Date creationDate;
 
     public String getId() {
         return id;
@@ -86,11 +86,11 @@ public class Site implements Serializable, IsSerializable {
         this.template = template;
     }
 
-    public Date getClientCreationDate() {
-        return clientCreationDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setClientCreationDate(Date clientCreationDate) {
-        this.clientCreationDate = clientCreationDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }
