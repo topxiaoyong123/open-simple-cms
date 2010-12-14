@@ -43,13 +43,20 @@ public abstract class FreemarkerEngineImpl implements Engine {
     @Resource(name = "templateModel")
     protected TemplateModel templateModel;
 
-    @PostConstruct
+    String templatePath = "classpath:/template/";
+
+    public String getTemplatePath() {
+        return templatePath;
+    }
+
+    public void setTemplatePath(String templatePath) {
+        this.templatePath = templatePath;
+    }
+
     public void initEngine(){
         freeMarkerConfiguration = new Configuration();
 		freeMarkerConfiguration.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
-		String templatePath = "classpath:/template/";
         try{
-            templatePath = cmsUtils.getResourceHelper().getTemplateResource().getTemplatePath();
             logger.debug("初始化FreeMarker模板目录:{}", templatePath);
             freeMarkerConfiguration.setDirectoryForTemplateLoading(new File(templatePath));
 			freeMarkerConfiguration.setDefaultEncoding(cmsUtils.getResourceHelper().getTemplateResource().getDefaultEncoding());
@@ -67,6 +74,7 @@ public abstract class FreemarkerEngineImpl implements Engine {
     public abstract String engineContent(String contentId);
 
     public String render(String template, Map model) throws TemplateException, IOException {
+        initEngine();
         Template temp;
 		temp = freeMarkerConfiguration.getTemplate(template);
 		Writer out = new StringWriter();
