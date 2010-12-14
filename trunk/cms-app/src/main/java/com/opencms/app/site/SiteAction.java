@@ -2,7 +2,7 @@ package com.opencms.app.site;
 
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.core.db.service.CmsManager;
-import com.opencms.template.Engine;
+import com.opencms.engine.Engine;
 import com.opensymphony.xwork2.ActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

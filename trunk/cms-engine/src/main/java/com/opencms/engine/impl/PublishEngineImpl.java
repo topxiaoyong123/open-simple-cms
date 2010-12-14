@@ -1,13 +1,18 @@
-package com.opencms.template.impl;
+package com.opencms.engine.impl;
 
-import com.opencms.template.Engine;
+import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.bean.SiteBean;
+import com.opencms.engine.Engine;
+import com.opencms.engine.model.Category;
+import com.opencms.engine.model.Content;
+import com.opencms.engine.model.Site;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,6 +37,21 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
 
     @Override
     public String engineContent(String contentId) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Site map(SiteBean siteBean) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Category map(CategoryBean categoryBean) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Content map(ContentBean contentBean) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

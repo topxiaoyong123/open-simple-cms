@@ -14,12 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.open-cms</groupId>
-            <artifactId>cms-core-db</artifactId>
-            <version>${pom.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.open-cms</groupId>
-            <artifactId>cms-template</artifactId>
+            <artifactId>cms-engine</artifactId>
             <version>${pom.version}</version>
         </dependency>
 

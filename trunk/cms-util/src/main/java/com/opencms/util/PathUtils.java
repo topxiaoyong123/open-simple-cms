@@ -1,11 +1,11 @@
-package com.opencms.template.model;
+package com.opencms.util;
 
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
- * Date: 10-12-13
- * Time: 下午10:15
+ * Date: 10-12-14
+ * Time: 下午7:20
  * To change this template use File | Settings | File Templates.
  */
-public class Content {
+public interface PathUtils {
 }

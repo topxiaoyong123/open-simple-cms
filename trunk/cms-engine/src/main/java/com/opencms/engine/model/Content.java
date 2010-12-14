@@ -1,4 +1,4 @@
-package com.opencms.template.model;
+package com.opencms.engine.model;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,5 +7,5 @@ package com.opencms.template.model;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Category {
+public class Content {
 }
