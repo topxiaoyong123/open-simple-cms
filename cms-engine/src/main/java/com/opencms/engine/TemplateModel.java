@@ -1,4 +1,4 @@
-package com.opencms.template;
+package com.opencms.engine;
 
 import java.util.Map;
 

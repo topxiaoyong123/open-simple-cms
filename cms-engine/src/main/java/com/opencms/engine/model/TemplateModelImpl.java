@@ -1,8 +1,9 @@
-package com.opencms.template.model;
+package com.opencms.engine.model;
 
-import com.opencms.core.db.bean.SiteBean;
 import com.opencms.core.db.service.CmsManager;
-import com.opencms.template.TemplateModel;
+import com.opencms.engine.TemplateModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,8 @@ import java.util.Map;
 @Component("templateModel")
 public class TemplateModelImpl extends BaseTemplateModel implements TemplateModel {
 
+    private static final Logger logger = LoggerFactory.getLogger(TemplateModelImpl.class);
+
     @Autowired
     private CmsManager cmsManager;
 
@@ -27,6 +30,18 @@ public class TemplateModelImpl extends BaseTemplateModel implements TemplateMode
 
     public void initModel(){
         model.put("cmsManager", cmsManager);
+        if(this.getSite() != null){
+            logger.debug("siteModel init");
+            model.put("siteModel", this.getSite());
+        }
+        if(this.getCategory() != null){
+            logger.debug("categoryModel init");
+            model.put("categoryModel", this.getCategory());
+        }
+        if(this.getContent() != null){
+            logger.debug("contentModel init");
+            model.put("contentModel", this.getContent());
+        }
     }
 
     public Map getModel() {

@@ -12,6 +12,7 @@
         <module>cms-template</module>
         <module>cms-ui</module>
         <module>cms-app</module>
+        <module>cms-engine</module>
     </modules>
 
     <properties>

@@ -1,4 +1,4 @@
-package com.opencms.template.model;
+package com.opencms.engine.model;
 
 /**
  * Created by IntelliJ IDEA.

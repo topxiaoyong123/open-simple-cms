@@ -1,9 +1,12 @@
-package com.opencms.template.impl;
+package com.opencms.engine.impl;
 
+import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
-import com.opencms.core.db.service.CmsManager;
-import com.opencms.template.Engine;
-import com.opencms.template.TemplateHelper;
+import com.opencms.engine.Engine;
+import com.opencms.engine.model.Category;
+import com.opencms.engine.model.Content;
+import com.opencms.engine.model.Site;
 import com.opencms.util.CmsUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -17,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -29,17 +31,10 @@ import java.util.Map;
  */
 public abstract class FreemarkerEngineImpl implements Engine {
 
-    private static final Logger logger = LoggerFactory
-                .getLogger(FreemarkerEngineImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(FreemarkerEngineImpl.class);
 
     @Autowired
     private CmsUtils cmsUtils;
-
-    @Autowired
-    private CmsManager cmsManager;
-
-    @Autowired
-    private TemplateHelper templateHelper;
 
     private Configuration freeMarkerConfiguration;
 
@@ -74,4 +69,11 @@ public abstract class FreemarkerEngineImpl implements Engine {
 		temp.process(model, out);
 		return out.toString();
     }
+
+    public abstract Site map(SiteBean siteBean);
+
+    public abstract Category map(CategoryBean categoryBean);
+
+    public abstract Content map(ContentBean contentBean);
+
 }
