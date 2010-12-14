@@ -2,11 +2,11 @@ package com.opencms.core.db.service.impl;
 
 import com.opencms.core.db.query.Finder;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.opencms.core.db.service.CategoryService;
 import com.opencms.core.db.dao.CategoryDao;
 import com.opencms.core.db.bean.CategoryBean;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
+    @Resource(name = "categoryDao")
     private CategoryDao categoryDao;
 
     public boolean addCategory(CategoryBean category) {

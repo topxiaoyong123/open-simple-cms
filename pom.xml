@@ -10,9 +10,9 @@
         <module>cms-core-db</module>
         <module>cms-util</module>
         <module>cms-template</module>
+        <module>cms-engine</module>
         <module>cms-ui</module>
         <module>cms-app</module>
-        <module>cms-engine</module>
     </modules>
 
     <properties>

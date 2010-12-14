@@ -1,8 +1,9 @@
 package com.opencms.util.mapper;
 
 import org.dozer.DozerBeanMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeanMapperHelper {
 
-    @Autowired
+    @Resource(name = "mapper")
     private DozerBeanMapper mapper;
 
     public Object map(Object source, Class targetClass){

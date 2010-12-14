@@ -4,6 +4,7 @@ import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.Engine;
+import com.opencms.engine.TemplateModel;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Site;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -33,11 +35,13 @@ public abstract class FreemarkerEngineImpl implements Engine {
 
     private static final Logger logger = LoggerFactory.getLogger(FreemarkerEngineImpl.class);
 
-    @Autowired
+   @Resource(name = "cmsUtils")
     private CmsUtils cmsUtils;
 
     private Configuration freeMarkerConfiguration;
 
+    @Resource(name = "templateModel")
+    protected TemplateModel templateModel;
 
     @PostConstruct
     public void initEngine(){
@@ -69,11 +73,5 @@ public abstract class FreemarkerEngineImpl implements Engine {
 		temp.process(model, out);
 		return out.toString();
     }
-
-    public abstract Site map(SiteBean siteBean);
-
-    public abstract Category map(CategoryBean categoryBean);
-
-    public abstract Content map(ContentBean contentBean);
 
 }

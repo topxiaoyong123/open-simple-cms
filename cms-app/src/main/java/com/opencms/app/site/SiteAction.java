@@ -6,7 +6,8 @@ import com.opencms.engine.Engine;
 import com.opensymphony.xwork2.ActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,10 +40,10 @@ public class SiteAction extends ActionSupport {
         this.html = html;
     }
 
-    @Autowired
+    @Resource(name = "cmsEngine")
     private Engine cmsEngine;
 
-    @Autowired
+    @Resource(name = "cmsManager")
     private CmsManager cmsManager;
 
     public String view(){

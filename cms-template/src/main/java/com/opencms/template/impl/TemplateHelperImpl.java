@@ -4,9 +4,7 @@ import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.template.TemplateHelper;
-import com.opencms.util.CmsUtils;
 import com.opencms.util.common.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,9 +16,6 @@ import org.springframework.stereotype.Component;
  */
 @Component("templateHelper")
 public class TemplateHelperImpl implements TemplateHelper {
-
-    @Autowired
-    private CmsUtils cmsUtils;
 
     public String getTemplate(SiteBean siteBean) {
         String basePath = getBasePath(siteBean);

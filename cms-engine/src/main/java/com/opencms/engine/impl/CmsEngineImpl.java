@@ -5,16 +5,19 @@ import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
+import com.opencms.engine.ModelMapper;
 import com.opencms.template.TemplateHelper;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Site;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -28,17 +31,23 @@ import java.io.IOException;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
 
-    @Autowired
+    @Resource(name = "cmsManager")
     private CmsManager cmsManager;
 
-    @Autowired
+    @Resource(name = "templateHelper")
     private TemplateHelper templateHelper;
+
+    @Resource(name = "cmsMapper")
+    private ModelMapper mapper;
 
     @Override
     public String engineSite(String siteId) throws IOException, TemplateException {
         SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
         if(siteBean != null){
-
+            templateModel.clean();
+            templateModel.setSite(mapper.map(siteBean));
+            String template = templateHelper.getTemplate(siteBean);
+            return render(template, templateModel.getModel());
         }
         return null;
     }
@@ -52,21 +61,5 @@ public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
     public String engineContent(String contentId) {
         return null;
     }
-
-    @Override
-    public Site map(SiteBean siteBean) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Category map(CategoryBean categoryBean) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Content map(ContentBean contentBean) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
 
 }

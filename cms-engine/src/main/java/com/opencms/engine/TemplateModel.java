@@ -1,5 +1,9 @@
 package com.opencms.engine;
 
+import com.opencms.engine.model.Category;
+import com.opencms.engine.model.Content;
+import com.opencms.engine.model.Site;
+
 import java.util.Map;
 
 /**
@@ -14,5 +18,11 @@ public interface TemplateModel {
     public Map getModel();
 
     public void clean();
+
+    public void setSite(Site site);
+
+    public void setCategory(Category category);
+
+    public void setContent(Content content);
 
 }

@@ -1,5 +1,7 @@
 package com.opencms.engine.model;
 
+import com.opencms.core.db.bean.ContentBean;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -7,5 +9,5 @@ package com.opencms.engine.model;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Content {
+public class Content extends ContentBean {
 }

@@ -21,13 +21,13 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import java.io.File;
 import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -75,14 +75,14 @@ public class WcmServiceImpl implements WcmService {
     }
 
     //cmsManager
-    @Autowired
+    @Resource(name = "cmsManager")
     private CmsManager cmsManager;
 
     //spring国际化处理
-    @Autowired
+    @Resource(name = "messageSourceHelper")
     private MessageSourceHelper messageSourceHelper;
 
-    @Autowired
+    @Resource(name = "cmsUtils")
     private CmsUtils cmsUtils;
 
     public User login(User user) throws ApplicationException {
