@@ -30,7 +30,7 @@ public class Category implements Serializable, IsSerializable {
 
     private double no;
 
-    private Date clientCreationDate;
+    private Date creationDate;
 
     private boolean visible;
 
@@ -98,12 +98,12 @@ public class Category implements Serializable, IsSerializable {
         this.no = no;
     }
 
-    public Date getClientCreationDate() {
-        return clientCreationDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setClientCreationDate(Date clientCreationDate) {
-        this.clientCreationDate = clientCreationDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public boolean isVisible() {

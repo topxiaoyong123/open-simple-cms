@@ -82,7 +82,7 @@ public class CategoryListPanel extends ContentPanel {
         columns.add(new ColumnConfig("name", msgs.category_name(), 150));
         columns.add(new ColumnConfig("title", msgs.category_title(), 100));
         columns.add(new ColumnConfig("keywords", msgs.category_keywords(), 100));
-        ColumnConfig date = new ColumnConfig("clientCreationDate", msgs.category_creationDate(), 100);
+        ColumnConfig date = new ColumnConfig("creationDate", msgs.category_creationDate(), 100);
         date.setDateTimeFormat(DateTimeFormat.getFormat("yyyy-MM-dd"));
         columns.add(date);
         ColumnModel cm = new ColumnModel(columns);

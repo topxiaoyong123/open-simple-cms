@@ -81,7 +81,7 @@ public class SiteListPanel extends ContentPanel {
         columns.add(new ColumnConfig("name", msgs.site_name(), 150));
         columns.add(new ColumnConfig("title", msgs.site_title(), 100));
         columns.add(new ColumnConfig("keywords", msgs.site_keywords(), 100));
-        ColumnConfig date = new ColumnConfig("clientCreationDate", msgs.site_creationDate(), 100);
+        ColumnConfig date = new ColumnConfig("creationDate", msgs.site_creationDate(), 100);
         date.setDateTimeFormat(DateTimeFormat.getFormat("yyyy-MM-dd"));
         columns.add(date);
         ColumnModel cm = new ColumnModel(columns);

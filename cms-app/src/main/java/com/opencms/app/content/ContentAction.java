@@ -1,8 +1,10 @@
 package com.opencms.app.content;
 
+import com.opencms.core.db.service.CmsManager;
 import com.opensymphony.xwork2.ActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,6 +22,9 @@ public class ContentAction extends ActionSupport {
     private int month;
 
     private String id;
+
+    @Autowired
+    private CmsManager cmsManager;
 
     public int getYear() {
         return year;
@@ -47,6 +52,7 @@ public class ContentAction extends ActionSupport {
 
     public String view(){
         logger.debug("pares:[{}][{}][{}]", new Object[]{year, month, id});
+        cmsManager.getContentService().getContentById(id);
         return SUCCESS;
     }
 

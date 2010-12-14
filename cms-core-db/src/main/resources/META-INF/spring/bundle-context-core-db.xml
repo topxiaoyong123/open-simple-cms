@@ -54,18 +54,18 @@
         <property name="packagesToScan" value="com.opencms.core.db.bean"/>
     </bean>
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="*" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
-    <aop:config>
-        <aop:pointcut id="txManager"
-                      expression="execution(* com.opencms.core.db.dao.*.*(..)) or execution(* com.opencms.core.db.service.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txManager"/>
-    </aop:config>
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>-->
+            <!--<tx:method name="*" read-only="true"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="txManager"-->
+                      <!--expression="execution(* com.opencms.core.db.dao.*.*(..)) or execution(* com.opencms.core.db.service.*.*(..))"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txManager"/>-->
+    <!--</aop:config>-->
     
 </beans>

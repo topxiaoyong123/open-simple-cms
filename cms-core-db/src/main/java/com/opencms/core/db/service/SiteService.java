@@ -22,4 +22,6 @@ public interface SiteService {
     public List<SiteBean> getAllSites();
 
     public SiteBean getSiteById(String id);
+
+    public SiteBean getSiteByName(String name);
 }

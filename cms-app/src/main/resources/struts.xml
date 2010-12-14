@@ -14,19 +14,25 @@
 
     <constant name="struts.custom.i18n.resources" value="messageResource"/>
     <constant name="struts.locale" value="zh_CN"/>
-    
-    <package name="content" extends="struts-default" namespace="/content">
-        <action name="*/*/content-*" class="com.opencms.app.content.ContentAction" method="view">
+
+    <package name="site" extends="struts-default">
+        <global-results>
+            <result name="error">/error.jsp</result>
+            <result name="404">/404.jsp</result>
+        </global-results>
+        <action name="category/**/*" class="com.opencms.app.category.CategoryAction" method="view">
+            <param name="id">{2}</param>
+            <result name="success">/WEB-INF/content/view.jsp</result>
+        </action>
+        <action name="content/*/*/content-*" class="com.opencms.app.content.ContentAction" method="view">
             <param name="year">{1}</param>
             <param name="month">{2}</param>
             <param name="id">{3}</param>
-            <result name="success">/WEB-INF/content/content-view.jsp</result>
+            <result name="success">/WEB-INF/content/view.jsp</result>
         </action>
-    </package>
-    <package name="category" extends="struts-default" namespace="/category">
-        <action name="**/*" class="com.opencms.app.category.CategoryAction" method="view">
-            <param name="id">{2}</param>
-            <result name="success">/WEB-INF/content/content-view.jsp</result>
+        <action name="site/*/index" class="com.opencms.app.site.SiteAction" method="view">
+            <param name="name">{1}</param>
+            <result name="success">/WEB-INF/content/view.jsp</result>
         </action>
     </package>
 </struts>

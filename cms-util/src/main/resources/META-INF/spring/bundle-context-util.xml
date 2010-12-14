@@ -9,8 +9,10 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
        default-autowire="byName" default-lazy-init="true">
-    
-    <bean id="resourceHelper" class="com.opencms.util.resources.ResourceHelper"/>
+
+    <context:component-scan base-package="com.opencms.util"/>
+
+    <bean id="mapper" class="org.dozer.DozerBeanMapper"/>
 
     <bean id="templateResource" class="com.opencms.util.resources.TemplateResource">
         <property name="templatePath" value="${cms.template.loaderPath}"/>

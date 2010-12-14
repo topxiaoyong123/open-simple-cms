@@ -1,7 +1,7 @@
 package com.opencms.wcm.server;
 
 import com.opencms.core.db.bean.ContentBean;
-import com.opencms.util.resources.ResourceHelper;
+import com.opencms.util.CmsUtils;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
@@ -20,7 +20,6 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 
 import java.io.File;
 import java.util.*;
-import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -28,7 +27,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.http.HttpSession;
 
@@ -85,7 +83,7 @@ public class WcmServiceImpl implements WcmService {
     private MessageSourceHelper messageSourceHelper;
 
     @Autowired
-    private ResourceHelper resourceHelper;
+    private CmsUtils cmsUtils;
 
     public User login(User user) throws ApplicationException {
         if (!user.getCheckcode().equals(this.getSession().getAttribute("checkcode"))) {
@@ -97,17 +95,7 @@ public class WcmServiceImpl implements WcmService {
         } else if (!user.getPassword().equals(userBean.getPassword())) {
             throw new ApplicationException(messageSourceHelper.getMessage("login.error", new String[]{messageSourceHelper.getMessage("login.password")}));
         }
-        try {
-            BeanUtils.copyProperties(user, userBean);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            logger.error(e.toString());
-            throw new ApplicationException(e.toString());
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            logger.error(e.toString());
-            throw new ApplicationException(e.toString());
-        }
+        cmsUtils.getBeanMapperHelper().map(userBean, user);
         logger.debug(user.getUsername() + "登录成功");
         this.getSession().setAttribute("username", user.getUsername());
         return user;
@@ -165,14 +153,7 @@ public class WcmServiceImpl implements WcmService {
             List<SiteBean> sites = cmsManager.getSiteService().getAllSites();
             for(SiteBean siteBean : sites){
                 Site site = new Site();
-                try {
-                    BeanUtils.copyProperties(site, siteBean);
-                    site.setClientCreationDate(siteBean.getCreationDate());
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+                cmsUtils.getBeanMapperHelper().map(siteBean, site);
                 list.add(site);
             }
             return list;
@@ -193,13 +174,7 @@ public class WcmServiceImpl implements WcmService {
                 logger.debug("新建站点[{}]",  site.getTitle());
                 siteBean = new SiteBean();
             }
-            try {
-                BeanUtils.copyProperties(siteBean, site);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            cmsUtils.getBeanMapperHelper().map(site, siteBean);
             return cmsManager.getSiteService().addOrUpdateSite(siteBean);
         } catch(Exception e){
             e.printStackTrace();
@@ -216,14 +191,7 @@ public class WcmServiceImpl implements WcmService {
             }
             SiteBean siteBean = cmsManager.getSiteService().getSiteById(id);
             Site site = new Site();
-            try {
-                BeanUtils.copyProperties(site, siteBean);
-                site.setClientCreationDate(siteBean.getCreationDate());
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            cmsUtils.getBeanMapperHelper().map(siteBean, site);
             return site;
         } catch(Exception e){
             e.printStackTrace();
@@ -242,16 +210,9 @@ public class WcmServiceImpl implements WcmService {
                 if(categorys != null){
                     for(CategoryBean categoryBean : categorys){
                         Category category = new Category();
-                        try {
-                            BeanUtils.copyProperties(category, categoryBean);
-                            category.setClientCreationDate(categoryBean.getCreationDate());
-                            category.setSiteId(parent.getId());
-                            list.add(category);
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
+                        cmsUtils.getBeanMapperHelper().map(categoryBean, category);
+                        category.setSiteId(parent.getId());
+                        list.add(category);
                     }
                 }
             } else{
@@ -260,17 +221,10 @@ public class WcmServiceImpl implements WcmService {
                 if(pcategory != null){
                     for(CategoryBean categoryBean : pcategory.getChildren()){
                         Category category = new Category();
-                        try {
-                            BeanUtils.copyProperties(category, categoryBean);
-                            category.setClientCreationDate(categoryBean.getCreationDate());
-                            category.setParentId(pcategory.getId());
-                            category.setSiteId(pcategory.getSite().getId());
-                            list.add(category);
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
+                        cmsUtils.getBeanMapperHelper().map(categoryBean, category);
+                        category.setParentId(pcategory.getId());
+                        category.setSiteId(pcategory.getSite().getId());
+                        list.add(category);
                     }
                 }
             }
@@ -295,13 +249,7 @@ public class WcmServiceImpl implements WcmService {
                     categoryBean.setSite(cmsManager.getSiteService().getSiteById(parent.getSite().getId()));
                 }
             }
-            try {
-                BeanUtils.copyProperties(categoryBean, category);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            cmsUtils.getBeanMapperHelper().map(category, categoryBean);
             return cmsManager.getCategoryService().addOrUpdateCategory(categoryBean);
         } catch(Exception e){
             e.printStackTrace();
@@ -318,17 +266,10 @@ public class WcmServiceImpl implements WcmService {
             }
             CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(id);
             Category category = new Category();
-            try {
-                BeanUtils.copyProperties(category, categoryBean);
-                category.setClientCreationDate(categoryBean.getCreationDate());
-                category.setSiteId(categoryBean.getSite().getId());
-                if(categoryBean.getParent() != null){
-                    category.setParentId(categoryBean.getParent().getId());
-                }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            cmsUtils.getBeanMapperHelper().map(categoryBean, category);
+            category.setSiteId(categoryBean.getSite().getId());
+            if(categoryBean.getParent() != null){
+                category.setParentId(categoryBean.getParent().getId());
             }
             return category;
         } catch(Exception e){
@@ -349,13 +290,7 @@ public class WcmServiceImpl implements WcmService {
                 contentBean = new ContentBean();
                 contentBean.setCategory(cmsManager.getCategoryService().getCategoryById(content.getCategoryId()));
             }
-            try {
-                BeanUtils.copyProperties(contentBean, content);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            cmsUtils.getBeanMapperHelper().map(content, contentBean);
             contentBean.setState("0");
             return cmsManager.getContentService().addOrUpdateContent(contentBean);
         } catch(Exception e){
@@ -377,16 +312,8 @@ public class WcmServiceImpl implements WcmService {
             }
             ContentBean contentBean = cmsManager.getContentService().getContentById(id);
             Content content = new Content();
-            try {
-                BeanUtils.copyProperties(content, contentBean);
-                content.setClientCreationDate(contentBean.getCreationDate());
-                content.setClientModificationDate(contentBean.getModificationDate());
-                content.setCategoryId(contentBean.getCategory().getId());
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            cmsUtils.getBeanMapperHelper().map(contentBean, content);
+            content.setCategoryId(contentBean.getCategory().getId());
             return content;
         } catch(Exception e){
             e.printStackTrace();
@@ -402,16 +329,9 @@ public class WcmServiceImpl implements WcmService {
             List<Content> contents = new ArrayList<Content>();
             for(ContentBean contentBean : list){
                 Content c = new Content();
-                try {
-                    BeanUtils.copyProperties(c, contentBean);
-                    c.setClientCreationDate(contentBean.getCreationDate());
-                    c.setCategoryId(contentBean.getCategory().getId());
-                    contents.add(c);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+                cmsUtils.getBeanMapperHelper().map(contentBean, c);
+                c.setCategoryId(contentBean.getCategory().getId());
+                contents.add(c);
             }
             return new BasePagingLoadResult<Content>(contents, config.getOffset(), (int)count);      
         } catch(Exception e){
@@ -422,7 +342,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
-        String templatePath = resourceHelper.getTemplateResource().getTemplatePath();
+        String templatePath = cmsUtils.getResourceHelper().getTemplateResource().getTemplatePath();
         List<WcmFile> list = new ArrayList<WcmFile>();
         if (f != null) {
             if ("0".equals(f.getType())) {
@@ -449,7 +369,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     public List<WcmFile> getFiles(WcmFile f) throws ApplicationException {
-        String hosturl = resourceHelper.getWcmResource().getOutputUrl();
+        String hosturl = cmsUtils.getResourceHelper().getWcmResource().getOutputUrl();
         List<WcmFile> list = new ArrayList<WcmFile>();
         logger.debug("getFiles, parent:{}", f);
         if (f != null && !"0".equals(f.getPath())) {
@@ -499,7 +419,7 @@ public class WcmServiceImpl implements WcmService {
                 return new WcmFile(tar.getName(), tar.getAbsolutePath(), "", "0", "", tar.getName());
             }
         } else {
-            String templatePath = resourceHelper.getTemplateResource().getTemplatePath();
+            String templatePath = cmsUtils.getResourceHelper().getTemplateResource().getTemplatePath();
             File parent = new File(templatePath);
             File tar = new File(parent, name);
             if (tar.mkdirs()) {

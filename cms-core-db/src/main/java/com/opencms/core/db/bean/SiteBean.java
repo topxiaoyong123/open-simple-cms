@@ -28,13 +28,13 @@ public class SiteBean implements Serializable {
     @Column(nullable = false, length = 128)
     private String title;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false, length = 32, unique = true)
     private String name;
 
     @Column(length = 128, nullable = false)
     private String url;
 
-    @Column(length = 32)
+    @Column(length = 32, nullable = false)
     private String template;
 
     @Column(length = 32)

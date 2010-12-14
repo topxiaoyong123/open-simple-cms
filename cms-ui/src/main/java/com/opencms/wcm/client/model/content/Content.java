@@ -40,9 +40,9 @@ public class Content implements Serializable, IsSerializable {
 
     private String content;
 
-    private Date clientCreationDate;
+    private Date creationDate;
 
-    private Date clientModificationDate;
+    private Date modificationDate;
 
     private String categoryId;
 
@@ -134,20 +134,20 @@ public class Content implements Serializable, IsSerializable {
         this.content = content;
     }
 
-    public Date getClientCreationDate() {
-        return clientCreationDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setClientCreationDate(Date clientCreationDate) {
-        this.clientCreationDate = clientCreationDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Date getClientModificationDate() {
-        return clientModificationDate;
+    public Date getModificationDate() {
+        return modificationDate;
     }
 
-    public void setClientModificationDate(Date clientModificationDate) {
-        this.clientModificationDate = clientModificationDate;
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
     }
 
     public String getCategoryId() {
