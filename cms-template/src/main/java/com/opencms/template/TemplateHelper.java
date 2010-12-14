@@ -20,6 +20,4 @@ public interface TemplateHelper {
 
     public String getTemplate(ContentBean contentBean);
 
-    public String getBasePath(SiteBean siteBean);
-
 }
