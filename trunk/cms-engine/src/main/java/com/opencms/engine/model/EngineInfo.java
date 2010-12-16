@@ -12,6 +12,15 @@ import com.opencms.util.common.page.PageBean;
  */
 public class EngineInfo<T extends Model> {
 
+    public EngineInfo(CmsType type, String id, String name) {
+        this.type = type;
+        this.id = id;
+        this.name = name;
+    }
+
+    public EngineInfo() {
+    }
+
     private String id;
 
     private String name;
