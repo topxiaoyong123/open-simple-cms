@@ -14,15 +14,12 @@
 
     <bean id="mapper" class="org.dozer.DozerBeanMapper"/>
 
-    <bean id="templateResource" class="com.opencms.util.resources.TemplateResource">
+    <bean id="wcmResource" class="com.opencms.util.resources.WcmResource">
+        <property name="outputUrl" value="${cms.output.url}"/>
         <property name="templatePath" value="${cms.template.loaderPath}"/>
         <property name="defaultEncoding" value="${cms.template.defaultEncoding}"/>
         <property name="inputEncoding" value="${cms.template.inputEncoding}"/>
         <property name="outputEncoding" value="${cms.template.outputEncoding}"/>
-    </bean>
-
-    <bean id="wcmResource" class="com.opencms.util.resources.WcmResource">
-        <property name="outputUrl" value="${cms.output.url}"/>
     </bean>
     
 </beans>

@@ -1,6 +1,6 @@
 package com.opencms.wcm.server.message;
 
-import com.opencms.wcm.server.ContextThreadLocal;
+import com.opencms.util.ContextThreadLocal;
 
 import java.util.Locale;
 
@@ -15,7 +15,7 @@ public class LocaleHelper {
 
     public static Locale getLocale(){
         try{
-            Locale locale = (Locale)ContextThreadLocal.getRequest().getSession().getAttribute("locale");
+            Locale locale = (Locale) ContextThreadLocal.getRequest().getSession().getAttribute("locale");
             if(locale != null){
                 return locale;
             } else{

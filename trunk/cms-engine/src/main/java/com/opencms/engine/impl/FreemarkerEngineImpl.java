@@ -7,6 +7,7 @@ import com.opencms.engine.Engine;
 import com.opencms.engine.TemplateModel;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
+import com.opencms.engine.model.EngineInfo;
 import com.opencms.engine.model.Site;
 import com.opencms.util.CmsUtils;
 import freemarker.template.Configuration;
@@ -49,10 +50,10 @@ public abstract class FreemarkerEngineImpl implements Engine {
 		freeMarkerConfiguration.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
 		String templatePath = "classpath:/template/";
         try{
-            templatePath = cmsUtils.getResourceHelper().getTemplateResource().getTemplatePath();
+            templatePath = cmsUtils.getResourceHelper().getWcmResource().getTemplatePath();
             logger.debug("初始化FreeMarker模板目录:{}", templatePath);
             freeMarkerConfiguration.setDirectoryForTemplateLoading(new File(templatePath));
-			freeMarkerConfiguration.setDefaultEncoding(cmsUtils.getResourceHelper().getTemplateResource().getDefaultEncoding());
+			freeMarkerConfiguration.setDefaultEncoding(cmsUtils.getResourceHelper().getWcmResource().getDefaultEncoding());
         } catch (IOException e) {
 			logger.error("初始化FreeMarker模板目录:" + templatePath
 					+ " 异常。");
@@ -60,11 +61,13 @@ public abstract class FreemarkerEngineImpl implements Engine {
 		}
     }
 
-    public abstract String engineSite(String siteId) throws IOException, TemplateException;
+    public abstract String engine(EngineInfo info) throws IOException, TemplateException;
 
-    public abstract String engineCategory(String categoryId);
+    public abstract String engineSite(EngineInfo info) throws IOException, TemplateException;
 
-    public abstract String engineContent(String contentId);
+    public abstract String engineCategory(EngineInfo info);
+
+    public abstract String engineContent(EngineInfo info);
 
     public String render(String template, Map model) throws TemplateException, IOException {
         Template temp;

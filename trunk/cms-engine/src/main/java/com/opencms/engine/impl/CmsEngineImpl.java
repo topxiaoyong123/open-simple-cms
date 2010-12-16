@@ -1,18 +1,12 @@
 package com.opencms.engine.impl;
 
-import com.opencms.core.db.bean.CategoryBean;
-import com.opencms.core.db.bean.ContentBean;
-import com.opencms.core.db.bean.SiteBean;
-import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
 import com.opencms.engine.ModelMapper;
+import com.opencms.engine.model.EngineInfo;
 import com.opencms.template.TemplateHelper;
-import com.opencms.engine.model.Category;
-import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Site;
+import com.opencms.util.CmsType;
 import freemarker.template.TemplateException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -31,9 +25,6 @@ import java.io.IOException;
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
 
-    @Resource(name = "cmsManager")
-    private CmsManager cmsManager;
-
     @Resource(name = "templateHelper")
     private TemplateHelper templateHelper;
 
@@ -41,24 +32,33 @@ public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
     private ModelMapper mapper;
 
     @Override
-    public String engineSite(String siteId) throws IOException, TemplateException {
-        SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
-        if(siteBean != null){
-            templateModel.clean();
-            templateModel.setSite(mapper.map(siteBean));
-            String template = templateHelper.getTemplate(siteBean);
-            return render(template, templateModel.getModel());
+    public String engine(EngineInfo info) throws IOException, TemplateException {
+        if(CmsType.SITE == info.getType()){
+            return engineSite(info);
+        } else if(CmsType.CATEGORY == info.getType()){
+            return engineCategory(info);
+        } else if(CmsType.CONTENT == info.getType()){
+            return engineSite(info);
         }
         return null;
     }
 
     @Override
-    public String engineCategory(String categoryId) {
+    public String engineSite(EngineInfo info) throws IOException, TemplateException {
+        templateModel.clean();
+        Site site = (Site)mapper.map(info);
+        templateModel.setSite(site);
+        String template = templateHelper.getTemplate(site);
+        return render(template, templateModel.getModel());
+    }
+
+    @Override
+    public String engineCategory(EngineInfo info) {
         return null;
     }
 
     @Override
-    public String engineContent(String contentId) {
+    public String engineContent(EngineInfo info) {
         return null;
     }
 

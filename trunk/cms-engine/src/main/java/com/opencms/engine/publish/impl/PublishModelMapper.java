@@ -6,6 +6,7 @@ import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.ModelMapper;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
+import com.opencms.engine.model.EngineInfo;
 import com.opencms.engine.model.Site;
 import org.springframework.stereotype.Component;
 
@@ -20,16 +21,36 @@ import org.springframework.stereotype.Component;
 public class PublishModelMapper implements ModelMapper {
     @Override
     public Site map(SiteBean siteBean) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public Category map(CategoryBean categoryBean) {
+        return null;
+    }
+
+    @Override
+    public Object map(EngineInfo info) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public Content map(ContentBean contentBean) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getSiteURL(SiteBean siteBean) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getCategoryURL(CategoryBean categoryBean) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getContentURL(ContentBean contentBean) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

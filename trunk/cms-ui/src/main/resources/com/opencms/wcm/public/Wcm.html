@@ -26,6 +26,22 @@
             }
             return null;
         }
+        if(getparastr("locale") == null){
+			var locale = navigator.language||navigator.userLanguage;
+			if(locale){
+				var chars = locale.split("-");
+				var l = "";
+				if(chars.length == 1){
+					l += chars[0].toLowerCase();
+				} else if(chars.length == 2){
+					l += chars[0].toLowerCase() + "_" + chars[1].toUpperCase()
+				}
+				if(window.location.href.indexOf("?") == -1)
+					window.location.href = window.location.href + "?locale=" + l;
+				else
+					window.location.href = window.location.href + "&locale=" + l;
+			}
+		}
     </script>
     <style>
         * {

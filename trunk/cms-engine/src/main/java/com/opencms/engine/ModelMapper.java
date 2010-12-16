@@ -5,6 +5,7 @@ import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
+import com.opencms.engine.model.EngineInfo;
 import com.opencms.engine.model.Site;
 
 /**
@@ -20,6 +21,14 @@ public interface ModelMapper {
 
     public Category map(CategoryBean categoryBean);
 
+    public Object map(EngineInfo info);
+
     public Content map(ContentBean contentBean);
+
+    public String getSiteURL(SiteBean siteBean);
+
+    public String getCategoryURL(CategoryBean categoryBean);
+
+    public String getContentURL(ContentBean contentBean);
 
 }

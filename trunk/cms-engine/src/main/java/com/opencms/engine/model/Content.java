@@ -9,5 +9,5 @@ import com.opencms.core.db.bean.ContentBean;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Content extends ContentBean {
+public class Content extends ContentBean implements Model {
 }

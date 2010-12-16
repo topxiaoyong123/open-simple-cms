@@ -15,15 +15,8 @@ import javax.annotation.Resource;
 @Component
 public class ResourceHelper {
 
-    @Resource(name = "templateResource")
-    private TemplateResource templateResource;
-
     @Resource(name = "wcmResource")
     private WcmResource wcmResource;
-
-    public TemplateResource getTemplateResource() {
-        return templateResource;
-    }
 
     public WcmResource getWcmResource() {
         return wcmResource;

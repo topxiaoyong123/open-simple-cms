@@ -3,6 +3,7 @@ package com.opencms.engine.publish.impl;
 import com.opencms.engine.Engine;
 import com.opencms.engine.ModelMapper;
 import com.opencms.engine.impl.FreemarkerEngineImpl;
+import com.opencms.engine.model.EngineInfo;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -26,17 +27,22 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
     private ModelMapper mapper;
 
     @Override
-    public String engineSite(String siteId) throws IOException, TemplateException {
+    public String engine(EngineInfo info) throws IOException, TemplateException {
         return null;
     }
 
     @Override
-    public String engineCategory(String categoryId) {
+    public String engineSite(EngineInfo info) throws IOException, TemplateException {
         return null;
     }
 
     @Override
-    public String engineContent(String contentId) {
+    public String engineCategory(EngineInfo info) {
+        return null;
+    }
+
+    @Override
+    public String engineContent(EngineInfo info) {
         return null;
     }
 

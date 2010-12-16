@@ -133,6 +133,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String category_title();
 
   /**
+   * Translated "Category Url".
+   * 
+   * @return translated "Category Url"
+   */
+  @DefaultMessage("Category Url")
+  @Key("category_url")
+  String category_url();
+
+  /**
    * Translated "Checkcode".
    * 
    * @return translated "Checkcode"
@@ -356,6 +365,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Outlink")
   @Key("content_type_outlink")
   String content_type_outlink();
+
+  /**
+   * Translated "Content Url".
+   * 
+   * @return translated "Content Url"
+   */
+  @DefaultMessage("Content Url")
+  @Key("content_url")
+  String content_url();
 
   /**
    * Translated "Delete".

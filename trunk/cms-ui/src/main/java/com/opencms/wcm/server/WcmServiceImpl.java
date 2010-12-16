@@ -2,6 +2,7 @@ package com.opencms.wcm.server;
 
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.util.CmsUtils;
+import com.opencms.util.ContextThreadLocal;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
@@ -342,7 +343,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
-        String templatePath = cmsUtils.getResourceHelper().getTemplateResource().getTemplatePath();
+        String templatePath = cmsUtils.getResourceHelper().getWcmResource().getTemplatePath();
         List<WcmFile> list = new ArrayList<WcmFile>();
         if (f != null) {
             if ("0".equals(f.getType())) {
@@ -419,7 +420,7 @@ public class WcmServiceImpl implements WcmService {
                 return new WcmFile(tar.getName(), tar.getAbsolutePath(), "", "0", "", tar.getName());
             }
         } else {
-            String templatePath = cmsUtils.getResourceHelper().getTemplateResource().getTemplatePath();
+            String templatePath = cmsUtils.getResourceHelper().getWcmResource().getTemplatePath();
             File parent = new File(templatePath);
             File tar = new File(parent, name);
             if (tar.mkdirs()) {
