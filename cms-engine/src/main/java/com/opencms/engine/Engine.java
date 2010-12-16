@@ -1,5 +1,6 @@
 package com.opencms.engine;
 
+import com.opencms.engine.model.EngineInfo;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -13,10 +14,12 @@ import java.io.IOException;
  */
 public interface Engine {
 
-    public String engineSite(String siteId) throws IOException, TemplateException;
+    public String engine(EngineInfo info) throws IOException, TemplateException;
 
-    public String engineCategory(String categoryId);
+    public String engineSite(EngineInfo info) throws IOException, TemplateException;
 
-    public String engineContent(String contentId);
+    public String engineCategory(EngineInfo info);
+
+    public String engineContent(EngineInfo info);
 
 }

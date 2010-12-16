@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletConfig;
 import java.io.IOException;
 
+import com.opencms.util.ContextThreadLocal;
 import org.springframework.web.context.WebApplicationContext;
 
 /**

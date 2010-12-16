@@ -9,5 +9,5 @@ import com.opencms.core.db.bean.SiteBean;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Site extends SiteBean {
+public class Site extends SiteBean implements Model {
 }

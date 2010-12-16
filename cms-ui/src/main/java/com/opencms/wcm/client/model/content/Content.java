@@ -24,6 +24,8 @@ public class Content implements Serializable, IsSerializable {
 
     private String keywords;
 
+    private String url;
+
     private String description;
 
     private double no;
@@ -68,6 +70,14 @@ public class Content implements Serializable, IsSerializable {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getDescription() {

@@ -18,30 +18,10 @@ public class ContentAction extends ActionSupport {
 
     private static Logger logger = LoggerFactory.getLogger(ContentAction.class);
 
-    private int year;
-
-    private int month;
-
     private String id;
 
     @Resource(name = "cmsManager")
     private CmsManager cmsManager;
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
 
     public String getId() {
         return id;
@@ -52,7 +32,7 @@ public class ContentAction extends ActionSupport {
     }
 
     public String view(){
-        logger.debug("pares:[{}][{}][{}]", new Object[]{year, month, id});
+        logger.debug("content-id:[{}]", id);
         cmsManager.getContentService().getContentById(id);
         return SUCCESS;
     }

@@ -28,6 +28,9 @@ public class ContentBean implements Serializable {
     @Column(length = 255)
     private String keywords;
 
+    @Column(length = 128)
+    private String url;
+
     @Column(length = 255)
     private String description;
 
@@ -85,6 +88,14 @@ public class ContentBean implements Serializable {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getDescription() {

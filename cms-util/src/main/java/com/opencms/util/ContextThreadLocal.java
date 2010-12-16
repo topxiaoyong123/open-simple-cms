@@ -1,4 +1,4 @@
-package com.opencms.wcm.server;
+package com.opencms.util;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
