@@ -160,6 +160,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String choose_one();
 
   /**
+   * Translated "Clear".
+   * 
+   * @return translated "Clear"
+   */
+  @DefaultMessage("Clear")
+  @Key("clear")
+  String clear();
+
+  /**
    * Translated "Confirm".
    * 
    * @return translated "Confirm"
@@ -727,6 +736,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String site_id();
 
   /**
+   * Translated "Index Template".
+   * 
+   * @return translated "Index Template"
+   */
+  @DefaultMessage("Index Template")
+  @Key("site_index_template")
+  String site_index_template();
+
+  /**
    * Translated "Keywords".
    * 
    * @return translated "Keywords"
@@ -772,6 +790,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String site_template();
 
   /**
+   * Translated "Choose site template first".
+   * 
+   * @return translated "Choose site template first"
+   */
+  @DefaultMessage("Choose site template first")
+  @Key("site_template_first")
+  String site_template_first();
+
+  /**
    * Translated "Site Title".
    * 
    * @return translated "Site Title"
@@ -788,6 +815,60 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Site Url")
   @Key("site_url")
   String site_url();
+
+  /**
+   * Translated "Description".
+   * 
+   * @return translated "Description"
+   */
+  @DefaultMessage("Description")
+  @Key("template_description")
+  String template_description();
+
+  /**
+   * Translated "Template Management".
+   * 
+   * @return translated "Template Management"
+   */
+  @DefaultMessage("Template Management")
+  @Key("template_manager_header")
+  String template_manager_header();
+
+  /**
+   * Translated "Tempalte Name".
+   * 
+   * @return translated "Tempalte Name"
+   */
+  @DefaultMessage("Tempalte Name")
+  @Key("template_name")
+  String template_name();
+
+  /**
+   * Translated "Template Selected".
+   * 
+   * @return translated "Template Selected"
+   */
+  @DefaultMessage("Template Selected")
+  @Key("template_selected")
+  String template_selected();
+
+  /**
+   * Translated "Shortcut".
+   * 
+   * @return translated "Shortcut"
+   */
+  @DefaultMessage("Shortcut")
+  @Key("template_shortcut")
+  String template_shortcut();
+
+  /**
+   * Translated "Template Title;".
+   * 
+   * @return translated "Template Title;"
+   */
+  @DefaultMessage("Template Title;")
+  @Key("template_title")
+  String template_title();
 
   /**
    * Translated "Tips".

@@ -14,11 +14,21 @@ public class Category extends CategoryBean implements Model {
 
     private PageBean page;
 
+    private Menu menu;
+
     public PageBean getPage() {
         return page;
     }
 
     public void setPage(PageBean page) {
         this.page = page;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

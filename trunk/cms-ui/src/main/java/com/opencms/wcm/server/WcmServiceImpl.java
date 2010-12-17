@@ -1,8 +1,11 @@
 package com.opencms.wcm.server;
 
 import com.opencms.core.db.bean.ContentBean;
+import com.opencms.template.TemplateHelper;
+import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
+import com.opencms.util.common.Constants;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.model.*;
@@ -10,6 +13,7 @@ import com.opencms.wcm.client.model.file.WcmFile;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
+import com.opencms.wcm.client.model.template.CmsTemplate;
 import com.opencms.wcm.server.message.MessageSourceHelper;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.core.db.bean.UserBean;
@@ -86,6 +90,9 @@ public class WcmServiceImpl implements WcmService {
     @Resource(name = "cmsUtils")
     private CmsUtils cmsUtils;
 
+    @Resource(name = "templateHelper")
+    private TemplateHelper templateHelper;
+
     public User login(User user) throws ApplicationException {
         if (!user.getCheckcode().equals(this.getSession().getAttribute("checkcode"))) {
             throw new ApplicationException(messageSourceHelper.getMessage("login.error", new String[]{messageSourceHelper.getMessage("login.validcode")}));
@@ -125,7 +132,7 @@ public class WcmServiceImpl implements WcmService {
             if("0".equals(node.getNodetype())){
                 SiteBean siteBean = cmsManager.getSiteService().getSiteById(node.getId());
                 if(siteBean != null){
-                    categorys = cmsManager.getCategoryService().getTopCategorysBySiteId(siteBean.getId());
+                    categorys = cmsManager.getCategoryService().getCategorysBySiteId(siteBean.getId(), false);
                 }
             } else{
                 CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(node.getId());
@@ -207,7 +214,7 @@ public class WcmServiceImpl implements WcmService {
             logger.debug("parent:{}", parent);
             if("0".equals(parent.getNodetype())){
                 logger.debug("取一级栏目，通过所属站点取");
-                List<CategoryBean> categorys = cmsManager.getCategoryService().getTopCategorysBySiteId(parent.getId());
+                List<CategoryBean> categorys = cmsManager.getCategoryService().getCategorysBySiteId(parent.getId(), false);
                 if(categorys != null){
                     for(CategoryBean categoryBean : categorys){
                         Category category = new Category();
@@ -342,8 +349,18 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    public List<CmsTemplate> getCmsTemplates(String baseTemplate, String type) {
+        List<CmsTemplate> list = new ArrayList<CmsTemplate>();
+        List<CmsTemplateBean> cmsTemplateBeans = templateHelper.getTemplateBeans(baseTemplate, type);
+        for(CmsTemplateBean cmsTemplateBean : cmsTemplateBeans){
+            CmsTemplate cmsTemplate = (CmsTemplate)cmsUtils.getBeanMapperHelper().map(cmsTemplateBean, CmsTemplate.class);
+            list.add(cmsTemplate);
+        }
+        return list;
+    }
+
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
-        String templatePath = cmsUtils.getResourceHelper().getWcmResource().getTemplatePath();
+        String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath();
         List<WcmFile> list = new ArrayList<WcmFile>();
         if (f != null) {
             if ("0".equals(f.getType())) {
@@ -370,7 +387,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     public List<WcmFile> getFiles(WcmFile f) throws ApplicationException {
-        String hosturl = cmsUtils.getResourceHelper().getWcmResource().getOutputUrl();
+        String hosturl = cmsUtils.getResourceHelper().getCmsResource().getOutputUrl();
         List<WcmFile> list = new ArrayList<WcmFile>();
         logger.debug("getFiles, parent:{}", f);
         if (f != null && !"0".equals(f.getPath())) {
@@ -381,7 +398,7 @@ public class WcmServiceImpl implements WcmService {
                     String filename = file.getName();
                     String filetype = filename.substring(filename.lastIndexOf(".") + 1);
                     String shortcut = null;
-                    String url = hosturl + "templates/" + file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(f.getTemplate())).replace("\\", "/");
+                    String url = hosturl +  Constants.TEMPLATE_PARENT_PATH + "/" + file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(f.getTemplate())).replace("\\", "/");
                     if (("jpg").equalsIgnoreCase(filetype) || ("bmp").equalsIgnoreCase(filetype) || ("gif").equalsIgnoreCase(filetype) || ("png").equalsIgnoreCase(filetype)) {
                         shortcut = url;
                     } else if ("doc".equalsIgnoreCase(filetype) || "docx".equalsIgnoreCase(filetype)) {
@@ -420,7 +437,7 @@ public class WcmServiceImpl implements WcmService {
                 return new WcmFile(tar.getName(), tar.getAbsolutePath(), "", "0", "", tar.getName());
             }
         } else {
-            String templatePath = cmsUtils.getResourceHelper().getWcmResource().getTemplatePath();
+            String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath();
             File parent = new File(templatePath);
             File tar = new File(parent, name);
             if (tar.mkdirs()) {

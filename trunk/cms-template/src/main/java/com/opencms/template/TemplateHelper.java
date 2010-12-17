@@ -3,7 +3,11 @@ package com.opencms.template;
 import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
+import com.opencms.template.bean.CmsTemplateBean;
 import freemarker.template.Template;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,10 +18,12 @@ import freemarker.template.Template;
  */
 public interface TemplateHelper {
 
-    public String getTemplate(SiteBean siteBean);
+    public Template getTemplate(SiteBean siteBean) throws IOException;
 
-    public String getTemplate(CategoryBean categoryBean);
+    public Template getTemplate(CategoryBean categoryBean) throws IOException;
 
-    public String getTemplate(ContentBean contentBean);
+    public Template getTemplate(ContentBean contentBean) throws IOException;
+
+    public List<CmsTemplateBean> getTemplateBeans(String baseTemplate, String type);
 
 }

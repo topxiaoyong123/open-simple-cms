@@ -14,7 +14,7 @@
 
     <bean id="mapper" class="org.dozer.DozerBeanMapper"/>
 
-    <bean id="wcmResource" class="com.opencms.util.resources.WcmResource">
+    <bean id="cmsResource" class="com.opencms.util.resources.CmsResource">
         <property name="outputUrl" value="${cms.output.url}"/>
         <property name="templatePath" value="${cms.template.loaderPath}"/>
         <property name="defaultEncoding" value="${cms.template.defaultEncoding}"/>

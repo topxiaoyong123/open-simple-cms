@@ -42,7 +42,7 @@ public class SiteAction extends ActionSupport {
         this.html = html;
     }
 
-    @Resource(name = "cmsEngine")
+    @Resource(name = "appEngine")
     private Engine cmsEngine;
 
     @Resource(name = "cmsManager")

@@ -28,6 +28,8 @@ public class Site implements Serializable, IsSerializable {
 
     private String template;
 
+    private String indexTemplate;
+
     private Date creationDate;
 
     public String getId() {
@@ -84,6 +86,14 @@ public class Site implements Serializable, IsSerializable {
 
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    public String getIndexTemplate() {
+        return indexTemplate;
+    }
+
+    public void setIndexTemplate(String indexTemplate) {
+        this.indexTemplate = indexTemplate;
     }
 
     public Date getCreationDate() {
