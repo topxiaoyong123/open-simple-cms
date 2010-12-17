@@ -26,5 +26,11 @@ public interface CategoryService {
      * @param siteId
      * @return
      */
-    public List<CategoryBean> getTopCategorysBySiteId(String siteId);
+    public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible);
+
+    public List<CategoryBean> getCategorysByParentId(String parentId, boolean visible);
+
+    public List<CategoryBean> getMenuBySiteId(String siteId);
+
+    public List<CategoryBean> getMenuByParentId(String parentId);
 }

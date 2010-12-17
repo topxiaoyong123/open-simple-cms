@@ -167,7 +167,7 @@ public class ImageHtmlHelper extends Dialog {
                 if(height.getValue() != null && height.validate()){
                     html += "height=\"" + height.getValue() + "px\"";
                 }
-                html += ">";
+                html += "/>";
                 imageHtml = html;
                 hide();
             }

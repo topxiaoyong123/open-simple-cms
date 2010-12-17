@@ -6,6 +6,7 @@ import com.opencms.engine.model.EngineInfo;
 import com.opencms.template.TemplateHelper;
 import com.opencms.engine.model.Site;
 import com.opencms.util.CmsType;
+import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -21,14 +22,14 @@ import java.io.IOException;
  * Time: 下午9:58
  * To change this template use File | Settings | File Templates.
  */
-@Component("cmsEngine")
+@Component("appEngine")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
+public class AppEngineImpl extends FreemarkerEngineImpl implements Engine {
 
     @Resource(name = "templateHelper")
     private TemplateHelper templateHelper;
 
-    @Resource(name = "cmsMapper")
+    @Resource(name = "appMapper")
     private ModelMapper mapper;
 
     @Override
@@ -48,7 +49,7 @@ public class CmsEngineImpl extends FreemarkerEngineImpl implements Engine {
         templateModel.clean();
         Site site = (Site)mapper.map(info);
         templateModel.setSite(site);
-        String template = templateHelper.getTemplate(site);
+        Template template = templateHelper.getTemplate(site);
         return render(template, templateModel.getModel());
     }
 

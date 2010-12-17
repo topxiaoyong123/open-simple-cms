@@ -7,7 +7,9 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:/META-INF/spring/bundle-context-core-db.xml
+            classpath*:/META-INF/spring/bundle-context-template.xml
             classpath*:/META-INF/spring/bundle-context-util.xml
+            <!--classpath*:/META-INF/spring/bundle-context-engine.xml-->
             classpath*:applicationContext.xml
         </param-value>
     </context-param>

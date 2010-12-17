@@ -7,7 +7,7 @@ package com.opencms.util.resources;
  * Time: 15:30:38
  * To change this template use File | Settings | File Templates.
  */
-public class WcmResource {
+public class CmsResource {
 
     private String outputUrl;
 

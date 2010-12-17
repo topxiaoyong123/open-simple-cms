@@ -9,6 +9,7 @@ import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.opencms.wcm.client.model.template.CmsTemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 //@SuppressWarnings({"ALL"})
+@SuppressWarnings({"ALL"})
 @RemoteServiceRelativePath(WcmService.SERVICE_URI)
 public interface WcmService extends RemoteService {
 
@@ -138,6 +140,14 @@ public interface WcmService extends RemoteService {
      */
     public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
 
+    /**
+     * 取得模板列表
+     * @param baseTemplate
+     * @param name
+     * @param type
+     * @return
+     */
+    public List<CmsTemplate> getCmsTemplates(String baseTemplate, String type);
 
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException;
 
@@ -146,4 +156,5 @@ public interface WcmService extends RemoteService {
     public WcmFile createForder(WcmFile f, String name) throws ApplicationException;
 
     public boolean deleteFiles(List<WcmFile> files) throws ApplicationException;
+
 }

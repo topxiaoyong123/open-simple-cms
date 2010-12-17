@@ -1,5 +1,7 @@
 package com.opencms.wcm.client.widget.site;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
@@ -17,6 +19,7 @@ import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.AppEvents;
+import com.opencms.wcm.client.widget.template.CmsTemplateChooser;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,6 +64,52 @@ public class SitePanel extends FormPanel {
         template.setFieldLabel(msgs.site_template());
         this.add(template);
 
+        final TextField<String> indexTemplate = new TextField<String>(); // template
+        indexTemplate.setName("indexTemplate");
+        indexTemplate.setFieldLabel(msgs.site_index_template());
+        this.add(indexTemplate);
+        template.addListener(Events.Focus, new Listener(){
+            @Override
+            public void handleEvent(BaseEvent be) {
+                final CmsTemplateChooser templateChooser = new CmsTemplateChooser(template.getValue(), template.getValue(), "0");
+                templateChooser.setFrame(true);
+                templateChooser.show();
+                templateChooser.addListener(Events.Hide, new Listener<BaseEvent>() {
+                    @Override
+                    public void handleEvent(BaseEvent be) {
+                        String templateName = templateChooser.getTemplateName();
+                        if(templateName != null){
+                            template.setValue(templateName);
+                        }
+                        if("".equals(templateName)){
+                            indexTemplate.setValue(null);
+                        }
+                    }
+                });
+            }
+        });
+        indexTemplate.addListener(Events.Focus, new Listener(){
+            @Override
+            public void handleEvent(BaseEvent be) {
+                if(template.getValue() == null || "".equals(template.getValue())){
+                    MessageBox.alert(msgs.warn(), msgs.site_template() , null);
+                    return;
+                }
+                final CmsTemplateChooser templateChooser = new CmsTemplateChooser(template.getValue(), template.getValue(), "1");
+                templateChooser.setFrame(true);
+                templateChooser.show();
+                templateChooser.addListener(Events.Hide, new Listener<BaseEvent>() {
+                    @Override
+                    public void handleEvent(BaseEvent be) {
+                        String templateName = templateChooser.getTemplateName();
+                        if(templateName != null){
+                            indexTemplate.setValue(templateName);
+                        }
+                    }
+                });
+            }
+        });
+
         final TextField<String> keywords = new TextField<String>(); // keyword
         keywords.setName("keywords");
         keywords.setFieldLabel(msgs.site_keywords());
@@ -81,7 +130,9 @@ public class SitePanel extends FormPanel {
         this.addButton(save);
         save.addListener(Events.Select, new Listener<ComponentEvent>() {
             public void handleEvent(ComponentEvent componentEvent) {
-                if(name.validate() && title.validate()){
+                if(name.validate() && title.validate() && template.validate()){
+                    site.setTemplate(template.getValue());
+                    site.setIndexTemplate(indexTemplate.getValue());
                     Dispatcher.forwardEvent(AppEvents.SITE_MANAGER_SAVE, site);
                 }
             }

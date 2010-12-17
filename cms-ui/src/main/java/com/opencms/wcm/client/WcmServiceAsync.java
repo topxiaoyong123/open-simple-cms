@@ -48,6 +48,8 @@ public interface WcmServiceAsync {
 
     void getContentById(String id, WcmNodeModel parent, AsyncCallback async);
 
+    void getCmsTemplates(String baseTemplate, String type, AsyncCallback async);
+
     void getFileForders(WcmFile f, AsyncCallback async);
 
     void getFiles(WcmFile f, AsyncCallback async);

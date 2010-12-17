@@ -47,12 +47,45 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.get(CategoryBean.class, id);
     }
 
-    public List<CategoryBean> getTopCategorysBySiteId(String siteId) {
+    public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible) {
         Finder finder = new Finder(CategoryBean.class);
-        finder.setColumns(new String[]{"site.id"});
-        finder.setValues(new Serializable[]{siteId});
+        if(visible){
+            finder.setColumns(new String[]{"site.id", "visible"});
+            finder.setValues(new Serializable[]{siteId, true});
+        } else{
+            finder.setColumns(new String[]{"site.id"});
+            finder.setValues(new Serializable[]{siteId});
+        }
         finder.setNullColumns(new String[]{"parent"});
         finder.setOrders(new String[]{"no"});
         return categoryDao.getByFinder(finder);
+    }
+
+    public List<CategoryBean> getCategorysByParentId(String parentId, boolean visible){
+        Finder finder = new Finder(CategoryBean.class);
+        if(visible){
+            finder.setColumns(new String[]{"parent.id", "visible"});
+            finder.setValues(new Serializable[]{parentId, true});
+        } else{
+            finder.setColumns(new String[]{"parent.id"});
+            finder.setValues(new Serializable[]{parentId});
+        }
+        finder.setOrders(new String[]{"no"});
+        return categoryDao.getByFinder(finder);
+    }
+
+    public List<CategoryBean> getMenuBySiteId(String siteId) {
+        List<CategoryBean> categoryBeans = getCategorysBySiteId(siteId, true);
+        return categoryBeans;
+    }
+
+    public List<CategoryBean> getMenuByParentId(String parentId){
+        return getCategorysByParentId(parentId, true);
+    }
+
+    private void loadSubCategorys(CategoryBean categoryBean){
+        for(CategoryBean category : categoryBean.getChildren()){
+            loadSubCategorys(category);
+        }
     }
 }

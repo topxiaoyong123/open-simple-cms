@@ -15,10 +15,10 @@ import javax.annotation.Resource;
 @Component
 public class ResourceHelper {
 
-    @Resource(name = "wcmResource")
-    private WcmResource wcmResource;
+    @Resource(name = "cmsResource")
+    private CmsResource cmsResource;
 
-    public WcmResource getWcmResource() {
-        return wcmResource;
+    public CmsResource getCmsResource() {
+        return cmsResource;
     }
 }

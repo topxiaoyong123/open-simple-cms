@@ -10,4 +10,14 @@ import com.opencms.core.db.bean.SiteBean;
  * To change this template use File | Settings | File Templates.
  */
 public class Site extends SiteBean implements Model {
+
+    private Menu menu;
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
 }
