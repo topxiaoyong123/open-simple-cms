@@ -10,6 +10,10 @@
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
        default-autowire="byName" default-lazy-init="true">
 
+    <context:annotation-config/>
+
     <context:component-scan base-package="com.opencms.engine"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

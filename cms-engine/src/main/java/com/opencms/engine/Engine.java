@@ -18,8 +18,8 @@ public interface Engine {
 
     public String engineSite(EngineInfo info) throws IOException, TemplateException;
 
-    public String engineCategory(EngineInfo info);
+    public String engineCategory(EngineInfo info) throws IOException, TemplateException;
 
-    public String engineContent(EngineInfo info);
+    public String engineContent(EngineInfo info) throws IOException, TemplateException;
 
 }

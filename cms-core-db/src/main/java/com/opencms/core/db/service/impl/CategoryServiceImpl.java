@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.opencms.core.db.service.CategoryService;
 import com.opencms.core.db.dao.CategoryDao;
 import com.opencms.core.db.bean.CategoryBean;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Service("categoryService")
+@Transactional(rollbackFor = Exception.class)
 public class CategoryServiceImpl implements CategoryService {
 
     @Resource(name = "categoryDao")
@@ -43,10 +45,12 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    @Transactional(readOnly = true)
     public CategoryBean getCategoryById(String id) {
         return categoryDao.get(CategoryBean.class, id);
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible) {
         Finder finder = new Finder(CategoryBean.class);
         if(visible){
@@ -61,6 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getByFinder(finder);
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryBean> getCategorysByParentId(String parentId, boolean visible){
         Finder finder = new Finder(CategoryBean.class);
         if(visible){
@@ -74,18 +79,14 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getByFinder(finder);
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryBean> getMenuBySiteId(String siteId) {
         List<CategoryBean> categoryBeans = getCategorysBySiteId(siteId, true);
         return categoryBeans;
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryBean> getMenuByParentId(String parentId){
         return getCategorysByParentId(parentId, true);
-    }
-
-    private void loadSubCategorys(CategoryBean categoryBean){
-        for(CategoryBean category : categoryBean.getChildren()){
-            loadSubCategorys(category);
-        }
     }
 }

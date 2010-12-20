@@ -1,6 +1,7 @@
 package com.opencms.engine.model;
 
 import com.opencms.core.db.service.CmsManager;
+import com.opencms.engine.EngineUtil;
 import com.opencms.engine.TemplateModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +27,17 @@ public class TemplateModelImpl extends BaseTemplateModel implements TemplateMode
     @Resource(name = "cmsManager")
     private CmsManager cmsManager;
 
+    private EngineUtil engineUtil;
+
+    public void setEngineUtil(EngineUtil engineUtil) {
+        this.engineUtil = engineUtil;
+    }
+
     private Map model = Collections.synchronizedMap(new HashMap());
 
     public void initModel(){
         model.put("cmsManager", cmsManager);
+        model.put("engineUtil", engineUtil);
         if(this.getSite() != null){
             logger.debug("siteModel init");
             model.put("siteModel", this.getSite());

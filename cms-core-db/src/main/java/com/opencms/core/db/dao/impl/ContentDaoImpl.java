@@ -4,6 +4,7 @@ import com.opencms.core.db.dao.ContentDao;
 import com.opencms.core.db.bean.ContentBean;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,5 +14,6 @@ import org.springframework.stereotype.Repository;
  * To change this template use File | Settings | File Templates.
  */
 @Repository("contentDao")
+@Transactional(rollbackFor = Exception.class)
 public class ContentDaoImpl extends BaseDaoImpl<ContentBean> implements ContentDao {
 }

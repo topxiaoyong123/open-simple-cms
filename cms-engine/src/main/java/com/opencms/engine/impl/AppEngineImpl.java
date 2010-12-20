@@ -1,7 +1,9 @@
 package com.opencms.engine.impl;
 
 import com.opencms.engine.Engine;
+import com.opencms.engine.EngineUtil;
 import com.opencms.engine.ModelMapper;
+import com.opencms.engine.model.Category;
 import com.opencms.engine.model.EngineInfo;
 import com.opencms.template.TemplateHelper;
 import com.opencms.engine.model.Site;
@@ -32,8 +34,12 @@ public class AppEngineImpl extends FreemarkerEngineImpl implements Engine {
     @Resource(name = "appMapper")
     private ModelMapper mapper;
 
+    @Resource(name = "appEngineUtil")
+    private EngineUtil engineUtil;
+
     @Override
     public String engine(EngineInfo info) throws IOException, TemplateException {
+        templateModel.setEngineUtil(engineUtil);
         if(CmsType.SITE == info.getType()){
             return engineSite(info);
         } else if(CmsType.CATEGORY == info.getType()){
@@ -54,12 +60,17 @@ public class AppEngineImpl extends FreemarkerEngineImpl implements Engine {
     }
 
     @Override
-    public String engineCategory(EngineInfo info) {
-        return null;
+    public String engineCategory(EngineInfo info) throws IOException, TemplateException {
+        templateModel.clean();
+        Category category = (Category)mapper.map(info);
+        templateModel.setCategory(category);
+        Template template = templateHelper.getTemplate(category);
+        return render(template, templateModel.getModel());
     }
 
     @Override
     public String engineContent(EngineInfo info) {
+        templateModel.clean();
         return null;
     }
 

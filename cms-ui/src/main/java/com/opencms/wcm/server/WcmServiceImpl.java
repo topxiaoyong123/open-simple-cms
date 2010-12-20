@@ -31,6 +31,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -43,12 +45,14 @@ import javax.servlet.http.HttpSession;
  * To change this template use File | Settings | File Templates.
  */
 @Component("wcmService")
+@Transactional(rollbackFor = Exception.class)
 public class WcmServiceImpl implements WcmService {
 
     private static Logger logger = LoggerFactory.getLogger(WcmServiceImpl.class);
 
     private static Map<Long, WcmApp> wcmApps;
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean setLocale(String locale) {
         getSession().setMaxInactiveInterval(-1);
         Locale l = new Locale("");
@@ -66,6 +70,7 @@ public class WcmServiceImpl implements WcmService {
         return true;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public Map<Long, WcmApp> getWcmApps() {
         if (wcmApps == null) {
             ApplicationContext context = new ClassPathXmlApplicationContext("wcmAppsContext.xml");
@@ -93,6 +98,7 @@ public class WcmServiceImpl implements WcmService {
     @Resource(name = "templateHelper")
     private TemplateHelper templateHelper;
 
+    @Transactional(readOnly = true)
     public User login(User user) throws ApplicationException {
         if (!user.getCheckcode().equals(this.getSession().getAttribute("checkcode"))) {
             throw new ApplicationException(messageSourceHelper.getMessage("login.error", new String[]{messageSourceHelper.getMessage("login.validcode")}));
@@ -103,12 +109,13 @@ public class WcmServiceImpl implements WcmService {
         } else if (!user.getPassword().equals(userBean.getPassword())) {
             throw new ApplicationException(messageSourceHelper.getMessage("login.error", new String[]{messageSourceHelper.getMessage("login.password")}));
         }
-        cmsUtils.getBeanMapperHelper().map(userBean, user);
+        cmsUtils.getBeanMapperHelper().simpleMap(userBean, user);
         logger.debug(user.getUsername() + "登录成功");
         this.getSession().setAttribute("username", user.getUsername());
         return user;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public String checkLogin() throws ApplicationException {
         String username = String.valueOf(this.getSession().getAttribute("username"));
         if (username == null || ("").equals(username) || ("null").equals(username)) {
@@ -118,6 +125,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<WcmNodeModel> getNodeChildren(WcmNodeModel node) throws ApplicationException {
         logger.debug("获取左侧树, [{}]", node);
         List<WcmNodeModel> list = new ArrayList<WcmNodeModel>();
@@ -155,13 +163,14 @@ public class WcmServiceImpl implements WcmService {
         return list;
     }
 
+    @Transactional(readOnly = true)
     public List<Site> getAllSites() throws ApplicationException {
         try {
             List<Site> list = new ArrayList<Site>();
             List<SiteBean> sites = cmsManager.getSiteService().getAllSites();
             for(SiteBean siteBean : sites){
                 Site site = new Site();
-                cmsUtils.getBeanMapperHelper().map(siteBean, site);
+                cmsUtils.getBeanMapperHelper().simpleMap(siteBean, site);
                 list.add(site);
             }
             return list;
@@ -182,7 +191,7 @@ public class WcmServiceImpl implements WcmService {
                 logger.debug("新建站点[{}]",  site.getTitle());
                 siteBean = new SiteBean();
             }
-            cmsUtils.getBeanMapperHelper().map(site, siteBean);
+            cmsUtils.getBeanMapperHelper().simpleMap(site, siteBean);
             return cmsManager.getSiteService().addOrUpdateSite(siteBean);
         } catch(Exception e){
             e.printStackTrace();
@@ -191,6 +200,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Site getSiteById(String id) throws ApplicationException {
         try {
             if(id == null){
@@ -199,7 +209,7 @@ public class WcmServiceImpl implements WcmService {
             }
             SiteBean siteBean = cmsManager.getSiteService().getSiteById(id);
             Site site = new Site();
-            cmsUtils.getBeanMapperHelper().map(siteBean, site);
+            cmsUtils.getBeanMapperHelper().simpleMap(siteBean, site);
             return site;
         } catch(Exception e){
             e.printStackTrace();
@@ -208,6 +218,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<Category> getCategorysByParent(WcmNodeModel parent) throws ApplicationException {
         List<Category> list = new ArrayList<Category>();
         if(parent != null){
@@ -218,7 +229,7 @@ public class WcmServiceImpl implements WcmService {
                 if(categorys != null){
                     for(CategoryBean categoryBean : categorys){
                         Category category = new Category();
-                        cmsUtils.getBeanMapperHelper().map(categoryBean, category);
+                        cmsUtils.getBeanMapperHelper().simpleMap(categoryBean, category);
                         category.setSiteId(parent.getId());
                         list.add(category);
                     }
@@ -229,7 +240,7 @@ public class WcmServiceImpl implements WcmService {
                 if(pcategory != null){
                     for(CategoryBean categoryBean : pcategory.getChildren()){
                         Category category = new Category();
-                        cmsUtils.getBeanMapperHelper().map(categoryBean, category);
+                        cmsUtils.getBeanMapperHelper().simpleMap(categoryBean, category);
                         category.setParentId(pcategory.getId());
                         category.setSiteId(pcategory.getSite().getId());
                         list.add(category);
@@ -257,7 +268,7 @@ public class WcmServiceImpl implements WcmService {
                     categoryBean.setSite(cmsManager.getSiteService().getSiteById(parent.getSite().getId()));
                 }
             }
-            cmsUtils.getBeanMapperHelper().map(category, categoryBean);
+            cmsUtils.getBeanMapperHelper().simpleMap(category, categoryBean);
             return cmsManager.getCategoryService().addOrUpdateCategory(categoryBean);
         } catch(Exception e){
             e.printStackTrace();
@@ -266,6 +277,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Category getCategoryById(String id, WcmNodeModel parent) throws ApplicationException {
         try {
             if(id == null){
@@ -274,7 +286,7 @@ public class WcmServiceImpl implements WcmService {
             }
             CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(id);
             Category category = new Category();
-            cmsUtils.getBeanMapperHelper().map(categoryBean, category);
+            cmsUtils.getBeanMapperHelper().simpleMap(categoryBean, category);
             category.setSiteId(categoryBean.getSite().getId());
             if(categoryBean.getParent() != null){
                 category.setParentId(categoryBean.getParent().getId());
@@ -298,7 +310,7 @@ public class WcmServiceImpl implements WcmService {
                 contentBean = new ContentBean();
                 contentBean.setCategory(cmsManager.getCategoryService().getCategoryById(content.getCategoryId()));
             }
-            cmsUtils.getBeanMapperHelper().map(content, contentBean);
+            cmsUtils.getBeanMapperHelper().simpleMap(content, contentBean);
             contentBean.setState("0");
             return cmsManager.getContentService().addOrUpdateContent(contentBean);
         } catch(Exception e){
@@ -308,6 +320,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Content getContentById(String id, WcmNodeModel parent) throws ApplicationException {
         try {
             if(id == null){
@@ -320,7 +333,7 @@ public class WcmServiceImpl implements WcmService {
             }
             ContentBean contentBean = cmsManager.getContentService().getContentById(id);
             Content content = new Content();
-            cmsUtils.getBeanMapperHelper().map(contentBean, content);
+            cmsUtils.getBeanMapperHelper().simpleMap(contentBean, content);
             content.setCategoryId(contentBean.getCategory().getId());
             return content;
         } catch(Exception e){
@@ -330,6 +343,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(readOnly = true)
     public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException {
         try {
             List<ContentBean> list = cmsManager.getContentService().getContentsByCategoryIdAndPage(content.getCategoryId(), config.getOffset(), config.getLimit());
@@ -337,7 +351,7 @@ public class WcmServiceImpl implements WcmService {
             List<Content> contents = new ArrayList<Content>();
             for(ContentBean contentBean : list){
                 Content c = new Content();
-                cmsUtils.getBeanMapperHelper().map(contentBean, c);
+                cmsUtils.getBeanMapperHelper().simpleMap(contentBean, c);
                 c.setCategoryId(contentBean.getCategory().getId());
                 contents.add(c);
             }
@@ -349,16 +363,18 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<CmsTemplate> getCmsTemplates(String baseTemplate, String type) {
         List<CmsTemplate> list = new ArrayList<CmsTemplate>();
         List<CmsTemplateBean> cmsTemplateBeans = templateHelper.getTemplateBeans(baseTemplate, type);
         for(CmsTemplateBean cmsTemplateBean : cmsTemplateBeans){
-            CmsTemplate cmsTemplate = (CmsTemplate)cmsUtils.getBeanMapperHelper().map(cmsTemplateBean, CmsTemplate.class);
+            CmsTemplate cmsTemplate = (CmsTemplate)cmsUtils.getBeanMapperHelper().simpleMap(cmsTemplateBean, CmsTemplate.class);
             list.add(cmsTemplate);
         }
         return list;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
         String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath();
         List<WcmFile> list = new ArrayList<WcmFile>();
@@ -386,6 +402,7 @@ public class WcmServiceImpl implements WcmService {
         return list;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<WcmFile> getFiles(WcmFile f) throws ApplicationException {
         String hosturl = cmsUtils.getResourceHelper().getCmsResource().getOutputUrl();
         List<WcmFile> list = new ArrayList<WcmFile>();
@@ -429,6 +446,7 @@ public class WcmServiceImpl implements WcmService {
         return list;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public WcmFile createForder(WcmFile f, String name) throws ApplicationException {
         if (f != null) {
             File parent = new File(f.getPath());
@@ -447,6 +465,7 @@ public class WcmServiceImpl implements WcmService {
         return null;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean deleteFiles(List<WcmFile> files) throws ApplicationException {
         int i = 0;
         logger.debug("删除文件：{}", files.toString());

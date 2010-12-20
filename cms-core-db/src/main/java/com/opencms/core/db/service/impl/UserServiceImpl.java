@@ -6,6 +6,7 @@ import com.opencms.core.db.dao.RoleDao;
 import com.opencms.core.db.bean.UserBean;
 import com.opencms.core.db.bean.RoleBean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Set;
@@ -19,6 +20,7 @@ import java.util.Iterator;
  * To change this template use File | Settings | File Templates.
  */
 @Service("userService")
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     @Resource(name = "userDao")
@@ -35,10 +37,12 @@ public class UserServiceImpl implements UserService {
         return true;   
     }
 
+    @Transactional(readOnly = true)
     public UserBean getUserById(String id) {
         return userDao.get(UserBean.class, id);
     }
 
+    @Transactional(readOnly = true)
     public UserBean getUserByUsername(String username){
         return userDao.get(UserBean.class, "username", username);
     }
@@ -78,6 +82,7 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Transactional(readOnly = true)
     public RoleBean getRoleById(String id){
         return roleDao.get(RoleBean.class, id);    
     }

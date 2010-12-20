@@ -18,19 +18,21 @@
 
     <aop:aspectj-autoproxy />
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
-            <tx:method name="*" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
-    <aop:config proxy-target-class="true">
-        <aop:pointcut id="txManager"
-                      expression="execution(* com.opencms.core.db.dao.*.*(..)) or execution(* com.opencms.core.db.service.*.*(..)) or execution(* com.opencms.wcm.server.WcmServiceImpl.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txManager"/>
-    </aop:config>
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>-->
+            <!--<tx:method name="*" read-only="true"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+    <!--<aop:config proxy-target-class="true">-->
+        <!--<aop:pointcut id="txManager"-->
+                      <!--expression="execution(* com.opencms.core.db.dao.*.*(..)) or execution(* com.opencms.core.db.service.*.*(..)) or execution(* com.opencms.wcm.server.WcmServiceImpl.*(..))"/>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="txManager"/>-->
+    <!--</aop:config>-->
+
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="wcmResource"/>
