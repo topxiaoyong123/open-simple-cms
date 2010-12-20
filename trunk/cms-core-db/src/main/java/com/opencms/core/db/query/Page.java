@@ -33,4 +33,12 @@ public class Page {
     public void setMaxResults(int maxResults) {
         this.maxResults = maxResults;
     }
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "firstResult=" + firstResult +
+                ", maxResults=" + maxResults +
+                '}';
+    }
 }

@@ -5,7 +5,7 @@ import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
-import com.opencms.engine.model.EngineInfo;
+import com.opencms.engine.model.Menu;
 import com.opencms.engine.model.Site;
 
 import java.util.List;
@@ -13,21 +13,17 @@ import java.util.List;
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
- * Date: 10-12-14
- * Time: 下午8:00
+ * Date: 10-12-20
+ * Time: 上午11:01
  * To change this template use File | Settings | File Templates.
  */
-public interface ModelMapper {
+public interface EngineUtil {
 
-    public Object map(EngineInfo info);
+    public Menu getSiteMenu(String siteId);
 
-    public Site map(SiteBean siteBean);
+    public Menu getCategoryMenu(String categoryId);
 
-    public Category map(CategoryBean categoryBean);
-
-    public Content map(ContentBean contentBean);
-
-    public List<Content> mapContents(List<ContentBean> contentBeans);
+    public List<Content> getContents(String categoryId, int firstResult, int maxResults);
 
     public String getSiteURL(SiteBean siteBean);
 

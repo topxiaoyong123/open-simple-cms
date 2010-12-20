@@ -18,11 +18,11 @@ public class BeanMapperHelper {
     @Resource(name = "mapper")
     private DozerBeanMapper mapper;
 
-    public Object map(Object source, Class targetClass){
+    public Object simpleMap(Object source, Class targetClass){
         return mapper.map(source, targetClass);
     }
 
-    public void map(Object source, Object target){
+    public void simpleMap(Object source, Object target){
         mapper.map(source, target);
     }
 

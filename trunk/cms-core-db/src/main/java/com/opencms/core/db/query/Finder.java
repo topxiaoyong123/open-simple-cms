@@ -112,8 +112,14 @@ public class Finder<T> {
         }
         if(orders != null && orders.length > 0){
             s.append(" order by ");
+            int index = 0;
             for(String order : orders){
-                s.append(" o.").append(order);    
+                if(index == 0){
+                    s.append(" o.").append(order);
+                } else{
+                    s.append(" ,o.").append(order);
+                }
+                index ++;
             }
         }
         logger.debug("query hql : [{}]", s);
@@ -134,7 +140,7 @@ public class Finder<T> {
             }
         }
         if(this.getPage() != null){
-            logger.debug("根据分页查询");
+            logger.debug("根据分页查询[{}]", this.getPage());
             return query.setFirstResult(page.getFirstResult()).setMaxResults(page.getMaxResults()).list();
         } else{
             logger.debug("查询所有，不分页");

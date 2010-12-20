@@ -25,4 +25,6 @@ public interface TemplateModel {
 
     public void setContent(Content content);
 
+    public void setEngineUtil(EngineUtil engineUtil);
+
 }

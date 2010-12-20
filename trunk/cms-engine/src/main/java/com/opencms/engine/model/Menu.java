@@ -16,7 +16,7 @@ public class Menu {
 
     private List<Menu> children;
 
-    private boolean current;
+    private boolean current = false;
 
     public Item getItem() {
         if(null == item)

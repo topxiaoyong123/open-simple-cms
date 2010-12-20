@@ -5,6 +5,7 @@ import com.opencms.core.db.query.Finder;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * Time: 21:23:13
  * To change this template use File | Settings | File Templates.
  */
+@Transactional(rollbackFor = Exception.class)
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 
     private static Logger logger = LoggerFactory.getLogger(BaseDaoImpl.class);
@@ -40,10 +42,12 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
         return true;
     }
 
+    @Transactional(readOnly = true)
     public T get(Class c, Serializable id) {
         return (T)this.getHibernateTemplate().get(c, id);
     }
 
+    @Transactional(readOnly = true)
     public T get(Class c, String column, Serializable value) {
         List<T> list = getAll(c, column, value);
         if(list != null && list.size() > 0){
@@ -52,6 +56,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
         return null;
     }
 
+    @Transactional(readOnly = true)
     public List<T> getAll(Class c, String column, Serializable value) {
         Finder finder = new Finder(c);
         finder.setColumns(new String[]{column});
@@ -59,15 +64,18 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
         return getByFinder(finder);
     }
 
+    @Transactional(readOnly = true)
     public List<T> getAll(Class c){
         Finder finder = new Finder(c);
         return getByFinder(finder);
     }
 
+    @Transactional(readOnly = true)
     public List<T> getByFinder(Finder finder) {
         return finder.find(this.getSession());
     }
 
+    @Transactional(readOnly = true)
     public long getCountByFinder(Finder finder) {
         return finder.findNumber(this.getSession());
     }

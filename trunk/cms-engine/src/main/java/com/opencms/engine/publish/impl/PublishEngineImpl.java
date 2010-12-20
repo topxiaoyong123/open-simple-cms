@@ -37,12 +37,12 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
     }
 
     @Override
-    public String engineCategory(EngineInfo info) {
+    public String engineCategory(EngineInfo info) throws IOException, TemplateException {
         return null;
     }
 
     @Override
-    public String engineContent(EngineInfo info) {
+    public String engineContent(EngineInfo info) throws IOException, TemplateException {
         return null;
     }
 

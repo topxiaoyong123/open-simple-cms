@@ -39,9 +39,9 @@ public abstract class FreemarkerEngineImpl implements Engine {
 
     public abstract String engineSite(EngineInfo info) throws IOException, TemplateException;
 
-    public abstract String engineCategory(EngineInfo info);
+    public abstract String engineCategory(EngineInfo info) throws IOException, TemplateException;
 
-    public abstract String engineContent(EngineInfo info);
+    public abstract String engineContent(EngineInfo info) throws IOException, TemplateException;
 
     public String render(Template template, Map model) throws TemplateException, IOException {
 		Writer out = new StringWriter();

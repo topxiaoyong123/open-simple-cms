@@ -40,6 +40,9 @@ public class ContentBean implements Serializable {
     @Column(nullable = false, length = 3)
     private String state;
 
+    @Column(length = 3)
+    private String top;
+
     @Column(nullable = false, length = 3)
     private String type;
 
@@ -120,6 +123,14 @@ public class ContentBean implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getTop() {
+        return top;
+    }
+
+    public void setTop(String top) {
+        this.top = top;
     }
 
     public String getType() {

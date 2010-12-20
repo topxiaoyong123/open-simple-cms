@@ -10,6 +10,8 @@ import com.opencms.engine.model.EngineInfo;
 import com.opencms.engine.model.Site;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -40,12 +42,22 @@ public class PublishModelMapper implements ModelMapper {
     }
 
     @Override
+    public List<Content> mapContents(List<ContentBean> contentBeans) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public String getSiteURL(SiteBean siteBean) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public String getCategoryURL(CategoryBean categoryBean) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
