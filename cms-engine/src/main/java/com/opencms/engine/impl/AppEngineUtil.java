@@ -8,8 +8,6 @@ import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.EngineUtil;
 import com.opencms.engine.ModelMapper;
 import com.opencms.engine.model.*;
-import com.opencms.util.ContextThreadLocal;
-import com.opencms.util.common.page.PageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -27,6 +25,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Component("appEngineUtil")
+@Transactional(readOnly = true)
 public class AppEngineUtil implements EngineUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(AppEngineUtil.class);
@@ -37,7 +36,6 @@ public class AppEngineUtil implements EngineUtil {
     @Resource(name = "appMapper")
 	private ModelMapper mapper;
 
-    @Transactional(readOnly = true)
     public Menu getSiteMenu(String siteId){
         SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
         logger.debug("设置站点菜单...");
@@ -70,7 +68,6 @@ public class AppEngineUtil implements EngineUtil {
         return menu;
     }
 
-    @Transactional(readOnly = true)
     public Menu getCategoryMenu(String categoryId){
         CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(categoryId);
         logger.debug("设置栏目菜单...");
@@ -118,6 +115,11 @@ public class AppEngineUtil implements EngineUtil {
     public List<Content> getContents(String categoryId, int firstResult, int maxResults) {
         List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
         return mapper.mapContents(contentBeans);
+    }
+
+    public List<Content> getContents(String categoryId, int firstResult, int maxResults, boolean loadContent) {
+        List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
+        return mapper.mapContents(contentBeans, loadContent);
     }
 
     public String getSiteURL(SiteBean siteBean) {

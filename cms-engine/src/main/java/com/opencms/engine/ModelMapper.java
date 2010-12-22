@@ -5,7 +5,6 @@ import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
-import com.opencms.engine.model.EngineInfo;
 import com.opencms.engine.model.Site;
 
 import java.util.List;
@@ -19,15 +18,17 @@ import java.util.List;
  */
 public interface ModelMapper {
 
-    public Object map(EngineInfo info);
-
     public Site map(SiteBean siteBean);
 
     public Category map(CategoryBean categoryBean);
 
+    public Category map(CategoryBean categoryBean, int page, int pagesize, int totalcount);
+
     public Content map(ContentBean contentBean);
 
     public List<Content> mapContents(List<ContentBean> contentBeans);
+
+    public List<Content> mapContents(List<ContentBean> contentBeans, boolean loadContent);
 
     public String getSiteURL(SiteBean siteBean);
 

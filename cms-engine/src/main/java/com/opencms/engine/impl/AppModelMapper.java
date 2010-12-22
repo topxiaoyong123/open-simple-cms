@@ -3,23 +3,17 @@ package com.opencms.engine.impl;
 import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
-import com.opencms.core.db.bean.field.ContentField;
-import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.ModelMapper;
 import com.opencms.engine.model.*;
-import com.opencms.util.CmsType;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
 import com.opencms.util.common.page.PageBean;
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +25,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Component("appMapper")
+@Transactional(readOnly = true)
 public class AppModelMapper implements ModelMapper {
 
     private static final Logger logger = LoggerFactory
@@ -39,76 +34,47 @@ public class AppModelMapper implements ModelMapper {
     @Resource(name = "cmsUtils")
     private CmsUtils cmsUtils;
 
-    @Resource(name = "cmsManager")
-    private CmsManager cmsManager;
-
-    @Transactional(readOnly = true)
-    public Object map(EngineInfo info) {
-        if(CmsType.SITE == info.getType()){
-            return map(cmsManager.getSiteService().getSiteById(info.getId()));
-        } else if(CmsType.CATEGORY == info.getType()){
-            return map(cmsManager.getCategoryService().getCategoryById(info.getId()), info.getPage(), info.getPageSize());
-        } else if(CmsType.CONTENT == info.getType()){
-            return map(cmsManager.getContentService().getContentById(info.getId()));
-        }
-        return null;
-    }
-
-    @Transactional(readOnly = true)
     public Site map(SiteBean siteBean) {
         Site site = (Site)cmsUtils.getBeanMapperHelper().simpleMap(siteBean, Site.class);
         site.setUrl(getSiteURL(siteBean));
         return site;
     }
 
-    @Transactional(readOnly = true)
     public Category map(CategoryBean categoryBean) {
         Category category = (Category)cmsUtils.getBeanMapperHelper().simpleMap(categoryBean, Category.class);
         category.setUrl(getCategoryURL(categoryBean));
         return category;
     }
 
-    @Transactional(readOnly = true)
-    public Category map(CategoryBean categoryBean, int page, int pagesize){
+    public Category map(CategoryBean categoryBean, int page, int pagesize, int totalcount){
         Category category = map(categoryBean);
-        category.setPage(new PageBean(pagesize, page, (int)cmsManager.getContentService().getCountByCategoryId(categoryBean.getId(), ContentField._STATE_PUBLISHED)));
+        category.setPage(new PageBean(pagesize, page, totalcount));
         return category;
     }
 
-    @Transactional(readOnly = true)
     public Content map(ContentBean contentBean) {
+        return map(contentBean, true);
+    }
+
+    public Content map(ContentBean contentBean, boolean loadContent) {
         Content content = (Content)cmsUtils.getBeanMapperHelper().simpleMap(contentBean, Content.class);
         content.setUrl(getContentURL(contentBean));
+        if(loadContent){
+            content.setContent(contentBean.getContentDetail().getContent());
+        }
         return content;
     }
 
     public List<Content> mapContents(List<ContentBean> contentBeans) {
-        List<Content> list = new ArrayList<Content>();
-        for(ContentBean contentBean : contentBeans){
-            Content content = simpleMap(contentBean);
-            content.setUrl(getContentURL(contentBean));
-            list.add(content);
-        }
-        return list;
+        return mapContents(contentBeans, false);
     }
 
-    private Content simpleMap(ContentBean contentBean){
-        Content content = new Content();
-        content.setId(contentBean.getId());
-        content.setTitle(contentBean.getTitle());
-        content.setKeywords(contentBean.getKeywords());
-        content.setUrl(contentBean.getUrl());
-        content.setDescription(contentBean.getDescription());
-        content.setNo(contentBean.getNo());
-        content.setState(contentBean.getState());
-        content.setTop(contentBean.getTop());
-        content.setType(contentBean.getType());
-        content.setSource(contentBean.getSource());
-        content.setTemplate(contentBean.getTemplate());
-        content.setAuthor(contentBean.getAuthor());
-        content.setCreationDate(contentBean.getCreationDate());
-        content.setModificationDate(contentBean.getModificationDate());
-        return content;
+    public List<Content> mapContents(List<ContentBean> contentBeans, boolean loadContent) {
+        List<Content> list = new ArrayList<Content>();
+        for(ContentBean contentBean : contentBeans){
+            list.add(map(contentBean, loadContent));
+        }
+        return list;
     }
 
     public String getSiteURL(SiteBean siteBean) {

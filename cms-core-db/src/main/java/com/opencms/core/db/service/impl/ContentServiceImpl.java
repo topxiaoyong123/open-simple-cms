@@ -51,15 +51,6 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Transactional(readOnly = true)
-    public ContentBean getContentById(String id, boolean loadContent) {
-        ContentBean content = getContentById(id);
-        if(loadContent){
-            content.getContent();
-        }
-        return content;
-    }
-
-    @Transactional(readOnly = true)
     public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});

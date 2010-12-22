@@ -4,6 +4,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +25,31 @@ public class BeanMapperHelper {
 
     public void simpleMap(Object source, Object target){
         mapper.map(source, target);
+    }
+
+    public void clientSimpleMap(Object source, Object target){
+        if(source == null || target == null){
+            return;
+        }
+        Class sClass = source.getClass();
+        Class tClass = target.getClass();
+        for(Field sField : sClass.getDeclaredFields()){
+            String fieldName = sField.getName();
+            fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1, fieldName.length());
+            String getter = null;
+            String setter = "set" + fieldName;
+            if(sField.getType().getName().equalsIgnoreCase(boolean.class.getName()) || sField.getType().getName().equalsIgnoreCase(Boolean.class.getName())){
+                getter = "is" + fieldName;
+            } else{
+                getter = "get" + fieldName;
+            }
+            try{
+                Object getterResult = sClass.getMethod(getter).invoke(source);
+                tClass.getMethod(setter, sField.getType()).invoke(target, getterResult);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
 }
