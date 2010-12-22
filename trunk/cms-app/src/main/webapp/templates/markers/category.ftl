@@ -13,7 +13,7 @@
     <#if pageContents??>
         <#return pageContents>
     <#else>
-        <#assign pageContents = engineUtil.getContents(categoryId, page.firstResult!, page.pagesize!)>
+        <#assign pageContents = engineUtil.getContents(categoryId, page.firstResult, page.pageSize)>
         <#return pageContents>
     </#if>
 </#function>

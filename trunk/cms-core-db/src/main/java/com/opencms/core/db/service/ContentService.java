@@ -21,8 +21,6 @@ public interface ContentService {
 
     public ContentBean getContentById(String id);
 
-    public ContentBean getContentById(String id, boolean loadContent);
-
     public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults);
 
     public long getCountByCategoryId(String categoryId);

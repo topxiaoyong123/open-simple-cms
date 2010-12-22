@@ -1,6 +1,6 @@
 package com.opencms.wcm.server;
 
-import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.bean.*;
 import com.opencms.template.TemplateHelper;
 import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
@@ -16,9 +16,6 @@ import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.model.template.CmsTemplate;
 import com.opencms.wcm.server.message.MessageSourceHelper;
 import com.opencms.core.db.service.CmsManager;
-import com.opencms.core.db.bean.UserBean;
-import com.opencms.core.db.bean.SiteBean;
-import com.opencms.core.db.bean.CategoryBean;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
@@ -305,10 +302,14 @@ public class WcmServiceImpl implements WcmService {
             if(content.getId() != null){
                 logger.debug("更新文章[{}]", content.getTitle());
                 contentBean = cmsManager.getContentService().getContentById(content.getId());
+                contentBean.getContentDetail().setContent(content.getContent());
             } else{
                 logger.debug("新建文章[{}]",  content.getTitle());
                 contentBean = new ContentBean();
                 contentBean.setCategory(cmsManager.getCategoryService().getCategoryById(content.getCategoryId()));
+                ContentDetailBean contentDetailBean = new ContentDetailBean();
+                contentDetailBean.setContent(content.getContent());
+                contentBean.setContentDetail(contentDetailBean);
             }
             cmsUtils.getBeanMapperHelper().simpleMap(content, contentBean);
             contentBean.setState("0");
@@ -334,6 +335,7 @@ public class WcmServiceImpl implements WcmService {
             ContentBean contentBean = cmsManager.getContentService().getContentById(id);
             Content content = new Content();
             cmsUtils.getBeanMapperHelper().simpleMap(contentBean, content);
+            content.setContent(contentBean.getContentDetail().getContent());
             content.setCategoryId(contentBean.getCategory().getId());
             return content;
         } catch(Exception e){

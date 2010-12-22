@@ -32,7 +32,7 @@ public class PublishModelMapper implements ModelMapper {
     }
 
     @Override
-    public Object map(EngineInfo info) {
+    public Category map(CategoryBean categoryBean, int page, int pagesize, int totalcount) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -43,6 +43,11 @@ public class PublishModelMapper implements ModelMapper {
 
     @Override
     public List<Content> mapContents(List<ContentBean> contentBeans) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Content> mapContents(List<ContentBean> contentBeans, boolean loadContent) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
