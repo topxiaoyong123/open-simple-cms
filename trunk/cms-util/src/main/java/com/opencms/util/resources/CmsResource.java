@@ -1,5 +1,7 @@
 package com.opencms.util.resources;
 
+import com.opencms.util.common.Constants;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -28,7 +30,7 @@ public class CmsResource {
     private String outputEncoding;
 
     public String getTemplatePath() {
-        return templatePath;
+        return getClass().getResource("/").getPath().replace("WEB-INF/classes", Constants.TEMPLATE_PARENT_PATH);
     }
 
     public void setTemplatePath(String templatePath) {

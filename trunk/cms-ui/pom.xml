@@ -75,7 +75,7 @@
     </dependencies>
 
     <build>
-        <outputDirectory>target/war/WEB-INF/classes</outputDirectory>
+        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
         <resources>
             <!--<resource>-->
                 <!--<directory>src/main/java</directory>-->
@@ -92,7 +92,7 @@
                 <version>2.1.0</version>
 
                 <configuration>
-                    
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
                     <runTarget>com.opencms.wcm.Wcm/Wcm.html</runTarget>
                     <modules>
                         <module>com.opencms.wcm.Wcm</module>
@@ -100,8 +100,8 @@
                     <i18nMessagesBundles>
                         <i18nMessagesBundle>com.opencms.wcm.client.WcmMessages</i18nMessagesBundle>
                     </i18nMessagesBundles>
-                    <hostedWebapp>target/war</hostedWebapp>
-                    <mergedWebXml>target/war/WEB-INF/web.xml</mergedWebXml>
+                    <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+                    <mergedWebXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</mergedWebXml>
                     <generateDirectory>src/main/java</generateDirectory>
                 </configuration>
 
@@ -123,7 +123,8 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                      <!--<webXml>target/web.xml</webXml>-->
-                    <webXml>target/war/WEB-INF/web.xml</webXml>
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+                    <!--<webXml>${project.build.directory}/${project.build.finalName}/WEB-INF/web.xml</webXml>-->
                     <warSourceExcludes>target/**</warSourceExcludes>
                 </configuration>
             </plugin>
