@@ -1,5 +1,7 @@
 package com.opencms.core.db.bean;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -15,6 +17,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "cms_content_detail")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class ContentDetailBean implements Serializable {
 
     public ContentDetailBean(String content) {

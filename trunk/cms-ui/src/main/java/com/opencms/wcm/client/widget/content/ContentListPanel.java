@@ -144,7 +144,7 @@ public class ContentListPanel extends ContentPanel {
         add.setMenu(addmenu);
         toolBars.add(add);
         Button edit = new Button(msgs.edit());
-        edit.setIconStyle("article-zengjia");
+        edit.setIconStyle("icon-plugin");
         edit.addListener(Events.Select, new Listener<ComponentEvent>() {
             @Override
             public void handleEvent(ComponentEvent componentEvent) {

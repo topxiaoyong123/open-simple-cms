@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ import java.util.List;
 public class Finder<T> {
 
     private static Logger logger = LoggerFactory.getLogger(Finder.class);
+
+    private boolean cacheable = false;
 
     private Class targetEntity;
 
@@ -42,6 +45,14 @@ public class Finder<T> {
         this.nullColumns = nullColumns;
         this.orders = orders;
         this.page = page;
+    }
+
+    public boolean isCacheable() {
+        return cacheable;
+    }
+
+    public void setCacheable(boolean cacheable) {
+        this.cacheable = cacheable;
     }
 
     public Class getTargetEntity() {
@@ -139,12 +150,35 @@ public class Finder<T> {
                 query = query.setParameter(i, values[i]);
             }
         }
+        query.setCacheable(true);
         if(this.getPage() != null){
             logger.debug("根据分页查询[{}]", this.getPage());
             return query.setFirstResult(page.getFirstResult()).setMaxResults(page.getMaxResults()).list();
         } else{
             logger.debug("查询所有，不分页");
             return query.list();
+        }
+    }
+
+    /**
+     * 返回query.iterator()，支持缓存读取;
+     * @param session
+     * @return
+     */
+    public Iterator<T> findIterator(Session session){
+        Query query = session.createQuery(getQueryHql());
+        if(values != null){
+            for(int i = 0; i < values.length; i ++){
+                query = query.setParameter(i, values[i]);
+            }
+        }
+        query.setCacheable(true);
+        if(this.getPage() != null){
+            logger.debug("根据分页查询[{}]", this.getPage());
+            return query.setFirstResult(page.getFirstResult()).setMaxResults(page.getMaxResults()).iterate();
+        } else{
+            logger.debug("查询所有，不分页");
+            return query.iterate();
         }
     }
 
@@ -155,6 +189,7 @@ public class Finder<T> {
                 query = query.setParameter(i, values[i]);
             }
         }
+        query.setCacheable(true);
         return ((Long)query.uniqueResult()).longValue();
     }
 

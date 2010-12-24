@@ -18,21 +18,24 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 @Service("siteService")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class SiteServiceImpl implements SiteService {
 
     @Resource(name = "siteDao")
     private SiteDao siteDao;
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addSite(SiteBean site){
         site.setCreationDate(new Date());
         return siteDao.persist(site);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateSite(SiteBean site) {
         return siteDao.merge(site);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateSite(SiteBean site) {
         if(site.getId() == null){
             return addSite(site);
@@ -41,17 +44,14 @@ public class SiteServiceImpl implements SiteService {
         }
     }
 
-    @Transactional(readOnly = true)
     public List<SiteBean> getAllSites() {
         return siteDao.getAll(SiteBean.class);
     }
 
-    @Transactional(readOnly = true)
     public SiteBean getSiteById(String id) {
         return siteDao.get(SiteBean.class, id);
     }
 
-    @Transactional(readOnly = true)
     public SiteBean getSiteByName(String name) {
         return siteDao.get(SiteBean.class, "name", name);
     }

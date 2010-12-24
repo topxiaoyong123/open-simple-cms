@@ -52,7 +52,7 @@ public class SiteView extends View {
                             false));
         } else if(AppEvents.SITE_MANAGER_CANCEL == appEvent.getType() || AppEvents.SITE_MANAGER_SUCCESS == appEvent.getType()){
             window.hide();
-            siteListPanel.refresh();
+//            siteListPanel.refresh();
         } else if(AppEvents.SITE_MANAGER_ADD == appEvent.getType()){
             Site c = appEvent.getData();
             SitePanel cp = new SitePanel(c);

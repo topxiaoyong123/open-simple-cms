@@ -51,15 +51,14 @@ public class BodyView extends View {
                 Entry entry = (Entry) be.getItem().getData("body");
                 if (entry.getId().equalsIgnoreCase(AppEvents.WELCOME.getId())) {
                     AppState.centerEventType = AppEvents.WELCOME;
+                    initWelcomeTabPanel();
                     if (AppState.westBarId.equals(AppState.OWNER_OTHER_MANAGER)) {
                         Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE);
                     }
                 } else if (AppState.OWNER_OTHER_MANAGER_CALLBACK.equals(entry.getOwner())) {
-                    Dispatcher.forwardEvent(entry.getEventType(), entry);
+                    Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION, entry);
                 } else if (AppState.OWNER_ARTICLE_MANAGER.equals(entry.getOwner())) {
-                    Content content = new Content();
-                    content.setCategoryId(AppState.westTreeItemId);
-                    Dispatcher.forwardEvent(entry.getEventType(), content);
+                    Dispatcher.forwardEvent(AppEvents.ARTICLE_MANAGER_CHANGE_EVENT, entry);
                 }
             }
         });
@@ -158,7 +157,9 @@ public class BodyView extends View {
         if (AppState.OWNER_ARTICLE_MANAGER_CALLBACK.equals(entry.getOwner())) {
             this.onShowPage(entry, true);
         } else {
-
+            Content content = new Content();
+            content.setCategoryId(AppState.westTreeItemId);
+            Dispatcher.forwardEvent(entry.getEventType(), content);
         }
     }
 

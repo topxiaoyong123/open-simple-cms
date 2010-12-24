@@ -13,6 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
  * To change this template use File | Settings | File Templates.
  */
 @Repository("categoryDao")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class CategoryDaoImpl extends BaseDaoImpl<CategoryBean> implements CategoryDao {
 }

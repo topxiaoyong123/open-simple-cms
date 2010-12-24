@@ -20,7 +20,7 @@ import java.util.Iterator;
  * To change this template use File | Settings | File Templates.
  */
 @Service("userService")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     @Resource(name = "userDao")
@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
     @Resource(name = "roleDao")
     private RoleDao roleDao;
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addUser(UserBean user){
         if(getUserByUsername(user.getUsername()) != null){
             return false;
@@ -47,16 +48,19 @@ public class UserServiceImpl implements UserService {
         return userDao.get(UserBean.class, "username", username);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateUser(UserBean user) {
         userDao.merge(user);
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean deleteUser(UserBean user) {
         userDao.delete(user);
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addRoleForUser(String id, RoleBean role) {
         UserBean user = getUserById(id);
         if(user != null){
@@ -67,6 +71,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addRolesForUser(String id, Set<RoleBean> roles) {
         UserBean user = getUserById(id);
         if(user != null){
@@ -77,6 +82,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addRole(RoleBean role){
         roleDao.persist(role);
         return true;
@@ -87,11 +93,13 @@ public class UserServiceImpl implements UserService {
         return roleDao.get(RoleBean.class, id);    
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateRole(RoleBean role) {
         roleDao.merge(role);
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean deleteRole(RoleBean role) {
         RoleBean r = getRoleById(role.getId());
         Iterator<UserBean> it = r.getUsers().iterator();
