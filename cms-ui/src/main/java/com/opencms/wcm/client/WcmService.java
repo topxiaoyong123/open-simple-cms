@@ -52,6 +52,8 @@ public interface WcmService extends RemoteService {
      */
     public User login(User user) throws ApplicationException;
 
+    public boolean logout() throws ApplicationException;
+
     /**
      * 检查是否已经登录
      * @return
@@ -156,5 +158,4 @@ public interface WcmService extends RemoteService {
     public WcmFile createForder(WcmFile f, String name) throws ApplicationException;
 
     public boolean deleteFiles(List<WcmFile> files) throws ApplicationException;
-
 }

@@ -20,6 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>com.open-cms</groupId>
+            <artifactId>cms-app</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open-cms</groupId>
             <artifactId>cms-template</artifactId>
             <version>${pom.version}</version>
         </dependency>

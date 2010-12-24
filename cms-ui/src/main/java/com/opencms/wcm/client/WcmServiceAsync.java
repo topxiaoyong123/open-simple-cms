@@ -25,6 +25,7 @@ public interface WcmServiceAsync {
     void getWcmApps(AsyncCallback async);
 
     void login(User user, AsyncCallback async);
+    void logout(AsyncCallback async);
 
     void checkLogin(AsyncCallback async);
 

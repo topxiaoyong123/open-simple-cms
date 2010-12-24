@@ -42,7 +42,7 @@ import javax.servlet.http.HttpSession;
  * To change this template use File | Settings | File Templates.
  */
 @Component("wcmService")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class WcmServiceImpl implements WcmService {
 
     private static Logger logger = LoggerFactory.getLogger(WcmServiceImpl.class);
@@ -112,6 +112,13 @@ public class WcmServiceImpl implements WcmService {
         return user;
     }
 
+    public boolean logout() throws ApplicationException {
+        String username = String.valueOf(this.getSession().getAttribute("username"));
+        logger.debug(username + "退出登录");
+        this.getSession().removeAttribute("username");
+        return true;
+    }
+
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public String checkLogin() throws ApplicationException {
         String username = String.valueOf(this.getSession().getAttribute("username"));
@@ -178,6 +185,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateSite(Site site) throws ApplicationException {
         try {
             SiteBean siteBean;
@@ -248,6 +256,7 @@ public class WcmServiceImpl implements WcmService {
         return list;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateCategory(Category category) throws ApplicationException {
         try {
             CategoryBean categoryBean;
@@ -296,6 +305,7 @@ public class WcmServiceImpl implements WcmService {
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateContent(Content content) throws ApplicationException {
         try {
             ContentBean contentBean;

@@ -13,6 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
  * To change this template use File | Settings | File Templates.
  */
 @Repository("siteDao")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class SiteDaoImpl extends BaseDaoImpl<SiteBean> implements SiteDao {
 }

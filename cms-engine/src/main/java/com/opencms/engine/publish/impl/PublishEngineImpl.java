@@ -46,4 +46,8 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
         return null;
     }
 
+    private void create(){
+
+    }
+
 }

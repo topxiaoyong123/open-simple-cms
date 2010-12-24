@@ -20,23 +20,26 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Service("categoryService")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {
 
     @Resource(name = "categoryDao")
     private CategoryDao categoryDao;
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addCategory(CategoryBean category) {
         category.setCreationDate(new Date());
         categoryDao.persist(category);
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateCategory(CategoryBean category) {
         categoryDao.merge(category);
         return true;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateCategory(CategoryBean category) {
         if(category.getId() == null){
             return addCategory(category);
@@ -45,12 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    @Transactional(readOnly = true)
     public CategoryBean getCategoryById(String id) {
         return categoryDao.get(CategoryBean.class, id);
     }
 
-    @Transactional(readOnly = true)
     public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible) {
         Finder finder = new Finder(CategoryBean.class);
         if(visible){
@@ -65,7 +66,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getByFinder(finder);
     }
 
-    @Transactional(readOnly = true)
     public List<CategoryBean> getCategorysByParentId(String parentId, boolean visible){
         Finder finder = new Finder(CategoryBean.class);
         if(visible){
@@ -79,13 +79,11 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getByFinder(finder);
     }
 
-    @Transactional(readOnly = true)
     public List<CategoryBean> getMenuBySiteId(String siteId) {
         List<CategoryBean> categoryBeans = getCategorysBySiteId(siteId, true);
         return categoryBeans;
     }
 
-    @Transactional(readOnly = true)
     public List<CategoryBean> getMenuByParentId(String parentId){
         return getCategorysByParentId(parentId, true);
     }

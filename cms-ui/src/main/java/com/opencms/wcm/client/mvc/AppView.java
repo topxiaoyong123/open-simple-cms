@@ -13,12 +13,15 @@ import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.WcmMessages;
+import com.opencms.wcm.client.WcmService;
+import com.opencms.wcm.client.WcmServiceAsync;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,6 +44,7 @@ public class AppView extends View {
     private ContentPanel center;
 
     WcmMessages msgs = GWT.create(WcmMessages.class);
+    final WcmServiceAsync service = (WcmServiceAsync) Registry.get(WcmService.SERVICE);
 
     public AppView(Controller controller) {
         super(controller);
@@ -74,6 +78,15 @@ public class AppView extends View {
             public void handleEvent(MessageBoxEvent ce) {
                 Button btn = ce.getButtonClicked();
                 if (msgs.yes().equals(btn.getText())) {
+                    service.logout(new AsyncCallback() {
+                        public void onFailure(Throwable throwable) {
+                            MessageBox.alert(msgs.error(), throwable.getMessage(), null);
+                            refreshBrowser();
+                        }
+                        public void onSuccess(Object result) {
+                            refreshBrowser();
+                        }
+                    });
                 }
             }
         };
@@ -117,7 +130,7 @@ public class AppView extends View {
         Registry.register(AppView.CENTER, center);
     }
 
-    public static native void refeshBrowser() /*-{
+    public static native void refreshBrowser() /*-{
         $wnd.location.reload(true);
     }-*/;
 }

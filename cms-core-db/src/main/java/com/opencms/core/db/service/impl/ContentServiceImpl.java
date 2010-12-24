@@ -21,22 +21,25 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Service("contentService")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class ContentServiceImpl implements ContentService {
 
     @Resource(name = "contentDao")
     private ContentDao contentDao;
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addContent(ContentBean content) {
         content.setCreationDate(new Date());
         return contentDao.persist(content);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateContent(ContentBean content) {
         content.setModificationDate(new Date());
         return contentDao.merge(content);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateContent(ContentBean content) {
         if(content.getId() == null){
             return addContent(content);
@@ -45,12 +48,10 @@ public class ContentServiceImpl implements ContentService {
         }
     }
 
-    @Transactional(readOnly = true)
     public ContentBean getContentById(String id) {
         return contentDao.get(ContentBean.class, id);
     }
 
-    @Transactional(readOnly = true)
     public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});
@@ -60,7 +61,6 @@ public class ContentServiceImpl implements ContentService {
         return contentDao.getByFinder(finder);
     }
 
-    @Transactional(readOnly = true)
     public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String state, int firstResult, int maxResults) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id", "state"});
@@ -70,7 +70,6 @@ public class ContentServiceImpl implements ContentService {
         return contentDao.getByFinder(finder);
     }
 
-    @Transactional(readOnly = true)
     public long getCountByCategoryId(String categoryId){
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});
@@ -78,7 +77,6 @@ public class ContentServiceImpl implements ContentService {
         return contentDao.getCountByFinder(finder);
     }
 
-    @Transactional(readOnly = true)
     public long getCountByCategoryId(String categoryId, String state){
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id", "state"});

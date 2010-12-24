@@ -14,6 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
  * To change this template use File | Settings | File Templates.
  */
 @Repository("contentDao")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(readOnly = true)
 public class ContentDaoImpl extends BaseDaoImpl<ContentBean> implements ContentDao {
 }

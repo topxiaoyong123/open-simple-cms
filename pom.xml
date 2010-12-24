@@ -11,6 +11,7 @@
         <module>cms-util</module>
         <module>cms-template</module>
         <module>cms-engine</module>
+        <module>cms-search</module>
         <module>cms-ui</module>
         <module>cms-app</module>
     </modules>
@@ -38,14 +39,17 @@
         <drools.version>4.0.7</drools.version>
 
         <aspectj.version>1.6.2</aspectj.version>
-        <spring.version>2.5.6</spring.version>
-        <spring.security.version>2.0.4</spring.security.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.security.version>3.0.5.RELEASE</spring.security.version>
         <spring.modules.version>0.9</spring.modules.version>
         <freemarker.version>2.3.15</freemarker.version>
         <dozer.version>5.3.1</dozer.version>
 
         <jetty.version>7.0.0.pre5</jetty.version>
         <jta.version>1.1</jta.version>
+
+        <compass.version>2.2.0</compass.version>
+        <javamail.version>1.4.1</javamail.version>
     </properties>
 
     <dependencyManagement>
@@ -54,6 +58,18 @@
                 <groupId>com.open-cms</groupId>
                 <artifactId>cms-core-db</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${javamail.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.compass-project</groupId>
+                <artifactId>compass</artifactId>
+                <version>${compass.version}</version>
             </dependency>
 
             <dependency>
