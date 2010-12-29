@@ -1,2 +1,0 @@
-template.title=站点模板002
-template.description=站点模板002

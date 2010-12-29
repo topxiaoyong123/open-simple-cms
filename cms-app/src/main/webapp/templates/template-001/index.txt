@@ -1,2 +1,0 @@
-template.title=首页默认模板
-template.description=首页默认模板
