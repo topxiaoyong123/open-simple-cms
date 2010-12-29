@@ -1,5 +1,6 @@
 package com.opencms.util.resources;
 
+import com.opencms.util.ContextThreadLocal;
 import com.opencms.util.common.Constants;
 
 /**
@@ -14,7 +15,7 @@ public class CmsResource {
     private String outputUrl;
 
     public String getOutputUrl() {
-        return outputUrl;
+        return ContextThreadLocal.getRequest().getContextPath();
     }
 
     public void setOutputUrl(String outputUrl) {
@@ -22,6 +23,8 @@ public class CmsResource {
     }
 
     private String templatePath;
+
+    private String outputPath;
 
     private String defaultEncoding;
 
@@ -35,6 +38,14 @@ public class CmsResource {
 
     public void setTemplatePath(String templatePath) {
         this.templatePath = templatePath;
+    }
+
+    public String getOutputPath() {
+        return getClass().getResource("/").getPath().replace("WEB-INF/classes", Constants.PUBLISH_OUTPUT_PATH);
+    }
+
+    public void setOutputPath(String outputPath) {
+        this.outputPath = outputPath;
     }
 
     public String getDefaultEncoding() {

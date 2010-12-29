@@ -1,23 +1,25 @@
 package com.opencms.wcm.client.mvc;
 
-import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.TabPanelEvent;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.*;
+import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.TabItem;
+import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.event.TabPanelEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.Events;
-import com.opencms.wcm.client.widget.WelcomePanel;
-import com.opencms.wcm.client.model.Entry;
-import com.opencms.wcm.client.model.WcmNodeModel;
-import com.opencms.wcm.client.model.content.Content;
+import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.WcmMessages;
-import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.model.Entry;
+import com.opencms.wcm.client.model.WcmNodeModel;
+import com.opencms.wcm.client.model.content.Content;
+import com.opencms.wcm.client.widget.WelcomePanel;
 
 import java.util.List;
 
@@ -203,14 +205,14 @@ public class BodyView extends View {
                 null, true, false, AppEvents.CONTENT_MANAGER, false));
         this.addShowPage(new Entry(AppEvents.CONTENT_AUDITING_MANAGER.getId(), msgs.content_auditing_header(), AppState.OWNER_ARTICLE_MANAGER,
                 null, true, false, AppEvents.CONTENT_AUDITING_MANAGER, false));
-        this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISH_MANAGER.getId(), msgs.content_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
-                null, true, false, AppEvents.CONTENT_PUBLISH_MANAGER, false));
+        this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISHING_MANAGER.getId(), msgs.content_publishing_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.CONTENT_PUBLISHING_MANAGER, false));
         this.addShowPage(new Entry(AppEvents.CONTENT_MANAGER_ALL.getId(), msgs.content_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
                 null, true, false, AppEvents.CONTENT_MANAGER_ALL, false));
         this.addShowPage(new Entry(AppEvents.CATEGORY_MANAGER.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
                 null, true, false, AppEvents.CATEGORY_MANAGER, false));
-        this.addShowPage(new Entry(AppEvents.PUBLISH_MANAGER.getId(), msgs.category_site_publish_header(), AppState.OWNER_ARTICLE_MANAGER,
-                null, true, false, AppEvents.PUBLISH_MANAGER, false));
+        this.addShowPage(new Entry(AppEvents.PUBLISHING_MANAGER.getId(), msgs.category_site_publishing_header(), AppState.OWNER_ARTICLE_MANAGER,
+                null, true, false, AppEvents.PUBLISHING_MANAGER, false));
     }
 
     private void initWelcomeTabPanel() {

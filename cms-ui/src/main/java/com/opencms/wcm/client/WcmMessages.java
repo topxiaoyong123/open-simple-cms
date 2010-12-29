@@ -120,8 +120,8 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
    * @return translated "Category Site Publish"
    */
   @DefaultMessage("Category Site Publish")
-  @Key("category_site_publish_header")
-  String category_site_publish_header();
+  @Key("category_site_publishing_header")
+  String category_site_publishing_header();
 
   /**
    * Translated "Category Title".
@@ -149,6 +149,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Checkcode")
   @Key("checkcode")
   String checkcode();
+
+  /**
+   * Translated "Please choose".
+   * 
+   * @return translated "Please choose"
+   */
+  @DefaultMessage("Please choose")
+  @Key("choose")
+  String choose();
 
   /**
    * Translated "Please choose one".
@@ -203,6 +212,24 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Content Auditing")
   @Key("content_auditing_header")
   String content_auditing_header();
+
+  /**
+   * Translated "Pass".
+   * 
+   * @return translated "Pass"
+   */
+  @DefaultMessage("Pass")
+  @Key("content_auditing_pass")
+  String content_auditing_pass();
+
+  /**
+   * Translated "Reject".
+   * 
+   * @return translated "Reject"
+   */
+  @DefaultMessage("Reject")
+  @Key("content_auditing_reject")
+  String content_auditing_reject();
 
   /**
    * Translated "Author".
@@ -295,13 +322,22 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String content_no();
 
   /**
+   * Translated "Publish".
+   * 
+   * @return translated "Publish"
+   */
+  @DefaultMessage("Publish")
+  @Key("content_publishing_do")
+  String content_publishing_do();
+
+  /**
    * Translated "Content Publish".
    * 
    * @return translated "Content Publish"
    */
   @DefaultMessage("Content Publish")
-  @Key("content_publish_header")
-  String content_publish_header();
+  @Key("content_publishing_header")
+  String content_publishing_header();
 
   /**
    * Translated "Source".
@@ -320,6 +356,51 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("State")
   @Key("content_state")
   String content_state();
+
+  /**
+   * Translated "Auditing Reject".
+   * 
+   * @return translated "Auditing Reject"
+   */
+  @DefaultMessage("Auditing Reject")
+  @Key("content_state_auditing_reject")
+  String content_state_auditing_reject();
+
+  /**
+   * Translated "Auditing Wait".
+   * 
+   * @return translated "Auditing Wait"
+   */
+  @DefaultMessage("Auditing Wait")
+  @Key("content_state_auditing_wait")
+  String content_state_auditing_wait();
+
+  /**
+   * Translated "Delete".
+   * 
+   * @return translated "Delete"
+   */
+  @DefaultMessage("Delete")
+  @Key("content_state_delete")
+  String content_state_delete();
+
+  /**
+   * Translated "Published".
+   * 
+   * @return translated "Published"
+   */
+  @DefaultMessage("Published")
+  @Key("content_state_published")
+  String content_state_published();
+
+  /**
+   * Translated "Publish Wait".
+   * 
+   * @return translated "Publish Wait"
+   */
+  @DefaultMessage("Publish Wait")
+  @Key("content_state_publishing_wait")
+  String content_state_publishing_wait();
 
   /**
    * Translated "Template".
@@ -619,6 +700,24 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String ok();
 
   /**
+   * Translated "Save Failed".
+   * 
+   * @return translated "Save Failed"
+   */
+  @DefaultMessage("Save Failed")
+  @Key("operation_fail")
+  String operation_fail();
+
+  /**
+   * Translated "Save Succeed".
+   * 
+   * @return translated "Save Succeed"
+   */
+  @DefaultMessage("Save Succeed")
+  @Key("operation_success")
+  String operation_success();
+
+  /**
    * Translated "Or".
    * 
    * @return translated "Or"
@@ -637,6 +736,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String password();
 
   /**
+   * Translated "Please Wait".
+   * 
+   * @return translated "Please Wait"
+   */
+  @DefaultMessage("Please Wait")
+  @Key("please_wait")
+  String please_wait();
+
+  /**
    * Translated "Waiting...".
    * 
    * @return translated "Waiting..."
@@ -653,6 +761,42 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Preview")
   @Key("preview")
   String preview();
+
+  /**
+   * Translated "Publishing".
+   * 
+   * @return translated "Publishing"
+   */
+  @DefaultMessage("Publishing")
+  @Key("publishing_process")
+  String publishing_process();
+
+  /**
+   * Translated "Start Publishing".
+   * 
+   * @return translated "Start Publishing"
+   */
+  @DefaultMessage("Start Publishing")
+  @Key("publishing_process_begin")
+  String publishing_process_begin();
+
+  /**
+   * Translated "Publishing Done".
+   * 
+   * @return translated "Publishing Done"
+   */
+  @DefaultMessage("Publishing Done")
+  @Key("publishing_process_end")
+  String publishing_process_end();
+
+  /**
+   * Translated "Publishing Exception".
+   * 
+   * @return translated "Publishing Exception"
+   */
+  @DefaultMessage("Publishing Exception")
+  @Key("publishing_process_exception")
+  String publishing_process_exception();
 
   /**
    * Translated "Reset".

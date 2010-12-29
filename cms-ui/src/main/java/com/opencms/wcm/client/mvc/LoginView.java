@@ -1,9 +1,9 @@
 package com.opencms.wcm.client.mvc;
 
-import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.widget.LoginDialog;

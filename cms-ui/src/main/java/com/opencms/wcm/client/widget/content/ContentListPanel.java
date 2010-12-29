@@ -1,33 +1,33 @@
 package com.opencms.wcm.client.widget.content;
 
+import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.grid.*;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import com.extjs.gxt.ui.client.widget.grid.*;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.data.*;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.WcmMessages;
-import com.opencms.wcm.client.model.content.Content;
-import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.WcmService;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.opencms.wcm.client.WcmServiceAsync;
+import com.opencms.wcm.client.model.content.Content;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -64,7 +64,7 @@ public class ContentListPanel extends ContentPanel {
             @Override
             protected void load(Object loadConfig,
                                 AsyncCallback<PagingLoadResult<Content>> callback) {
-                service.PagingLoadArticleList((PagingLoadConfig) loadConfig, content, callback);
+                service.PagingLoadContentList((PagingLoadConfig) loadConfig, content, callback);
             }
         };
         final BasePagingLoader<PagingLoadResult<Content>> loader = new BasePagingLoader<PagingLoadResult<Content>>(proxy, new BeanModelReader());
@@ -81,7 +81,25 @@ public class ContentListPanel extends ContentPanel {
         columns.add(new ColumnConfig("title", msgs.content_title(), 80));
         columns.add(new ColumnConfig("author", msgs.content_author(), 80));
         columns.add(new ColumnConfig("source", msgs.content_source(), 80));
-        columns.add(new ColumnConfig("state", msgs.content_state(), 80));
+        GridCellRenderer<BeanModel> stateRender = new GridCellRenderer<BeanModel>(){
+            public Object render(BeanModel model, String property, ColumnData config, int rowIndex, int colIndex, ListStore<BeanModel> beanModelListStore, Grid<BeanModel> beanModelGrid) {
+                if("-1".equals(model.<Object>get("state"))){
+                    return msgs.content_state_auditing_reject();
+                } else if("0".equals(model.<Object>get("state"))){
+                    return msgs.content_state_auditing_wait();
+                } else if("1".equals(model.<Object>get("state"))){
+                    return msgs.content_state_publishing_wait();
+                } else if("2".equals(model.<Object>get("state"))){
+                    return msgs.content_state_published();
+                } else if("3".equals(model.<Object>get("state"))){
+                    return msgs.content_state_delete();
+                } else
+                    return model.<Object>get("state");
+            }
+        };
+        ColumnConfig stateConfig = new ColumnConfig("state", msgs.content_state(), 80);
+        stateConfig.setRenderer(stateRender);
+        columns.add(stateConfig);
         columns.add(new ColumnConfig("type", msgs.content_type(), 80));
         columns.add(new ColumnConfig("no", msgs.content_no(), 40));
 
@@ -164,7 +182,7 @@ public class ContentListPanel extends ContentPanel {
         this.setCollapsible(false);
         this.setAnimCollapse(false);
         this.setIconStyle("icon-table");
-        this.setLayout(new RowLayout(Style.Orientation.VERTICAL));
+        this.setLayout(new FitLayout());
         this.setButtonAlign(Style.HorizontalAlignment.CENTER);
         this.setSize("100%", "100%");
         this.add(grid);

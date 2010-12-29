@@ -15,6 +15,12 @@ public class Constants {
     //首页模板开始标志
     public static String INDEX_TEMPLATE_FILTER_START_WITH = "index";
 
+    //栏目模板开始标志
+    public static String CATEGORY_TEMPLATE_FILTER_START_WITH = "category";
+
+    //文章模板开始标志
+    public static String CONTENT_TEMPLATE_FILTER_START_WITH = "content";
+
     //模板结尾标志
     public static String TEMPLATE_FILTER_END_WITH = ".html.ftl";
 
@@ -42,5 +48,7 @@ public class Constants {
     public static String BASE_TEMPLATE_PROP_FILE = "template.txt";
 
     public static String TEMPLATE_PARENT_PATH = "templates";
+
+    public static String PUBLISH_OUTPUT_PATH = "content";
 
 }

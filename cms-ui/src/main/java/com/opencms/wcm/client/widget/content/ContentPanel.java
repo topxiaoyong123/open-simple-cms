@@ -1,29 +1,29 @@
 package com.opencms.wcm.client.widget.content;
 
-import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.binding.FormBinding;
 import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelFactory;
 import com.extjs.gxt.ui.client.data.BeanModelLookup;
-import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.button.ToggleButton;
-import com.extjs.gxt.ui.client.widget.form.*;
-import com.extjs.gxt.ui.client.widget.layout.*;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.NumberField;
+import com.extjs.gxt.ui.client.widget.form.TextField;
+import com.extjs.gxt.ui.client.widget.layout.ColumnData;
+import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
+import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.widget.extend.ExtendedHtmlEditor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

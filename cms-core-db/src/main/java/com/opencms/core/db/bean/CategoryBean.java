@@ -1,15 +1,15 @@
 package com.opencms.core.db.bean;
 
+import org.compass.annotations.Searchable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,12 +21,7 @@ import java.util.LinkedHashSet;
 @Entity
 @Table(name = "cms_category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class CategoryBean implements Serializable {
-
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    private String id;
+public class CategoryBean extends BaseEntity {
 
     @Column(nullable = false, length = 128)
     private String title;
@@ -49,12 +44,6 @@ public class CategoryBean implements Serializable {
     @Column
     private double no = 0;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificationDate;
-
     private boolean visible;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
@@ -68,14 +57,6 @@ public class CategoryBean implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "site", nullable = false)
     private SiteBean site;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -131,22 +112,6 @@ public class CategoryBean implements Serializable {
 
     public void setNo(double no) {
         this.no = no;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getModificationDate() {
-        return modificationDate;
-    }
-
-    public void setModificationDate(Date modificationDate) {
-        this.modificationDate = modificationDate;
     }
 
     public boolean isVisible() {

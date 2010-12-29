@@ -1,12 +1,10 @@
 package com.opencms.core.db.bean;
 
+import org.compass.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,55 +13,59 @@ import java.util.Date;
  * Time: 上午8:58
  * To change this template use File | Settings | File Templates.
  */
+@Searchable
 @Entity
 @Table(name = "cms_content")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class ContentBean implements Serializable {
+public class ContentBean extends BaseEntity {
 
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    private String id;
-
+    @SearchableProperty
     @Column(nullable = false, length = 128)
     private String title;
 
+    @SearchableProperty
     @Column(length = 255)
     private String keywords;
 
+    @SearchableProperty(index = Index.NO)
     @Column(length = 128)
     private String url;
 
+    @SearchableProperty
     @Column(length = 255)
     private String description;
 
+    @SearchableProperty(index = Index.NO)
     @Column
     private double no;
 
+    @SearchableProperty(index = Index.NO)
     @Column(nullable = false, length = 3)
     private String state;
 
+    @SearchableProperty(index = Index.NO)
     @Column(length = 3)
     private String top;
 
+    @SearchableProperty(index = Index.NO)
     @Column(nullable = false, length = 3)
     private String type;
 
+    @SearchableProperty(index = Index.NO)
     @Column(length = 32)
     private String source;
 
     @Column(length = 32)
     private String template;
 
+    @SearchableProperty(index = Index.NO)
     @Column(length = 32)
     private String author;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+    @Column
+    private boolean createHtml;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificationDate;
-
+    @SearchableComponent
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name = "content", nullable = false)
     private ContentDetailBean contentDetail;
@@ -71,14 +73,6 @@ public class ContentBean implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "category", nullable = false)
     private CategoryBean category;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -160,12 +154,12 @@ public class ContentBean implements Serializable {
         this.source = source;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public boolean isCreateHtml() {
+        return createHtml;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setCreateHtml(boolean createHtml) {
+        this.createHtml = createHtml;
     }
 
     public String getAuthor() {
@@ -174,14 +168,6 @@ public class ContentBean implements Serializable {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public Date getModificationDate() {
-        return modificationDate;
-    }
-
-    public void setModificationDate(Date modificationDate) {
-        this.modificationDate = modificationDate;
     }
 
     public CategoryBean getCategory() {

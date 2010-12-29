@@ -1,19 +1,19 @@
 package com.opencms.wcm.client.widget;
 
+import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
-import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.Style;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.http.client.*;
+import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.*;
+import com.google.gwt.user.client.ui.HTML;
 import com.opencms.wcm.client.WcmMessages;
 
 /**

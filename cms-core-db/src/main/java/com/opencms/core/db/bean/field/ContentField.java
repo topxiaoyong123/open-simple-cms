@@ -9,6 +9,8 @@ package com.opencms.core.db.bean.field;
  */
 public class ContentField {
 
+    public static final String _STATE_AUDITING_REJECT = "-1";
+
     public static final String _STATE_AUDITING_WAITING = "0";
 
     public static final String _STATE_PUBLISH_WAITING = "1";

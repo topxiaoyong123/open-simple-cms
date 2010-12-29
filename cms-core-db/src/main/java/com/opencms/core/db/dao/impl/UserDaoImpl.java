@@ -1,12 +1,9 @@
 package com.opencms.core.db.dao.impl;
 
-import com.opencms.core.db.dao.UserDao;
 import com.opencms.core.db.bean.UserBean;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import com.opencms.core.db.dao.UserDao;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +12,7 @@ import java.util.List;
  * Time: 14:45:46
  * To change this template use File | Settings | File Templates.
  */
-@Repository("userDao")
+@Repository
 @Transactional(rollbackFor = Exception.class)
 public class UserDaoImpl extends BaseDaoImpl<UserBean> implements UserDao {
 }

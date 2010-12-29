@@ -1,12 +1,11 @@
 package com.opencms.core.db.test;
 
+import com.opencms.core.db.bean.UserBean;
+import com.opencms.core.db.service.UserService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.opencms.core.db.bean.UserBean;
-import com.opencms.core.db.bean.RoleBean;
-import com.opencms.core.db.service.UserService;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,7 +21,7 @@ public class UserTest {
     @BeforeClass
     public static void init(){
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"/META-INF/spring/bundle-context-core-db.xml"});
-        userService = (UserService)context.getBean("userService");
+        userService = (UserService)context.getBean("userServiceImpl");
     }
 
     @Test

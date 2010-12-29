@@ -22,7 +22,7 @@ public interface ModelMapper {
 
     public Category map(CategoryBean categoryBean);
 
-    public Category map(CategoryBean categoryBean, int page, int pagesize, int totalcount);
+    public Category map(CategoryBean categoryBean, int page, int pageSize, int totalCount);
 
     public Content map(ContentBean contentBean);
 
@@ -37,5 +37,7 @@ public interface ModelMapper {
     public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize);
 
     public String getContentURL(ContentBean contentBean);
+
+    public String getContentPath(ContentBean contentBean);
 
 }

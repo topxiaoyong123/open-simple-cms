@@ -18,12 +18,7 @@ import java.util.Date;
 @Entity
 @Table(name = "cms_site")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class SiteBean implements Serializable {
-
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    private String id;
+public class SiteBean extends BaseEntity {
 
     @Column(nullable = false, length = 128)
     private String title;
@@ -31,7 +26,7 @@ public class SiteBean implements Serializable {
     @Column(nullable = false, length = 32, unique = true)
     private String name;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 128)
     private String url;
 
     @Column(length = 32, nullable = false)
@@ -46,23 +41,9 @@ public class SiteBean implements Serializable {
     @Column(length = 255)
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modificationDate;
-
 //    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "site")
 //    @OrderBy("no")
 //    private Set<CategoryBean> categorys = new LinkedHashSet<CategoryBean>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -118,21 +99,5 @@ public class SiteBean implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getModificationDate() {
-        return modificationDate;
-    }
-
-    public void setModificationDate(Date modificationDate) {
-        this.modificationDate = modificationDate;
     }
 }

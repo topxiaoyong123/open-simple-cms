@@ -4,8 +4,8 @@ import com.extjs.gxt.ui.client.event.EventType;
 import com.opencms.wcm.client.model.WcmApp;
 import com.opencms.wcm.client.model.WcmNodeModel;
 
-import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.

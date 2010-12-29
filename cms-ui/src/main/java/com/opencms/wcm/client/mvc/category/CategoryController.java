@@ -1,13 +1,13 @@
 package com.opencms.wcm.client.mvc.category;
 
-import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.*;
 import com.opencms.wcm.client.model.category.Category;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.core.client.GWT;
 
 /**
  * Created by IntelliJ IDEA.

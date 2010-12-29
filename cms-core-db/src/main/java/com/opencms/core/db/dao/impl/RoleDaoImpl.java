@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Time: 18:51:05
  * To change this template use File | Settings | File Templates.
  */
-@Repository("roleDao")
+@Repository
 @Transactional(readOnly = true)
 public class RoleDaoImpl extends BaseDaoImpl<RoleBean> implements RoleDao {
 }

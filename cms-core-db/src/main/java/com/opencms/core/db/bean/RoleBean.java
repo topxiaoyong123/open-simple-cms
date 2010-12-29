@@ -6,9 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,15 +19,10 @@ import java.util.LinkedHashSet;
 @Entity
 @Table(name = "cms_role")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class RoleBean implements Serializable {
-
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    private String id;
+public class RoleBean extends BaseEntity {
 
     @Column(nullable = false, length = 32)
-    private String rolename;
+    private String roleName;
 
     @Column(length = 256)
     private String description;
@@ -36,20 +30,12 @@ public class RoleBean implements Serializable {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "roles")
     private Set<UserBean> users = new LinkedHashSet<UserBean>();
 
-    public String getId() {
-        return id;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getRolename() {
-        return rolename;
-    }
-
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public String getDescription() {

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Time: 10:10:31
  * To change this template use File | Settings | File Templates.
  */
-@Repository("categoryDao")
+@Repository
 @Transactional(readOnly = true)
 public class CategoryDaoImpl extends BaseDaoImpl<CategoryBean> implements CategoryDao {
 }

@@ -1,38 +1,38 @@
 package com.opencms.wcm.client.widget.category;
 
+import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.Style;
+import com.extjs.gxt.ui.client.data.*;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
+import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
+import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.data.*;
-import com.opencms.wcm.client.WcmServiceAsync;
-import com.opencms.wcm.client.WcmService;
-import com.opencms.wcm.client.WcmMessages;
-import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.model.site.Site;
-import com.opencms.wcm.client.model.WcmNodeModel;
+import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.opencms.wcm.client.AppEvents;
+import com.opencms.wcm.client.WcmMessages;
+import com.opencms.wcm.client.WcmService;
+import com.opencms.wcm.client.WcmServiceAsync;
+import com.opencms.wcm.client.model.WcmNodeModel;
+import com.opencms.wcm.client.model.site.Site;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.

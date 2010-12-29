@@ -3,12 +3,13 @@ package com.opencms.app.category;
 import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
-import com.opencms.engine.model.EngineInfo;
-import com.opencms.util.CmsType;
 import com.opencms.util.common.page.PageBean;
 import com.opensymphony.xwork2.ActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -19,6 +20,8 @@ import javax.annotation.Resource;
  * Time: 13:28:18
  * To change this template use File | Settings | File Templates.
  */
+@Controller
+@Scope("prototype")
 public class CategoryAction extends ActionSupport {
 
     private static Logger logger = LoggerFactory.getLogger(CategoryAction.class);
@@ -45,7 +48,7 @@ public class CategoryAction extends ActionSupport {
 
     private int page = 1;
 
-    private int pagesize = PageBean.DEFAULT_SIZE;
+    private int pageSize = PageBean.DEFAULT_SIZE;
 
     public int getPage() {
         return page;
@@ -55,27 +58,27 @@ public class CategoryAction extends ActionSupport {
         this.page = page;
     }
 
-    public int getPagesize() {
-        return pagesize;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setPagesize(int pagesize) {
-        this.pagesize = pagesize;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
-    @Resource(name = "appEngine")
-    private Engine cmsEngine;
+    @Resource
+    private Engine engine;
 
-    @Resource(name = "cmsManager")
+    @Resource
     private CmsManager cmsManager;
 
+    @Transactional(readOnly = true)
     public String view(){
-        logger.debug("category-id:[{}] page:[{}] pagesize:[{}]", new Object[]{id, page, pagesize});
+        logger.debug("category-id:[{}] page:[{}] pagesize:[{}]", new Object[]{id, page, pageSize});
         try{
             CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(id);
             if(categoryBean != null){
-                EngineInfo info = new EngineInfo(CmsType.CATEGORY, categoryBean.getId(), categoryBean.getName());
-                html = cmsEngine.engine(info);
+                html = engine.engineCategory(categoryBean, page, pageSize);
             } else {
                 return "404";
             }

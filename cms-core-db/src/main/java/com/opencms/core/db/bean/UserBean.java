@@ -6,9 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,12 +19,7 @@ import java.util.LinkedHashSet;
 @Entity
 @Table(name = "cms_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class UserBean implements Serializable {
-
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid.hex")
-    private String id;
+public class UserBean extends BaseEntity {
 
     @Column(unique = true, nullable = false, length = 32)
     private String username;
@@ -36,14 +30,6 @@ public class UserBean implements Serializable {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "cms_usergroup")
     private Set<RoleBean> roles = new LinkedHashSet<RoleBean>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -81,7 +67,7 @@ public class UserBean implements Serializable {
 
     @Override
     public String toString() {
-        return "id:" + id + ", username:" + username;
+        return "id:" + getId() + ", username:" + username;
     }
 
 }

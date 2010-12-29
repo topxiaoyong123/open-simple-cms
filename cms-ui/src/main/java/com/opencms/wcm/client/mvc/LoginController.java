@@ -1,16 +1,16 @@
 package com.opencms.wcm.client.mvc;
 
-import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.model.User;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Created by IntelliJ IDEA.

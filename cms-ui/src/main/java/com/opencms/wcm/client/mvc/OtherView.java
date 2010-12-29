@@ -1,18 +1,18 @@
 package com.opencms.wcm.client.mvc;
 
-import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.Registry;
+import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.opencms.wcm.client.WcmServiceAsync;
-import com.opencms.wcm.client.WcmService;
-import com.opencms.wcm.client.AppState;
-import com.opencms.wcm.client.model.WcmApp;
-import com.opencms.wcm.client.model.Entry;
 import com.google.gwt.user.client.ui.Frame;
+import com.opencms.wcm.client.AppState;
+import com.opencms.wcm.client.WcmService;
+import com.opencms.wcm.client.WcmServiceAsync;
+import com.opencms.wcm.client.model.Entry;
+import com.opencms.wcm.client.model.WcmApp;
 
 import java.util.Map;
 

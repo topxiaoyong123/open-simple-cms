@@ -2,8 +2,8 @@ package com.opencms.wcm.client.model.content;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -41,6 +41,8 @@ public class Content implements Serializable, IsSerializable {
     private String source;
 
     private String content;
+
+    private boolean createHtml;
 
     private Date creationDate;
 
@@ -144,6 +146,14 @@ public class Content implements Serializable, IsSerializable {
         this.content = content;
     }
 
+    public boolean isCreateHtml() {
+        return createHtml;
+    }
+
+    public void setCreateHtml(boolean createHtml) {
+        this.createHtml = createHtml;
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }
@@ -166,5 +176,15 @@ public class Content implements Serializable, IsSerializable {
 
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
+    }
+
+    private String[] states;
+
+    public String[] getStates() {
+        return states;
+    }
+
+    public void setStates(String[] states) {
+        this.states = states;
     }
 }

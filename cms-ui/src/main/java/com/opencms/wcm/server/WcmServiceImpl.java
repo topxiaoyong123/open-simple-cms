@@ -1,38 +1,42 @@
 package com.opencms.wcm.server;
 
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.opencms.core.db.bean.*;
+import com.opencms.core.db.bean.field.ContentField;
+import com.opencms.core.db.service.CmsManager;
+import com.opencms.engine.Engine;
+import com.opencms.engine.PublishStatus;
 import com.opencms.template.TemplateHelper;
 import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
 import com.opencms.util.common.Constants;
-import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.ApplicationException;
-import com.opencms.wcm.client.model.*;
-import com.opencms.wcm.client.model.file.WcmFile;
-import com.opencms.wcm.client.model.site.Site;
+import com.opencms.wcm.client.WcmService;
+import com.opencms.wcm.client.model.User;
+import com.opencms.wcm.client.model.WcmApp;
+import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
+import com.opencms.wcm.client.model.file.WcmFile;
+import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.template.CmsTemplate;
 import com.opencms.wcm.server.message.MessageSourceHelper;
-import com.opencms.core.db.service.CmsManager;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
-
-import java.io.File;
-import java.util.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,6 +46,7 @@ import javax.servlet.http.HttpSession;
  * To change this template use File | Settings | File Templates.
  */
 @Component("wcmService")
+@Scope("session")
 @Transactional(readOnly = true)
 public class WcmServiceImpl implements WcmService {
 
@@ -82,18 +87,21 @@ public class WcmServiceImpl implements WcmService {
     }
 
     //cmsManager
-    @Resource(name = "cmsManager")
+    @Resource
     private CmsManager cmsManager;
 
     //spring国际化处理
-    @Resource(name = "messageSourceHelper")
+    @Resource
     private MessageSourceHelper messageSourceHelper;
 
-    @Resource(name = "cmsUtils")
+    @Resource
     private CmsUtils cmsUtils;
 
-    @Resource(name = "templateHelper")
+    @Resource
     private TemplateHelper templateHelper;
+
+    @Resource
+    private Engine engine;
 
     @Transactional(readOnly = true)
     public User login(User user) throws ApplicationException {
@@ -112,6 +120,7 @@ public class WcmServiceImpl implements WcmService {
         return user;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public boolean logout() throws ApplicationException {
         String username = String.valueOf(this.getSession().getAttribute("username"));
         logger.debug(username + "退出登录");
@@ -322,7 +331,7 @@ public class WcmServiceImpl implements WcmService {
                 contentBean.setContentDetail(contentDetailBean);
             }
             cmsUtils.getBeanMapperHelper().simpleMap(content, contentBean);
-            contentBean.setState("0");
+            contentBean.setState(ContentField._STATE_AUDITING_WAITING);
             return cmsManager.getContentService().addOrUpdateContent(contentBean);
         } catch(Exception e){
             e.printStackTrace();
@@ -356,10 +365,21 @@ public class WcmServiceImpl implements WcmService {
     }
 
     @Transactional(readOnly = true)
-    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException {
+    public PagingLoadResult<Content> PagingLoadContentList(PagingLoadConfig config, Content content) throws ApplicationException {
         try {
-            List<ContentBean> list = cmsManager.getContentService().getContentsByCategoryIdAndPage(content.getCategoryId(), config.getOffset(), config.getLimit());
-            long count = cmsManager.getContentService().getCountByCategoryId(content.getCategoryId());
+            List<ContentBean> list;
+            long count;
+            if(content.getState() != null){
+                list = cmsManager.getContentService().getContentsByCategoryIdAndPage(content.getCategoryId(), content.getState(), config.getOffset(), config.getLimit());
+                count = cmsManager.getContentService().getCountByCategoryId(content.getCategoryId(), content.getState());
+            } else if(content.getStates() != null){
+                list = cmsManager.getContentService().getContentsByCategoryIdAndPage(content.getCategoryId(), content.getStates(), config.getOffset(), config.getLimit());
+                count = cmsManager.getContentService().getCountByCategoryId(content.getCategoryId(), content.getStates());
+            } else{
+                list = cmsManager.getContentService().getContentsByCategoryIdAndPage(content.getCategoryId(), config.getOffset(), config.getLimit());
+                count = cmsManager.getContentService().getCountByCategoryId(content.getCategoryId());
+            }
+
             List<Content> contents = new ArrayList<Content>();
             for(ContentBean contentBean : list){
                 Content c = new Content();
@@ -372,6 +392,69 @@ public class WcmServiceImpl implements WcmService {
             e.printStackTrace();
             logger.error("error:", e);
             throw new ApplicationException(e.getMessage());    
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public boolean auditingContents(List<Content> contents, boolean pass) throws ApplicationException {
+        try {
+            for(Content content : contents){
+                ContentBean contentBean = cmsManager.getContentService().getContentById(content.getId());
+                if(pass){
+                    contentBean.setState(ContentField._STATE_PUBLISH_WAITING);
+                } else {
+                    contentBean.setState(ContentField._STATE_AUDITING_REJECT);
+                }
+                cmsManager.getContentService().updateContent(contentBean);
+            }
+            return true;
+        } catch(Exception e){
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    @Resource
+    private PublishStatus status;
+
+    @Transactional(rollbackFor = Exception.class)
+    public boolean publishingContents(List<Content> contents, boolean createHtml) throws ApplicationException {
+        try {
+            status.clean();
+            status.setInitial(true);
+            status.setTotal(contents.size());
+            for(Content content : contents){
+                ContentBean contentBean = cmsManager.getContentService().getContentById(content.getId());
+                engine.engineContent(contentBean, createHtml);
+                contentBean.setState(ContentField._STATE_PUBLISHED);
+                contentBean.setCreateHtml(createHtml);
+                cmsManager.getContentService().updateContent(contentBean);
+                status.addFinished(1);
+            }
+            status.setEnd(true);
+            return true;
+        } catch(Exception e){
+            status.setException(true);
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public int[] getPublishingContentsProcess() throws ApplicationException {
+        try{
+            if(!status.isInitial()){
+                return null;
+            }
+            if(status.isException()){
+                return new int[]{-1, 0};
+            }
+            return new int[]{status.getFinished(), status.getTotal()};
+        } finally {
+            if(status.isEnd() || status.isException())
+                status.clean();
         }
     }
 

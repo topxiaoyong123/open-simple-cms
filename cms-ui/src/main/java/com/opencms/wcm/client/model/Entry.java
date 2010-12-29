@@ -1,7 +1,7 @@
 package com.opencms.wcm.client.model;
 
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.event.EventType;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
 /**
  * Created by IntelliJ IDEA.

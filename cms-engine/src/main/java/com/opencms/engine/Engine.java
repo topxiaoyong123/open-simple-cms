@@ -1,6 +1,8 @@
 package com.opencms.engine;
 
-import com.opencms.engine.model.EngineInfo;
+import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.bean.SiteBean;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -14,12 +16,12 @@ import java.io.IOException;
  */
 public interface Engine {
 
-    public String engine(EngineInfo info) throws IOException, TemplateException;
+    public String engineSite(SiteBean siteBean) throws IOException, TemplateException;
 
-    public String engineSite(EngineInfo info) throws IOException, TemplateException;
+    public String engineCategory(CategoryBean categoryBean) throws IOException, TemplateException;
 
-    public String engineCategory(EngineInfo info) throws IOException, TemplateException;
+    public String engineCategory(CategoryBean categoryBean, int page, int pageSize) throws IOException, TemplateException;
 
-    public String engineContent(EngineInfo info) throws IOException, TemplateException;
+    public String engineContent(ContentBean contentBean, boolean create) throws IOException, TemplateException;
 
 }

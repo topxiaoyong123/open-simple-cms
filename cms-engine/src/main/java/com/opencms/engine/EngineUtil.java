@@ -3,10 +3,8 @@ package com.opencms.engine;
 import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
-import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Menu;
-import com.opencms.engine.model.Site;
 
 import java.util.List;
 

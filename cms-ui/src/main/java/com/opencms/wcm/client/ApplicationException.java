@@ -1,7 +1,7 @@
 package com.opencms.wcm.client;
 
-import com.google.gwt.user.client.rpc.SerializableException;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.user.client.rpc.SerializableException;
 
 /**
  * Created by IntelliJ IDEA.

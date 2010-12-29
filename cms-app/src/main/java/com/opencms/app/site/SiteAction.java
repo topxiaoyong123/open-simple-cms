@@ -3,11 +3,12 @@ package com.opencms.app.site;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
-import com.opencms.engine.model.EngineInfo;
-import com.opencms.util.CmsType;
 import com.opensymphony.xwork2.ActionSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -18,6 +19,8 @@ import javax.annotation.Resource;
  * Time: 下午11:54
  * To change this template use File | Settings | File Templates.
  */
+@Controller
+@Scope("prototype")
 public class SiteAction extends ActionSupport {
 
     private static Logger logger = LoggerFactory.getLogger(SiteAction.class);
@@ -42,18 +45,18 @@ public class SiteAction extends ActionSupport {
         this.html = html;
     }
 
-    @Resource(name = "appEngine")
-    private Engine cmsEngine;
+    @Resource
+    private Engine engine;
 
-    @Resource(name = "cmsManager")
+    @Resource
     private CmsManager cmsManager;
 
+    @Transactional(readOnly = true)
     public String view(){
         try{
             SiteBean siteBean = cmsManager.getSiteService().getSiteByName(name);
             if(siteBean != null){
-                EngineInfo info = new EngineInfo(CmsType.SITE, siteBean.getId(), siteBean.getName());
-                html = cmsEngine.engine(info);
+                html = engine.engineSite(siteBean);
             } else {
                 return "404";
             }

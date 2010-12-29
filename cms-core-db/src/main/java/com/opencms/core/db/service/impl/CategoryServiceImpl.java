@@ -1,10 +1,10 @@
 package com.opencms.core.db.service.impl;
 
-import com.opencms.core.db.query.Finder;
-import org.springframework.stereotype.Service;
-import com.opencms.core.db.service.CategoryService;
-import com.opencms.core.db.dao.CategoryDao;
 import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.core.db.dao.CategoryDao;
+import com.opencms.core.db.query.Finder;
+import com.opencms.core.db.service.CategoryService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -19,11 +19,11 @@ import java.util.List;
  * Time: 10:09:04
  * To change this template use File | Settings | File Templates.
  */
-@Service("categoryService")
+@Service
 @Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {
 
-    @Resource(name = "categoryDao")
+    @Resource
     private CategoryDao categoryDao;
 
     @Transactional(rollbackFor = Exception.class)
