@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Time: 13:06:37
  * To change this template use File | Settings | File Templates.
  */
-@Repository("siteDao")
+@Repository
 @Transactional(readOnly = true)
 public class SiteDaoImpl extends BaseDaoImpl<SiteBean> implements SiteDao {
 }

@@ -1,7 +1,5 @@
 package com.opencms.wcm.client;
 
-import com.extjs.gxt.ui.client.event.EventType;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -29,7 +27,7 @@ public class AppEvents {
     public static final AppEventType ARTICLE_MANAGER_ITEM_SELECTION_NONE = new AppEventType();
     public static final AppEventType ARTICLE_MANAGER_CHANGE_CATEGORY = new AppEventType();
 
-    public final static AppEventType PUBLISH_MANAGER = new AppEventType();
+    public final static AppEventType PUBLISHING_MANAGER = new AppEventType();
 
     //站点管理
     public final static AppEventType SITE_MANAGER = new AppEventType();
@@ -51,8 +49,6 @@ public class AppEvents {
 
     //文章管理
     public final static AppEventType CONTENT_MANAGER = new AppEventType();
-    public final static AppEventType CONTENT_AUDITING_MANAGER = new AppEventType();
-    public final static AppEventType CONTENT_PUBLISH_MANAGER = new AppEventType();
     public final static AppEventType CONTENT_MANAGER_ALL = new AppEventType();
     public final static AppEventType CONTENT_MANAGER_ADD = new AppEventType();
     public final static AppEventType CONTENT_MANAGER_EDIT = new AppEventType();
@@ -60,4 +56,14 @@ public class AppEvents {
     public final static AppEventType CONTENT_MANAGER_SAVE = new AppEventType();
     public final static AppEventType CONTENT_MANAGER_CANCEL = new AppEventType();
     public final static AppEventType CONTENT_MANAGER_SUCCESS = new AppEventType();
+
+    //文章审核
+    public final static AppEventType CONTENT_AUDITING_MANAGER = new AppEventType();
+    public final static AppEventType CONTENT_AUDITING_MANAGER_PASS = new AppEventType();
+    public final static AppEventType CONTENT_AUDITING_MANAGER_REJECT = new AppEventType();
+    public final static AppEventType CONTENT_AUDITING_MANAGER_SUCCESS = new AppEventType();
+
+    public final static AppEventType CONTENT_PUBLISHING_MANAGER = new AppEventType();
+    public final static AppEventType CONTENT_PUBLISHING_MANAGER_DO = new AppEventType();
+    public final static AppEventType CONTENT_PUBLISHING_MANAGER_SUCCESS = new AppEventType();
 }

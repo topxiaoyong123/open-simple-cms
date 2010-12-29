@@ -1,4 +1,4 @@
-package com.opencms.engine.impl;
+package com.opencms.engine.publish.impl;
 
 import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
@@ -7,7 +7,9 @@ import com.opencms.core.db.bean.field.ContentField;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.EngineUtil;
 import com.opencms.engine.ModelMapper;
-import com.opencms.engine.model.*;
+import com.opencms.engine.model.Content;
+import com.opencms.engine.model.Item;
+import com.opencms.engine.model.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -24,16 +26,16 @@ import java.util.List;
  * Time: 上午11:01
  * To change this template use File | Settings | File Templates.
  */
-@Component("appEngineUtil")
+@Component
 @Transactional(readOnly = true)
-public class AppEngineUtil implements EngineUtil {
+public class PublishEngineUtil implements EngineUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(AppEngineUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(PublishEngineUtil.class);
 
-    @Resource(name = "cmsManager")
+    @Resource
     private CmsManager cmsManager;
 
-    @Resource(name = "appMapper")
+    @Resource
 	private ModelMapper mapper;
 
     public Menu getSiteMenu(String siteId){

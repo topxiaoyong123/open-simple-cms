@@ -22,6 +22,13 @@
             <artifactId>compass</artifactId>
             <version>${compass.version}</version>
         </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

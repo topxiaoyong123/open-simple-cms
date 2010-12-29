@@ -16,10 +16,10 @@ import javax.annotation.Resource;
 @Component
 public class CmsUtils {
 
-    @Resource(name = "resourceHelper")
+    @Resource
     private ResourceHelper resourceHelper;
 
-    @Resource(name = "beanMapperHelper")
+    @Resource
     private BeanMapperHelper beanMapperHelper;
 
     public ResourceHelper getResourceHelper() {

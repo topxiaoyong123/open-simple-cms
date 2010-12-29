@@ -1,16 +1,33 @@
 package com.opencms.engine.publish.impl;
 
+import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.bean.SiteBean;
+import com.opencms.core.db.bean.field.ContentField;
+import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
+import com.opencms.engine.EngineUtil;
 import com.opencms.engine.ModelMapper;
 import com.opencms.engine.impl.FreemarkerEngineImpl;
-import com.opencms.engine.model.EngineInfo;
+import com.opencms.engine.model.Category;
+import com.opencms.engine.model.Content;
+import com.opencms.engine.model.Site;
+import com.opencms.template.TemplateHelper;
+import com.opencms.util.CmsUtils;
+import com.opencms.util.common.page.PageBean;
+import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.IOException;
+import java.io.*;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,35 +36,86 @@ import java.io.IOException;
  * Time: 下午3:27
  * To change this template use File | Settings | File Templates.
  */
-@Component("publishEngine")
+@Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
 
-    @Resource(name = "publishMapper")
+    private static Logger logger = LoggerFactory.getLogger(PublishEngineImpl.class);
+
+    @Resource
     private ModelMapper mapper;
 
-    @Override
-    public String engine(EngineInfo info) throws IOException, TemplateException {
-        return null;
+    @Resource
+    private TemplateHelper templateHelper;
+
+    @Resource
+    private EngineUtil engineUtil;
+
+    @Resource
+    private CmsManager cmsManager;
+
+    @Resource
+    private CmsUtils cmsUtils;
+
+    @PostConstruct
+    public void init() {
+        templateModel.setEngineUtil(engineUtil);
     }
 
-    @Override
-    public String engineSite(EngineInfo info) throws IOException, TemplateException {
-        return null;
+    public String engineSite(SiteBean siteBean) throws IOException, TemplateException {
+        templateModel.clean();
+        Site site = mapper.map(siteBean);
+        templateModel.setSite(site);
+        Template template = templateHelper.getTemplate(site);
+        return render(template, templateModel.getModel());
     }
 
-    @Override
-    public String engineCategory(EngineInfo info) throws IOException, TemplateException {
-        return null;
+    public String engineCategory(CategoryBean categoryBean) throws IOException, TemplateException {
+        return engineCategory(categoryBean, 1, PageBean.DEFAULT_SIZE);
     }
 
-    @Override
-    public String engineContent(EngineInfo info) throws IOException, TemplateException {
-        return null;
+    public String engineCategory(CategoryBean categoryBean, int page, int pageSize) throws IOException, TemplateException {
+        templateModel.clean();
+        int contentsCount = (int) cmsManager.getContentService().getCountByCategoryId(categoryBean.getId(), ContentField._STATE_PUBLISHED);
+        Category category = mapper.map(categoryBean, page, pageSize, contentsCount);
+        Site site = mapper.map(categoryBean.getSite());
+        templateModel.setCategory(category);
+        templateModel.setSite(site);
+        Template template = templateHelper.getTemplate(category);
+        return render(template, templateModel.getModel());
     }
 
-    private void create(){
+    public String engineContent(ContentBean contentBean, boolean create) throws IOException, TemplateException {
+        templateModel.clean();
+        Content content = mapper.map(contentBean);
+        Category category = mapper.map(contentBean.getCategory());
+        Site site = mapper.map(contentBean.getCategory().getSite());
+        templateModel.setContent(content);
+        templateModel.setCategory(category);
+        templateModel.setSite(site);
+        Template template = templateHelper.getTemplate(contentBean);
+        String html = render(template, templateModel.getModel());
+        if (create)
+            create(html, contentBean);
+        return html;
+    }
 
+    private void create(String html, ContentBean contentBean) throws IOException {
+        logger.debug("html内容为:{}", html);
+        String path = mapper.getContentPath(contentBean);
+        logger.debug("生成文件为:{}", path);
+        File f = new File(path);
+        //对文件加锁
+        FileOutputStream outputStream = new FileOutputStream(f);
+        FileChannel channel = outputStream.getChannel();
+        FileLock lock = channel.tryLock(); //加锁
+        Writer out = new BufferedWriter(new OutputStreamWriter(outputStream, cmsUtils.getResourceHelper().getCmsResource().getOutputEncoding()));
+        out.append(html);
+        out.flush();
+        lock.release();//解锁
+        outputStream.close();
+        out.close();
+        logger.info("成功生成文件：{}", path);
     }
 
 }

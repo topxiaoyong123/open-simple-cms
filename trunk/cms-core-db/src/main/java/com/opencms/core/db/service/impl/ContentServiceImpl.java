@@ -1,10 +1,10 @@
 package com.opencms.core.db.service.impl;
 
+import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.dao.ContentDao;
 import com.opencms.core.db.query.Finder;
 import com.opencms.core.db.query.Page;
 import com.opencms.core.db.service.ContentService;
-import com.opencms.core.db.bean.ContentBean;
-import com.opencms.core.db.dao.ContentDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +20,11 @@ import java.util.List;
  * Time: 20:58:51
  * To change this template use File | Settings | File Templates.
  */
-@Service("contentService")
+@Service
 @Transactional(readOnly = true)
 public class ContentServiceImpl implements ContentService {
 
-    @Resource(name = "contentDao")
+    @Resource
     private ContentDao contentDao;
 
     @Transactional(rollbackFor = Exception.class)
@@ -81,6 +81,40 @@ public class ContentServiceImpl implements ContentService {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id", "state"});
         finder.setValues(new Serializable[]{categoryId, state});
+        return contentDao.getCountByFinder(finder);
+    }
+
+    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String[] states, int firstResult, int maxResults) {
+        Finder finder = new Finder(ContentBean.class);
+        finder.setColumns(new String[]{"category.id"});
+        finder.setValues(new Serializable[]{categoryId});
+        if(states != null && states.length > 0){
+            StringBuffer s = new StringBuffer(" (1=2 ");
+            for(int i = 0; i < states.length; i ++){
+                s.append(" or o.state = ? ");
+            }
+            s.append(") ");
+            finder.setFilter(s.toString());
+            finder.setFilterValues(states);
+        }
+        finder.setPage(new Page(firstResult, maxResults));
+        finder.setOrders(new String[]{"top", "no", "creationDate"});
+        return contentDao.getByFinder(finder);
+    }
+
+    public long getCountByCategoryId(String categoryId, String[] states) {
+        Finder finder = new Finder(ContentBean.class);
+        finder.setColumns(new String[]{"category.id"});
+        finder.setValues(new Serializable[]{categoryId});
+        if(states != null && states.length > 0){
+            StringBuffer s = new StringBuffer(" (1=2 ");
+            for(int i = 0; i < states.length; i ++){
+                s.append(" or o.state = ? ");
+            }
+            s.append(") ");
+            finder.setFilter(s.toString());
+            finder.setFilterValues(states);
+        }
         return contentDao.getCountByFinder(finder);
     }
 }

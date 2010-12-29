@@ -1,13 +1,14 @@
 package com.opencms.wcm.client;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.google.gwt.core.client.GWT;
-import com.opencms.wcm.client.model.*;
-import com.opencms.wcm.client.model.file.WcmFile;
-import com.opencms.wcm.client.model.site.Site;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.opencms.wcm.client.model.User;
+import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.opencms.wcm.client.model.file.WcmFile;
+import com.opencms.wcm.client.model.site.Site;
 
 import java.util.List;
 
@@ -31,8 +32,6 @@ public interface WcmServiceAsync {
 
     void getNodeChildren(WcmNodeModel node, AsyncCallback async);
 
-    void PagingLoadArticleList(PagingLoadConfig config, Content content, AsyncCallback async);
-
     void getAllSites(AsyncCallback async);
 
     void addOrUpdateSite(Site site, AsyncCallback async);
@@ -48,6 +47,14 @@ public interface WcmServiceAsync {
     void addOrUpdateContent(Content category, AsyncCallback async);
 
     void getContentById(String id, WcmNodeModel parent, AsyncCallback async);
+
+    void PagingLoadContentList(PagingLoadConfig config, Content content, AsyncCallback async);
+
+    void auditingContents(List<Content> contents, boolean pass, AsyncCallback async);
+
+    void publishingContents(List<Content> contents, boolean createHtml, AsyncCallback async);
+
+    void getPublishingContentsProcess(AsyncCallback async);
 
     void getCmsTemplates(String baseTemplate, String type, AsyncCallback async);
 

@@ -16,15 +16,15 @@ import java.lang.reflect.Field;
 @Component
 public class BeanMapperHelper {
 
-    @Resource(name = "mapper")
-    private DozerBeanMapper mapper;
+    @Resource
+    private DozerBeanMapper beanMapper;
 
     public Object simpleMap(Object source, Class targetClass){
-        return mapper.map(source, targetClass);
+        return beanMapper.map(source, targetClass);
     }
 
     public void simpleMap(Object source, Object target){
-        mapper.map(source, target);
+        beanMapper.map(source, target);
     }
 
     public void clientSimpleMap(Object source, Object target){

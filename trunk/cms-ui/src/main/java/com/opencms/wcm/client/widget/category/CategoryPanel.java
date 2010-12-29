@@ -1,21 +1,21 @@
 package com.opencms.wcm.client.widget.category;
 
-import com.extjs.gxt.ui.client.widget.form.*;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.binding.FormBinding;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.binding.FormBinding;
+import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelFactory;
 import com.extjs.gxt.ui.client.data.BeanModelLookup;
-import com.extjs.gxt.ui.client.data.BeanModel;
-import com.opencms.wcm.client.WcmMessages;
-import com.opencms.wcm.client.AppEvents;
-import com.opencms.wcm.client.model.category.Category;
-import com.opencms.wcm.client.model.WcmNodeModel;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.*;
 import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.AppEvents;
+import com.opencms.wcm.client.WcmMessages;
+import com.opencms.wcm.client.model.WcmNodeModel;
+import com.opencms.wcm.client.model.category.Category;
 
 /**
  * Created by IntelliJ IDEA.

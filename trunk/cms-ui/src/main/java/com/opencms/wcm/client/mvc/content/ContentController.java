@@ -1,13 +1,12 @@
 package com.opencms.wcm.client.mvc.content;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.*;
-import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
 
 /**
@@ -28,7 +27,7 @@ public class ContentController extends Controller {
     public ContentController() {
         this.registerEventTypes(AppEvents.CONTENT_MANAGER);
         this.registerEventTypes(AppEvents.CONTENT_AUDITING_MANAGER);
-        this.registerEventTypes(AppEvents.CONTENT_PUBLISH_MANAGER);
+        this.registerEventTypes(AppEvents.CONTENT_PUBLISHING_MANAGER);
         this.registerEventTypes(AppEvents.CONTENT_MANAGER_ALL);
         this.registerEventTypes(AppEvents.CONTENT_MANAGER_ADD);
         this.registerEventTypes(AppEvents.CONTENT_MANAGER_EDIT);
@@ -44,7 +43,7 @@ public class ContentController extends Controller {
                 || AppEvents.CONTENT_MANAGER_CANCEL == appEvent.getType()
                 || AppEvents.CONTENT_MANAGER_SUCCESS == appEvent.getType()
                 || AppEvents.CONTENT_AUDITING_MANAGER == appEvent.getType()
-                || AppEvents.CONTENT_PUBLISH_MANAGER == appEvent.getType()
+                || AppEvents.CONTENT_PUBLISHING_MANAGER == appEvent.getType()
                 || AppEvents.CONTENT_MANAGER_ALL == appEvent.getType()) {
             this.forwardToView(view, appEvent);
         } else if(AppEvents.CONTENT_MANAGER_SAVE == appEvent.getType()){

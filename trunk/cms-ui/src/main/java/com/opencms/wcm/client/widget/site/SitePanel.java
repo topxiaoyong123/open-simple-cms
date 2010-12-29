@@ -1,24 +1,24 @@
 package com.opencms.wcm.client.widget.site;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.TextArea;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.binding.FormBinding;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.binding.FormBinding;
+import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelFactory;
 import com.extjs.gxt.ui.client.data.BeanModelLookup;
-import com.extjs.gxt.ui.client.data.BeanModel;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.TextArea;
+import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
-import com.opencms.wcm.client.model.site.Site;
-import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.AppEvents;
+import com.opencms.wcm.client.WcmMessages;
+import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.widget.template.CmsTemplateChooser;
 
 /**
@@ -54,7 +54,6 @@ public class SitePanel extends FormPanel {
 
         final TextField<String> url = new TextField<String>(); // url
         url.setName("url");
-        url.setAllowBlank(false);
         url.setFieldLabel(msgs.site_url());
         this.add(url);
 

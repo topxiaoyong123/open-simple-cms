@@ -1,18 +1,17 @@
 package com.opencms.wcm.server;
 
-import com.google.gwt.user.server.rpc.*;
+import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializationException;
-import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
-import javax.servlet.ServletConfig;
-import java.io.IOException;
-
+import com.google.gwt.user.server.rpc.*;
 import com.opencms.util.ContextThreadLocal;
 import org.springframework.web.context.WebApplicationContext;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by IntelliJ IDEA.

@@ -29,4 +29,8 @@ public interface ContentService {
 
     public long getCountByCategoryId(String categoryId, String state);
 
+    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String[] states, int firstResult, int maxResults);
+
+    public long getCountByCategoryId(String categoryId, String[] states);
+
 }

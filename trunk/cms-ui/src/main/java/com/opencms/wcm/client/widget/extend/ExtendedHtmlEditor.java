@@ -3,8 +3,6 @@ package com.opencms.wcm.client.widget.extend;
 import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.HtmlEditor;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.RichTextArea;
 
 import java.util.ArrayList;

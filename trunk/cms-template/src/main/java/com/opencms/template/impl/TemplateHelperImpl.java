@@ -28,12 +28,12 @@ import java.util.Properties;
  * Time: 下午10:02
  * To change this template use File | Settings | File Templates.
  */
-@Component("templateHelper")
+@Component
 public class TemplateHelperImpl implements TemplateHelper {
 
     private static Logger logger = LoggerFactory.getLogger(TemplateHelperImpl.class);
 
-    @Resource(name = "cmsUtils")
+    @Resource
     private CmsUtils cmsUtils;
 
     private Configuration freeMarkerConfiguration;
@@ -104,6 +104,10 @@ public class TemplateHelperImpl implements TemplateHelper {
             return getSiteTemplates();
         } else if("1".equals(type)){
             return getIndexTemplates(baseTemplate);
+        } else if("2".equals(type)){
+            return getCategoryTemplates(baseTemplate);
+        } else if("3".equals(type)){
+            return getContentTemplates(baseTemplate);
         }
         return new ArrayList<CmsTemplateBean>();
     }
@@ -158,7 +162,57 @@ public class TemplateHelperImpl implements TemplateHelper {
         return list;
     }
 
+    private List<CmsTemplateBean> getCategoryTemplates(String baseTemplate){
+        logger.debug("取得站点[{}]下所有栏目模板", baseTemplate);
+        List<CmsTemplateBean> list = new ArrayList<CmsTemplateBean>();
+        String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath() + "/" + baseTemplate;
+        File base = new File(templatePath);
+        FileFilter fileFilter = new FileFilterImpl(true, false, Constants.CATEGORY_TEMPLATE_FILTER_START_WITH, Constants.TEMPLATE_FILTER_END_WITH);
+        File[] subFiles = base.listFiles(fileFilter);
+        for(File subFile : subFiles){
+            CmsTemplateBean cmsTemplateBean = new CmsTemplateBean();
+            cmsTemplateBean.setName(subFile.getName());
+            cmsTemplateBean.setShortcut(getTemplateUrl(baseTemplate) + subFile.getName().replace(Constants.TEMPLATE_FILTER_END_WITH, Constants.TEMPLATE_SHORTCUT_TYPE));
+            cmsTemplateBean.setType("2");
+            try {
+                Properties prop = new Properties();
+                prop.load(new BufferedInputStream(new FileInputStream(new File(templatePath, subFile.getName().replace(Constants.TEMPLATE_FILTER_END_WITH, Constants.TEMPLATE_PROP_TYPE)))));
+                cmsTemplateBean.setTitle(new String(prop.getProperty("template.title", subFile.getName()).getBytes("ISO8859-1"), cmsUtils.getResourceHelper().getCmsResource().getDefaultEncoding()));
+                cmsTemplateBean.setDescription(new String(prop.getProperty("template.description", subFile.getName()).getBytes("ISO8859-1"), cmsUtils.getResourceHelper().getCmsResource().getDefaultEncoding()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            list.add(cmsTemplateBean);
+        }
+        return list;
+    }
+
+    private List<CmsTemplateBean> getContentTemplates(String baseTemplate){
+        logger.debug("取得站点[{}]下所有文章模板", baseTemplate);
+        List<CmsTemplateBean> list = new ArrayList<CmsTemplateBean>();
+        String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath() + "/" + baseTemplate;
+        File base = new File(templatePath);
+        FileFilter fileFilter = new FileFilterImpl(true, false, Constants.CONTENT_TEMPLATE_FILTER_START_WITH, Constants.TEMPLATE_FILTER_END_WITH);
+        File[] subFiles = base.listFiles(fileFilter);
+        for(File subFile : subFiles){
+            CmsTemplateBean cmsTemplateBean = new CmsTemplateBean();
+            cmsTemplateBean.setName(subFile.getName());
+            cmsTemplateBean.setShortcut(getTemplateUrl(baseTemplate) + subFile.getName().replace(Constants.TEMPLATE_FILTER_END_WITH, Constants.TEMPLATE_SHORTCUT_TYPE));
+            cmsTemplateBean.setType("3");
+            try {
+                Properties prop = new Properties();
+                prop.load(new BufferedInputStream(new FileInputStream(new File(templatePath, subFile.getName().replace(Constants.TEMPLATE_FILTER_END_WITH, Constants.TEMPLATE_PROP_TYPE)))));
+                cmsTemplateBean.setTitle(new String(prop.getProperty("template.title", subFile.getName()).getBytes("ISO8859-1"), cmsUtils.getResourceHelper().getCmsResource().getDefaultEncoding()));
+                cmsTemplateBean.setDescription(new String(prop.getProperty("template.description", subFile.getName()).getBytes("ISO8859-1"), cmsUtils.getResourceHelper().getCmsResource().getDefaultEncoding()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            list.add(cmsTemplateBean);
+        }
+        return list;
+    }
+
     private String getTemplateUrl(String baseTemplate){
-        return cmsUtils.getResourceHelper().getCmsResource().getOutputUrl() + Constants.TEMPLATE_PARENT_PATH + "/" + baseTemplate + "/";
+        return cmsUtils.getResourceHelper().getCmsResource().getOutputUrl() + "/" + Constants.TEMPLATE_PARENT_PATH + "/" + baseTemplate + "/";
     }
 }

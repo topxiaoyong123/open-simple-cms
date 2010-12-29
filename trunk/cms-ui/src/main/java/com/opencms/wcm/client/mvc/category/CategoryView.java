@@ -1,19 +1,19 @@
 package com.opencms.wcm.client.mvc.category;
 
-import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.Window;
-import com.opencms.wcm.client.widget.category.CategoryListPanel;
-import com.opencms.wcm.client.widget.category.CategoryPanel;
-import com.opencms.wcm.client.WcmMessages;
+import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.AppEventType;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
+import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.category.Category;
-import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.widget.category.CategoryListPanel;
+import com.opencms.wcm.client.widget.category.CategoryPanel;
 
 /**
  * Created by IntelliJ IDEA.

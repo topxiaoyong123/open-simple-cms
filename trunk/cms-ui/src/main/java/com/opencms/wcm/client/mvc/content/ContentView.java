@@ -1,17 +1,17 @@
 package com.opencms.wcm.client.mvc.content;
 
-import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.WcmMessages;
-import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.model.Entry;
+import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.widget.content.ContentListPanel;
-import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.widget.content.ContentPanel;
 
 /**
@@ -25,7 +25,7 @@ public class ContentView extends View {
 
     private Window window = new Window();
     
-    private ContentListPanel artcilelisttpanel;
+    private ContentListPanel contentListPanel;
 
     WcmMessages msgs = GWT.create(WcmMessages.class);
 
@@ -36,21 +36,21 @@ public class ContentView extends View {
     protected void handleEvent(AppEvent appEvent) {
         if(appEvent.getType() == AppEvents.CONTENT_MANAGER){
             Content content = (Content) appEvent.getData();
-            artcilelisttpanel = new ContentListPanel(content);
+            contentListPanel = new ContentListPanel(content);
             Dispatcher.forwardEvent(
                     AppEvents.ARTICLE_MANAGER_CHANGE_EVENT,
                     new Entry(
                             AppEvents.CONTENT_MANAGER.getId(),
                             msgs.content_editing_header(),
                             AppState.OWNER_ARTICLE_MANAGER_CALLBACK,
-                            artcilelisttpanel,
+                            contentListPanel,
                             true,
                             false,
                             AppEvents.CONTENT_MANAGER,
                             false));
         } else if(AppEvents.CONTENT_MANAGER_CANCEL == appEvent.getType() || AppEvents.CONTENT_MANAGER_SUCCESS == appEvent.getType()){
             window.hide();
-            artcilelisttpanel.refresh();
+            contentListPanel.refresh();
         } else if(AppEvents.CONTENT_MANAGER_ADD == appEvent.getType()){
             Content c = appEvent.getData();
             ContentPanel cp = new ContentPanel(c, AppState.westTreeItemObj);

@@ -19,12 +19,12 @@ import java.util.Map;
  * Time: 下午2:25
  * To change this template use File | Settings | File Templates.
  */
-@Component("templateModel")
+@Component
 public class TemplateModelImpl extends BaseTemplateModel implements TemplateModel {
 
     private static final Logger logger = LoggerFactory.getLogger(TemplateModelImpl.class);
 
-    @Resource(name = "cmsManager")
+    @Resource
     private CmsManager cmsManager;
 
     private EngineUtil engineUtil;

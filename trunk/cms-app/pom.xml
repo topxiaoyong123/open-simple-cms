@@ -14,6 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>com.open-cms</groupId>
+            <artifactId>cms-search</artifactId>
+            <version>${pom.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.open-cms</groupId>
             <artifactId>cms-engine</artifactId>
             <version>${pom.version}</version>
         </dependency>
@@ -40,23 +45,28 @@
             <artifactId>struts2-core</artifactId>
             <version>${struts.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.struts</groupId>-->
+            <!--<artifactId>struts2-convention-plugin</artifactId>-->
+            <!--<version>${struts.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
             <version>${struts.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.freemarker</groupId>-->
+            <!--<artifactId>freemarker</artifactId>-->
+            <!--<version>${freemarker.version}</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>ognl</groupId>
-            <artifactId>ognl</artifactId>
-            <version>2.7.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>ognl</groupId>-->
+            <!--<artifactId>ognl</artifactId>-->
+            <!--<version>2.7.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>javax.servlet</groupId>

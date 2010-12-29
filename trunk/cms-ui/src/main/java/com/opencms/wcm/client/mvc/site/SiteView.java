@@ -1,19 +1,19 @@
 package com.opencms.wcm.client.mvc.site;
 
-import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.Window;
+import com.google.gwt.core.client.GWT;
+import com.opencms.wcm.client.AppEventType;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
-import com.opencms.wcm.client.AppEventType;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.widget.site.SiteListPanel;
 import com.opencms.wcm.client.widget.site.SitePanel;
-import com.google.gwt.core.client.GWT;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,7 +52,7 @@ public class SiteView extends View {
                             false));
         } else if(AppEvents.SITE_MANAGER_CANCEL == appEvent.getType() || AppEvents.SITE_MANAGER_SUCCESS == appEvent.getType()){
             window.hide();
-//            siteListPanel.refresh();
+            siteListPanel.refresh();
         } else if(AppEvents.SITE_MANAGER_ADD == appEvent.getType()){
             Site c = appEvent.getData();
             SitePanel cp = new SitePanel(c);

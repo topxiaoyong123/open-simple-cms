@@ -1,14 +1,14 @@
 package com.opencms.core.db.service.impl;
 
-import com.opencms.core.db.service.SiteService;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.core.db.dao.SiteDao;
+import com.opencms.core.db.service.SiteService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,11 +17,11 @@ import java.util.Date;
  * Time: 13:07:47
  * To change this template use File | Settings | File Templates.
  */
-@Service("siteService")
+@Service
 @Transactional(readOnly = true)
 public class SiteServiceImpl implements SiteService {
 
-    @Resource(name = "siteDao")
+    @Resource
     private SiteDao siteDao;
 
     @Transactional(rollbackFor = Exception.class)

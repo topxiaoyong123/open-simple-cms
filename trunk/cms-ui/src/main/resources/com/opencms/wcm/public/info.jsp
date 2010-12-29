@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="java.util.*" %>
 <%@ page import="java.net.InetAddress" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.StringTokenizer" %>
 <%
     String agent = request.getHeader("user-agent");
     StringTokenizer st = new StringTokenizer(agent,";");

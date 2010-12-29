@@ -12,19 +12,19 @@ import javax.annotation.Resource;
  * Time: 8:25:22
  * To change this template use File | Settings | File Templates.
  */
-@Service("cmsManager")
+@Service
 public class CmsManagerImpl implements CmsManager {
 
-    @Resource(name = "userService")
+    @Resource
     private UserService userService;
 
-    @Resource(name = "contentService")
+    @Resource
     private ContentService contentService;
 
-    @Resource(name = "siteService")
+    @Resource
     private SiteService siteService;
 
-    @Resource(name = "categoryService")
+    @Resource
     private CategoryService categoryService;
 
     public UserService getUserService() {

@@ -1,16 +1,16 @@
 package com.opencms.core.db.service.impl;
 
-import com.opencms.core.db.service.UserService;
-import com.opencms.core.db.dao.UserDao;
-import com.opencms.core.db.dao.RoleDao;
-import com.opencms.core.db.bean.UserBean;
 import com.opencms.core.db.bean.RoleBean;
+import com.opencms.core.db.bean.UserBean;
+import com.opencms.core.db.dao.RoleDao;
+import com.opencms.core.db.dao.UserDao;
+import com.opencms.core.db.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,14 +19,14 @@ import java.util.Iterator;
  * Time: 20:02:01
  * To change this template use File | Settings | File Templates.
  */
-@Service("userService")
+@Service
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    @Resource(name = "userDao")
+    @Resource
     private UserDao userDao;
 
-    @Resource(name = "roleDao")
+    @Resource
     private RoleDao roleDao;
 
     @Transactional(rollbackFor = Exception.class)

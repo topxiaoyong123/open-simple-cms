@@ -2,9 +2,9 @@ package com.opencms.core.db.dao.impl;
 
 import com.opencms.core.db.dao.BaseDao;
 import com.opencms.core.db.query.Finder;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;

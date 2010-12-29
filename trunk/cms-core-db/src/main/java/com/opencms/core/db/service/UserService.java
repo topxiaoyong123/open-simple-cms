@@ -1,9 +1,8 @@
 package com.opencms.core.db.service;
 
-import com.opencms.core.db.bean.UserBean;
 import com.opencms.core.db.bean.RoleBean;
+import com.opencms.core.db.bean.UserBean;
 
-import java.util.List;
 import java.util.Set;
 
 /**

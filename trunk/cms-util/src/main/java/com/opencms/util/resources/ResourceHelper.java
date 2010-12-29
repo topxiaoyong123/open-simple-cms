@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @Component
 public class ResourceHelper {
 
-    @Resource(name = "cmsResource")
+    @Resource
     private CmsResource cmsResource;
 
     public CmsResource getCmsResource() {

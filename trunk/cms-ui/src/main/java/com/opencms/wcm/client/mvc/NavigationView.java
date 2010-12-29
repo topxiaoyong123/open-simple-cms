@@ -1,32 +1,32 @@
 package com.opencms.wcm.client.mvc;
 
-import com.extjs.gxt.ui.client.mvc.View;
-import com.extjs.gxt.ui.client.mvc.AppEvent;
-import com.extjs.gxt.ui.client.mvc.Controller;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.DataList;
-import com.extjs.gxt.ui.client.widget.DataListSelectionModel;
-import com.extjs.gxt.ui.client.widget.DataListItem;
-import com.extjs.gxt.ui.client.widget.tree.Tree;
-import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.binder.TreeBinder;
 import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.*;
-import com.opencms.wcm.client.*;
-import com.opencms.wcm.client.model.WcmApp;
-import com.opencms.wcm.client.model.Entry;
-import com.opencms.wcm.client.model.WcmNodeModel;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.extjs.gxt.ui.client.mvc.AppEvent;
+import com.extjs.gxt.ui.client.mvc.Controller;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.store.TreeStore;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.DataList;
+import com.extjs.gxt.ui.client.widget.DataListItem;
+import com.extjs.gxt.ui.client.widget.DataListSelectionModel;
+import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.extjs.gxt.ui.client.widget.tree.Tree;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.opencms.wcm.client.*;
+import com.opencms.wcm.client.model.Entry;
+import com.opencms.wcm.client.model.WcmApp;
+import com.opencms.wcm.client.model.WcmNodeModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.

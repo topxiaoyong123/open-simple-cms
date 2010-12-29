@@ -1,14 +1,16 @@
 package com.opencms.wcm.client;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.opencms.wcm.client.model.*;
-import com.opencms.wcm.client.model.file.WcmFile;
-import com.opencms.wcm.client.model.site.Site;
+import com.opencms.wcm.client.model.User;
+import com.opencms.wcm.client.model.WcmApp;
+import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.content.Content;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.opencms.wcm.client.model.file.WcmFile;
+import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.template.CmsTemplate;
 
 import java.util.List;
@@ -140,7 +142,20 @@ public interface WcmService extends RemoteService {
      * @return
      * @throws ApplicationException
      */
-    public PagingLoadResult<Content> PagingLoadArticleList(PagingLoadConfig config, Content content) throws ApplicationException;
+    public PagingLoadResult<Content> PagingLoadContentList(PagingLoadConfig config, Content content) throws ApplicationException;
+
+    /**
+     * 文章审核
+     * @param contents
+     * @param pass    是否审核通过
+     * @return
+     * @throws ApplicationException
+     */
+    public boolean auditingContents(List<Content> contents, boolean pass) throws ApplicationException;
+
+    public boolean publishingContents(List<Content> contents, boolean createHtml) throws ApplicationException;
+
+    public int[] getPublishingContentsProcess() throws ApplicationException;
 
     /**
      * 取得模板列表

@@ -7,9 +7,11 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:/META-INF/spring/bundle-context-core-db.xml
+            classpath*:/META-INF/spring/bundle-context-search.xml
             classpath*:/META-INF/spring/bundle-context-template.xml
             classpath*:/META-INF/spring/bundle-context-util.xml
             classpath*:/META-INF/spring/bundle-context-engine.xml
+            classpath*:/META-INF/spring/bundle-context-app.xml
             classpath*:applicationContext.xml
         </param-value>
     </context-param>
@@ -21,15 +23,7 @@
 
     <filter-mapping>
         <filter-name>action2</filter-name>
-        <url-pattern>/site/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>action2</filter-name>
-        <url-pattern>/category/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>action2</filter-name>
-        <url-pattern>/content/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <servlet>
