@@ -1,7 +1,8 @@
 package com.opencms.engine.model;
 
-import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.util.common.page.PageBean;
+
+import java.util.Date;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,7 +11,127 @@ import com.opencms.util.common.page.PageBean;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Category extends CategoryBean implements Model {
+public class Category implements Model {
+
+    private String id;
+
+    private String title;
+
+    private String name;
+
+    private String keywords;
+
+    private String description;
+
+    private String url;
+
+    private String siteId;
+
+    private String parentId;
+
+    private double no;
+
+    private Date creationDate;
+
+    private Date modificationDate;
+
+    private boolean visible;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public double getNo() {
+        return no;
+    }
+
+    public void setNo(double no) {
+        this.no = no;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 
     private PageBean page;
 

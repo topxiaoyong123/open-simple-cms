@@ -1,14 +1,12 @@
 package com.opencms.core.db.bean;
 
+import org.compass.annotations.Index;
 import org.compass.annotations.Searchable;
-import org.compass.annotations.SearchableId;
 import org.compass.annotations.SearchableProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,7 +29,7 @@ public class ContentDetailBean extends BaseEntity {
     }
 
     @Lob
-    @SearchableProperty
+    @SearchableProperty(index = Index.TOKENIZED, converter = "htmlPropertyConverter")
     private String content;
 
     @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "contentDetail")

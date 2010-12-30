@@ -12,12 +12,11 @@ import com.opencms.util.ContextThreadLocal;
 import com.opencms.util.common.DateUtil;
 import com.opencms.util.common.page.PageBean;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -28,6 +27,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Component
+@Transactional(readOnly = true)
 public class PublishModelMapper implements ModelMapper {
 
     @Resource
@@ -45,9 +45,9 @@ public class PublishModelMapper implements ModelMapper {
         return category;
     }
 
-    public Category map(CategoryBean categoryBean, int page, int pagesize, int totalcount){
+    public Category map(CategoryBean categoryBean, int page, int pageSize, int totalCount){
         Category category = map(categoryBean);
-        category.setPage(new PageBean(pagesize, page, totalcount));
+        category.setPage(new PageBean(pageSize, page, totalCount));
         return category;
     }
 
@@ -80,25 +80,25 @@ public class PublishModelMapper implements ModelMapper {
         if(siteBean.getUrl() != null && !"".equals(siteBean.getUrl())){
             return siteBean.getUrl();
         }
-        return ContextThreadLocal.getRequest().getContextPath() + "/site/" + siteBean.getName() + "/index.html";
+        return getContextPath() + "/site/" + siteBean.getName() + "/index.html";
     }
 
     public String getCategoryURL(CategoryBean categoryBean) {
         if(categoryBean.getUrl() != null && !"".equals(categoryBean.getUrl())){
             return categoryBean.getUrl();
         }
-        return ContextThreadLocal.getRequest().getContextPath() + "/category" + "/1/" + PageBean.DEFAULT_SIZE + "/" + categoryBean.getId() + ".html";
+        return getContextPath() + "/category" + "/1/" + PageBean.DEFAULT_SIZE + "/" + categoryBean.getId() + ".html";
     }
 
     public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize) {
-        return ContextThreadLocal.getRequest().getContextPath() + "/category" + "/" + page + "/" + pageSize + "/" + categoryBean.getId() + ".html";
+        return getContextPath() + "/category" + "/" + page + "/" + pageSize + "/" + categoryBean.getId() + ".html";
     }
 
     public String getContentURL(ContentBean contentBean) {
         if(contentBean.getUrl() != null && !"".equals(contentBean.getUrl())){
             return contentBean.getUrl();
         }
-        return ContextThreadLocal.getRequest().getContextPath() + "/content/" + DateUtil.getYear(contentBean.getCreationDate()) + "/" + DateUtil.getMonth(contentBean.getCreationDate()) + "/" + contentBean.getId() + ".html";
+        return getContextPath() + "/content/" + DateUtil.getYear(contentBean.getCreationDate()) + "/" + DateUtil.getMonth(contentBean.getCreationDate()) + "/" + contentBean.getId() + ".html";
     }
 
     public String getContentPath(ContentBean contentBean) {
@@ -108,5 +108,13 @@ public class PublishModelMapper implements ModelMapper {
             folder.mkdirs();
         }
         return basePath + "/" + contentBean.getId() + ".html";
+    }
+
+    private String getContextPath(){
+        if(ContextThreadLocal.getRequest() != null){
+            return ContextThreadLocal.getRequest().getContextPath();
+        } else{
+            return "{contextPath}";
+        }
     }
 }

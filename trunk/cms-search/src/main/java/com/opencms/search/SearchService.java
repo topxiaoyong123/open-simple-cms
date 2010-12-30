@@ -1,6 +1,6 @@
 package com.opencms.search;
 
-import java.util.List;
+import com.opencms.util.common.page.PageBean;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface SearchService {
 
-    public List search(String key, String type);
+    public PageBean search(String key, String type, int page, int pageSize);
+
+    public void index();
 
 }

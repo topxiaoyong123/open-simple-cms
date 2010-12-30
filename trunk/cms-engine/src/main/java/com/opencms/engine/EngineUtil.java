@@ -1,8 +1,6 @@
 package com.opencms.engine;
 
-import com.opencms.core.db.bean.CategoryBean;
-import com.opencms.core.db.bean.ContentBean;
-import com.opencms.core.db.bean.SiteBean;
+import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Menu;
 
@@ -17,18 +15,14 @@ import java.util.List;
  */
 public interface EngineUtil {
 
+    public CmsManager getCmsManager();
+
+    public ModelMapper getMapper();
+
     public Menu getSiteMenu(String siteId);
 
     public Menu getCategoryMenu(String categoryId);
 
     public List<Content> getContents(String categoryId, int firstResult, int maxResults);
-
-    public String getSiteURL(SiteBean siteBean);
-
-    public String getCategoryURL(CategoryBean categoryBean);
-
-    public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize);
-
-    public String getContentURL(ContentBean contentBean);
 
 }

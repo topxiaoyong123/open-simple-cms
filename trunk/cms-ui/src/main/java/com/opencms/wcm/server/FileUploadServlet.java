@@ -5,6 +5,8 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +25,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class FileUploadServlet extends HttpServlet {
+
+    private static Logger logger = LoggerFactory.getLogger(FileUploadServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,16 +48,20 @@ public class FileUploadServlet extends HttpServlet {
         FileItem i = null;
         while (iter.hasNext()) {
             FileItem item = (FileItem) iter.next();
+            logger.debug(item.getFieldName());
             if(item.isFormField() == false){
                 i = item;
             } else{
+                logger.debug(item.getString());
                 if("path".equals(item.getFieldName())){
                     path = item.getString();
                 }
             }
         }
+        logger.debug("文件路径:{}", path);
         if(i != null && path != null && !"".equals(path)){
             File f = new File(path, i.getName());
+            logger.debug("文件路径:{}", f.getAbsolutePath());
             try {
                 i.write(f);
             } catch (Exception e) {

@@ -58,8 +58,10 @@ public class TemplateHelperImpl implements TemplateHelper {
     public Template getTemplate(SiteBean siteBean) throws IOException {
         String basePath = getBasePath(siteBean);
         String indexTemplate = siteBean.getIndexTemplate() == null || "".equals(siteBean.getIndexTemplate()) ? Constants.DEFAULT_INDEX_TEMPLATE : siteBean.getIndexTemplate();
+        String templatePath = basePath + "/" + indexTemplate;
+        logger.debug("模板：{}", templatePath);
         try {
-            return freeMarkerConfiguration.getTemplate(basePath + "/" + indexTemplate);
+            return freeMarkerConfiguration.getTemplate(templatePath);
         } catch (IOException e) {
             logger.warn("模板找不到，采用默认模板", e);
             return freeMarkerConfiguration.getTemplate(basePath + "/" + Constants.DEFAULT_INDEX_TEMPLATE);
@@ -69,8 +71,10 @@ public class TemplateHelperImpl implements TemplateHelper {
     public Template getTemplate(CategoryBean categoryBean) throws IOException {
         String basePath = getBasePath(categoryBean.getSite());
         String categoryTemplate = categoryBean.getTemplate() == null || "".equals(categoryBean.getTemplate()) ? Constants.DEFAULT_CATEGORY_TEMPLATE : categoryBean.getTemplate();
+        String templatePath = basePath + "/" + categoryTemplate;
+        logger.debug("模板：{}", templatePath);
         try {
-            return freeMarkerConfiguration.getTemplate(basePath + "/" + categoryTemplate);
+            return freeMarkerConfiguration.getTemplate(templatePath);
         } catch (IOException e) {
             logger.warn("模板找不到，采用默认模板", e);
             return freeMarkerConfiguration.getTemplate(basePath + "/" + Constants.DEFAULT_CATEGORY_TEMPLATE);
@@ -80,8 +84,10 @@ public class TemplateHelperImpl implements TemplateHelper {
     public Template getTemplate(ContentBean contentBean) throws IOException {
         String basePath = getBasePath(contentBean.getCategory().getSite());
         String contentTemplate = contentBean.getTemplate() == null || "".equals(contentBean.getTemplate()) ? Constants.DEFAULT_CONTENT_TEMPLATE : contentBean.getTemplate();
+        String templatePath = basePath + "/" + contentTemplate;
+        logger.debug("模板：{}", templatePath);
         try {
-            return freeMarkerConfiguration.getTemplate(basePath + "/" + contentTemplate);
+            return freeMarkerConfiguration.getTemplate(templatePath);
         } catch (IOException e) {
             logger.warn("模板找不到，采用默认模板", e);
             return freeMarkerConfiguration.getTemplate(basePath + "/" + Constants.DEFAULT_CONTENT_TEMPLATE);
