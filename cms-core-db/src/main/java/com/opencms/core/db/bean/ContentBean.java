@@ -19,11 +19,11 @@ import javax.persistence.*;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class ContentBean extends BaseEntity {
 
-    @SearchableProperty
+    @SearchableProperty(index = Index.TOKENIZED, boost = 3F)
     @Column(nullable = false, length = 128)
     private String title;
 
-    @SearchableProperty
+    @SearchableProperty(index = Index.TOKENIZED, boost = 2F)
     @Column(length = 255)
     private String keywords;
 
@@ -31,7 +31,7 @@ public class ContentBean extends BaseEntity {
     @Column(length = 128)
     private String url;
 
-    @SearchableProperty
+    @SearchableProperty(index = Index.TOKENIZED, boost = 1.5F)
     @Column(length = 255)
     private String description;
 
@@ -39,11 +39,11 @@ public class ContentBean extends BaseEntity {
     @Column
     private double no;
 
-    @SearchableProperty(index = Index.NO)
+    @SearchableProperty(store = Store.NO)
     @Column(nullable = false, length = 3)
     private String state;
 
-    @SearchableProperty(index = Index.NO)
+    @SearchableProperty(store = Store.NO)
     @Column(length = 3)
     private String top;
 

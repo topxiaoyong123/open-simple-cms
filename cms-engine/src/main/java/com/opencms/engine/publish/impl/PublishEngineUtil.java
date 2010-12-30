@@ -38,6 +38,14 @@ public class PublishEngineUtil implements EngineUtil {
     @Resource
 	private ModelMapper mapper;
 
+    public CmsManager getCmsManager() {
+        return cmsManager;
+    }
+
+    public ModelMapper getMapper() {
+        return mapper;
+    }
+
     public Menu getSiteMenu(String siteId){
         SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
         logger.debug("设置站点菜单...");
@@ -122,22 +130,6 @@ public class PublishEngineUtil implements EngineUtil {
     public List<Content> getContents(String categoryId, int firstResult, int maxResults, boolean loadContent) {
         List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
         return mapper.mapContents(contentBeans, loadContent);
-    }
-
-    public String getSiteURL(SiteBean siteBean) {
-        return mapper.getSiteURL(siteBean);
-    }
-
-    public String getCategoryURL(CategoryBean categoryBean) {
-        return mapper.getCategoryURL(categoryBean);
-    }
-
-    public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize) {
-        return mapper.getCategoryURL(categoryBean, page, pageSize);
-    }
-
-    public String getContentURL(ContentBean contentBean) {
-        return mapper.getContentURL(contentBean);
     }
 
 }

@@ -2,10 +2,8 @@ package com.opencms.core.db.bean;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

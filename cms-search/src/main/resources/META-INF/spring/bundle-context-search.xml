@@ -10,6 +10,10 @@
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
        default-autowire="byName" default-lazy-init="true">
 
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.opencms.search"/>
+
     <bean id="annotationConfiguration" class="org.compass.annotations.config.CompassAnnotationsConfiguration" />
 
     <bean id="compass" class="org.compass.spring.LocalCompassBean">
@@ -28,11 +32,19 @@
 				<prop key="compass.transaction.factory">org.compass.spring.transaction.SpringSyncTransactionFactory</prop>
                 <prop key="compass.engine.highlighter.default.formatter.simple.pre" ><![CDATA[<span style='background-color:yellow;color:red;' >]]></prop>
                 <prop key="compass.engine.highlighter.default.formatter.simple.post" ><![CDATA[</span>]]></prop>
-				<prop key="compass.engine.analyzer.default.type">org.apache.lucene.analysis.standard.StandardAnalyzer</prop>
+				<!--<prop key="compass.engine.analyzer.default.type">org.apache.lucene.analysis.standard.StandardAnalyzer</prop>-->
 			</props>
 		</property>
 
 		<property name="transactionManager" ref="transactionManager" />
+
+        <property name="convertersByName">
+            <map>
+                <entry key="htmlPropertyConverter">
+                    <bean class="com.opencms.search.HtmlPropertyConverter"/>
+                </entry>
+            </map>
+        </property>
     </bean>
 
     <bean id="hibernateGpsDevice" class="org.compass.spring.device.hibernate.dep.SpringHibernate3GpsDevice">
@@ -54,5 +66,39 @@
 	<bean id="compassTemplate" class="org.compass.core.CompassTemplate">
 		<property name="compass" ref="compass" />
 	</bean>
+
+    <!-- 重建索引配置 -->
+	<bean id="indexBuilder" class="com.opencms.search.CompassIndexBuilder"/>
+
+    <bean id="indexJobMethod"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="indexBuilder"/>
+        <property name="targetMethod" value="index"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+
+    <bean id="simpleIndexJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+        <property name="jobDetail" ref="indexJobMethod"/>
+        <property name="startDelay" value="${compass.index_job_delay}"/>
+        <property name="repeatInterval" value="${compass.index_job_interval}"/>
+    </bean>
+
+    <bean id="indexScheduler"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
+        <property name="triggers">
+            <list>
+                <ref bean="simpleIndexJobTrigger"/>
+            </list>
+        </property>
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+                <prop key="org.quartz.threadPool.threadCount">1</prop>
+                <!--<prop key="org.quartz.threadPool.threadPriority">4</prop>-->
+                <prop key="org.quartz.jobStore.class">org.quartz.simpl.RAMJobStore</prop>
+                <prop key="org.quartz.jobStore.misfireThreshold">60000</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>

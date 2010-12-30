@@ -24,6 +24,8 @@ public class Category implements Serializable, IsSerializable {
 
     private String description;
 
+    private String url;
+
     private String siteId;
 
     private String parentId;
@@ -31,6 +33,8 @@ public class Category implements Serializable, IsSerializable {
     private double no;
 
     private Date creationDate;
+
+    private Date modificationDate;
 
     private boolean visible;
 
@@ -104,6 +108,14 @@ public class Category implements Serializable, IsSerializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Date getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(Date modificationDate) {
+        this.modificationDate = modificationDate;
     }
 
     public boolean isVisible() {

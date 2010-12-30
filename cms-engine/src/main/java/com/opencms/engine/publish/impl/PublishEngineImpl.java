@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -38,6 +39,7 @@ import java.nio.channels.FileLock;
  */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Transactional(readOnly = true)
 public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
 
     private static Logger logger = LoggerFactory.getLogger(PublishEngineImpl.class);
@@ -66,7 +68,7 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
         templateModel.clean();
         Site site = mapper.map(siteBean);
         templateModel.setSite(site);
-        Template template = templateHelper.getTemplate(site);
+        Template template = templateHelper.getTemplate(siteBean);
         return render(template, templateModel.getModel());
     }
 
@@ -81,7 +83,7 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
         Site site = mapper.map(categoryBean.getSite());
         templateModel.setCategory(category);
         templateModel.setSite(site);
-        Template template = templateHelper.getTemplate(category);
+        Template template = templateHelper.getTemplate(categoryBean);
         return render(template, templateModel.getModel());
     }
 

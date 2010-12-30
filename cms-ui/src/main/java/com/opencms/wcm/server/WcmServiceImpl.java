@@ -510,7 +510,7 @@ public class WcmServiceImpl implements WcmService {
                     String filename = file.getName();
                     String filetype = filename.substring(filename.lastIndexOf(".") + 1);
                     String shortcut = null;
-                    String url = hosturl +  Constants.TEMPLATE_PARENT_PATH + "/" + file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(f.getTemplate())).replace("\\", "/");
+                    String url = hosturl + "/" + Constants.TEMPLATE_PARENT_PATH + "/" + file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(f.getTemplate())).replace("\\", "/");
                     if (("jpg").equalsIgnoreCase(filetype) || ("bmp").equalsIgnoreCase(filetype) || ("gif").equalsIgnoreCase(filetype) || ("png").equalsIgnoreCase(filetype)) {
                         shortcut = url;
                     } else if ("doc".equalsIgnoreCase(filetype) || "docx".equalsIgnoreCase(filetype)) {

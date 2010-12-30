@@ -36,7 +36,7 @@ public class TemplateModelImpl extends BaseTemplateModel implements TemplateMode
     private Map model = Collections.synchronizedMap(new HashMap());
 
     public void initModel(){
-        model.put("cmsManager", cmsManager);
+//        model.put("cmsManager", cmsManager);
         model.put("engineUtil", engineUtil);
         if(this.getSite() != null){
             logger.debug("siteModel init");
