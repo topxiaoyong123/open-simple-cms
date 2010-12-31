@@ -13,10 +13,10 @@ import java.util.Locale;
  * Time: 21:37:55
  * To change this template use File | Settings | File Templates.
  */
-@Component("messageSourceHelper")
+@Component
 public class MessageSourceHelper {
 
-    @Resource(name = "messageSource")
+    @Resource
     private MessageSource messageSource;
 
     public String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {

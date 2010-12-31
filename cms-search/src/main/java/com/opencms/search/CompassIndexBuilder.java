@@ -25,6 +25,7 @@ public class CompassIndexBuilder {
         try{
             logger.debug("-------indexing start...");
 		    compassGps.index(ContentBean.class);
+            logger.debug("-------indexing end...");
         } catch (Exception e){
             e.printStackTrace();
         }

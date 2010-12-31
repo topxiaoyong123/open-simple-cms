@@ -52,7 +52,6 @@ public class FileUploadServlet extends HttpServlet {
             if(item.isFormField() == false){
                 i = item;
             } else{
-                logger.debug(item.getString());
                 if("path".equals(item.getFieldName())){
                     path = item.getString();
                 }
@@ -61,7 +60,6 @@ public class FileUploadServlet extends HttpServlet {
         logger.debug("文件路径:{}", path);
         if(i != null && path != null && !"".equals(path)){
             File f = new File(path, i.getName());
-            logger.debug("文件路径:{}", f.getAbsolutePath());
             try {
                 i.write(f);
             } catch (Exception e) {

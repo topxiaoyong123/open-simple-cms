@@ -1,5 +1,6 @@
 package com.opencms.core.db.bean;
 
+import com.opencms.core.db.bean.field.ContentField;
 import org.compass.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -39,11 +40,11 @@ public class ContentBean extends BaseEntity {
     @Column
     private double no;
 
-    @SearchableProperty(store = Store.NO)
+    @SearchableProperty
     @Column(nullable = false, length = 3)
     private String state;
 
-    @SearchableProperty(store = Store.NO)
+    @SearchableProperty(index = Index.NO)
     @Column(length = 3)
     private String top;
 
@@ -120,6 +121,15 @@ public class ContentBean extends BaseEntity {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @SearchableProperty
+    @Transient
+    public Boolean isSearchAble() {
+        return ContentField._STATE_PUBLISHED.equals(state);
+    }
+
+    public void setSearchAble(Boolean searchAble) {
     }
 
     public String getTop() {

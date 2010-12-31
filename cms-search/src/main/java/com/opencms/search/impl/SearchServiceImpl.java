@@ -46,16 +46,17 @@ public class SearchServiceImpl implements SearchService {
         CompassQueryBuilder compassQueryBuilder = compassSession.queryBuilder();
         if("content".equals(type)){
             List<Content> records = new ArrayList<Content>();
-            CompassQuery query = compassQueryBuilder.bool().addMust(compassQueryBuilder.term("state", ContentField._STATE_PUBLISHED)).addMust(compassQueryBuilder.queryString(key).toQuery()).toQuery().setAliases(ContentBean.class.getSimpleName());
-            query.addSort("top", CompassQuery.SortPropertyType.STRING);
+            CompassQuery query = compassQueryBuilder.bool().addMust(compassQueryBuilder.term("searchAble", true)).addMust(compassQueryBuilder.queryString(key).toQuery()).toQuery().setAliases(ContentBean.class.getSimpleName());
+//            query.addSort("top", CompassQuery.SortPropertyType.STRING);
             CompassHits hits = query.hits();
             int total = hits.length();
 
             PageBean pageBean = new PageBean(pageSize, page, total);
+            pageBean.setKey(key);
             logger.debug("--------page:currentPage[{}],pageSize[{}],totalCount[{}]", new Integer[]{pageBean.getCurrentPage(), pageBean.getPageSize(), pageBean.getTotalCount()});
             for(int i = pageBean.getFirstResult(); i < pageBean.getLastResult(); i ++){
                 CompassHit hit = hits.hit(i);
-                String c = hits.highlighter(i).fragmentsWithSeparator("content");//.replaceAll("<[^>]*>", "");
+                String c = hits.highlighter(i).setTextTokenizer(CompassHighlighter.TextTokenizer.AUTO).fragmentsWithSeparator("content"); //.replaceAll("<[^>]*>", "");
                 String title = hits.highlighter(i).fragment("title");
                 Content content = (Content)cmsUtils.getBeanMapperHelper().simpleMap((ContentBean)hit.getData(), Content.class);
                 content.setContent(c);
@@ -65,6 +66,7 @@ public class SearchServiceImpl implements SearchService {
                 records.add(content);
             }
             pageBean.setRecords(records);
+            compassSession.close();
             return pageBean;
         }
         return null;
