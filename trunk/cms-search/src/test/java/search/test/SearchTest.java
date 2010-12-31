@@ -30,7 +30,7 @@ public class SearchTest {
 
     @Test
     public void testSearch(){
-        searchService.search("大炮", "content", 1, 100);
+        searchService.search("这个", "content", 1, 100);
     }
 
 }

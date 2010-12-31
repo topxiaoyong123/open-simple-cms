@@ -15,6 +15,16 @@ public class PageBean<T> {
 
     public final static int DEFAULT_SIZE = 10;
 
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     private int firstResult;
 
     private int lastResult;

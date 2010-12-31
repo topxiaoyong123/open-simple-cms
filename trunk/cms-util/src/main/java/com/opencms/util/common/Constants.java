@@ -41,6 +41,9 @@ public class Constants {
     //站点模板开始标志
     public static String BASE_TEMPLATE_PATH_FILTER_START_WITH = "template-";
 
+    //站点的js模板（用于生成头尾）
+    public static String SITE_JS_TEMPLATE = "site.js.ftl";
+
     //站点模板缩略图
     public static String BASE_TEMPLATE_SHORTCUT = "template.jpg";
 

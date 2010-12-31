@@ -68,6 +68,10 @@
             <param name="name">{1}</param>
             <result name="success">/WEB-INF/content/view.jsp</result>
         </action>
+        <action name="search" class="searchAction" method="search">
+            <result name="success" type="freemarker">/templates/%{template}/search.html.ftl</result>
+            <result name="input" type="freemarker">/templates/%{template}/search.html.ftl</result>
+        </action>
         <action name="**">
             <result>/{1}.html</result>
         </action>
