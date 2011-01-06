@@ -41,7 +41,7 @@
         <aspectj.version>1.6.2</aspectj.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <spring.security.version>3.0.5.RELEASE</spring.security.version>
-        <spring.modules.version>0.9</spring.modules.version>
+        <spring.modules.version>0.8a</spring.modules.version>
         <freemarker.version>2.3.16</freemarker.version>
         <ognl.version>3.0</ognl.version>
         <dozer.version>5.3.1</dozer.version>
@@ -282,17 +282,17 @@
                 <version>${spring.version}</version>
                 <scope>test</scope>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.springmodules</groupId>-->
-                <!--<artifactId>spring-modules-jcr</artifactId>-->
-                <!--<version>${spring.modules.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>org.springmodules</groupId>
+                <artifactId>spring-modules-cache</artifactId>
+                <version>${spring.modules.version}</version>
+            </dependency>
 
-            <!--    <dependency>-->
-            <!--      <groupId>org.springmodules</groupId>-->
-            <!--      <artifactId>spring-modules-jbpm</artifactId>-->
-            <!--      <version>${spring.modules.version}</version>-->
-            <!--    </dependency>-->
+                <!--<dependency>-->
+                  <!--<groupId>org.springmodules</groupId>-->
+                  <!--<artifactId>spring-modules-jbpm</artifactId>-->
+                  <!--<version>${spring.modules.version}</version>-->
+                <!--</dependency>-->
 
             <!-- Spring Security -->
             <dependency>
