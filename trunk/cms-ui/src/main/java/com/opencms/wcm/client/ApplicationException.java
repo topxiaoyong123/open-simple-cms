@@ -10,7 +10,7 @@ import com.google.gwt.user.client.rpc.SerializableException;
  * Time: 8:35:38
  * To change this template use File | Settings | File Templates.
  */
-public class ApplicationException extends SerializableException implements IsSerializable {
+public class ApplicationException extends Exception implements IsSerializable {
 
     public ApplicationException() {
         super();
