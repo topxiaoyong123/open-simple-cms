@@ -72,7 +72,6 @@ public class FileUpload extends Dialog {
     }
 
     public native void initJS(WcmFile f) /*-{
-        alert(f.@com.opencms.wcm.client.model.file.WcmFile::getPath()());
         $wnd.upload1 = new $wnd.SWFUpload({
 				// Backend Settings
 				upload_url: "fileupload",
