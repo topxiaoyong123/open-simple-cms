@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.test.org/schema/spring-test"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="http://www.test.org/schema/spring-test"
+      elementFormDefault="qualified"
+      attributeFormDefault="unqualified">
+
+    <xsd:attributeGroup name="testAttributes">
+        <xsd:attribute name="class" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="java:java.lang.Class"><![CDATA[
+	The fully qualified name of the bean's class, except if it serves only
+	as a parent definition for child bean definitions.
+				]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:element name="test">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="property" type="xsd:string" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attributeGroup ref="testAttributes"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

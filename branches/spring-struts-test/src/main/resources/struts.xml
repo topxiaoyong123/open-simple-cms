@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <!--<constant name="struts.action.extension" value="html"/>-->
+
+    <package name="test" extends="rest-default" namespace="/test">
+        <result-types>
+            <result-type name="testResult" default="true" class="test.result.TestResult"></result-type>
+        </result-types>
+        <!--<action name="*" class="testAction" method="{1}">-->
+            <!--<result>/index.jsp</result>-->
+        <!--</action>-->
+    </package>
+
+</struts>
