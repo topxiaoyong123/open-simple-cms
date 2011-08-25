@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:test="http://www.test.org/schema/spring-test"
+       xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.test.org/schema/spring-test http://www.test.org/schema/spring-test.xsd
+    http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <context:annotation-config/>
+    <aop:aspectj-autoproxy/>
+
+    <context:component-scan base-package="test"/>
+
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean">
+    </bean>
+
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="testAspect" id="testAspectA">-->
+            <!--<aop:pointcut id="testPt" expression="execution(* test.service.*.*(..))"/>-->
+            <!--<aop:before method="test" pointcut-ref="testPt"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <test:test class="test.spring.TestBean">
+        <test:property></test:property>
+        <test:property></test:property>
+    </test:test>
+
+    <dwr:configuration>
+        <dwr:create type="spring" javascript="Msg">
+            <dwr:param name="beanName" value="baseAction"/>
+        </dwr:create>
+    </dwr:configuration>
+</beans>
