@@ -52,7 +52,7 @@
         </global-results>
         <action name="category/*/*/*" class="categoryAction" method="view">
             <param name="page">{1}</param>
-            <param name="pagesize">{2}</param>
+            <param name="pageSize">{2}</param>
             <param name="id">{3}</param>
             <result name="success">/WEB-INF/content/view.jsp</result>
         </action>
