@@ -117,7 +117,7 @@ public class PublishEngineUtil implements EngineUtil {
 		menu.setItem(item);
         List<CategoryBean> categoryBeans = cmsManager.getCategoryService().getMenuByParentId(categoryBean.getId());
         for(CategoryBean category : categoryBeans){
-            getCategoryMenu(category, currentIds);
+            menu.addMenu(getCategoryMenu(category, currentIds));
         }
         return menu;
     }
