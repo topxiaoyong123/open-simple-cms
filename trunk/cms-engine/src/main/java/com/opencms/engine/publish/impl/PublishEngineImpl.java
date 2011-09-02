@@ -84,6 +84,7 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
             int contentsCount = (int) cmsManager.getContentService().getCountByCategoryId(categoryBean.getId(), ContentField._STATE_PUBLISHED);
             int pageSize = PageBean.DEFAULT_SIZE;
             int pageCount = contentsCount / pageSize + (contentsCount % pageSize == 0 ? 0 : 1);
+            pageCount = pageCount == 0 ? 1 : pageCount;
             for (int page = 1; page <= pageCount; page ++) {
                 String html = engineCategory(categoryBean, page, pageSize);
                 create(html, PathUtils.getCategoryPath(categoryBean, page));
