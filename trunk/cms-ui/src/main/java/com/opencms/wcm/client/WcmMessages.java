@@ -2,7 +2,7 @@ package com.opencms.wcm.client;
 
 /**
  * Interface to represent the messages contained in resource bundle:
- * 	F:/workspace/opencms/trunk/cms-ui/src/main/java/com/opencms/wcm/client/WcmMessages.properties'.
+ * 	D:/workspaces/eclipse/cms/cms-ui/src/main/java/com/opencms/wcm/client/WcmMessages.properties'.
  */
 public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   
@@ -122,6 +122,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Category Site Publish")
   @Key("category_site_publishing_header")
   String category_site_publishing_header();
+
+  /**
+   * Translated "Static".
+   * 
+   * @return translated "Static"
+   */
+  @DefaultMessage("Static")
+  @Key("category_static")
+  String category_static();
 
   /**
    * Translated "Category Title".

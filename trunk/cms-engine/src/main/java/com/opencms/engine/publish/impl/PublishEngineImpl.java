@@ -12,6 +12,7 @@ import com.opencms.engine.impl.FreemarkerEngineImpl;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Site;
+import com.opencms.engine.util.PathUtils;
 import com.opencms.template.TemplateHelper;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.common.page.PageBean;
@@ -69,11 +70,26 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
         Site site = mapper.map(siteBean);
         templateModel.setSite(site);
         Template template = templateHelper.getTemplate(siteBean);
-        return render(template, templateModel.getModel());
+        String html = render(template, templateModel.getModel());
+        create(html, PathUtils.getSitePath(siteBean));
+        return html;
     }
 
     public String engineCategory(CategoryBean categoryBean) throws IOException, TemplateException {
         return engineCategory(categoryBean, 1, PageBean.DEFAULT_SIZE);
+    }
+
+    public String engineCategory(CategoryBean categoryBean, boolean create) throws IOException, TemplateException {
+        if(categoryBean.isStaticCategory() && create) {
+            int contentsCount = (int) cmsManager.getContentService().getCountByCategoryId(categoryBean.getId(), ContentField._STATE_PUBLISHED);
+            int pageSize = PageBean.DEFAULT_SIZE;
+            int pageCount = contentsCount / pageSize + (contentsCount % pageSize == 0 ? 0 : 1);
+            for (int page = 1; page <= pageCount; page ++) {
+                String html = engineCategory(categoryBean, page, pageSize);
+                create(html, PathUtils.getCategoryPath(categoryBean, page));
+            }
+        }
+        return null;
     }
 
     public String engineCategory(CategoryBean categoryBean, int page, int pageSize) throws IOException, TemplateException {
@@ -98,13 +114,12 @@ public class PublishEngineImpl extends FreemarkerEngineImpl implements Engine {
         Template template = templateHelper.getTemplate(contentBean);
         String html = render(template, templateModel.getModel());
         if (create)
-            create(html, contentBean);
+            create(html, PathUtils.getContentPath(contentBean));
         return html;
     }
 
-    private void create(String html, ContentBean contentBean) throws IOException {
+    private void create(String html, String path) throws IOException {
         logger.debug("html内容为:{}", html);
-        String path = mapper.getContentPath(contentBean);
         logger.debug("生成文件为:{}", path);
         File f = new File(path);
         //对文件加锁

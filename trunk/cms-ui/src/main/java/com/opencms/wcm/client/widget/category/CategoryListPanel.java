@@ -6,6 +6,7 @@ import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -29,6 +30,7 @@ import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.model.WcmNodeModel;
+import com.opencms.wcm.client.model.category.Category;
 import com.opencms.wcm.client.model.site.Site;
 
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class CategoryListPanel extends ContentPanel {
         ListStore<BeanModel> store = new ListStore<BeanModel>(loader);
         loader.load();
         List<ColumnConfig> columns = new ArrayList<ColumnConfig>();
-        final CheckBoxSelectionModel smm = new CheckBoxSelectionModel();
+        final CheckBoxSelectionModel<BeanModel> smm = new CheckBoxSelectionModel<BeanModel>();
         columns.add(smm.getColumn());
         columns.add(new ColumnConfig("name", msgs.category_name(), 150));
         columns.add(new ColumnConfig("title", msgs.category_title(), 100));
@@ -119,6 +121,23 @@ public class CategoryListPanel extends ContentPanel {
         });
         Button preview = new Button(msgs.preview());
         preview.setIconStyle("icon-text");
+
+        Button publish = new Button(msgs.content_publishing_do());
+        publish.setIconStyle("article-wenzhangfubu");
+        publish.addSelectionListener(new SelectionListener() {
+            public void componentSelected(ComponentEvent ce) {
+                if(smm.getSelectedItems().size() <= 0){
+                    MessageBox.alert(msgs.warn(), msgs.choose(), null);
+                } else{
+                    List<Category> categories = new ArrayList<Category>();
+                    for(BeanModel model : smm.getSelectedItems()){
+                        categories.add(model.<Category>getBean());
+                    }
+                    Dispatcher.forwardEvent(AppEvents.CATEGORY_MANAGER_PUBLISHING, categories);
+                }
+            }
+        });
+
         toolBars.add(add);
         toolBars.add(new SeparatorToolItem());
         toolBars.add(remove);
@@ -126,23 +145,25 @@ public class CategoryListPanel extends ContentPanel {
         toolBars.add(edit);
         toolBars.add(new SeparatorToolItem());
         toolBars.add(preview);
+        toolBars.add(new SeparatorToolItem());
+        toolBars.add(publish);
 
         Menu contextMenu = new Menu();
         contextMenu.setWidth(130);
-        MenuItem addSite = new MenuItem();
-        addSite.setText(msgs.add());
-        addSite.setIconStyle("icon-add");
-        addSite.addListener(Events.Select, new Listener<ComponentEvent>() {
+        MenuItem addCategory = new MenuItem();
+        addCategory.setText(msgs.add());
+        addCategory.setIconStyle("icon-add");
+        addCategory.addListener(Events.Select, new Listener<ComponentEvent>() {
             public void handleEvent(ComponentEvent componentEvent) {
                 AppEvent evt = new AppEvent(AppEvents.CATEGORY_MANAGER_ADD);
                 Dispatcher.forwardEvent(evt);
             }
         });
-        contextMenu.add(addSite);
-        MenuItem editSite = new MenuItem();
-        editSite.setText(msgs.edit());
-        editSite.setIconStyle("icon-plugin");
-        editSite.addListener(Events.Select, new Listener<ComponentEvent>() {
+        contextMenu.add(addCategory);
+        MenuItem editCategory = new MenuItem();
+        editCategory.setText(msgs.edit());
+        editCategory.setIconStyle("icon-plugin");
+        editCategory.addListener(Events.Select, new Listener<ComponentEvent>() {
             public void handleEvent(ComponentEvent componentEvent) {
                 if(smm.getSelectedItems().size() != 1){
                     MessageBox.alert(msgs.warn(), msgs.choose_one(), null);
@@ -153,15 +174,32 @@ public class CategoryListPanel extends ContentPanel {
                 }
             }
         });
-        contextMenu.add(editSite);
-        MenuItem deleteSite = new MenuItem();
-        deleteSite.setText(msgs.delete());
-        deleteSite.setIconStyle("icon-delete");
-        contextMenu.add(deleteSite);
-        MenuItem previewSite = new MenuItem();
-        previewSite.setText(msgs.preview());
-        previewSite.setIconStyle("icon-text");
-        contextMenu.add(deleteSite);
+        contextMenu.add(editCategory);
+        MenuItem deleteCategory = new MenuItem();
+        deleteCategory.setText(msgs.delete());
+        deleteCategory.setIconStyle("icon-delete");
+        contextMenu.add(deleteCategory);
+        MenuItem previewCategory = new MenuItem();
+        previewCategory.setText(msgs.preview());
+        previewCategory.setIconStyle("icon-text");
+        contextMenu.add(previewCategory);
+        MenuItem publishCategory = new MenuItem();
+        publishCategory.setTitle(msgs.content_publishing_do());
+        publishCategory.setIconStyle("article-wenzhangfubu");
+        publishCategory.addSelectionListener(new SelectionListener() {
+            public void componentSelected(ComponentEvent ce) {
+                if(smm.getSelectedItems().size() <= 0){
+                    MessageBox.alert(msgs.warn(), msgs.choose(), null);
+                } else{
+                    List<Category> categories = new ArrayList<Category>();
+                    for(BeanModel model : smm.getSelectedItems()){
+                        categories.add(model.<Category>getBean());
+                    }
+                    Dispatcher.forwardEvent(AppEvents.CATEGORY_MANAGER_PUBLISHING, categories);
+                }
+            }
+        });
+        contextMenu.add(publishCategory);
         grid.setContextMenu(contextMenu);
         this.setHeaderVisible(false);
         this.setFrame(false);

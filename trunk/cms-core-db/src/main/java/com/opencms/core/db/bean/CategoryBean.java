@@ -40,7 +40,11 @@ public class CategoryBean extends BaseEntity {
     @Column
     private double no = 0;
 
+    @Column
     private boolean visible;
+
+    @Column
+    private boolean staticCategory;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "parent")
@@ -116,6 +120,14 @@ public class CategoryBean extends BaseEntity {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public boolean isStaticCategory() {
+        return staticCategory;
+    }
+
+    public void setStaticCategory(boolean staticCategory) {
+        this.staticCategory = staticCategory;
     }
 
     public CategoryBean getParent() {

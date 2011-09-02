@@ -52,7 +52,7 @@ public class ContentPublishingController extends Controller {
                         cancel();
                         box.close();
                     }
-                    service.getPublishingContentsProcess(new AsyncCallback() {
+                    service.getPublishingProcess(new AsyncCallback() {
                         public void onFailure(Throwable caught) {
                             cancel();
                             box.close();
