@@ -46,6 +46,8 @@ public class AppEvents {
     public final static AppEventType CATEGORY_MANAGER_SAVE = new AppEventType();
     public final static AppEventType CATEGORY_MANAGER_CANCEL = new AppEventType();
     public final static AppEventType CATEGORY_MANAGER_SUCCESS = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_PUBLISHING = new AppEventType();
+    public final static AppEventType CATEGORY_MANAGER_PUBLISHING_SUCCESS = new AppEventType();
 
     //文章管理
     public final static AppEventType CONTENT_MANAGER = new AppEventType();

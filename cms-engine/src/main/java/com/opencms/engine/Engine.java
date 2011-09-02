@@ -22,6 +22,8 @@ public interface Engine {
 
     public String engineCategory(CategoryBean categoryBean, int page, int pageSize) throws IOException, TemplateException;
 
+    public String engineCategory(CategoryBean categoryBean, boolean create) throws IOException, TemplateException;
+
     public String engineContent(ContentBean contentBean, boolean create) throws IOException, TemplateException;
 
 }

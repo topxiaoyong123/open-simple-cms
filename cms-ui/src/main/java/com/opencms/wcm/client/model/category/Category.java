@@ -38,6 +38,8 @@ public class Category implements Serializable, IsSerializable {
 
     private boolean visible;
 
+    private boolean staticCategory;
+
     public String getId() {
         return id;
     }
@@ -124,5 +126,13 @@ public class Category implements Serializable, IsSerializable {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public boolean isStaticCategory() {
+        return staticCategory;
+    }
+
+    public void setStaticCategory(boolean staticCategory) {
+        this.staticCategory = staticCategory;
     }
 }

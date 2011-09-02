@@ -7,8 +7,10 @@ import com.opencms.engine.ModelMapper;
 import com.opencms.engine.model.Category;
 import com.opencms.engine.model.Content;
 import com.opencms.engine.model.Site;
+import com.opencms.engine.util.PathUtils;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
+import com.opencms.util.common.Constants;
 import com.opencms.util.common.DateUtil;
 import com.opencms.util.common.page.PageBean;
 import org.springframework.stereotype.Component;
@@ -80,14 +82,17 @@ public class PublishModelMapper implements ModelMapper {
         if(siteBean.getUrl() != null && !"".equals(siteBean.getUrl())){
             return siteBean.getUrl();
         }
-        return getContextPath() + "/site/" + siteBean.getName() + "/index.html";
+        return getContextPath() + "/" + siteBean.getName() + "/index.html";
     }
 
     public String getCategoryURL(CategoryBean categoryBean) {
         if(categoryBean.getUrl() != null && !"".equals(categoryBean.getUrl())){
             return categoryBean.getUrl();
         }
-        return getContextPath() + "/category" + "/1/" + PageBean.DEFAULT_SIZE + "/" + categoryBean.getId() + ".html";
+        if(categoryBean.isStaticCategory()) {
+            return getContextPath() + "/" + PathUtils.getCategoryRelativePath(categoryBean, 1);
+        }
+        return getCategoryURL(categoryBean, 1, PageBean.DEFAULT_SIZE);
     }
 
     public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize) {
@@ -98,16 +103,7 @@ public class PublishModelMapper implements ModelMapper {
         if(contentBean.getUrl() != null && !"".equals(contentBean.getUrl())){
             return contentBean.getUrl();
         }
-        return getContextPath() + "/content/" + DateUtil.getYear(contentBean.getCreationDate()) + "/" + DateUtil.getMonth(contentBean.getCreationDate()) + "/" + contentBean.getId() + ".html";
-    }
-
-    public String getContentPath(ContentBean contentBean) {
-        String basePath = cmsUtils.getResourceHelper().getCmsResource().getOutputPath() + "/" + DateUtil.getYear(contentBean.getCreationDate()) + "/" + DateUtil.getMonth(contentBean.getCreationDate());
-        File folder = new File(basePath);
-        if(!folder.exists()){
-            folder.mkdirs();
-        }
-        return basePath + "/" + contentBean.getId() + ".html";
+        return getContextPath() + "/" + Constants.PUBLISH_OUTPUT_PATH + "/" + DateUtil.getYear(contentBean.getCreationDate()) + "/" + DateUtil.getMonth(contentBean.getCreationDate()) + "/" + contentBean.getId() + Constants.DEFAULT_URL_EXTEND;
     }
 
     private String getContextPath(){

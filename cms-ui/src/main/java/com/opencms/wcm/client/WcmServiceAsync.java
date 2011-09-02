@@ -44,6 +44,8 @@ public interface WcmServiceAsync {
 
     void getCategoryById(String id, WcmNodeModel parent, AsyncCallback async);
 
+    void publishingCategoryss(List<Category> categories, boolean createHtml, AsyncCallback async);
+
     void addOrUpdateContent(Content category, AsyncCallback async);
 
     void getContentById(String id, WcmNodeModel parent, AsyncCallback async);
@@ -54,7 +56,7 @@ public interface WcmServiceAsync {
 
     void publishingContents(List<Content> contents, boolean createHtml, AsyncCallback async);
 
-    void getPublishingContentsProcess(AsyncCallback async);
+    void getPublishingProcess(AsyncCallback async);
 
     void getCmsTemplates(String baseTemplate, String type, AsyncCallback async);
 

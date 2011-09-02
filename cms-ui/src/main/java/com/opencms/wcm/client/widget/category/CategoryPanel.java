@@ -63,24 +63,43 @@ public class CategoryPanel extends FormPanel {
         description.setFieldLabel(msgs.category_description());
         this.add(description);
 
-        final Radio yes = new Radio();
-        yes.setName("radio");
-        yes.setBoxLabel(msgs.yes());
+        final Radio visable = new Radio();
+        visable.setName("visable");
+        visable.setBoxLabel(msgs.yes());
 
         final Radio novisable = new Radio();
-        novisable.setName("radio");
+        novisable.setName("visable");
         novisable.setBoxLabel(msgs.no());
 
         if (category.isVisible()) {
-            yes.setValue(true);
+            visable.setValue(true);
         } else {
             novisable.setValue(true);
         }
-        final RadioGroup radioGroup = new RadioGroup("isvisible");
-        radioGroup.setFieldLabel(msgs.visible());
-        radioGroup.add(yes);
-        radioGroup.add(novisable);
-        this.add(radioGroup);
+        final RadioGroup visibleGroup = new RadioGroup("isvisible");
+        visibleGroup.setFieldLabel(msgs.visible());
+        visibleGroup.add(visable);
+        visibleGroup.add(novisable);
+        this.add(visibleGroup);
+
+        final Radio staticC = new Radio();
+        staticC.setName("static");
+        staticC.setBoxLabel(msgs.yes());
+
+        final Radio nostaticC = new Radio();
+        nostaticC.setName("static");
+        nostaticC.setBoxLabel(msgs.no());
+
+        if (category.isStaticCategory()) {
+            staticC.setValue(true);
+        } else {
+            nostaticC.setValue(true);
+        }
+        final RadioGroup staticGroup = new RadioGroup("static");
+        staticGroup.setFieldLabel(msgs.category_static());
+        staticGroup.add(staticC);
+        staticGroup.add(nostaticC);
+        this.add(staticGroup);
 
         BeanModelFactory factory = BeanModelLookup.get().getFactory(Category.class);
 
@@ -100,10 +119,15 @@ public class CategoryPanel extends FormPanel {
                             category.setParentId(parent.getId());
                         }
                     }
-                    if(yes.getValue()){
+                    if(visable.getValue()){
                         category.setVisible(true);
                     } else{
                         category.setVisible(false);
+                    }
+                    if(staticC.getValue()){
+                        category.setStaticCategory(true);
+                    } else{
+                        category.setStaticCategory(false);
                     }
                     Dispatcher.forwardEvent(AppEvents.CATEGORY_MANAGER_SAVE, category);
                 }

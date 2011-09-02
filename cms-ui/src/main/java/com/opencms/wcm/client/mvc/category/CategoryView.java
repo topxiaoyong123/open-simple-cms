@@ -71,6 +71,8 @@ public class CategoryView extends View {
             window.show();
         } else if(AppEvents.CATEGORY_MANAGER_DELETE == appEvent.getType()){
 
+        } else if(AppEvents.CATEGORY_MANAGER_PUBLISHING_SUCCESS == appEvent.getType()){
+            categoryListPanel.refresh();
         }
     }
 }

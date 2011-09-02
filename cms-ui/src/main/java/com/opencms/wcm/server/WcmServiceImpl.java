@@ -315,6 +315,30 @@ public class WcmServiceImpl implements WcmService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public boolean publishingCategoryss(List<Category> categories, boolean createHtml) throws ApplicationException {
+        try {
+            status.clean();
+            status.setInitial(true);
+            status.setTotal(categories.size());
+            for(Category category : categories){
+                CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(category.getId());
+                engine.engineCategory(categoryBean, createHtml);
+//                contentBean.setState(ContentField._STATE_PUBLISHED);
+//                contentBean.setCreateHtml(createHtml);
+                cmsManager.getCategoryService().updateCategory(categoryBean);
+                status.addFinished(1);
+            }
+            status.setEnd(true);
+            return true;
+        } catch(Exception e){
+            status.setException(true);
+            e.printStackTrace();
+            logger.error("error:", e);
+            throw new ApplicationException(e.getMessage());
+        }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public boolean addOrUpdateContent(Content content) throws ApplicationException {
         try {
             ContentBean contentBean;
@@ -443,7 +467,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public int[] getPublishingContentsProcess() throws ApplicationException {
+    public int[] getPublishingProcess() throws ApplicationException {
         try{
             if(!status.isInitial()){
                 return null;

@@ -38,6 +38,4 @@ public interface ModelMapper {
 
     public String getContentURL(ContentBean contentBean);
 
-    public String getContentPath(ContentBean contentBean);
-
 }

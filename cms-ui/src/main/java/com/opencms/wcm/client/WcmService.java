@@ -118,6 +118,8 @@ public interface WcmService extends RemoteService {
      */
     public Category getCategoryById(String id, WcmNodeModel parent) throws ApplicationException;
 
+    public boolean publishingCategoryss(List<Category> categories, boolean createHtml) throws ApplicationException;
+
     /**
      * 新增或更新文章
      * @param content
@@ -155,7 +157,7 @@ public interface WcmService extends RemoteService {
 
     public boolean publishingContents(List<Content> contents, boolean createHtml) throws ApplicationException;
 
-    public int[] getPublishingContentsProcess() throws ApplicationException;
+    public int[] getPublishingProcess() throws ApplicationException;
 
     /**
      * 取得模板列表
