@@ -9,10 +9,12 @@
     <#else>
         <a href="${menu.item.url}" target="_blank">${menu.item.title}</a>
     </#if>
-    </#list>
+    </#list>       <br>
 </#if>
 
 <#assign pageContents = category.getContents()!/>
 <#list pageContents as content>
-    ${content.title}
+    <a href="${content.url!}">${content.title}</a>
 </#list>
+<br>
+<@paging/>

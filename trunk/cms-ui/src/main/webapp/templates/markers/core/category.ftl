@@ -19,6 +19,14 @@
     <#return categoryModel.id?if_exists>
 </#function>
 
+<#function getCategory id = getId()>
+    <#return engineUtil.getCmsManager().getCategoryService().getCategoryById(id)?if_exists>
+</#function>
+
+<#function getCategoryModel>
+    <#return categoryModel?if_exists>
+</#function>
+
 <#function getPage>
     <#return categoryModel.page?if_exists>
 </#function>
