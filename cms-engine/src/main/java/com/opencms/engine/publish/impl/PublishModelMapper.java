@@ -86,13 +86,17 @@ public class PublishModelMapper implements ModelMapper {
     }
 
     public String getCategoryURL(CategoryBean categoryBean) {
+        return getCategoryURL(categoryBean, 1);
+    }
+
+    public String getCategoryURL(CategoryBean categoryBean, int page) {
         if(categoryBean.getUrl() != null && !"".equals(categoryBean.getUrl())){
             return categoryBean.getUrl();
         }
         if(categoryBean.isStaticCategory()) {
-            return getContextPath() + "/" + PathUtils.getCategoryRelativePath(categoryBean, 1);
+            return getContextPath() + "/" + PathUtils.getCategoryRelativePath(categoryBean, page);
         }
-        return getCategoryURL(categoryBean, 1, PageBean.DEFAULT_SIZE);
+        return getCategoryURL(categoryBean, page, PageBean.DEFAULT_SIZE);
     }
 
     public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize) {

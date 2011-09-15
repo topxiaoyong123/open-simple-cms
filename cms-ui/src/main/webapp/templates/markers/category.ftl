@@ -17,3 +17,7 @@
         <#return pageContents>
     </#if>
 </#function>
+
+<#function getCategoryURL category = getCategory() page = 1>
+    <#return engineUtil.getMapper().getCategoryURL(category, page)>
+</#function>

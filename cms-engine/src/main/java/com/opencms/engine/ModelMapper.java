@@ -34,6 +34,8 @@ public interface ModelMapper {
 
     public String getCategoryURL(CategoryBean categoryBean);
 
+    public String getCategoryURL(CategoryBean categoryBean, int page);
+
     public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize);
 
     public String getContentURL(ContentBean contentBean);
