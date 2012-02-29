@@ -97,7 +97,7 @@ public class FilePanel extends ContentPanel {
         TreeLoader<WcmFile> loader = new BaseTreeLoader<WcmFile>(proxy) {
             @Override
             public boolean hasChildren(WcmFile modelData) {
-                return (modelData instanceof WcmFile && "1".equals(modelData.getHasChild()));
+                return (modelData instanceof WcmFile);
             }
         };
         // trees store
@@ -107,7 +107,7 @@ public class FilePanel extends ContentPanel {
         tree.setIconProvider(new ModelIconProvider<WcmFile>() {
 			@Override
 			public AbstractImagePrototype getIcon(WcmFile model) {
-				if(!"1".equals(model.getHasChild())) {
+				if("0".equals(model.getHasChild()) && !tree.getStore().hasChildren(model)) {
 					return IconHelper.createPath("images/icons/page_white.png");
 				}
 				return null;
