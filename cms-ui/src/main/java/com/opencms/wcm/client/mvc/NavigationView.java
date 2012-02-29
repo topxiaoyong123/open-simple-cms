@@ -1,32 +1,45 @@
 package com.opencms.wcm.client.mvc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.binder.TreeBinder;
-import com.extjs.gxt.ui.client.data.*;
-import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.Style.SelectionMode;
+import com.extjs.gxt.ui.client.data.BaseTreeLoader;
+import com.extjs.gxt.ui.client.data.ModelIconProvider;
+import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.data.TreeLoader;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.store.TreeStore;
+import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.DataList;
 import com.extjs.gxt.ui.client.widget.DataListItem;
 import com.extjs.gxt.ui.client.widget.DataListSelectionModel;
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.tree.Tree;
+import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.opencms.wcm.client.*;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.opencms.wcm.client.AppEvents;
+import com.opencms.wcm.client.AppState;
+import com.opencms.wcm.client.WcmMessages;
+import com.opencms.wcm.client.WcmService;
+import com.opencms.wcm.client.WcmServiceAsync;
 import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.WcmApp;
 import com.opencms.wcm.client.model.WcmNodeModel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -39,7 +52,7 @@ public class NavigationView extends View {
 
     private ContentPanel westPanel;
 
-    private TreeBinder<WcmNodeModel> binder;
+    private TreePanel<WcmNodeModel> tree;
     private final DataList otherManageDataList = new DataList();
     private final DataListSelectionModel smotherManageDLSM = otherManageDataList.getSelectionModel();
 
@@ -77,9 +90,9 @@ public class NavigationView extends View {
             }
         };
         // tree loader
-        TreeLoader loader = new BaseTreeLoader(proxy) {
+        TreeLoader<WcmNodeModel> loader = new BaseTreeLoader<WcmNodeModel>(proxy) {
             @Override
-            public boolean hasChildren(ModelData parent) {
+            public boolean hasChildren(WcmNodeModel parent) {
                 if(!(parent instanceof WcmNodeModel)){
                     return false;
                 }
@@ -88,27 +101,29 @@ public class NavigationView extends View {
         };
         // trees store
         TreeStore<WcmNodeModel> store = new TreeStore<WcmNodeModel>(loader);
-        Tree tree = new Tree();
-        binder = new TreeBinder<WcmNodeModel>(tree, store);
-        binder.setIconProvider(new ModelStringProvider<WcmNodeModel>() {
+
+        tree = new TreePanel<WcmNodeModel>(store);
+        tree.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        tree.setIconProvider(new ModelIconProvider<WcmNodeModel>() {
             //节点是根节点还是栏目节点
-            public String getStringValue(WcmNodeModel model, String property) {
-                if ((model instanceof WcmNodeModel)) {
+			@Override
+			public AbstractImagePrototype getIcon(WcmNodeModel model) {
+				if ((model instanceof WcmNodeModel)) {
                     String ext = model.getNodetype();
                     if ("0".equals(ext)) {
-                        return "images/icons/application_home.png";
+                        return IconHelper.createPath("images/icons/application_home.png");
                     }
                     if ("-1".equals(ext)) {
-                        return "images/icons/page_white.png";
+                        return IconHelper.createPath("images/icons/page_white.png");
                     }
                 }
-                return null;
-            }
+				return null;
+			}
         });
-        binder.setCaching(false);
-        binder.setDisplayProperty("title");
-        binder.addSelectionChangedListener(new SelectionChangedListener<WcmNodeModel>() {
-            public void selectionChanged(SelectionChangedEvent se) {
+        tree.setCaching(false);
+        tree.setDisplayProperty("title");
+        tree.getSelectionModel().addSelectionChangedListener(new SelectionChangedListener<WcmNodeModel>() {
+            public void selectionChanged(SelectionChangedEvent<WcmNodeModel> se) {
                 if (!se.getSelection().isEmpty()) {
                     WcmNodeModel node = (WcmNodeModel) se.getSelection().get(0);
                     Dispatcher.forwardEvent(AppEvents.ARTICLE_MANAGER_CHANGE_CATEGORY, node);
@@ -176,7 +191,7 @@ public class NavigationView extends View {
             smotherManageDLSM.deselectAll();
         }
         if(AppEvents.ARTICLE_MANAGER_ITEM_SELECTION_NONE == appEvent.getType()){
-            binder.setSelection(new ArrayList());
+            tree.getSelectionModel().setSelection(new ArrayList());
         }
     }
 }

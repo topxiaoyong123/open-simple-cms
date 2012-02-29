@@ -1,9 +1,34 @@
 package com.opencms.wcm.server;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.opencms.core.db.bean.*;
+import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.bean.ContentDetailBean;
+import com.opencms.core.db.bean.SiteBean;
+import com.opencms.core.db.bean.UserBean;
 import com.opencms.core.db.bean.field.ContentField;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
@@ -13,6 +38,7 @@ import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
 import com.opencms.util.common.Constants;
+import com.opencms.util.common.FileFilterImpl;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.model.User;
@@ -24,19 +50,6 @@ import com.opencms.wcm.client.model.file.WcmFile;
 import com.opencms.wcm.client.model.site.Site;
 import com.opencms.wcm.client.model.template.CmsTemplate;
 import com.opencms.wcm.server.message.MessageSourceHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -497,6 +510,7 @@ public class WcmServiceImpl implements WcmService {
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
         String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath();
         List<WcmFile> list = new ArrayList<WcmFile>();
+        FileFilter filter = new FileFilterImpl(false, true, null, null);
         if (f != null) {
             if ("0".equals(f.getType())) {
                 File parent = new File(f.getPath());
@@ -504,6 +518,8 @@ public class WcmServiceImpl implements WcmService {
                 for (File file : fs) {
                     if (file.isDirectory() && !file.isHidden()) {
                         WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), "", "0", "", f.getTemplate());
+                        File[] ifs = file.listFiles(filter);
+                        wf.setHasChild((ifs == null || ifs.length == 0) ? "0" : "1");
                         list.add(wf);
                     }
                 }
@@ -514,6 +530,8 @@ public class WcmServiceImpl implements WcmService {
             for (File file : fs) {
                 if (file.isDirectory() && !file.isHidden()) {
                     WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), "", "0", "", file.getName());
+                    File[] ifs = file.listFiles(filter);
+                    wf.setHasChild((ifs == null || ifs.length == 0) ? "0" : "1");
                     list.add(wf);
                 }
             }

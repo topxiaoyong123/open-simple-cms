@@ -33,6 +33,8 @@ public class WcmFile extends BaseModelData implements BeanModelTag, Serializable
     private Date lastModify;
 
     private String shortName;
+    
+    private String hasChild;
 
     public WcmFile() {
     }
@@ -128,8 +130,17 @@ public class WcmFile extends BaseModelData implements BeanModelTag, Serializable
     public void setShortName(String shortName) {
         set("shortName", shortName);
     }
+    
 
-    @Override
+    public String getHasChild() {
+		return get("hasChild");
+	}
+
+	public void setHasChild(String hasChild) {
+		set("hasChild", hasChild);
+	}
+
+	@Override
     public String toString() {
         return "path:" + this.getPath() + ",type:" + this.getType();
     }
