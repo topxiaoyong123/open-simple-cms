@@ -18,6 +18,6 @@
     </#if>
 </#function>
 
-<#function getCategoryURL category = getCategory() page = 1>
-    <#return engineUtil.getMapper().getCategoryURL(category, page)>
+<#function getCategoryURL category = getCategory() page = 1 pageSize = 10>
+    <#return engineUtil.getMapper().getCategoryURL(category, page, pageSize)>
 </#function>
