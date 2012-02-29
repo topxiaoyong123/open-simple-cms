@@ -1,12 +1,17 @@
 package com.opencms.wcm.client.widget.extend;
 
-import com.extjs.gxt.ui.client.event.*;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.HtmlEditor;
-import com.google.gwt.user.client.ui.RichTextArea;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.HtmlEditor;
+import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
+import com.google.gwt.user.client.ui.RichTextArea;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,7 +33,10 @@ public class ExtendedHtmlEditor extends HtmlEditor {
         super.setupToolbar();
         Button image = new Button();
         image.setIconStyle("editor_image");
-        image.setToolTip("Insert an image");
+        ToolTipConfig config = new ToolTipConfig();  
+        config.setTitle("Insert an image");
+        config.setText("Insert an image");
+        image.setToolTip(config);
         image.addSelectionListener(new SelectionListener(){
             @Override
             public void componentSelected(ComponentEvent componentEvent) {
