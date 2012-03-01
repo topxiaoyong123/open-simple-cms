@@ -33,6 +33,7 @@ import com.opencms.core.db.bean.field.ContentField;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
 import com.opencms.engine.PublishStatus;
+import com.opencms.engine.util.PathUtils;
 import com.opencms.template.TemplateHelper;
 import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
@@ -508,13 +509,21 @@ public class WcmServiceImpl implements WcmService {
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<WcmFile> getFileForders(WcmFile f) throws ApplicationException {
-        String templatePath = cmsUtils.getResourceHelper().getCmsResource().getTemplatePath();
+        String basePath = PathUtils.getBasePath();
         List<WcmFile> list = new ArrayList<WcmFile>();
-        FileFilter filter = new FileFilterImpl(false, true, null, null);
+        FileFilter filter = new FileFilter() {
+			@Override
+			public boolean accept(File file) {
+				if(file.isFile() || "WEB-INF".equalsIgnoreCase(file.getName())) {
+					return false;
+				}
+				return true;
+			}
+        };
         if (f != null) {
             if ("0".equals(f.getType())) {
                 File parent = new File(f.getPath());
-                File[] fs = parent.listFiles();
+                File[] fs = parent.listFiles(filter);
                 for (File file : fs) {
                     if (file.isDirectory() && !file.isHidden()) {
                         WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), "", "0", "", f.getTemplate());
@@ -525,8 +534,8 @@ public class WcmServiceImpl implements WcmService {
                 }
             }
         } else {
-            File parent = new File(templatePath);
-            File[] fs = parent.listFiles();
+            File parent = new File(basePath);
+            File[] fs = parent.listFiles(filter);
             for (File file : fs) {
                 if (file.isDirectory() && !file.isHidden()) {
                     WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), "", "0", "", file.getName());
@@ -544,39 +553,51 @@ public class WcmServiceImpl implements WcmService {
         String hosturl = cmsUtils.getResourceHelper().getCmsResource().getOutputUrl();
         List<WcmFile> list = new ArrayList<WcmFile>();
         logger.debug("getFiles, parent:{}", f);
-        if (f != null && !"0".equals(f.getPath())) {
-            File parent = new File(f.getPath());
-            File[] fs = parent.listFiles();
+        File parent;
+        if (f != null && "0".equals(f.getType()) && f.getPath() != null) {
+            parent = new File(f.getPath());
+        } else {
+        	parent = new File(PathUtils.getBasePath());
+        }
+        if(parent != null) {
+        	FileFilter filter = new FileFilter() {
+    			@Override
+    			public boolean accept(File file) {
+    				if(file.isFile() && !file.isHidden()) {
+    					return true;
+    				}
+    				return false;
+    			}
+            };
+        	File[] fs = parent.listFiles(filter);
             for (File file : fs) {
-                if (file.isFile() && !file.isHidden()) {
-                    String filename = file.getName();
-                    String filetype = filename.substring(filename.lastIndexOf(".") + 1);
-                    String shortcut = null;
-                    String url = hosturl + "/" + Constants.TEMPLATE_PARENT_PATH + "/" + file.getAbsolutePath().substring(file.getAbsolutePath().indexOf(f.getTemplate())).replace("\\", "/");
-                    if (("jpg").equalsIgnoreCase(filetype) || ("bmp").equalsIgnoreCase(filetype) || ("gif").equalsIgnoreCase(filetype) || ("png").equalsIgnoreCase(filetype)) {
-                        shortcut = url;
-                    } else if ("doc".equalsIgnoreCase(filetype) || "docx".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/word.jpg";
-                    } else if ("xls".equalsIgnoreCase(filetype) || "xlsx".equalsIgnoreCase(filetype) || "csv".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/excel.jpg";
-                    } else if ("ppt".equalsIgnoreCase(filetype) || "pptx".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/ppt.jpg";
-                    } else if ("pdf".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/pdf.jpg";
-                    } else if ("html".equalsIgnoreCase(filetype) || "htm".equalsIgnoreCase(filetype) || "shtml".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/html.jpg";
-                    } else if ("css".equalsIgnoreCase(filetype) || "js".equalsIgnoreCase(filetype) || "txt".equalsIgnoreCase(filetype) || "text".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/txt.jpg";
-                    } else if ("rar".equalsIgnoreCase(filetype) || "zip".equalsIgnoreCase(filetype) || "war".equalsIgnoreCase(filetype) || "jar".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/rar.jpg";
-                    } else if ("exe".equalsIgnoreCase(filetype)) {
-                        shortcut = "images/shortcut/exe.jpg";
-                    } else {
-                        shortcut = "images/shortcut/other.jpg";
-                    }
-                    WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), url, "1", shortcut, f.getTemplate(), file.length(), new Date(file.lastModified()));
-                    list.add(wf);
+                String filename = file.getName();
+                String filetype = filename.substring(filename.lastIndexOf(".") + 1);
+                String shortcut = null;
+                String url = hosturl + file.getAbsolutePath().substring(new File(PathUtils.getBasePath()).getAbsolutePath().length()).replace("\\", "/");
+                if (("jpg").equalsIgnoreCase(filetype) || ("bmp").equalsIgnoreCase(filetype) || ("gif").equalsIgnoreCase(filetype) || ("png").equalsIgnoreCase(filetype)) {
+                    shortcut = url;
+                } else if ("doc".equalsIgnoreCase(filetype) || "docx".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/word.jpg";
+                } else if ("xls".equalsIgnoreCase(filetype) || "xlsx".equalsIgnoreCase(filetype) || "csv".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/excel.jpg";
+                } else if ("ppt".equalsIgnoreCase(filetype) || "pptx".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/ppt.jpg";
+                } else if ("pdf".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/pdf.jpg";
+                } else if ("html".equalsIgnoreCase(filetype) || "htm".equalsIgnoreCase(filetype) || "shtml".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/html.jpg";
+                } else if ("css".equalsIgnoreCase(filetype) || "js".equalsIgnoreCase(filetype) || "txt".equalsIgnoreCase(filetype) || "text".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/txt.jpg";
+                } else if ("rar".equalsIgnoreCase(filetype) || "zip".equalsIgnoreCase(filetype) || "war".equalsIgnoreCase(filetype) || "jar".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/rar.jpg";
+                } else if ("exe".equalsIgnoreCase(filetype)) {
+                    shortcut = "images/shortcut/exe.jpg";
+                } else {
+                    shortcut = "images/shortcut/other.jpg";
                 }
+                WcmFile wf = new WcmFile(file.getName(), file.getAbsolutePath(), url, "1", shortcut, f.getTemplate(), file.length(), new Date(file.lastModified()));
+                list.add(wf);
             }
         }
         logger.debug("getFiles, filelist:{}", list);

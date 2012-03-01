@@ -517,75 +517,75 @@
 
  .icon-huishouzhan
 {
-    background: url(images/icons/huafu/huishouzhan.gif) no-repeat center left !important;
+    background: url(images/icons/manager/huishouzhan.gif) no-repeat center left !important;
 }
 
  .icon-jijinjinli
 {
-    background: url(images/icons/huafu/jijinjinli.gif) no-repeat center left !important;
+    background: url(images/icons/manager/jijinjinli.gif) no-repeat center left !important;
 }
 
  .icon-passwordsmanager
 {
-    background: url(images/icons/huafu/passwordmanager.gif) no-repeat center left !important;
+    background: url(images/icons/manager/passwordmanager.gif) no-repeat center left !important;
 }
 
  .icon-zhaopin
 {
-    background: url(images/icons/huafu/zhaopin.gif) no-repeat center left !important;
+    background: url(images/icons/manager/zhaopin.gif) no-repeat center left !important;
 }
 
  .icon-qxfund
 {
-    background: url(images/icons/huafu/qxfund.gif) no-repeat center left !important;
+    background: url(images/icons/manager/qxfund.gif) no-repeat center left !important;
 }
 
 
  .icon-rizhi
 {
-    background: url(images/icons/huafu/rizhi.gif) no-repeat center left !important;
+    background: url(images/icons/manager/rizhi.gif) no-repeat center left !important;
 }
 
  .icon-huodong
 {
-    background: url(images/icons/huafu/huodong.gif) no-repeat center left !important;
+    background: url(images/icons/manager/huodong.gif) no-repeat center left !important;
 }
 
  .icon-yonghu
 {
-    background: url(images/icons/huafu/yonghu.gif) no-repeat center left !important;
+    background: url(images/icons/manager/yonghu.gif) no-repeat center left !important;
 }
 
  .icon-liuyan
 {
-    background: url(images/icons/huafu/liuyan.gif) no-repeat center left !important;
+    background: url(images/icons/manager/liuyan.gif) no-repeat center left !important;
 }
 
  .icon-site
 {
-    background: url(images/icons/huafu/site.gif) no-repeat center left !important;
+    background: url(images/icons/manager/site.gif) no-repeat center left !important;
 }
 
  .icon-juese
 {
-    background: url(images/icons/huafu/juese.gif) no-repeat center left !important;
+    background: url(images/icons/manager/juese.gif) no-repeat center left !important;
 }
 
 
  .icon-ip
 {
-    background: url(images/icons/huafu/ip.gif) no-repeat center left !important;
+    background: url(images/icons/manager/ip.gif) no-repeat center left !important;
 }
 
  .icon-shouye
 {
-    background: url(images/icons/huafu/shouye.gif) no-repeat center left !important;
+    background: url(images/icons/manager/shouye.gif) no-repeat center left !important;
 }
 
 
  .icon-wenjuan
 {
-    background: url(images/icons/huafu/wenjuan.gif) no-repeat center left !important;
+    background: url(images/icons/manager/wenjuan.gif) no-repeat center left !important;
 }
 
 .article-about
@@ -812,6 +812,10 @@ a.address:hover{ text-decoration:underline}
     border:1px solid red
 }
 
+
+.icon-resource{
+    background: url(images/icons/resource.gif) no-repeat center left !important;
+}
 
 /*  批量上传  */
 div.fieldset {

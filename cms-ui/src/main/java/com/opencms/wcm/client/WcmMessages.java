@@ -2,7 +2,7 @@ package com.opencms.wcm.client;
 
 /**
  * Interface to represent the messages contained in resource bundle:
- * 	D:/workspaces/eclipse/cms/cms-ui/src/main/java/com/opencms/wcm/client/WcmMessages.properties'.
+ * 	D:/workspaces/all/open-simple-cms/cms-ui/src/main/java/com/opencms/wcm/client/WcmMessages.properties'.
  */
 public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   

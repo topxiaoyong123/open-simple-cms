@@ -10,6 +10,7 @@ import com.opencms.wcm.client.mvc.category.CategoryController;
 import com.opencms.wcm.client.mvc.content.ContentAuditingController;
 import com.opencms.wcm.client.mvc.content.ContentController;
 import com.opencms.wcm.client.mvc.content.ContentPublishingController;
+import com.opencms.wcm.client.mvc.file.FileController;
 import com.opencms.wcm.client.mvc.site.SiteController;
 
 /**
@@ -37,6 +38,8 @@ public class Wcm implements EntryPoint {
         dispatcher.addController(new ContentController());
         dispatcher.addController(new ContentAuditingController());
         dispatcher.addController(new ContentPublishingController());
+        
+        dispatcher.addController(new FileController());
 
         dispatcher.addController(new LoginController());
         wService.setLocale(getLocale(), new AsyncCallback(){

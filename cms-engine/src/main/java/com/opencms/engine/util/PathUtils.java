@@ -71,5 +71,9 @@ public class PathUtils {
         }
         return basePath + "/" + contentBean.getId() + Constants.DEFAULT_URL_EXTEND;
     }
+    
+    public static String getBasePath() {
+    	return PathUtils.class.getResource("/").getPath().replace("WEB-INF/classes", "");
+    }
 
 }
