@@ -68,4 +68,7 @@ public class AppEvents {
     public final static AppEventType CONTENT_PUBLISHING_MANAGER = new AppEventType();
     public final static AppEventType CONTENT_PUBLISHING_MANAGER_DO = new AppEventType();
     public final static AppEventType CONTENT_PUBLISHING_MANAGER_SUCCESS = new AppEventType();
+    
+    //文件管理
+    public final static AppEventType FILE_MANAGER = new AppEventType();
 }

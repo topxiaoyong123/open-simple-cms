@@ -38,6 +38,7 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -70,7 +71,7 @@ public class FilePanel extends ContentPanel {
     final WcmMessages msgs = GWT.create(WcmMessages.class);
 
     final ListView<BeanModel> view = new ListView<BeanModel>();
-
+    
     public List<BeanModel> getSelections(){
         return view.getSelectionModel().getSelection();
     }
@@ -256,6 +257,7 @@ public class FilePanel extends ContentPanel {
         panel.setScrollMode(Style.Scroll.AUTO);
         panel.setHeaderVisible(false);
         panel.setHeading("West");
+        panel.setLayout(new FitLayout());
         BorderLayoutData data = new BorderLayoutData(Style.LayoutRegion.WEST, 150, 100, 250);
         data.setMargins(new Margins(1, 1, 1, 1));
         data.setSplit(true);
@@ -396,6 +398,7 @@ public class FilePanel extends ContentPanel {
             }
         });
         panel.setContextMenu(contextMenu);
+        lloader.load(null);
     }
 
     class ContentPanel1 extends ContentPanel {

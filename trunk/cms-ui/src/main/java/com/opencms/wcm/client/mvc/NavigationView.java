@@ -161,7 +161,13 @@ public class NavigationView extends View {
         m.set("name", msgs.site_manager_header());
         m.set("icon", "icon-site");
         m.set("entry", new Entry(AppEvents.SITE_MANAGER.getId(), msgs.site_manager_header(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.SITE_MANAGER, false));
-        view.getStore().add(m);
+        view.getStore().add(m);//站点管理
+        m = new OtherManageModelData();
+    	m.set("id", AppEvents.FILE_MANAGER.getId());
+        m.set("name", msgs.file_manager());
+        m.set("icon", "icon-resource");
+        m.set("entry", new Entry(AppEvents.FILE_MANAGER.getId(), msgs.site_manager_header(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.FILE_MANAGER, false));
+        view.getStore().add(m);//文件管理
         
         service.getWcmApps(new AsyncCallback<Map<Long, WcmApp>>(){
             public void onFailure(Throwable throwable) {
