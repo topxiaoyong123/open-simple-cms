@@ -1,31 +1,29 @@
 package com.opencms.wcm.client.mvc;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
+import com.extjs.gxt.ui.client.data.BaseModelData;
 import com.extjs.gxt.ui.client.data.BaseTreeLoader;
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.data.TreeLoader;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.DataList;
-import com.extjs.gxt.ui.client.widget.DataListItem;
-import com.extjs.gxt.ui.client.widget.DataListSelectionModel;
+import com.extjs.gxt.ui.client.widget.ListView;
+import com.extjs.gxt.ui.client.widget.ListViewSelectionModel;
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -53,8 +51,8 @@ public class NavigationView extends View {
     private ContentPanel westPanel;
 
     private TreePanel<WcmNodeModel> tree;
-    private final DataList otherManageDataList = new DataList();
-    private final DataListSelectionModel smotherManageDLSM = otherManageDataList.getSelectionModel();
+    private final ListView<ModelData> view = new ListView<ModelData>(new ListStore<ModelData>());
+    private final ListViewSelectionModel<ModelData> selectionModel = view.getSelectionModel();
 
 
     final WcmServiceAsync service = (WcmServiceAsync) Registry.get(WcmService.SERVICE);// 定义所要引用的异步服务
@@ -141,42 +139,42 @@ public class NavigationView extends View {
         otherManage.setHeading(msgs.wcm_general_management());
         otherManage.setLayout(new FitLayout());
 
-        otherManageDataList.setSelectionModel(smotherManageDLSM);
-        otherManageDataList.setBorders(false);
-        otherManageDataList.addListener(Events.SelectionChange, new Listener<ComponentEvent>(){
-            public void handleEvent(ComponentEvent be) {
-                DataList list = (DataList) be.getComponent();
-                if (null == list.getSelectedItem()) return;
-                Entry entry = list.getSelectedItem().getData("entry");
-                Dispatcher.forwardEvent(entry.getEventType(), entry);
-            }
-        });
         juge();
-        otherManage.add(otherManageDataList);
+        view.setSimpleTemplate("<table id='{id}' class='my-list-item x-component' cellpadding='0' cellspacing='0' tabindex='0'><tbody><tr><td class='my-list-item-l'><div>&nbsp;</div></td><td class='my-list-item-icon' style=''><div class='x-icon-btn {icon}'></div></td><td class='my-list-item-c'><span class='my-list-item-text '>{name}</span></td><td class='my-list-item-r'><div>&nbsp;</div></td></tr></tbody></table>");
+        selectionModel.setSelectionMode(SelectionMode.SINGLE);
+        selectionModel.addSelectionChangedListener(new SelectionChangedListener<ModelData>() {
+			@Override
+			public void selectionChanged(SelectionChangedEvent<ModelData> se) {
+				ModelData data = selectionModel.getSelectedItem();
+				if(data == null) return;
+				Entry entry = data.get("entry");
+				Dispatcher.forwardEvent(entry.getEventType(), entry);
+			}
+		});
+        otherManage.add(view);
         return otherManage;
     }
     
     private void juge(){
-        DataListItem dataListItem = new DataListItem();
-        dataListItem.setText(msgs.site_manager_header());
-        dataListItem.setId(AppEvents.SITE_MANAGER.getId());
-        dataListItem.setIconStyle("icon-site");
-        dataListItem.setData("entry", new Entry(AppEvents.SITE_MANAGER.getId(), msgs.site_manager_header(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.SITE_MANAGER, false));
-        otherManageDataList.add(dataListItem);
-        service.getWcmApps(new AsyncCallback(){
+    	ModelData m = new OtherManageModelData();
+    	m.set("id", AppEvents.SITE_MANAGER.getId());
+        m.set("name", msgs.site_manager_header());
+        m.set("icon", "icon-site");
+        m.set("entry", new Entry(AppEvents.SITE_MANAGER.getId(), msgs.site_manager_header(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.SITE_MANAGER, false));
+        view.getStore().add(m);
+        
+        service.getWcmApps(new AsyncCallback<Map<Long, WcmApp>>(){
             public void onFailure(Throwable throwable) {
             }
-            public void onSuccess(Object o) {
-                Map<Long, WcmApp> wcmApps = (Map<Long, WcmApp>)o;
+            public void onSuccess(Map<Long, WcmApp> wcmApps) {
                 AppState.wcmApps = wcmApps;
-                DataListItem dataListItem = null;
                 for(WcmApp wcmApp : wcmApps.values()){
-                    dataListItem = new DataListItem();
-                    dataListItem.setText(wcmApp.getName());
-                    dataListItem.setId(String.valueOf(wcmApp.getId()));
-                    dataListItem.setIconStyle(wcmApp.getIcon());
-                    dataListItem.setData("entry", new Entry(String.valueOf(wcmApp.getId()), wcmApp.getName(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.OTHER_MANAGER_CHANGE_EVENT, true));
-                    otherManageDataList.add(dataListItem);
+                	ModelData m = new OtherManageModelData();
+                	m.set("id", String.valueOf(wcmApp.getId()));
+                    m.set("name", wcmApp.getName());
+                    m.set("icon", wcmApp.getIcon());
+                    m.set("entry", new Entry(String.valueOf(wcmApp.getId()), wcmApp.getName(), AppState.OWNER_OTHER_MANAGER, null, true, true, AppEvents.OTHER_MANAGER_CHANGE_EVENT, true));
+                    view.getStore().add(m);
                 }
             }
         });
@@ -185,13 +183,36 @@ public class NavigationView extends View {
     protected void handleEvent(AppEvent appEvent) {
         if(AppEvents.OTHER_MANAGER_ITEM_SELECTION == appEvent.getType()){
             Entry entry = (Entry)appEvent.getData();
-            smotherManageDLSM.select(otherManageDataList.getItemByItemId(entry.getId()), true);
+            ModelData m = new OtherManageModelData();
+            m.set("id", entry.getId());
+            selectionModel.select(m, true);
         }
         if(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE == appEvent.getType()){
-            smotherManageDLSM.deselectAll();
+        	selectionModel.deselectAll();
         }
         if(AppEvents.ARTICLE_MANAGER_ITEM_SELECTION_NONE == appEvent.getType()){
-            tree.getSelectionModel().setSelection(new ArrayList());
+            tree.getSelectionModel().deselectAll();
         }
+    }
+    
+    private static class OtherManageModelData extends BaseModelData {
+    	/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public boolean equals(Object o) {
+    		if(o == null || !(o instanceof OtherManageModelData)) return false;
+    		OtherManageModelData obj = (OtherManageModelData)o;
+    		if(o == this) return true;
+    		String id1 = get("id");
+    		String id2 = obj.get("id");
+    		if(id1 != null && id2 != null) {
+    			if(id1 == id2 || id1.equals(id2)) {
+    				return true;
+    			}
+    		}
+    		return false;
+    	}
     }
 }
