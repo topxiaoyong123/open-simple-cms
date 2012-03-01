@@ -1,5 +1,7 @@
 package com.opencms.wcm.client.mvc;
 
+import java.util.List;
+
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
@@ -20,8 +22,6 @@ import com.opencms.wcm.client.model.Entry;
 import com.opencms.wcm.client.model.WcmNodeModel;
 import com.opencms.wcm.client.model.content.Content;
 import com.opencms.wcm.client.widget.WelcomePanel;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
