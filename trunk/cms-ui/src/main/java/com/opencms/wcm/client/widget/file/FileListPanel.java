@@ -58,7 +58,7 @@ import com.opencms.wcm.client.model.file.WcmFile;
  * Time: 11:51:23
  * To change this template use File | Settings | File Templates.
  */
-public class FilePanel extends ContentPanel {
+public class FileListPanel extends ContentPanel {
 
     final WcmServiceAsync service = (WcmServiceAsync) Registry.get(WcmService.SERVICE);// 定义所要引用的异步服务
 
@@ -76,7 +76,7 @@ public class FilePanel extends ContentPanel {
         return view.getSelectionModel().getSelection();
     }
 
-    public FilePanel() {
+    public FileListPanel() {
         this.setHeaderVisible(false);
         this.setLayout(new BorderLayout());
         this.setBodyBorder(false);
@@ -346,6 +346,29 @@ public class FilePanel extends ContentPanel {
                 }
                 for (BeanModel file : l) {
                     Window.open((String) file.get("url"), "", "");
+                }
+            }
+        });
+        MenuItem edit = new MenuItem();
+        edit.setText(msgs.file_manager_edit());
+        edit.setIconStyle("icon-plugin");
+        contextMenu.add(edit);
+        edit.addListener(Events.Select, new Listener<BaseEvent>() {
+            public void handleEvent(BaseEvent baseEvent) {
+                if(view.getSelectionModel().getSelection().size() != 1) {
+                	MessageBox.alert(msgs.warn(), msgs.choose_one(), null);
+                } else {
+                	WcmFile file = view.getSelectionModel().getSelectedItem().getBean();
+                	service.editFile(file, new AsyncCallback<WcmFile>(){
+						@Override
+						public void onFailure(Throwable throwable) {
+							MessageBox.alert(msgs.error(), throwable.getMessage(), null);
+						}
+						@Override
+						public void onSuccess(WcmFile file) {
+							
+						}
+                	});
                 }
             }
         });

@@ -13,14 +13,14 @@
     <bean id="wcmApp" class="com.opencms.wcm.client.model.WcmApp"/>
 
     <util:map id="wcmApps" map-class="java.util.LinkedHashMap" key-type="java.lang.Long" value-type="com.opencms.wcm.client.model.WcmApp">
-        <!--<entry key="10001">-->
-            <!--<bean parent="wcmApp">-->
-                <!--<property name="id" value="10001"/>-->
-                <!--<property name="name" value="访问IP管理"/>-->
-                <!--<property name="url" value="x"/>-->
-                <!--<property name="icon" value="icon-ip"/>-->
-            <!--</bean>-->
-        <!--</entry>-->
+        <entry key="10001">
+            <bean parent="wcmApp">
+                <property name="id" value="10001"/>
+                <property name="name" value="访问IP管理"/>
+                <property name="url" value="x"/>
+                <property name="icon" value="icon-ip"/>
+            </bean>
+        </entry>
         <!--<entry key="10002">-->
             <!--<bean parent="wcmApp">-->
                 <!--<property name="id" value="10002"/>-->

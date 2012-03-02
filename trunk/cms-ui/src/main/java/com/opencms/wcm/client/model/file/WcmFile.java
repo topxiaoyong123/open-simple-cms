@@ -34,6 +34,8 @@ public class WcmFile extends BaseModelData implements BeanModelTag, Serializable
 
     private String shortName;
     
+    private String content;
+    
     private String hasChild;
 
     public WcmFile() {
@@ -131,8 +133,15 @@ public class WcmFile extends BaseModelData implements BeanModelTag, Serializable
         set("shortName", shortName);
     }
     
+    public String getContent() {
+		return get("content");
+	}
 
-    public String getHasChild() {
+	public void setContent(String content) {
+		set("content", content);
+	}
+
+	public String getHasChild() {
 		return get("hasChild");
 	}
 

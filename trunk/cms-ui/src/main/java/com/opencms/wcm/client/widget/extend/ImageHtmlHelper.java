@@ -15,7 +15,7 @@ import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.file.WcmFile;
-import com.opencms.wcm.client.widget.file.FilePanel;
+import com.opencms.wcm.client.widget.file.FileListPanel;
 
 import java.util.List;
 
@@ -119,7 +119,7 @@ public class ImageHtmlHelper extends Dialog {
                 d.setHeading(msgs.file_manager());
                 d.setLayout(new FitLayout());
                 d.setSize(1000, 500);
-                final FilePanel filePanel = new FilePanel();
+                final FileListPanel filePanel = new FileListPanel();
                 d.add(filePanel);
                 d.setHideOnButtonClick(true);
                 d.addListener(Events.Hide, new Listener(){

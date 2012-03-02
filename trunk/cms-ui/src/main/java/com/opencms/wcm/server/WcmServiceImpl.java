@@ -2,6 +2,10 @@ package com.opencms.wcm.server;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -38,8 +42,6 @@ import com.opencms.template.TemplateHelper;
 import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
-import com.opencms.util.common.Constants;
-import com.opencms.util.common.FileFilterImpl;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.model.User;
@@ -640,4 +642,36 @@ public class WcmServiceImpl implements WcmService {
         }
         return true;
     }
+
+	@Override
+	public WcmFile editFile(WcmFile file) throws ApplicationException {
+		File f = new File(file.getPath());
+		if(f.isFile() && !f.isHidden()) {
+			if((double)f.length() / (1024 * 1024 * 8) > 5) {
+				throw new ApplicationException("太大了");
+			}
+			String filetype = f.getName().substring(f.getName().lastIndexOf(".") + 1);
+			if(filetype == null || "".equals(filetype)) {
+				throw new ApplicationException("");
+			}
+			String allowTypes = "txt|text|css|js|html|htm|shtml|ftl";
+			if(!allowTypes.contains(filetype.toLowerCase())) {
+				throw new ApplicationException("");
+			}
+			try {
+				byte[] buffer = new byte[1024];
+				InputStream in = new FileInputStream(f);
+				StringBuffer s = new StringBuffer();
+				while(in.read(buffer) != -1) {
+					s.append(new String(buffer));
+				}
+				file.setContent(s.toString());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return file;
+	}
 }

@@ -601,6 +601,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String file_manager_delete_folder_fail();
 
   /**
+   * Translated "Edit File".
+   * 
+   * @return translated "Edit File"
+   */
+  @DefaultMessage("Edit File")
+  @Key("file_manager_edit")
+  String file_manager_edit();
+
+  /**
    * Translated "File Name".
    * 
    * @return translated "File Name"
