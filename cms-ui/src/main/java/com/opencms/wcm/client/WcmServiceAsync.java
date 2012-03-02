@@ -67,6 +67,8 @@ public interface WcmServiceAsync {
     void createForder(WcmFile f, String name, AsyncCallback async);
 
     void deleteFiles(List<WcmFile> files, AsyncCallback async);
+    
+    void editFile(WcmFile file, AsyncCallback async);
 
     public static class Util {
         private static WcmServiceAsync instance;

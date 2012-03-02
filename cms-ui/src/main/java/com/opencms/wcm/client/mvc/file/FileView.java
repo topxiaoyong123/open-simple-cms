@@ -4,18 +4,21 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.mvc.View;
+import com.extjs.gxt.ui.client.widget.Window;
 import com.google.gwt.core.client.GWT;
 import com.opencms.wcm.client.AppEventType;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.Entry;
-import com.opencms.wcm.client.widget.file.FilePanel;
+import com.opencms.wcm.client.widget.file.FileListPanel;
 import com.opencms.wcm.client.widget.site.SiteListPanel;
 
 public class FileView extends View {
 
-	private FilePanel filePanel;
+	private Window window = new Window();
+	
+	private FileListPanel filePanel;
 	
 	WcmMessages msgs = GWT.create(WcmMessages.class);
 	
@@ -27,7 +30,7 @@ public class FileView extends View {
 	protected void handleEvent(AppEvent appEvent) {
 		AppEventType etype = (AppEventType)appEvent.getType();
         if(AppEvents.FILE_MANAGER == appEvent.getType()){
-        	filePanel = new FilePanel();
+        	filePanel = new FileListPanel();
             Dispatcher.forwardEvent(
                     AppEvents.OTHER_MANAGER_CHANGE_EVENT,
                     new Entry(
