@@ -69,6 +69,8 @@ public interface WcmServiceAsync {
     void deleteFiles(List<WcmFile> files, AsyncCallback async);
     
     void editFile(WcmFile file, AsyncCallback async);
+    
+    void saveFile(WcmFile file, AsyncCallback async);
 
     public static class Util {
         private static WcmServiceAsync instance;

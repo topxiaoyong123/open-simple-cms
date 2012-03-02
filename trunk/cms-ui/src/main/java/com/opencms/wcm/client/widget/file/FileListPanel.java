@@ -27,6 +27,7 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.util.IconHelper;
@@ -46,6 +47,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.WcmServiceAsync;
@@ -74,6 +76,10 @@ public class FileListPanel extends ContentPanel {
     
     public List<BeanModel> getSelections(){
         return view.getSelectionModel().getSelection();
+    }
+    
+    public void refresh() {
+    	lloader.load(null);
     }
 
     public FileListPanel() {
@@ -359,16 +365,7 @@ public class FileListPanel extends ContentPanel {
                 	MessageBox.alert(msgs.warn(), msgs.choose_one(), null);
                 } else {
                 	WcmFile file = view.getSelectionModel().getSelectedItem().getBean();
-                	service.editFile(file, new AsyncCallback<WcmFile>(){
-						@Override
-						public void onFailure(Throwable throwable) {
-							MessageBox.alert(msgs.error(), throwable.getMessage(), null);
-						}
-						@Override
-						public void onSuccess(WcmFile file) {
-							
-						}
-                	});
+                	Dispatcher.forwardEvent(AppEvents.FILE_MANAGER_EDIT, file);
                 }
             }
         });

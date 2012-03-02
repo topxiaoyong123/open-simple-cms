@@ -11,8 +11,9 @@ import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.AppState;
 import com.opencms.wcm.client.WcmMessages;
 import com.opencms.wcm.client.model.Entry;
+import com.opencms.wcm.client.model.file.WcmFile;
 import com.opencms.wcm.client.widget.file.FileListPanel;
-import com.opencms.wcm.client.widget.site.SiteListPanel;
+import com.opencms.wcm.client.widget.file.FilePanel;
 
 public class FileView extends View {
 
@@ -42,6 +43,20 @@ public class FileView extends View {
                             true,
                             etype,
                             false));
+        }
+        if(AppEvents.FILE_MANAGER_EDIT == appEvent.getType()) {
+        	WcmFile f = appEvent.getData();
+            FilePanel fp = new FilePanel(f);
+            window.removeAll();
+            window.add(fp);
+            window.setHeading(msgs.file_manager_edit_header());
+            window.setWidth(617);
+            window.show();
+        }
+        if(AppEvents.FILE_MANAGER_CANCEL == appEvent.getType()
+        		|| AppEvents.FILE_MANAGER_SUCCESS == appEvent.getType()) {
+            window.hide();
+            filePanel.refresh();
         }
 	}
 

@@ -502,6 +502,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String error();
 
   /**
+   * Translated "Content".
+   * 
+   * @return translated "Content"
+   */
+  @DefaultMessage("Content")
+  @Key("file_content")
+  String file_content();
+
+  /**
    * Translated "Hight".
    * 
    * @return translated "Hight"
@@ -610,6 +619,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String file_manager_edit();
 
   /**
+   * Translated "Edit File".
+   * 
+   * @return translated "Edit File"
+   */
+  @DefaultMessage("Edit File")
+  @Key("file_manager_edit_header")
+  String file_manager_edit_header();
+
+  /**
    * Translated "File Name".
    * 
    * @return translated "File Name"
@@ -662,6 +680,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Start Upload")
   @Key("file_manager_upload_start")
   String file_manager_upload_start();
+
+  /**
+   * Translated "File Name".
+   * 
+   * @return translated "File Name"
+   */
+  @DefaultMessage("File Name")
+  @Key("file_name")
+  String file_name();
 
   /**
    * Translated "View Server".
