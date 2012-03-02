@@ -177,4 +177,6 @@ public interface WcmService extends RemoteService {
     public boolean deleteFiles(List<WcmFile> files) throws ApplicationException;
     
     public WcmFile editFile(WcmFile file) throws ApplicationException;
+    
+    public boolean saveFile(WcmFile file) throws ApplicationException;
 }

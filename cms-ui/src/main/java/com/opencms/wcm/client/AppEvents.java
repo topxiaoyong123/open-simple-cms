@@ -71,4 +71,8 @@ public class AppEvents {
     
     //文件管理
     public final static AppEventType FILE_MANAGER = new AppEventType();
+    public final static AppEventType FILE_MANAGER_EDIT = new AppEventType();
+    public final static AppEventType FILE_MANAGER_SAVE = new AppEventType();
+    public final static AppEventType FILE_MANAGER_CANCEL = new AppEventType();
+    public final static AppEventType FILE_MANAGER_SUCCESS = new AppEventType();
 }

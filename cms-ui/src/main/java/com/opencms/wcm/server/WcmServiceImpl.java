@@ -1,11 +1,18 @@
 package com.opencms.wcm.server;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -647,25 +654,26 @@ public class WcmServiceImpl implements WcmService {
 	public WcmFile editFile(WcmFile file) throws ApplicationException {
 		File f = new File(file.getPath());
 		if(f.isFile() && !f.isHidden()) {
-			if((double)f.length() / (1024 * 1024 * 8) > 5) {
-				throw new ApplicationException("太大了");
+			if((double)f.length() / (1024 * 1024) > 5) {
+				throw new ApplicationException(messageSourceHelper.getMessage("file.edit.error.size.toolong", new String[]{"5M"}));
 			}
 			String filetype = f.getName().substring(f.getName().lastIndexOf(".") + 1);
 			if(filetype == null || "".equals(filetype)) {
-				throw new ApplicationException("");
+				throw new ApplicationException(messageSourceHelper.getMessage("file.edit.error.type.notallow"));
 			}
-			String allowTypes = "txt|text|css|js|html|htm|shtml|ftl";
+			String allowTypes = "txt|text|css|js|html|htm|shtml|ftl|jsp|xml";
 			if(!allowTypes.contains(filetype.toLowerCase())) {
-				throw new ApplicationException("");
+				throw new ApplicationException(messageSourceHelper.getMessage("file.edit.error.type.notallow"));
 			}
 			try {
 				byte[] buffer = new byte[1024];
 				InputStream in = new FileInputStream(f);
-				StringBuffer s = new StringBuffer();
-				while(in.read(buffer) != -1) {
-					s.append(new String(buffer));
+				OutputStream os = new ByteArrayOutputStream();
+				int count;
+				while((count = in.read(buffer)) != -1) {
+					os.write(buffer, 0, count);
 				}
-				file.setContent(s.toString());
+				file.setContent(os.toString());
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -673,5 +681,28 @@ public class WcmServiceImpl implements WcmService {
 			}
 		}
 		return file;
+	}
+
+	@Override
+	public boolean saveFile(WcmFile file) throws ApplicationException {
+		File f = new File(file.getPath());
+		if(f.isFile() && !f.isHidden()) {
+			try {
+				FileOutputStream outputStream = new FileOutputStream(f);
+				Writer out = new BufferedWriter(new OutputStreamWriter(outputStream, cmsUtils.getResourceHelper().getCmsResource().getOutputEncoding()));
+				out.append(file.getContent());
+		        out.flush();
+		        outputStream.close();
+		        out.close();
+		        return true;
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 }
