@@ -7,7 +7,7 @@
 
     <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.DefaultActionMapper"/>
     <constant name="struts.enable.SlashesInActionNames" value="true"/>
-    <constant name="struts.action.extension" value="html"/>
+    <constant name="struts.action.extension" value="jhtml"/>
 
     <constant name="struts.objectFactory" value="spring"/>
 
@@ -50,21 +50,16 @@
             <result name="error">/error.jsp</result>
             <result name="404" type="redirect">/404.jsp</result>
         </global-results>
-        <action name="category/*/*/*" class="categoryAction" method="view">
-            <param name="page">{1}</param>
-            <param name="pageSize">{2}</param>
-            <param name="id">{3}</param>
+        <action name="category/**/index*" class="categoryAction" method="view">
+            <param name="names">{1}</param>
+            <param name="page">{2}</param>
             <result name="success">/WEB-INF/content/view.jsp</result>
         </action>
-        <action name="category/*" class="categoryAction" method="view">
-            <param name="id">{1}</param>
+        <action name="content/**/*" class="contentAction" method="view">
+            <param name="id">{2}</param>
             <result name="success">/WEB-INF/content/view.jsp</result>
         </action>
-        <action name="content/*" class="contentAction" method="view">
-            <param name="id">{1}</param>
-            <result name="success">/WEB-INF/content/view.jsp</result>
-        </action>
-        <action name="site/*/index" class="siteAction" method="view">
+        <action name="*/index" class="siteAction" method="view">
             <param name="name">{1}</param>
             <result name="success">/WEB-INF/content/view.jsp</result>
         </action>

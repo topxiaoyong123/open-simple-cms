@@ -51,6 +51,43 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryBean getCategoryById(String id) {
         return categoryDao.get(CategoryBean.class, id);
     }
+    
+    public CategoryBean getCategoryByNames(String[] names) {
+    	if(names.length > 1) {
+    		CategoryBean c = getCategoryBySiteAndName(names[0], names[1]);
+    		for(int i=2; i<names.length; i++) {
+    			if(c != null) {
+    				c = getCategoryByParentAndName(c.getId(), names[i]);
+    			} else{
+    				return null;
+    			}
+    		}
+    		return c;
+    	}
+        return null;
+    }
+    
+    private CategoryBean getCategoryBySiteAndName(String siteName, String name) {
+    	Finder finder = new Finder(CategoryBean.class);
+    	finder.setColumns(new String[]{"name", "site.name"});
+    	finder.setValues(new Serializable[]{name, siteName});
+    	List<CategoryBean> list = categoryDao.getByFinder(finder);
+    	if(list != null && list.size() > 0){
+            return list.get(0);
+        }
+        return null;
+    }
+    
+    private CategoryBean getCategoryByParentAndName(String parent, String name) {
+    	Finder finder = new Finder(CategoryBean.class);
+    	finder.setColumns(new String[]{"name", "parent.id"});
+    	finder.setValues(new Serializable[]{name, parent});
+    	List<CategoryBean> list = categoryDao.getByFinder(finder);
+    	if(list != null && list.size() > 0){
+            return list.get(0);
+        }
+        return null;
+    }
 
     public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible) {
         Finder finder = new Finder(CategoryBean.class);

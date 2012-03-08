@@ -1,5 +1,9 @@
 package com.opencms.engine.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -8,34 +12,10 @@ package com.opencms.engine.model;
  * To change this template use File | Settings | File Templates.
  */
 public class BaseTemplateModel {
+	
+	protected List<Model> models = Collections.synchronizedList(new ArrayList<Model>());
 
-    private Site site;
-
-    private Category category;
-
-    private Content content;
-
-    public Site getSite() {
-        return site;
-    }
-
-    public void setSite(Site site) {
-        this.site = site;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Content getContent() {
-        return content;
-    }
-
-    public void setContent(Content content) {
-        this.content = content;
-    }
+	public void addModel(Model model) {
+		models.add(model);
+	}
 }

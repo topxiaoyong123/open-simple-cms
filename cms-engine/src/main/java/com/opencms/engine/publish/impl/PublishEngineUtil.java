@@ -7,9 +7,11 @@ import com.opencms.core.db.bean.field.ContentField;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.EngineUtil;
 import com.opencms.engine.ModelMapper;
-import com.opencms.engine.model.Content;
+import com.opencms.engine.model.ContentModel;
 import com.opencms.engine.model.Item;
 import com.opencms.engine.model.Menu;
+import com.opencms.engine.util.PathUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -37,6 +39,9 @@ public class PublishEngineUtil implements EngineUtil {
 
     @Resource
 	private ModelMapper mapper;
+    
+    @Resource
+    private PathUtils pathUtils;
 
     public CmsManager getCmsManager() {
         return cmsManager;
@@ -45,6 +50,10 @@ public class PublishEngineUtil implements EngineUtil {
     public ModelMapper getMapper() {
         return mapper;
     }
+    
+    public PathUtils getPathUtils() {
+    	return pathUtils;
+    }
 
     public Menu getSiteMenu(String siteId){
         SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
@@ -52,7 +61,7 @@ public class PublishEngineUtil implements EngineUtil {
         Menu menu = new Menu();
 		Item item = new Item();
 		item.setName(siteBean.getName());
-		item.setUrl(mapper.getSiteURL(siteBean));
+		item.setUrl(pathUtils.getSiteURL(siteBean));
 		item.setTitle(siteBean.getTitle());
         item.setId(siteBean.getId());
 		menu.setItem(item);
@@ -67,7 +76,7 @@ public class PublishEngineUtil implements EngineUtil {
         Menu menu = new Menu();
 		Item item = new Item();
 		item.setName(categoryBean.getName());
-		item.setUrl(mapper.getCategoryURL(categoryBean));
+		item.setUrl(pathUtils.getCategoryURL(categoryBean));
 		item.setTitle(categoryBean.getTitle());
         item.setId(categoryBean.getId());
 		menu.setItem(item);
@@ -92,7 +101,7 @@ public class PublishEngineUtil implements EngineUtil {
         Menu menu = new Menu();
 		Item item = new Item();
 		item.setName(siteBean.getName());
-		item.setUrl(mapper.getSiteURL(siteBean));
+		item.setUrl(pathUtils.getSiteURL(siteBean));
 		item.setTitle(siteBean.getTitle());
         item.setId(siteBean.getId());
 		menu.setItem(item);
@@ -108,7 +117,7 @@ public class PublishEngineUtil implements EngineUtil {
         Menu menu = new Menu();
 		Item item = new Item();
 		item.setName(categoryBean.getName());
-		item.setUrl(mapper.getCategoryURL(categoryBean));
+		item.setUrl(pathUtils.getCategoryURL(categoryBean));
 		item.setTitle(categoryBean.getTitle());
         item.setId(categoryBean.getId());
         if(currentIds.contains(categoryBean.getId())){
@@ -122,12 +131,12 @@ public class PublishEngineUtil implements EngineUtil {
         return menu;
     }
 
-    public List<Content> getContents(String categoryId, int firstResult, int maxResults) {
+    public List<ContentModel> getContents(String categoryId, int firstResult, int maxResults) {
         List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
         return mapper.mapContents(contentBeans);
     }
 
-    public List<Content> getContents(String categoryId, int firstResult, int maxResults, boolean loadContent) {
+    public List<ContentModel> getContents(String categoryId, int firstResult, int maxResults, boolean loadContent) {
         List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
         return mapper.mapContents(contentBeans, loadContent);
     }

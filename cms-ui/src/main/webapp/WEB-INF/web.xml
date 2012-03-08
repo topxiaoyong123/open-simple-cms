@@ -54,7 +54,7 @@
 
    <filter-mapping>
        <filter-name>OpenSessionInViewFilter</filter-name>
-       <url-pattern>*.html</url-pattern>
+       <url-pattern>*.jhtml</url-pattern>
    </filter-mapping>
 
     <filter>
@@ -64,7 +64,7 @@
 
     <filter-mapping>
         <filter-name>action2</filter-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.jhtml</url-pattern>
     </filter-mapping>
 
     <servlet>

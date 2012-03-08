@@ -1,6 +1,5 @@
 package com.opencms.engine.model;
 
-import com.opencms.util.CmsType;
 import com.opencms.util.common.page.PageBean;
 
 /**
@@ -12,24 +11,34 @@ import com.opencms.util.common.page.PageBean;
  */
 public class EngineInfo<T extends Model> {
 
-    public EngineInfo(CmsType type, String id, String name) {
-        this.type = type;
-        this.id = id;
-        this.name = name;
-    }
+	private T model;
+	
+    public T getModel() {
+		return model;
+	}
 
-    public EngineInfo() {
+	public void setModel(T model) {
+		this.model = model;
+	}
+
+	public EngineInfo() {
+	}
+
+	public EngineInfo(T model) {
+    	this.model = model;
     }
 
     private String id;
 
     private String name;
 
-    private CmsType type;
-
     private int page = 1;
 
     private int pageSize = PageBean.DEFAULT_SIZE;
+    
+    private long totalCount;
+    
+    private boolean create = false;
 
     public String getId() {
         return id;
@@ -47,14 +56,6 @@ public class EngineInfo<T extends Model> {
         this.name = name;
     }
 
-    public CmsType getType() {
-        return type;
-    }
-
-    public void setType(CmsType type) {
-        this.type = type;
-    }
-
     public int getPage() {
         return page;
     }
@@ -70,4 +71,21 @@ public class EngineInfo<T extends Model> {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+
+	public long getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(long totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+    
 }

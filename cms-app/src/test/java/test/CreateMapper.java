@@ -1,7 +1,7 @@
 package test;
 
 import com.opencms.core.db.bean.CategoryBean;
-import com.opencms.engine.model.Category;
+import com.opencms.engine.model.CategoryModel;
 
 import java.lang.reflect.Field;
 
@@ -37,7 +37,7 @@ public class CreateMapper {
     }
 
     public static void main(String[] args){
-        createMap(CategoryBean.class, "contentBean", Category.class, "content");
+        createMap(CategoryBean.class, "contentBean", CategoryModel.class, "content");
     }
 
 }
