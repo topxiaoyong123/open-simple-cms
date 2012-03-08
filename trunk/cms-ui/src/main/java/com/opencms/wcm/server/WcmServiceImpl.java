@@ -44,11 +44,15 @@ import com.opencms.core.db.bean.field.ContentField;
 import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.Engine;
 import com.opencms.engine.PublishStatus;
+import com.opencms.engine.model.CategoryModel;
+import com.opencms.engine.model.ContentModel;
+import com.opencms.engine.model.SiteModel;
 import com.opencms.engine.util.PathUtils;
 import com.opencms.template.TemplateHelper;
 import com.opencms.template.bean.CmsTemplateBean;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
+import com.opencms.util.common.page.PageBean;
 import com.opencms.wcm.client.ApplicationException;
 import com.opencms.wcm.client.WcmService;
 import com.opencms.wcm.client.model.User;
@@ -124,7 +128,13 @@ public class WcmServiceImpl implements WcmService {
     private TemplateHelper templateHelper;
 
     @Resource
-    private Engine engine;
+    private Engine<SiteModel> siteEngineImpl;
+    
+    @Resource
+    private Engine<CategoryModel> categoryEngineImpl;
+    
+    @Resource
+    private Engine<ContentModel> contentEngineImpl;
 
     @Transactional(readOnly = true)
     public User login(User user) throws ApplicationException {
@@ -345,7 +355,15 @@ public class WcmServiceImpl implements WcmService {
             status.setTotal(categories.size());
             for(Category category : categories){
                 CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(category.getId());
-                engine.engineCategory(categoryBean, createHtml);
+                long contentsCount = cmsManager.getContentService().getCountByCategoryId(categoryBean.getId(), ContentField._STATE_PUBLISHED);
+                int pageSize = PageBean.DEFAULT_SIZE;
+                int pageCount = (int)(contentsCount / pageSize + (contentsCount % pageSize == 0 ? 0 : 1));
+                pageCount = pageCount == 0 ? 1 : pageCount;
+                for (int page = 1; page <= pageCount; page ++) {
+                	CategoryModel categoryModel = new CategoryModel(categoryBean, page, pageSize, contentsCount);
+                	categoryModel.getEngineInfo().setCreate(true);
+                    String html = categoryEngineImpl.engine(categoryModel);
+                }
 //                contentBean.setState(ContentField._STATE_PUBLISHED);
 //                contentBean.setCreateHtml(createHtml);
                 cmsManager.getCategoryService().updateCategory(categoryBean);
@@ -473,7 +491,9 @@ public class WcmServiceImpl implements WcmService {
             status.setTotal(contents.size());
             for(Content content : contents){
                 ContentBean contentBean = cmsManager.getContentService().getContentById(content.getId());
-                engine.engineContent(contentBean, createHtml);
+                ContentModel contentModel = new ContentModel(contentBean);
+                contentModel.getEngineInfo().setCreate(true);
+                contentEngineImpl.engine(contentModel);
                 contentBean.setState(ContentField._STATE_PUBLISHED);
                 contentBean.setCreateHtml(createHtml);
                 cmsManager.getContentService().updateContent(contentBean);

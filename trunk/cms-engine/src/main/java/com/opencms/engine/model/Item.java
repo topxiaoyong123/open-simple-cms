@@ -7,7 +7,7 @@ package com.opencms.engine.model;
  * Time: 下午9:07
  * To change this template use File | Settings | File Templates.
  */
-public class Item {
+public class Item extends BaseModel {
 
     private String id;
 

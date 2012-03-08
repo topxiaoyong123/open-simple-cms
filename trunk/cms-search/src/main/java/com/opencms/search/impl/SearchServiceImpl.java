@@ -2,7 +2,7 @@ package com.opencms.search.impl;
 
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.field.ContentField;
-import com.opencms.engine.model.Content;
+import com.opencms.engine.model.ContentModel;
 import com.opencms.search.CompassIndexBuilder;
 import com.opencms.search.SearchService;
 import com.opencms.util.CmsUtils;
@@ -45,7 +45,7 @@ public class SearchServiceImpl implements SearchService {
         CompassSession compassSession = compass.openSession();
         CompassQueryBuilder compassQueryBuilder = compassSession.queryBuilder();
         if("content".equals(type)){
-            List<Content> records = new ArrayList<Content>();
+            List<ContentModel> records = new ArrayList<ContentModel>();
             CompassQuery query = compassQueryBuilder.bool().addMust(compassQueryBuilder.term("searchAble", true)).addMust(compassQueryBuilder.queryString(key).toQuery()).toQuery().setAliases(ContentBean.class.getSimpleName());
 //            query.addSort("top", CompassQuery.SortPropertyType.STRING);
             CompassHits hits = query.hits();
@@ -58,7 +58,7 @@ public class SearchServiceImpl implements SearchService {
                 CompassHit hit = hits.hit(i);
                 String c = hits.highlighter(i).setTextTokenizer(CompassHighlighter.TextTokenizer.AUTO).fragmentsWithSeparator("content"); //.replaceAll("<[^>]*>", "");
                 String title = hits.highlighter(i).fragment("title");
-                Content content = (Content)cmsUtils.getBeanMapperHelper().simpleMap((ContentBean)hit.getData(), Content.class);
+                ContentModel content = (ContentModel)cmsUtils.getBeanMapperHelper().simpleMap((ContentBean)hit.getData(), ContentModel.class);
                 content.setContent(c);
                 if(title != null){
                     content.setTitle(title);

@@ -3,9 +3,9 @@ package com.opencms.engine;
 import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
-import com.opencms.engine.model.Category;
-import com.opencms.engine.model.Content;
-import com.opencms.engine.model.Site;
+import com.opencms.engine.model.CategoryModel;
+import com.opencms.engine.model.ContentModel;
+import com.opencms.engine.model.SiteModel;
 
 import java.util.List;
 
@@ -18,26 +18,14 @@ import java.util.List;
  */
 public interface ModelMapper {
 
-    public Site map(SiteBean siteBean);
+    public SiteModel map(SiteBean siteBean, SiteModel site);
 
-    public Category map(CategoryBean categoryBean);
+    public CategoryModel map(CategoryBean categoryBean, CategoryModel category);
 
-    public Category map(CategoryBean categoryBean, int page, int pageSize, int totalCount);
+    public ContentModel map(ContentBean contentBean, ContentModel content);
 
-    public Content map(ContentBean contentBean);
+    public List<ContentModel> mapContents(List<ContentBean> contentBeans);
 
-    public List<Content> mapContents(List<ContentBean> contentBeans);
-
-    public List<Content> mapContents(List<ContentBean> contentBeans, boolean loadContent);
-
-    public String getSiteURL(SiteBean siteBean);
-
-    public String getCategoryURL(CategoryBean categoryBean);
-
-    public String getCategoryURL(CategoryBean categoryBean, int page);
-
-    public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize);
-
-    public String getContentURL(ContentBean contentBean);
+    public List<ContentModel> mapContents(List<ContentBean> contentBeans, boolean loadContent);
 
 }

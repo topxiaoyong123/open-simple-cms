@@ -19,5 +19,5 @@
 </#function>
 
 <#function getCategoryURL category = getCategory() page = 1 pageSize = 10>
-    <#return engineUtil.getMapper().getCategoryURL(category, page, pageSize)>
+    <#return engineUtil.getPathUtils().getCategoryURL(category, page, pageSize)>
 </#function>

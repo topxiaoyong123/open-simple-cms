@@ -1,10 +1,11 @@
 package com.opencms.engine;
 
-import com.opencms.core.db.service.CmsManager;
-import com.opencms.engine.model.Content;
-import com.opencms.engine.model.Menu;
-
 import java.util.List;
+
+import com.opencms.core.db.service.CmsManager;
+import com.opencms.engine.model.ContentModel;
+import com.opencms.engine.model.Menu;
+import com.opencms.engine.util.PathUtils;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,11 +19,13 @@ public interface EngineUtil {
     public CmsManager getCmsManager();
 
     public ModelMapper getMapper();
+    
+    public PathUtils getPathUtils();
 
     public Menu getSiteMenu(String siteId);
 
     public Menu getCategoryMenu(String categoryId);
 
-    public List<Content> getContents(String categoryId, int firstResult, int maxResults);
+    public List<ContentModel> getContents(String categoryId, int firstResult, int maxResults);
 
 }

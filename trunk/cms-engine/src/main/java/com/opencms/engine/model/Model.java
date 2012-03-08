@@ -8,4 +8,13 @@ package com.opencms.engine.model;
  * To change this template use File | Settings | File Templates.
  */
 public interface Model {
+	
+	public String getModelName();
+	
+	public Object getObject();
+	
+	public String getId();
+	
+	public String getName();
+	
 }

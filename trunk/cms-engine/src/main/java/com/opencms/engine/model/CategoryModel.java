@@ -1,8 +1,9 @@
 package com.opencms.engine.model;
 
-import com.opencms.util.common.page.PageBean;
-
 import java.util.Date;
+
+import com.opencms.core.db.bean.CategoryBean;
+import com.opencms.util.common.page.PageBean;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,9 +12,27 @@ import java.util.Date;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Category implements Model {
+public class CategoryModel extends BaseModel {
+	
+    public CategoryBean getObject() {
+    	if(!(object instanceof CategoryBean)) {
+    		throw new IllegalArgumentException();
+    	}
+		return (CategoryBean)object;
+	}
 
-    private String id;
+	public CategoryModel(CategoryBean categoryBean) {
+		this.object = categoryBean;
+	}
+	
+	public CategoryModel(CategoryBean categoryBean, int page, int pageSize, long totalCount) {
+		this.object = categoryBean;
+		this.getEngineInfo().setPage(page);
+		this.getEngineInfo().setPageSize(pageSize);
+		this.getEngineInfo().setTotalCount(totalCount);
+	}
+
+	private String id;
 
     private String title;
 

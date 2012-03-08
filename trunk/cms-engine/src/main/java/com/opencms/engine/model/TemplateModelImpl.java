@@ -1,16 +1,20 @@
 package com.opencms.engine.model;
 
-import com.opencms.core.db.service.CmsManager;
-import com.opencms.engine.EngineUtil;
-import com.opencms.engine.TemplateModel;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import com.opencms.core.db.service.CmsManager;
+import com.opencms.engine.EngineUtil;
+import com.opencms.engine.TemplateModel;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,40 +31,26 @@ public class TemplateModelImpl extends BaseTemplateModel implements TemplateMode
     @Resource
     private CmsManager cmsManager;
 
+    @Resource
     private EngineUtil engineUtil;
 
-    public void setEngineUtil(EngineUtil engineUtil) {
-        this.engineUtil = engineUtil;
-    }
-
-    private Map model = Collections.synchronizedMap(new HashMap());
-
+    private Map outModel = Collections.synchronizedMap(new HashMap());
+    
     public void initModel(){
-//        model.put("cmsManager", cmsManager);
-        model.put("engineUtil", engineUtil);
-        if(this.getSite() != null){
-            logger.debug("siteModel init");
-            model.put("siteModel", this.getSite());
-        }
-        if(this.getCategory() != null){
-            logger.debug("categoryModel init");
-            model.put("categoryModel", this.getCategory());
-        }
-        if(this.getContent() != null){
-            logger.debug("contentModel init");
-            model.put("contentModel", this.getContent());
+    	outModel.put("engineUtil", engineUtil);
+        for(Model model : models) {
+        	logger.debug("{0} init", model.getModelName());
+        	outModel.put(model.getModelName(), model);
         }
     }
 
     public Map getModel() {
         initModel();
-        return model;
+        return outModel;
     }
 
     public void clean() {
-        model.clear();
-        this.setSite(null);
-		this.setCategory(null);
-		this.setContent(null);
+    	outModel.clear();
+        models.clear();
     }
 }

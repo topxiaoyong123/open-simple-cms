@@ -20,6 +20,8 @@ public interface CategoryService {
     public boolean addOrUpdateCategory(CategoryBean category);
 
     public CategoryBean getCategoryById(String id);
+    
+    public CategoryBean getCategoryByNames(String[] names);
 
     /**
      * 根据站点ID取以及栏目

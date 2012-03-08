@@ -20,6 +20,8 @@ public interface ContentService {
     public boolean addOrUpdateContent(ContentBean content);
 
     public ContentBean getContentById(String id);
+    
+    public ContentBean getPublishedContentById(String id);
 
     public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults);
 

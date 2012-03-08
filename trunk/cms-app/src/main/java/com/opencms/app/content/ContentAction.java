@@ -1,16 +1,18 @@
 package com.opencms.app.content;
 
-import com.opencms.core.db.bean.ContentBean;
-import com.opencms.core.db.service.CmsManager;
-import com.opencms.engine.Engine;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.service.CmsManager;
+import com.opencms.engine.Engine;
+import com.opencms.engine.model.ContentModel;
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,15 +51,15 @@ public class ContentAction extends ActionSupport {
     private CmsManager cmsManager;
 
     @Resource
-    private Engine engine;
+    private Engine<ContentModel> contentEngineImpl;
 
     @Transactional(readOnly = true)
     public String view(){
         logger.debug("content-id:[{}]", id);
         try{
-            ContentBean contentBean = cmsManager.getContentService().getContentById(id);
+            ContentBean contentBean = cmsManager.getContentService().getPublishedContentById(id);
             if(contentBean != null){
-                html = engine.engineContent(contentBean, false);
+                html = contentEngineImpl.engine(new ContentModel(contentBean));
             } else{
                 return "404";
             }

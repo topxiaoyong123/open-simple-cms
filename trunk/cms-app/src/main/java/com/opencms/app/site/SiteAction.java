@@ -1,16 +1,18 @@
 package com.opencms.app.site;
 
-import com.opencms.core.db.bean.SiteBean;
-import com.opencms.core.db.service.CmsManager;
-import com.opencms.engine.Engine;
-import com.opensymphony.xwork2.ActionSupport;
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import com.opencms.core.db.bean.SiteBean;
+import com.opencms.core.db.service.CmsManager;
+import com.opencms.engine.Engine;
+import com.opencms.engine.model.SiteModel;
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,7 +48,7 @@ public class SiteAction extends ActionSupport {
     }
 
     @Resource
-    private Engine engine;
+    private Engine<SiteModel> siteEngineImpl;
 
     @Resource
     private CmsManager cmsManager;
@@ -56,7 +58,7 @@ public class SiteAction extends ActionSupport {
         try{
             SiteBean siteBean = cmsManager.getSiteService().getSiteByName(name);
             if(siteBean != null){
-                html = engine.engineSite(siteBean);
+                html = siteEngineImpl.engine(new SiteModel(siteBean));
             } else {
                 return "404";
             }

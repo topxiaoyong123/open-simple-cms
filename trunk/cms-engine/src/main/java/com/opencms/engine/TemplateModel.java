@@ -1,10 +1,8 @@
 package com.opencms.engine;
 
-import com.opencms.engine.model.Category;
-import com.opencms.engine.model.Content;
-import com.opencms.engine.model.Site;
-
 import java.util.Map;
+
+import com.opencms.engine.model.Model;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,12 +17,6 @@ public interface TemplateModel {
 
     public void clean();
 
-    public void setSite(Site site);
-
-    public void setCategory(Category category);
-
-    public void setContent(Content content);
-
-    public void setEngineUtil(EngineUtil engineUtil);
+    public void addModel(Model model);
 
 }

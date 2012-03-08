@@ -2,6 +2,8 @@ package com.opencms.engine.model;
 
 import java.util.Date;
 
+import com.opencms.core.db.bean.ContentBean;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -9,7 +11,18 @@ import java.util.Date;
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-public class Content implements Model {
+public class ContentModel extends BaseModel {
+	
+	public ContentBean getObject() {
+    	if(!(object instanceof ContentBean)) {
+    		throw new IllegalArgumentException();
+    	}
+		return (ContentBean)object;
+	}
+	
+	public ContentModel(ContentBean contentBean) {
+		this.object = contentBean;
+	}
 
     private String id;
 

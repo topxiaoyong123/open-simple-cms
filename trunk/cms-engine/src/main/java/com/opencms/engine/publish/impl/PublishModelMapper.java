@@ -4,9 +4,9 @@ import com.opencms.core.db.bean.CategoryBean;
 import com.opencms.core.db.bean.ContentBean;
 import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.ModelMapper;
-import com.opencms.engine.model.Category;
-import com.opencms.engine.model.Content;
-import com.opencms.engine.model.Site;
+import com.opencms.engine.model.CategoryModel;
+import com.opencms.engine.model.ContentModel;
+import com.opencms.engine.model.SiteModel;
 import com.opencms.engine.util.PathUtils;
 import com.opencms.util.CmsUtils;
 import com.opencms.util.ContextThreadLocal;
@@ -34,87 +34,46 @@ public class PublishModelMapper implements ModelMapper {
 
     @Resource
     private CmsUtils cmsUtils;
+    
+    @Resource
+    private PathUtils pathUtils;
 
-    public Site map(SiteBean siteBean) {
-        Site site = (Site)cmsUtils.getBeanMapperHelper().simpleMap(siteBean, Site.class);
-        site.setUrl(getSiteURL(siteBean));
+    public SiteModel map(SiteBean siteBean, SiteModel site) {
+        cmsUtils.getBeanMapperHelper().simpleMap(siteBean, site);
+        site.setUrl(pathUtils.getSiteURL(siteBean));
         return site;
     }
 
-    public Category map(CategoryBean categoryBean) {
-        Category category = (Category)cmsUtils.getBeanMapperHelper().simpleMap(categoryBean, Category.class);
-        category.setUrl(getCategoryURL(categoryBean));
+    public CategoryModel map(CategoryBean categoryBean, CategoryModel category) {
+        cmsUtils.getBeanMapperHelper().simpleMap(categoryBean, category);
+        category.setPage(new PageBean(category.getEngineInfo().getPageSize(), category.getEngineInfo().getPage(), (int)category.getEngineInfo().getTotalCount()));
+        category.setUrl(pathUtils.getCategoryURL(categoryBean));
         return category;
     }
 
-    public Category map(CategoryBean categoryBean, int page, int pageSize, int totalCount){
-        Category category = map(categoryBean);
-        category.setPage(new PageBean(pageSize, page, totalCount));
-        return category;
+    public ContentModel map(ContentBean contentBean, ContentModel content) {
+        return map(contentBean, content, true);
     }
 
-    public Content map(ContentBean contentBean) {
-        return map(contentBean, true);
-    }
-
-    public Content map(ContentBean contentBean, boolean loadContent) {
-        Content content = (Content)cmsUtils.getBeanMapperHelper().simpleMap(contentBean, Content.class);
-        content.setUrl(getContentURL(contentBean));
+    public ContentModel map(ContentBean contentBean, ContentModel content, boolean loadContent) {
+        cmsUtils.getBeanMapperHelper().simpleMap(contentBean, content);
+        content.setUrl(pathUtils.getContentURL(contentBean));
         if(loadContent){
             content.setContent(contentBean.getContentDetail().getContent());
         }
         return content;
     }
 
-    public List<Content> mapContents(List<ContentBean> contentBeans) {
+    public List<ContentModel> mapContents(List<ContentBean> contentBeans) {
         return mapContents(contentBeans, false);
     }
 
-    public List<Content> mapContents(List<ContentBean> contentBeans, boolean loadContent) {
-        List<Content> list = new ArrayList<Content>();
+    public List<ContentModel> mapContents(List<ContentBean> contentBeans, boolean loadContent) {
+        List<ContentModel> list = new ArrayList<ContentModel>();
         for(ContentBean contentBean : contentBeans){
-            list.add(map(contentBean, loadContent));
+            list.add(map(contentBean, new ContentModel(contentBean), loadContent));
         }
         return list;
     }
 
-    public String getSiteURL(SiteBean siteBean) {
-        if(siteBean.getUrl() != null && !"".equals(siteBean.getUrl())){
-            return siteBean.getUrl();
-        }
-        return getContextPath() + "/" + siteBean.getName() + "/index.html";
-    }
-
-    public String getCategoryURL(CategoryBean categoryBean) {
-        return getCategoryURL(categoryBean, 1);
-    }
-
-    public String getCategoryURL(CategoryBean categoryBean, int page) {
-        if(categoryBean.getUrl() != null && !"".equals(categoryBean.getUrl())){
-            return categoryBean.getUrl();
-        }
-        if(categoryBean.isStaticCategory()) {
-            return getContextPath() + "/" + PathUtils.getCategoryRelativePath(categoryBean, page);
-        }
-        return getCategoryURL(categoryBean, page, PageBean.DEFAULT_SIZE);
-    }
-
-    public String getCategoryURL(CategoryBean categoryBean, int page, int pageSize) {
-        return getContextPath() + "/category" + "/" + page + "/" + pageSize + "/" + categoryBean.getId() + ".html";
-    }
-
-    public String getContentURL(ContentBean contentBean) {
-        if(contentBean.getUrl() != null && !"".equals(contentBean.getUrl())){
-            return contentBean.getUrl();
-        }
-        return getContextPath() + "/" + Constants.PUBLISH_OUTPUT_PATH + "/" + DateUtil.getYear(contentBean.getCreationDate()) + "/" + DateUtil.getMonth(contentBean.getCreationDate()) + "/" + contentBean.getId() + Constants.DEFAULT_URL_EXTEND;
-    }
-
-    private String getContextPath(){
-        if(ContextThreadLocal.getRequest() != null){
-            return ContextThreadLocal.getRequest().getContextPath();
-        } else{
-            return "{contextPath}";
-        }
-    }
 }

@@ -55,5 +55,7 @@ public class Constants {
     public static String PUBLISH_OUTPUT_PATH = "content";
 
     public static String DEFAULT_URL_EXTEND = ".html";
+    
+    public static String DYNAMIC_URL_EXTEND = ".jhtml";
 
 }

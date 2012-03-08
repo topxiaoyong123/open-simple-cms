@@ -1,6 +1,7 @@
 package com.opencms.core.db.service.impl;
 
 import com.opencms.core.db.bean.ContentBean;
+import com.opencms.core.db.bean.field.ContentField;
 import com.opencms.core.db.dao.ContentDao;
 import com.opencms.core.db.query.Finder;
 import com.opencms.core.db.query.Page;
@@ -50,6 +51,14 @@ public class ContentServiceImpl implements ContentService {
 
     public ContentBean getContentById(String id) {
         return contentDao.get(ContentBean.class, id);
+    }
+    
+    public ContentBean getPublishedContentById(String id) {
+    	ContentBean c = contentDao.get(ContentBean.class, id);
+    	if(c != null && ContentField._STATE_PUBLISHED.equals(c.getState())) {
+    		return c;
+    	}
+        return null;
     }
 
     public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults) {
