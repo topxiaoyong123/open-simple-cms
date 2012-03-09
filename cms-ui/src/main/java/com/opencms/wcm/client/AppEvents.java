@@ -27,8 +27,6 @@ public class AppEvents {
     public static final AppEventType ARTICLE_MANAGER_ITEM_SELECTION_NONE = new AppEventType();
     public static final AppEventType ARTICLE_MANAGER_CHANGE_CATEGORY = new AppEventType();
 
-    public final static AppEventType PUBLISHING_MANAGER = new AppEventType();
-
     //站点管理
     public final static AppEventType SITE_MANAGER = new AppEventType();
     public final static AppEventType SITE_MANAGER_ADD = new AppEventType();
@@ -64,10 +62,12 @@ public class AppEvents {
     public final static AppEventType CONTENT_AUDITING_MANAGER_PASS = new AppEventType();
     public final static AppEventType CONTENT_AUDITING_MANAGER_REJECT = new AppEventType();
     public final static AppEventType CONTENT_AUDITING_MANAGER_SUCCESS = new AppEventType();
-
-    public final static AppEventType CONTENT_PUBLISHING_MANAGER = new AppEventType();
-    public final static AppEventType CONTENT_PUBLISHING_MANAGER_DO = new AppEventType();
-    public final static AppEventType CONTENT_PUBLISHING_MANAGER_SUCCESS = new AppEventType();
+    
+    //发布生成
+    public final static AppEventType PUBLISHING_MANAGER = new AppEventType();
+    public final static AppEventType PUBLISHING_MANAGER_SITE = new AppEventType();
+    public final static AppEventType PUBLISHING_MANAGER_CATEGORY = new AppEventType();
+    public final static AppEventType PUBLISHING_MANAGER_CONTENT = new AppEventType();
     
     //文件管理
     public final static AppEventType FILE_MANAGER = new AppEventType();

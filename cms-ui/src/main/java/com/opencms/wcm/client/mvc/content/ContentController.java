@@ -26,8 +26,6 @@ public class ContentController extends Controller {
 
     public ContentController() {
         this.registerEventTypes(AppEvents.CONTENT_MANAGER);
-        this.registerEventTypes(AppEvents.CONTENT_AUDITING_MANAGER);
-        this.registerEventTypes(AppEvents.CONTENT_PUBLISHING_MANAGER);
         this.registerEventTypes(AppEvents.CONTENT_MANAGER_ALL);
         this.registerEventTypes(AppEvents.CONTENT_MANAGER_ADD);
         this.registerEventTypes(AppEvents.CONTENT_MANAGER_EDIT);
@@ -42,8 +40,6 @@ public class ContentController extends Controller {
         if (AppEvents.CONTENT_MANAGER == appEvent.getType()
                 || AppEvents.CONTENT_MANAGER_CANCEL == appEvent.getType()
                 || AppEvents.CONTENT_MANAGER_SUCCESS == appEvent.getType()
-                || AppEvents.CONTENT_AUDITING_MANAGER == appEvent.getType()
-                || AppEvents.CONTENT_PUBLISHING_MANAGER == appEvent.getType()
                 || AppEvents.CONTENT_MANAGER_ALL == appEvent.getType()) {
             this.forwardToView(view, appEvent);
         } else if(AppEvents.CONTENT_MANAGER_SAVE == appEvent.getType()){

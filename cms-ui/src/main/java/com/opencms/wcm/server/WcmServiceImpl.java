@@ -466,7 +466,7 @@ public class WcmServiceImpl implements WcmService {
             for(Content content : contents){
                 ContentBean contentBean = cmsManager.getContentService().getContentById(content.getId());
                 if(pass){
-                    contentBean.setState(ContentField._STATE_PUBLISH_WAITING);
+                    contentBean.setState(ContentField._STATE_AUDITING_PASS);
                 } else {
                     contentBean.setState(ContentField._STATE_AUDITING_REJECT);
                 }
@@ -492,7 +492,7 @@ public class WcmServiceImpl implements WcmService {
             for(Content content : contents){
                 ContentBean contentBean = cmsManager.getContentService().getContentById(content.getId());
                 ContentModel contentModel = new ContentModel(contentBean);
-                contentModel.getEngineInfo().setCreate(true);
+                contentModel.getEngineInfo().setCreate(contentBean.getCategory().isStaticContent());
                 contentEngineImpl.engine(contentModel);
                 contentBean.setState(ContentField._STATE_PUBLISHED);
                 contentBean.setCreateHtml(createHtml);
@@ -688,12 +688,12 @@ public class WcmServiceImpl implements WcmService {
 			try {
 				byte[] buffer = new byte[1024];
 				InputStream in = new FileInputStream(f);
-				OutputStream os = new ByteArrayOutputStream();
+				ByteArrayOutputStream os = new ByteArrayOutputStream();
 				int count;
 				while((count = in.read(buffer)) != -1) {
 					os.write(buffer, 0, count);
 				}
-				file.setContent(os.toString());
+				file.setContent(os.toString(cmsUtils.getResourceHelper().getCmsResource().getOutputEncoding()));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

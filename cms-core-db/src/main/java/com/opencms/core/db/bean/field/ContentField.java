@@ -13,9 +13,9 @@ public class ContentField {
 
     public static final String _STATE_AUDITING_WAITING = "0";
 
-    public static final String _STATE_PUBLISH_WAITING = "1";
+    public static final String _STATE_AUDITING_PASS = "1";
 
-    public static final String _STATE_PUBLISHED = "2";
+    public static final String _STATE_PUBLISHED = "1";
 
     public static final String _STATE_DELETE = "3";
 

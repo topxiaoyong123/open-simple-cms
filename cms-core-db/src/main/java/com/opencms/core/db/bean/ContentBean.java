@@ -4,6 +4,7 @@ import com.opencms.core.db.bean.field.ContentField;
 import org.compass.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -63,7 +64,8 @@ public class ContentBean extends BaseEntity {
     @Column(length = 32)
     private String author;
 
-    @Column
+    @Column(nullable = false)
+    @Type(type = "yes_no")
     private boolean createHtml;
 
     @SearchableComponent

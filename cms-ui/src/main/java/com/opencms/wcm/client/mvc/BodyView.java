@@ -160,7 +160,11 @@ public class BodyView extends View {
             this.onShowPage(entry, true);
         } else {
             Content content = new Content();
-            content.setCategoryId(AppState.westTreeItemId);
+            if(!"0".equals(AppState.westTreeItemObj.getNodetype())) {
+            	content.setCategoryId(AppState.westTreeItemId);
+            } else {
+            	content.setCategoryId(0L);
+            }
             Dispatcher.forwardEvent(entry.getEventType(), content);
         }
     }
@@ -175,7 +179,11 @@ public class BodyView extends View {
             Dispatcher.forwardEvent(AppEvents.OTHER_MANAGER_ITEM_SELECTION_NONE);
         }
         Content content = new Content();
-        content.setCategoryId(node.getId());
+        if(!"0".equals(AppState.westTreeItemObj.getNodetype())) {
+        	content.setCategoryId(AppState.westTreeItemId);
+        } else {
+        	content.setCategoryId(0L);
+        }
         Dispatcher.forwardEvent(AppState.centerEventType, content);
     }
 
@@ -205,13 +213,13 @@ public class BodyView extends View {
                 null, true, false, AppEvents.CONTENT_MANAGER, false));
         this.addShowPage(new Entry(AppEvents.CONTENT_AUDITING_MANAGER.getId(), msgs.content_auditing_header(), AppState.OWNER_ARTICLE_MANAGER,
                 null, true, false, AppEvents.CONTENT_AUDITING_MANAGER, false));
-        this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISHING_MANAGER.getId(), msgs.content_publishing_header(), AppState.OWNER_ARTICLE_MANAGER,
-                null, true, false, AppEvents.CONTENT_PUBLISHING_MANAGER, false));
-        this.addShowPage(new Entry(AppEvents.CONTENT_MANAGER_ALL.getId(), msgs.content_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
-                null, true, false, AppEvents.CONTENT_MANAGER_ALL, false));
+//        this.addShowPage(new Entry(AppEvents.CONTENT_PUBLISHING_MANAGER.getId(), msgs.content_publishing_header(), AppState.OWNER_ARTICLE_MANAGER,
+//                null, true, false, AppEvents.CONTENT_PUBLISHING_MANAGER, false));
+//        this.addShowPage(new Entry(AppEvents.CONTENT_MANAGER_ALL.getId(), msgs.content_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
+//                null, true, false, AppEvents.CONTENT_MANAGER_ALL, false));
         this.addShowPage(new Entry(AppEvents.CATEGORY_MANAGER.getId(), msgs.category_manager_header(), AppState.OWNER_ARTICLE_MANAGER,
                 null, true, false, AppEvents.CATEGORY_MANAGER, false));
-        this.addShowPage(new Entry(AppEvents.PUBLISHING_MANAGER.getId(), msgs.category_site_publishing_header(), AppState.OWNER_ARTICLE_MANAGER,
+        this.addShowPage(new Entry(AppEvents.PUBLISHING_MANAGER.getId(), msgs.publishing_header(), AppState.OWNER_ARTICLE_MANAGER,
                 null, true, false, AppEvents.PUBLISHING_MANAGER, false));
     }
 

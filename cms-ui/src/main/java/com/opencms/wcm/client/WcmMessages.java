@@ -43,6 +43,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   String category_add_header();
 
   /**
+   * Translated "Static Content".
+   * 
+   * @return translated "Static Content"
+   */
+  @DefaultMessage("Static Content")
+  @Key("category_content_static")
+  String category_content_static();
+
+  /**
    * Translated "Creation Date".
    * 
    * @return translated "Creation Date"
@@ -113,15 +122,6 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Category No.")
   @Key("category_no")
   String category_no();
-
-  /**
-   * Translated "Category Site Publish".
-   * 
-   * @return translated "Category Site Publish"
-   */
-  @DefaultMessage("Category Site Publish")
-  @Key("category_site_publishing_header")
-  String category_site_publishing_header();
 
   /**
    * Translated "Static".
@@ -806,6 +806,15 @@ public interface WcmMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("Preview")
   @Key("preview")
   String preview();
+
+  /**
+   * Translated "Publish".
+   * 
+   * @return translated "Publish"
+   */
+  @DefaultMessage("Publish")
+  @Key("publishing_header")
+  String publishing_header();
 
   /**
    * Translated "Publishing".
