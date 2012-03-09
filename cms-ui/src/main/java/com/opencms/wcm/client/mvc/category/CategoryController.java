@@ -73,7 +73,7 @@ public class CategoryController extends Controller {
                 }
             });
         } else if(AppEvents.CATEGORY_MANAGER_EDIT == appEvent.getType()){
-            String id = appEvent.getData();
+            Long id = appEvent.getData();
             service.getCategoryById(id, AppState.westTreeItemObj, new AsyncCallback(){
                 public void onFailure(Throwable throwable) {
                     MessageBox.alert(msgs.error(), throwable.getMessage(), null);

@@ -79,7 +79,7 @@ public class ContentController extends Controller {
                 }
             });
         } else if(AppEvents.CONTENT_MANAGER_EDIT == appEvent.getType()){
-            String id = appEvent.getData();
+        	Long id = appEvent.getData();
             service.getContentById(id, AppState.westTreeItemObj, new AsyncCallback(){
                 public void onFailure(Throwable throwable) {
                     MessageBox.alert(msgs.error(), throwable.getMessage(), null);

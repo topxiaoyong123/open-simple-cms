@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Category implements Serializable, IsSerializable {
 
-    private String id;
+    private Long id;
 
     private String title;
 
@@ -26,9 +26,9 @@ public class Category implements Serializable, IsSerializable {
 
     private String url;
 
-    private String siteId;
+    private Long siteId;
 
-    private String parentId;
+    private Long parentId;
 
     private double no;
 
@@ -40,11 +40,11 @@ public class Category implements Serializable, IsSerializable {
 
     private boolean staticCategory;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,19 +80,19 @@ public class Category implements Serializable, IsSerializable {
         this.description = description;
     }
 
-    public String getSiteId() {
+    public Long getSiteId() {
         return siteId;
     }
 
-    public void setSiteId(String siteId) {
+    public void setSiteId(Long siteId) {
         this.siteId = siteId;
     }
 
-    public String getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(String parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

@@ -13,7 +13,7 @@ public interface Model {
 	
 	public Object getObject();
 	
-	public String getId();
+	public Long getId();
 	
 	public String getName();
 	

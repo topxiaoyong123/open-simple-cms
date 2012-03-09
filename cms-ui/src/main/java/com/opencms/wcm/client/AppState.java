@@ -22,7 +22,7 @@ public class AppState {
 
     public static EventType centerEventType = AppEvents.WELCOME;
 
-    public static String westTreeItemId = "";
+    public static Long westTreeItemId = 0L;
     public static WcmNodeModel westTreeItemObj = null;
 
     public static final String OWNER_WESTBAR_INIT = "";

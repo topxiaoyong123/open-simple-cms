@@ -29,7 +29,7 @@ public abstract class BaseModel implements Model {
 	}
 
 	@Override
-	public String getId() {
+	public Long getId() {
 		return null;
 	}
 

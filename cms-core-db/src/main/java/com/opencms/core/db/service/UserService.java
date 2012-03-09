@@ -16,7 +16,7 @@ public interface UserService {
 
     public boolean addUser(UserBean user);
 
-    public UserBean getUserById(String id);
+    public UserBean getUserById(Long id);
 
     public UserBean getUserByUsername(String username);
 
@@ -24,13 +24,13 @@ public interface UserService {
 
     public boolean deleteUser(UserBean user);
 
-    public boolean addRoleForUser(String id, RoleBean role);
+    public boolean addRoleForUser(Long id, RoleBean role);
 
-    public boolean addRolesForUser(String id, Set<RoleBean> roles);
+    public boolean addRolesForUser(Long id, Set<RoleBean> roles);
 
     public boolean addRole(RoleBean role);
 
-    public RoleBean getRoleById(String id);
+    public RoleBean getRoleById(Long id);
 
     public boolean updateRole(RoleBean role);
 

@@ -92,7 +92,7 @@ public interface WcmService extends RemoteService {
      * @return
      * @throws ApplicationException
      */
-    public Site getSiteById(String id) throws ApplicationException;
+    public Site getSiteById(Long id) throws ApplicationException;
 
     /**
      * 通过父节点，查询栏目列表
@@ -116,7 +116,7 @@ public interface WcmService extends RemoteService {
      * @return
      * @throws ApplicationException
      */
-    public Category getCategoryById(String id, WcmNodeModel parent) throws ApplicationException;
+    public Category getCategoryById(Long id, WcmNodeModel parent) throws ApplicationException;
 
     public boolean publishingCategoryss(List<Category> categories, boolean createHtml) throws ApplicationException;
 
@@ -135,7 +135,7 @@ public interface WcmService extends RemoteService {
      * @return
      * @throws ApplicationException
      */
-    public Content getContentById(String id, WcmNodeModel parent) throws ApplicationException;
+    public Content getContentById(Long id, WcmNodeModel parent) throws ApplicationException;
 
     /**
      * 分页取得文章列表

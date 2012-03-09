@@ -21,7 +21,7 @@ public interface SiteService {
 
     public List<SiteBean> getAllSites();
 
-    public SiteBean getSiteById(String id);
+    public SiteBean getSiteById(Long id);
 
     public SiteBean getSiteByName(String name);
 }

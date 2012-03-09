@@ -49,11 +49,11 @@ public class ContentServiceImpl implements ContentService {
         }
     }
 
-    public ContentBean getContentById(String id) {
+    public ContentBean getContentById(Long id) {
         return contentDao.get(ContentBean.class, id);
     }
     
-    public ContentBean getPublishedContentById(String id) {
+    public ContentBean getPublishedContentById(Long id) {
     	ContentBean c = contentDao.get(ContentBean.class, id);
     	if(c != null && ContentField._STATE_PUBLISHED.equals(c.getState())) {
     		return c;
@@ -61,7 +61,7 @@ public class ContentServiceImpl implements ContentService {
         return null;
     }
 
-    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults) {
+    public List<ContentBean> getContentsByCategoryIdAndPage(Long categoryId, int firstResult, int maxResults) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});
         finder.setValues(new Serializable[]{categoryId});
@@ -70,7 +70,7 @@ public class ContentServiceImpl implements ContentService {
         return contentDao.getByFinder(finder);
     }
 
-    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String state, int firstResult, int maxResults) {
+    public List<ContentBean> getContentsByCategoryIdAndPage(Long categoryId, String state, int firstResult, int maxResults) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id", "state"});
         finder.setValues(new Serializable[]{categoryId, state});
@@ -79,21 +79,21 @@ public class ContentServiceImpl implements ContentService {
         return contentDao.getByFinder(finder);
     }
 
-    public long getCountByCategoryId(String categoryId){
+    public long getCountByCategoryId(Long categoryId){
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});
         finder.setValues(new Serializable[]{categoryId});
         return contentDao.getCountByFinder(finder);
     }
 
-    public long getCountByCategoryId(String categoryId, String state){
+    public long getCountByCategoryId(Long categoryId, String state){
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id", "state"});
         finder.setValues(new Serializable[]{categoryId, state});
         return contentDao.getCountByFinder(finder);
     }
 
-    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String[] states, int firstResult, int maxResults) {
+    public List<ContentBean> getContentsByCategoryIdAndPage(Long categoryId, String[] states, int firstResult, int maxResults) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});
         finder.setValues(new Serializable[]{categoryId});
@@ -111,7 +111,7 @@ public class ContentServiceImpl implements ContentService {
         return contentDao.getByFinder(finder);
     }
 
-    public long getCountByCategoryId(String categoryId, String[] states) {
+    public long getCountByCategoryId(Long categoryId, String[] states) {
         Finder finder = new Finder(ContentBean.class);
         finder.setColumns(new String[]{"category.id"});
         finder.setValues(new Serializable[]{categoryId});

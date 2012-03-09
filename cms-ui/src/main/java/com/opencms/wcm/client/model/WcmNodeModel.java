@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class WcmNodeModel extends BaseModelData implements BeanModelTag, Serializable, IsSerializable {
 
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -29,7 +29,7 @@ public class WcmNodeModel extends BaseModelData implements BeanModelTag, Seriali
 
 
     //0 is site,1 is topic,2 is article
-    public WcmNodeModel(String id, String name, String title,String nodetype) {
+    public WcmNodeModel(Long id, String name, String title,String nodetype) {
         set("id", id);
         set("name", name);
         set("title", title);
@@ -49,8 +49,8 @@ public class WcmNodeModel extends BaseModelData implements BeanModelTag, Seriali
         return (String) get("description");
     }
 
-    public String getId() {
-        return (String) get("id");
+    public Long getId() {
+        return (Long) get("id");
     }
 
     public String getName() {

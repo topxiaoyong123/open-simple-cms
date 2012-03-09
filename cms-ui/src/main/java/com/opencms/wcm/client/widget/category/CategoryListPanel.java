@@ -113,7 +113,7 @@ public class CategoryListPanel extends ContentPanel {
                 if(smm.getSelectedItems().size() != 1){
                     MessageBox.alert(msgs.warn(), msgs.choose_one(), null);
                 } else{
-                    String id = smm.getSelectedItem().get("id");
+                    Long id = smm.getSelectedItem().get("id");
                     AppEvent evt = new AppEvent(AppEvents.CATEGORY_MANAGER_EDIT, id);
                     Dispatcher.forwardEvent(evt);
                 }
@@ -168,7 +168,7 @@ public class CategoryListPanel extends ContentPanel {
                 if(smm.getSelectedItems().size() != 1){
                     MessageBox.alert(msgs.warn(), msgs.choose_one(), null);
                 } else{
-                    String id = smm.getSelectedItem().get("id");
+                    Long id = smm.getSelectedItem().get("id");
                     AppEvent evt = new AppEvent(AppEvents.CATEGORY_MANAGER_EDIT, id);
                     Dispatcher.forwardEvent(evt);
                 }

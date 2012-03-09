@@ -248,7 +248,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     @Transactional(readOnly = true)
-    public Site getSiteById(String id) throws ApplicationException {
+    public Site getSiteById(Long id) throws ApplicationException {
         try {
             if(id == null){
                 logger.debug("id为空");
@@ -326,7 +326,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     @Transactional(readOnly = true)
-    public Category getCategoryById(String id, WcmNodeModel parent) throws ApplicationException {
+    public Category getCategoryById(Long id, WcmNodeModel parent) throws ApplicationException {
         try {
             if(id == null){
                 logger.debug("id为空");
@@ -406,7 +406,7 @@ public class WcmServiceImpl implements WcmService {
     }
 
     @Transactional(readOnly = true)
-    public Content getContentById(String id, WcmNodeModel parent) throws ApplicationException {
+    public Content getContentById(Long id, WcmNodeModel parent) throws ApplicationException {
         try {
             if(id == null){
                 logger.debug("id为空");

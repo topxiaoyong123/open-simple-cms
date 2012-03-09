@@ -18,7 +18,7 @@ public class Content implements Serializable, IsSerializable {
         super();
     }
 
-    private String id;
+    private Long id;
 
     private String title;
 
@@ -48,13 +48,13 @@ public class Content implements Serializable, IsSerializable {
 
     private Date modificationDate;
 
-    private String categoryId;
+    private Long categoryId;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -170,11 +170,11 @@ public class Content implements Serializable, IsSerializable {
         this.modificationDate = modificationDate;
     }
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

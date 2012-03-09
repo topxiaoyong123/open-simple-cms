@@ -55,7 +55,7 @@ public class PublishEngineUtil implements EngineUtil {
     	return pathUtils;
     }
 
-    public Menu getSiteMenu(String siteId){
+    public Menu getSiteMenu(Long siteId){
         SiteBean siteBean = cmsManager.getSiteService().getSiteById(siteId);
         logger.debug("设置站点菜单...");
         Menu menu = new Menu();
@@ -87,10 +87,10 @@ public class PublishEngineUtil implements EngineUtil {
         return menu;
     }
 
-    public Menu getCategoryMenu(String categoryId){
+    public Menu getCategoryMenu(Long categoryId){
         CategoryBean categoryBean = cmsManager.getCategoryService().getCategoryById(categoryId);
         logger.debug("设置栏目菜单...");
-        List<String> currentIds = new ArrayList<String>();
+        List<Long> currentIds = new ArrayList<Long>();
         currentIds.add(categoryBean.getId());
         CategoryBean parent = categoryBean.getParent();
         while(parent != null){
@@ -113,7 +113,7 @@ public class PublishEngineUtil implements EngineUtil {
         return menu;
     }
 
-    public Menu getCategoryMenu(CategoryBean categoryBean, List<String> currentIds){
+    public Menu getCategoryMenu(CategoryBean categoryBean, List<Long> currentIds){
         Menu menu = new Menu();
 		Item item = new Item();
 		item.setName(categoryBean.getName());
@@ -131,12 +131,12 @@ public class PublishEngineUtil implements EngineUtil {
         return menu;
     }
 
-    public List<ContentModel> getContents(String categoryId, int firstResult, int maxResults) {
+    public List<ContentModel> getContents(Long categoryId, int firstResult, int maxResults) {
         List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
         return mapper.mapContents(contentBeans);
     }
 
-    public List<ContentModel> getContents(String categoryId, int firstResult, int maxResults, boolean loadContent) {
+    public List<ContentModel> getContents(Long categoryId, int firstResult, int maxResults, boolean loadContent) {
         List<ContentBean> contentBeans = cmsManager.getContentService().getContentsByCategoryIdAndPage(categoryId, ContentField._STATE_PUBLISHED, firstResult, maxResults);
         return mapper.mapContents(contentBeans, loadContent);
     }
