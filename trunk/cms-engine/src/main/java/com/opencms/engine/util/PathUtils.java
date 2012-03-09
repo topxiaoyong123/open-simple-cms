@@ -121,7 +121,11 @@ public class PathUtils {
         	.append(DateUtil.getMonth(contentBean.getCreationDate())).append("/")
         	.append(DateUtil.getDate(contentBean.getCreationDate())).append("/")
         	.append(contentBean.getId());
-        s.append(Constants.DYNAMIC_URL_EXTEND);
+        if(contentBean.getCategory().isStaticContent()) {
+        	s.append(Constants.DEFAULT_URL_EXTEND);
+        } else {
+        	s.append(Constants.DYNAMIC_URL_EXTEND);
+        }
         return s.toString();
     }
 

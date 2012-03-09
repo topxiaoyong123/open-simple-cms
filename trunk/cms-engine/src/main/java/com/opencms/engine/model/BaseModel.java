@@ -3,7 +3,6 @@ package com.opencms.engine.model;
 public abstract class BaseModel implements Model {
 
 	public BaseModel() {
-		engineInfo = new EngineInfo<Model>(this);
 	}
 	
 	public String getModelName(){
@@ -18,7 +17,7 @@ public abstract class BaseModel implements Model {
 		return object;
 	}
 
-	private EngineInfo<Model> engineInfo;
+	private EngineInfo<Model> engineInfo = new EngineInfo<Model>(this);
 
 	public EngineInfo<Model> getEngineInfo() {
 		return engineInfo;

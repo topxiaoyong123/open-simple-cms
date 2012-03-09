@@ -5,12 +5,16 @@ import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.opencms.wcm.client.mvc.*;
+import com.opencms.wcm.client.mvc.AppController;
+import com.opencms.wcm.client.mvc.BodyController;
+import com.opencms.wcm.client.mvc.LoginController;
+import com.opencms.wcm.client.mvc.NavigationController;
+import com.opencms.wcm.client.mvc.OtherController;
 import com.opencms.wcm.client.mvc.category.CategoryController;
 import com.opencms.wcm.client.mvc.content.ContentAuditingController;
 import com.opencms.wcm.client.mvc.content.ContentController;
-import com.opencms.wcm.client.mvc.content.ContentPublishingController;
 import com.opencms.wcm.client.mvc.file.FileController;
+import com.opencms.wcm.client.mvc.publish.PublishController;
 import com.opencms.wcm.client.mvc.site.SiteController;
 
 /**
@@ -37,7 +41,7 @@ public class Wcm implements EntryPoint {
         dispatcher.addController(new CategoryController());
         dispatcher.addController(new ContentController());
         dispatcher.addController(new ContentAuditingController());
-        dispatcher.addController(new ContentPublishingController());
+        dispatcher.addController(new PublishController());
         
         dispatcher.addController(new FileController());
 

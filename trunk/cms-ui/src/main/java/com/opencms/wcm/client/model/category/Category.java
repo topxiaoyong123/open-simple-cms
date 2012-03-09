@@ -39,6 +39,8 @@ public class Category implements Serializable, IsSerializable {
     private boolean visible;
 
     private boolean staticCategory;
+    
+    private boolean staticContent;
 
     public Long getId() {
         return id;
@@ -80,7 +82,15 @@ public class Category implements Serializable, IsSerializable {
         this.description = description;
     }
 
-    public Long getSiteId() {
+    public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Long getSiteId() {
         return siteId;
     }
 
@@ -135,4 +145,13 @@ public class Category implements Serializable, IsSerializable {
     public void setStaticCategory(boolean staticCategory) {
         this.staticCategory = staticCategory;
     }
+
+	public boolean isStaticContent() {
+		return staticContent;
+	}
+
+	public void setStaticContent(boolean staticContent) {
+		this.staticContent = staticContent;
+	}
+    
 }

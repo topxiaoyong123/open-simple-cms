@@ -70,7 +70,6 @@ public class CategoryPanel extends FormPanel {
         final Radio novisable = new Radio();
         novisable.setName("visable");
         novisable.setBoxLabel(msgs.no());
-
         if (category.isVisible()) {
             visable.setValue(true);
         } else {
@@ -85,11 +84,9 @@ public class CategoryPanel extends FormPanel {
         final Radio staticC = new Radio();
         staticC.setName("static");
         staticC.setBoxLabel(msgs.yes());
-
         final Radio nostaticC = new Radio();
         nostaticC.setName("static");
         nostaticC.setBoxLabel(msgs.no());
-
         if (category.isStaticCategory()) {
             staticC.setValue(true);
         } else {
@@ -100,6 +97,23 @@ public class CategoryPanel extends FormPanel {
         staticGroup.add(staticC);
         staticGroup.add(nostaticC);
         this.add(staticGroup);
+        
+        final Radio staticContent = new Radio();
+        staticContent.setName("staticContent");
+        staticContent.setBoxLabel(msgs.yes());
+        final Radio nostaticContent = new Radio();
+        nostaticContent.setName("staticContent");
+        nostaticContent.setBoxLabel(msgs.no());
+        if (category.isStaticContent()) {
+        	nostaticContent.setValue(true);
+        } else {
+        	nostaticContent.setValue(true);
+        }
+        final RadioGroup staticContentGroup = new RadioGroup("staticContent");
+        staticContentGroup.setFieldLabel(msgs.category_content_static());
+        staticContentGroup.add(staticContent);
+        staticContentGroup.add(nostaticContent);
+        this.add(staticContentGroup);
 
         BeanModelFactory factory = BeanModelLookup.get().getFactory(Category.class);
 
@@ -128,6 +142,11 @@ public class CategoryPanel extends FormPanel {
                         category.setStaticCategory(true);
                     } else{
                         category.setStaticCategory(false);
+                    }
+                    if(staticContent.getValue()) {
+                    	category.setStaticContent(true);
+                    } else {
+                    	category.setStaticContent(false);
                     }
                     Dispatcher.forwardEvent(AppEvents.CATEGORY_MANAGER_SAVE, category);
                 }
