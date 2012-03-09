@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.open-cms</groupId>
-            <artifactId>cms-core-db</artifactId>
+            <artifactId>cms-db-core</artifactId>
             <version>${pom.version}</version>
         </dependency>
 
