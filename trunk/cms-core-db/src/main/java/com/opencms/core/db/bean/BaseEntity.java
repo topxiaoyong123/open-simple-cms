@@ -21,9 +21,8 @@ public class BaseEntity implements Serializable {
     @SearchableId
 	@Id
 	@Column(length = 32, nullable = true)
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid")
-    private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @SearchableProperty
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,11 +33,11 @@ public class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modificationDate;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

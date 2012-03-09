@@ -22,10 +22,10 @@ public interface EngineUtil {
     
     public PathUtils getPathUtils();
 
-    public Menu getSiteMenu(String siteId);
+    public Menu getSiteMenu(Long siteId);
 
-    public Menu getCategoryMenu(String categoryId);
+    public Menu getCategoryMenu(Long categoryId);
 
-    public List<ContentModel> getContents(String categoryId, int firstResult, int maxResults);
+    public List<ContentModel> getContents(Long categoryId, int firstResult, int maxResults);
 
 }

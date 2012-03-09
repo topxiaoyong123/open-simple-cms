@@ -19,20 +19,20 @@ public interface ContentService {
 
     public boolean addOrUpdateContent(ContentBean content);
 
-    public ContentBean getContentById(String id);
+    public ContentBean getContentById(Long id);
     
-    public ContentBean getPublishedContentById(String id);
+    public ContentBean getPublishedContentById(Long id);
 
-    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, int firstResult, int maxResults);
+    public List<ContentBean> getContentsByCategoryIdAndPage(Long categoryId, int firstResult, int maxResults);
 
-    public long getCountByCategoryId(String categoryId);
+    public long getCountByCategoryId(Long categoryId);
 
-    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String state, int firstResult, int maxResults);
+    public List<ContentBean> getContentsByCategoryIdAndPage(Long categoryId, String state, int firstResult, int maxResults);
 
-    public long getCountByCategoryId(String categoryId, String state);
+    public long getCountByCategoryId(Long categoryId, String state);
 
-    public List<ContentBean> getContentsByCategoryIdAndPage(String categoryId, String[] states, int firstResult, int maxResults);
+    public List<ContentBean> getContentsByCategoryIdAndPage(Long categoryId, String[] states, int firstResult, int maxResults);
 
-    public long getCountByCategoryId(String categoryId, String[] states);
+    public long getCountByCategoryId(Long categoryId, String[] states);
 
 }

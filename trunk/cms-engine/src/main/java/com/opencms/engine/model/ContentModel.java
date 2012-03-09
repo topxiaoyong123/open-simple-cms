@@ -24,7 +24,7 @@ public class ContentModel extends BaseModel {
 		this.object = contentBean;
 	}
 
-    private String id;
+    private Long id;
 
     private String title;
 
@@ -54,11 +54,11 @@ public class ContentModel extends BaseModel {
 
     private Date modificationDate;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

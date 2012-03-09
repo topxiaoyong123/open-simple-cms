@@ -24,7 +24,7 @@ public class SiteModel extends BaseModel implements Model {
 		this.object = siteBean;
 	}
 	
-	private String id;
+	private Long id;
 
     private String title;
 
@@ -44,11 +44,11 @@ public class SiteModel extends BaseModel implements Model {
 
     private Date modificationDate;
 
-    public String getId() {
+    public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

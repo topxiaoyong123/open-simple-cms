@@ -9,7 +9,7 @@ package com.opencms.engine.model;
  */
 public class Item extends BaseModel {
 
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -17,11 +17,11 @@ public class Item extends BaseModel {
 
     private String url;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

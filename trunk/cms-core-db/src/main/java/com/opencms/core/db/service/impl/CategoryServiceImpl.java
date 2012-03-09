@@ -48,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    public CategoryBean getCategoryById(String id) {
+    public CategoryBean getCategoryById(Long id) {
         return categoryDao.get(CategoryBean.class, id);
     }
     
@@ -78,7 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
     
-    private CategoryBean getCategoryByParentAndName(String parent, String name) {
+    private CategoryBean getCategoryByParentAndName(Long parent, String name) {
     	Finder finder = new Finder(CategoryBean.class);
     	finder.setColumns(new String[]{"name", "parent.id"});
     	finder.setValues(new Serializable[]{name, parent});
@@ -89,7 +89,7 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
 
-    public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible) {
+    public List<CategoryBean> getCategorysBySiteId(Long siteId, boolean visible) {
         Finder finder = new Finder(CategoryBean.class);
         if(visible){
             finder.setColumns(new String[]{"site.id", "visible"});
@@ -103,7 +103,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getByFinder(finder);
     }
 
-    public List<CategoryBean> getCategorysByParentId(String parentId, boolean visible){
+    public List<CategoryBean> getCategorysByParentId(Long parentId, boolean visible){
         Finder finder = new Finder(CategoryBean.class);
         if(visible){
             finder.setColumns(new String[]{"parent.id", "visible"});
@@ -116,12 +116,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getByFinder(finder);
     }
 
-    public List<CategoryBean> getMenuBySiteId(String siteId) {
+    public List<CategoryBean> getMenuBySiteId(Long siteId) {
         List<CategoryBean> categoryBeans = getCategorysBySiteId(siteId, true);
         return categoryBeans;
     }
 
-    public List<CategoryBean> getMenuByParentId(String parentId){
+    public List<CategoryBean> getMenuByParentId(Long parentId){
         return getCategorysByParentId(parentId, true);
     }
 }

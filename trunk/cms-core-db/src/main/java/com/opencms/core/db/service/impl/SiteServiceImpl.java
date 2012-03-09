@@ -48,7 +48,7 @@ public class SiteServiceImpl implements SiteService {
         return siteDao.getAll(SiteBean.class);
     }
 
-    public SiteBean getSiteById(String id) {
+    public SiteBean getSiteById(Long id) {
         return siteDao.get(SiteBean.class, id);
     }
 

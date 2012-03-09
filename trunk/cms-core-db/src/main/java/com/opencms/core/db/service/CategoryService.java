@@ -19,7 +19,7 @@ public interface CategoryService {
 
     public boolean addOrUpdateCategory(CategoryBean category);
 
-    public CategoryBean getCategoryById(String id);
+    public CategoryBean getCategoryById(Long id);
     
     public CategoryBean getCategoryByNames(String[] names);
 
@@ -28,11 +28,11 @@ public interface CategoryService {
      * @param siteId
      * @return
      */
-    public List<CategoryBean> getCategorysBySiteId(String siteId, boolean visible);
+    public List<CategoryBean> getCategorysBySiteId(Long siteId, boolean visible);
 
-    public List<CategoryBean> getCategorysByParentId(String parentId, boolean visible);
+    public List<CategoryBean> getCategorysByParentId(Long parentId, boolean visible);
 
-    public List<CategoryBean> getMenuBySiteId(String siteId);
+    public List<CategoryBean> getMenuBySiteId(Long siteId);
 
-    public List<CategoryBean> getMenuByParentId(String parentId);
+    public List<CategoryBean> getMenuByParentId(Long parentId);
 }

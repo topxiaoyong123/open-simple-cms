@@ -70,7 +70,7 @@ public class SiteController extends Controller {
                 }
             });
         } else if(AppEvents.SITE_MANAGER_EDIT == appEvent.getType()){
-            String id = appEvent.getData();
+        	Long id = appEvent.getData();
             service.getSiteById(id, new AsyncCallback(){
                 public void onFailure(Throwable throwable) {
                     MessageBox.alert(msgs.error(), throwable.getMessage(), null);

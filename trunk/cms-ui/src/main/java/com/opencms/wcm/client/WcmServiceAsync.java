@@ -36,19 +36,19 @@ public interface WcmServiceAsync {
 
     void addOrUpdateSite(Site site, AsyncCallback async);
 
-    void getSiteById(String id, AsyncCallback async);
+    void getSiteById(Long id, AsyncCallback async);
 
     void getCategorysByParent(WcmNodeModel parent, AsyncCallback async);
 
     void addOrUpdateCategory(Category category, AsyncCallback async);
 
-    void getCategoryById(String id, WcmNodeModel parent, AsyncCallback async);
+    void getCategoryById(Long id, WcmNodeModel parent, AsyncCallback async);
 
     void publishingCategoryss(List<Category> categories, boolean createHtml, AsyncCallback async);
 
     void addOrUpdateContent(Content category, AsyncCallback async);
 
-    void getContentById(String id, WcmNodeModel parent, AsyncCallback async);
+    void getContentById(Long id, WcmNodeModel parent, AsyncCallback async);
 
     void PagingLoadContentList(PagingLoadConfig config, Content content, AsyncCallback async);
 

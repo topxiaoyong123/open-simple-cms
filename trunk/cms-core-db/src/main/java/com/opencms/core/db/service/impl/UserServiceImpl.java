@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserBean getUserById(String id) {
+    public UserBean getUserById(Long id) {
         return userDao.get(UserBean.class, id);
     }
 
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean addRoleForUser(String id, RoleBean role) {
+    public boolean addRoleForUser(Long id, RoleBean role) {
         UserBean user = getUserById(id);
         if(user != null){
             user.addRole(role);
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public boolean addRolesForUser(String id, Set<RoleBean> roles) {
+    public boolean addRolesForUser(Long id, Set<RoleBean> roles) {
         UserBean user = getUserById(id);
         if(user != null){
             user.setRoles(roles);
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public RoleBean getRoleById(String id){
+    public RoleBean getRoleById(Long id){
         return roleDao.get(RoleBean.class, id);    
     }
 

@@ -32,7 +32,7 @@ public class CategoryModel extends BaseModel {
 		this.getEngineInfo().setTotalCount(totalCount);
 	}
 
-	private String id;
+	private Long id;
 
     private String title;
 
@@ -56,11 +56,11 @@ public class CategoryModel extends BaseModel {
 
     private boolean visible;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
