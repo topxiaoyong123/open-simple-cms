@@ -17,7 +17,6 @@ import com.opencms.engine.ModelMapper;
 import com.opencms.engine.impl.FreemarkerEngineImpl;
 import com.opencms.engine.model.CategoryModel;
 import com.opencms.engine.model.ContentModel;
-import com.opencms.engine.model.Model;
 import com.opencms.engine.model.SiteModel;
 import com.opencms.engine.util.PathUtils;
 import com.opencms.template.TemplateHelper;
@@ -28,7 +27,7 @@ import freemarker.template.TemplateException;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transactional(readOnly = true)
-public class ContentEngineImpl extends FreemarkerEngineImpl<SiteModel> {
+public class ContentEngineImpl extends FreemarkerEngineImpl<ContentModel> {
 
 	@Resource
     private ModelMapper mapper;
@@ -39,7 +38,7 @@ public class ContentEngineImpl extends FreemarkerEngineImpl<SiteModel> {
     @Resource
     private PathUtils pathUtils;
 
-	public String engine(Model model) throws IOException, TemplateException {
+	public String doEngine(ContentModel model) throws IOException, TemplateException {
 		ContentModel content = calculate(model);
         Template template = templateHelper.getTemplate(content.getObject());
         String html = render(template, templateModel.getModel());
@@ -48,11 +47,8 @@ public class ContentEngineImpl extends FreemarkerEngineImpl<SiteModel> {
         return html;
 	}
 	
-	protected ContentModel calculate(Model model) {
-		if(!(model instanceof ContentModel)) {
-			throw new IllegalArgumentException();
-		}
-		ContentModel content = (ContentModel) model;
+	protected ContentModel calculate(ContentModel model) {
+		ContentModel content = model;
         templateModel.clean();
         ContentBean contentBean = content.getObject();
         templateModel.addModel(mapper.map(contentBean, content));

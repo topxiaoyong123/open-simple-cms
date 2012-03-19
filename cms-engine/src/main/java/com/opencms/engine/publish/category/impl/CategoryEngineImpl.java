@@ -15,7 +15,6 @@ import com.opencms.core.db.bean.SiteBean;
 import com.opencms.engine.ModelMapper;
 import com.opencms.engine.impl.FreemarkerEngineImpl;
 import com.opencms.engine.model.CategoryModel;
-import com.opencms.engine.model.Model;
 import com.opencms.engine.model.SiteModel;
 import com.opencms.engine.util.PathUtils;
 import com.opencms.template.TemplateHelper;
@@ -26,7 +25,7 @@ import freemarker.template.TemplateException;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transactional(readOnly = true)
-public class CategoryEngineImpl extends FreemarkerEngineImpl<SiteModel> {
+public class CategoryEngineImpl extends FreemarkerEngineImpl<CategoryModel> {
 
 	@Resource
     private ModelMapper mapper;
@@ -37,7 +36,7 @@ public class CategoryEngineImpl extends FreemarkerEngineImpl<SiteModel> {
     @Resource
     private PathUtils pathUtils;
 
-	public String engine(Model model) throws IOException, TemplateException {
+	public String doEngine(CategoryModel model) throws IOException, TemplateException {
 		CategoryModel category = calculate(model);
         Template template = templateHelper.getTemplate(category.getObject());
         String html = render(template, templateModel.getModel());
@@ -46,11 +45,8 @@ public class CategoryEngineImpl extends FreemarkerEngineImpl<SiteModel> {
         return html;
 	}
 	
-	protected CategoryModel calculate(Model model) {
-		if(!(model instanceof CategoryModel)) {
-			throw new IllegalArgumentException();
-		}
-		CategoryModel category = (CategoryModel) model;
+	protected CategoryModel calculate(CategoryModel model) {
+		CategoryModel category = model;
         templateModel.clean();
         CategoryBean categoryBean = category.getObject();
         templateModel.addModel(mapper.map(categoryBean, category));

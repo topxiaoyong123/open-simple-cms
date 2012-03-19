@@ -35,7 +35,7 @@ public class SiteEngineImpl extends FreemarkerEngineImpl<SiteModel> {
     @Resource
     private PathUtils pathUtils;
 
-	public String engine(Model model) throws IOException, TemplateException {
+	public String doEngine(SiteModel model) throws IOException, TemplateException {
 		SiteModel site = calculate(model);
         Template template = templateHelper.getTemplate(site.getObject());
         String html = render(template, templateModel.getModel());
@@ -44,11 +44,8 @@ public class SiteEngineImpl extends FreemarkerEngineImpl<SiteModel> {
         return html;
 	}
 	
-	protected SiteModel calculate(Model model) {
-		if(!(model instanceof SiteModel)) {
-			throw new IllegalArgumentException();
-		}
-		SiteModel site = (SiteModel) model;
+	protected SiteModel calculate(SiteModel model) {
+		SiteModel site = model;
         templateModel.clean();
         SiteBean siteBean = site.getObject();
         templateModel.addModel(mapper.map(siteBean, site));
