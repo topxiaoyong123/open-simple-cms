@@ -1,20 +1,5 @@
 package com.opencms.engine.impl;
 
-import com.opencms.core.db.bean.CategoryBean;
-import com.opencms.core.db.bean.ContentBean;
-import com.opencms.core.db.bean.SiteBean;
-import com.opencms.engine.Engine;
-import com.opencms.engine.TemplateModel;
-import com.opencms.engine.model.CategoryModel;
-import com.opencms.engine.model.Model;
-import com.opencms.util.CmsUtils;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Resource;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +11,19 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.opencms.engine.Engine;
+import com.opencms.engine.TemplateModel;
+import com.opencms.engine.model.Model;
+import com.opencms.util.CmsUtils;
+
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Lij
@@ -33,7 +31,7 @@ import java.util.Map;
  * Time: 下午11:19
  * To change this template use File | Settings | File Templates.
  */
-public abstract class FreemarkerEngineImpl<T extends Model> implements Engine<Model> {
+public abstract class FreemarkerEngineImpl<T extends Model> implements Engine<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(FreemarkerEngineImpl.class);
 
@@ -45,7 +43,14 @@ public abstract class FreemarkerEngineImpl<T extends Model> implements Engine<Mo
 
     public abstract void init();
     
-    protected abstract Model calculate(Model model);
+    protected abstract Model calculate(T model);
+    
+    protected abstract String doEngine(T model) throws IOException, TemplateException;
+    
+    public String engine(T model) throws IOException, TemplateException {
+		return doEngine(model);
+    	
+    }
 
     public String render(Template template, Map model) throws TemplateException, IOException {
 		Writer out = new StringWriter();
