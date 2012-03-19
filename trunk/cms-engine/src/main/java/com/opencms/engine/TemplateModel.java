@@ -13,7 +13,7 @@ import com.opencms.engine.model.Model;
  */
 public interface TemplateModel {
 
-    public Map getModel();
+    public Map<String, Object> getModel();
 
     public void clean();
 
