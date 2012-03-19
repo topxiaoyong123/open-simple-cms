@@ -1,9 +1,7 @@
 package com.opencms.engine.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.opencms.core.db.service.CmsManager;
 import com.opencms.engine.EngineUtil;
 import com.opencms.engine.TemplateModel;
 
@@ -29,12 +26,9 @@ public class TemplateModelImpl extends BaseTemplateModel implements TemplateMode
     private static final Logger logger = LoggerFactory.getLogger(TemplateModelImpl.class);
 
     @Resource
-    private CmsManager cmsManager;
-
-    @Resource
     private EngineUtil engineUtil;
 
-    private Map outModel = Collections.synchronizedMap(new HashMap());
+    private Map<String, Object> outModel = Collections.synchronizedMap(new HashMap<String, Object>());
     
     public void initModel(){
     	outModel.put("engineUtil", engineUtil);
@@ -44,7 +38,7 @@ public class TemplateModelImpl extends BaseTemplateModel implements TemplateMode
         }
     }
 
-    public Map getModel() {
+    public Map<String, Object> getModel() {
         initModel();
         return outModel;
     }
