@@ -23,6 +23,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.opencms.wcm.client.AppEvents;
 import com.opencms.wcm.client.WcmMessages;
@@ -117,6 +118,16 @@ public class SiteListPanel extends ContentPanel {
             }
         });
         Button preview = new Button(msgs.preview());
+        preview.addListener(Events.Select, new Listener<ComponentEvent>() {
+            public void handleEvent(ComponentEvent componentEvent) {
+                if(smm.getSelectedItems().size() != 1){
+                    MessageBox.alert(msgs.warn(), msgs.choose_one(), null);    
+                } else{
+                    String name = smm.getSelectedItem().get("name");
+                    Window.open(GWT.getHostPageBaseURL().replace(GWT.getModuleName() + "/", "") + name + "/index.jhtml", "", "");
+                }
+            }
+        });
         preview.setIconStyle("icon-text");
         toolBars.add(add);
         toolBars.add(new SeparatorToolItem());
