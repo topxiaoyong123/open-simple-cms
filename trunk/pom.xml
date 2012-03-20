@@ -58,7 +58,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.open-cms</groupId>
-                <artifactId>cms-db</artifactId>
+                <artifactId>cms-db-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
